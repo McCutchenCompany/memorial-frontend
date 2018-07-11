@@ -8,9 +8,20 @@ deploy_stage:
   stage: deploy
   environment: Stage
   only:
+    - staging
+  script:
+    - rm ./package-lock.json
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng test --single-run=true --watch=false
+    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
+
+deploy_production:
+  stage: deploy
+  environment: Production
+  only:
     - master
   script:
     - rm ./package-lock.json
     - npm install
-    - ./node_modules/@angular/cli/bin/ng test --progress false --single-run=true --watch=false
+    - ./node_modules/@angular/cli/bin/ng test --single-run=true --watch=false
     - ./node_modules/@angular/cli/bin/ng build --progress false --prod
