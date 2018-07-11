@@ -17,7 +17,7 @@ deploy_stage:
 
 deploy_production:
   stage: deploy
-  envitonment: Production
+  environment: Production
   only:
     - master
   scripts:
