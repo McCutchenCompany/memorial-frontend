@@ -20,7 +20,7 @@ deploy_production:
   environment: Production
   only:
     - master
-  scripts:
+  script:
     - rm ./package-lock.json
     - npm install
     - ./node_modules/@angular/cli/bin/ng test --single-run=true --watch=false
