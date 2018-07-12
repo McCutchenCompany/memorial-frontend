@@ -51,7 +51,7 @@ deploy_stage:
     - pip install awscli
   script:
     - ./node_modules/@angular/cli/bin/ng build --configuration=staging
-    - aws s3 cp ./dist s3://memorial-frontend-staging --recursive
+    - aws s3 cp ./dist/memorial s3://memorial-frontend-staging --recursive
 
 deploy_production:
   stage: deploy
@@ -68,4 +68,4 @@ deploy_production:
     - pip install awscli
   script:
     - ./node_modules/@angular/cli/bin/ng build --prod
-    - aws s3 cp ./dist s3://memorial-frontend --recursive
+    - aws s3 cp ./dist/memorial s3://memorial-frontend --recursive
