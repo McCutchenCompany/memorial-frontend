@@ -12,6 +12,8 @@ stages:
 before_script:
   - rm ./package-lock.json
   - npm install
+  - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  - python get-pip.py
   - pip install awscli
 
 run_test:
