@@ -4,24 +4,68 @@ cache:
   paths:
     - node_modules/
 
+stages:
+  - test
+  - build
+  - deploy
+
+before_script:
+  - rm ./package-lock.json
+  - npm install
+
+run_test:
+  stage: test
+  only:
+    - branches
+  script:
+    - ./node_modules/@angular/cli/bin/ng test --watch=false
+
+build_stage:
+  stage: build
+  environment: Stage
+  only:
+    - staging
+  script:
+    - ./node_modules/@angular/cli/bin/ng build --configuration=staging
+
+build_production:
+  stage: build
+  environment: Production
+  only:
+    - master
+  script:
+    - ./node_modules/@angular/cli/bin/ng build --prod
+
 deploy_stage:
   stage: deploy
   environment: Stage
   only:
     - staging
-  script:
+  before_script:
     - rm ./package-lock.json
     - npm install
-    - ./node_modules/@angular/cli/bin/ng test --single-run=true --watch=false
-    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
+    - apt-get update
+    - apt-get -y install python-dev
+    - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    - python get-pip.py
+    - pip install awscli
+  script:
+    - ./node_modules/@angular/cli/bin/ng build --configuration=staging
+    - aws s3 cp ./dist/memorial s3://memorial-frontend-staging --recursive
 
 deploy_production:
   stage: deploy
   environment: Production
   only:
     - master
-  script:
+  before_script:
     - rm ./package-lock.json
     - npm install
-    - ./node_modules/@angular/cli/bin/ng test --single-run=true --watch=false
-    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
+    - apt-get update
+    - apt-get -y install python-dev
+    - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    - python get-pip.py
+    - pip install awscli
+  script:
+    - ./node_modules/@angular/cli/bin/ng build --prod
+    - aws s3 cp ./dist/memorial s3://memorial-frontend --recursive
