@@ -12,6 +12,7 @@ stages:
 before_script:
   - rm ./package-lock.json
   - npm install
+  - sudo apt-get install python3.6
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   - python get-pip.py
   - pip install awscli
@@ -28,6 +29,10 @@ build_stage:
   environment: Stage
   only:
     - staging
+  before_script:
+    - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    - python get-pip.py
+    - pip install awscli
   script:
     - ./node_modules/@angular/cli/bin/ng build --configuration=staging
 
@@ -36,6 +41,10 @@ build_production:
   environment: Production
   only:
     - master
+  before_script:
+    - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    - python get-pip.py
+    - pip install awscli
   script:
     - ./node_modules/@angular/cli/bin/ng build --prod
 
