@@ -4,16 +4,46 @@ cache:
   paths:
     - node_modules/
 
+stages:
+  - test
+  - build
+  - deploy
+
+before_script:
+  - rm ./package-lock.json
+  - npm install
+  - pip install awscli
+
+run_test:
+  stage: test
+  only:
+    - branches
+  script:
+    - ./node_modules/@angular/cli/bin/ng test --watch=false
+
+build_stage:
+  stage: build
+  environment: Stage
+  only:
+    - staging
+  script:
+    - ./node_modules/@angular/cli/bin/ng build --configuration=staging
+
+build_production:
+  stage: build
+  environment: Production
+  only:
+    - master
+  script:
+    - ./node_modules/@angular/cli/bin/ng build --prod
+
 deploy_stage:
   stage: deploy
   environment: Stage
   only:
     - staging
   script:
-    - rm ./package-lock.json
-    - npm install
-    - ./node_modules/@angular/cli/bin/ng test --single-run=true --watch=false
-    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
+    - aws s3 cp ./dist s3://memorial-frontend-staging --recursive
 
 deploy_production:
   stage: deploy
@@ -21,7 +51,4 @@ deploy_production:
   only:
     - master
   script:
-    - rm ./package-lock.json
-    - npm install
-    - ./node_modules/@angular/cli/bin/ng test --single-run=true --watch=false
-    - ./node_modules/@angular/cli/bin/ng build --progress false --prod
+    - aws s3 cp ./dist s3://memorial-frontend --recursive
