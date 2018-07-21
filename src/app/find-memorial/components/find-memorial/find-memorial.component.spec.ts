@@ -1,4 +1,5 @@
 import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
@@ -20,6 +21,7 @@ describe('FindMemorialComponent', () => {
       declarations: [ FindMemorialComponent ],
       imports: [
         AgmCoreModule.forRoot({}),
+        AgmJsMarkerClustererModule,
         StoreModule.forRoot({findMemorial: fromStore.findMemorialReducer}),
         EffectsModule.forRoot([])
       ]
