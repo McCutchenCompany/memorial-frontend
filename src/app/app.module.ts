@@ -1,4 +1,3 @@
-import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
@@ -17,9 +16,6 @@ import { appReducer } from './store/app/app.reducer';
     AppComponent
   ],
   imports: [
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
-    }),
     AppRoutingModule,
     BrowserModule,
     RouterModule,

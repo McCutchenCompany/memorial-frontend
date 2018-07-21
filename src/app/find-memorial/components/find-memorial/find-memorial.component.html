@@ -1,3 +1,5 @@
-<p>
-  find-memorial works!
-</p>
+<agm-map [latitude]="latitude | async" [longitude]="longitude | async" [zoom]="12">
+  <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+    <agm-marker [latitude]="latitude | async" [longitude]="longitude | async"></agm-marker>
+  </agm-marker-cluster>
+</agm-map>
