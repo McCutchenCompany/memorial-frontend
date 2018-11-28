@@ -51,7 +51,7 @@ deploy_stage:
     - pip install awscli
   script:
     - ./node_modules/@angular/cli/bin/ng build --configuration=staging
-    - aws s3 cp ./dist/memorial s3://staging.memorial.co --recursive
+    - aws s3 cp ./dist/memorial s3://staging.mymemorial.co --recursive
 
 deploy_production:
   stage: deploy
