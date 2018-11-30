@@ -47,10 +47,6 @@ describe('FindMemorialComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should get lat and long', () => {
-    expect(component.latitude.subscribe(res => expect(res).toBe(1)));
-    expect(component.longitude.subscribe(res => expect(res).toBe(1)));
-  });
   it('should get current location', inject([GeolocationService], (service) => {
     spyOn(service, 'findMe');
     component.ngOnInit();
