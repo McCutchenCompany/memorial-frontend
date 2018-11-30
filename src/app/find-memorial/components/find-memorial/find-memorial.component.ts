@@ -13,7 +13,7 @@ import { GeolocationService } from '../../services/geolocation.service';
   templateUrl: './find-memorial.component.html',
   styleUrls: ['./find-memorial.component.scss']
 })
-export class FindMemorialComponent implements OnInit, AfterViewInit {
+export class FindMemorialComponent implements OnInit {
 
   latitude$: Observable<number>;
   longitude$: Observable<number>;
@@ -41,9 +41,6 @@ export class FindMemorialComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit() {
     this.geo.findMe();
   }
 
