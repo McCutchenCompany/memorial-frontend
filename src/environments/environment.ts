@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  title: 'Memorial Local'
+  title: 'Memorial Local',
+  api: 'http://localhost:3000'
 };
 
 /*
