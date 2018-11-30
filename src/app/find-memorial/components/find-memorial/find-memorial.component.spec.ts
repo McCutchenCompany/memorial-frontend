@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { TestStore } from '@shared/testing/test-store';
 import { GetInRange } from '@store/find-memorial/actions/action.types';
 import { configureTestSuite } from 'ng-bullet';
+import { of } from 'rxjs';
 
 import { GeolocationService } from './../../services/geolocation.service';
 import { FindMemorialComponent } from './find-memorial.component';
@@ -39,6 +40,7 @@ describe('FindMemorialComponent', () => {
     });
     fixture = TestBed.createComponent(FindMemorialComponent);
     component = fixture.componentInstance;
+    component.markers$ = of([]);
     fixture.detectChanges();
   });
 
