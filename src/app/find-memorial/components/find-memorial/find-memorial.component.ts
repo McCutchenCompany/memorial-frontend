@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { GetInRange } from '@store/find-memorial/actions/action.types';
 import { getAllMemorialMarkers } from '@store/find-memorial/selectors/memorial-markers.selector';
 import { getLatitude, getLongitude } from '@store/find-memorial/selectors/position.selector';
@@ -13,7 +13,7 @@ import { GeolocationService } from '../../services/geolocation.service';
   templateUrl: './find-memorial.component.html',
   styleUrls: ['./find-memorial.component.scss']
 })
-export class FindMemorialComponent implements OnInit {
+export class FindMemorialComponent implements OnInit, AfterViewInit {
 
   latitude$: Observable<number>;
   longitude$: Observable<number>;
@@ -35,12 +35,15 @@ export class FindMemorialComponent implements OnInit {
     private geo: GeolocationService,
     private store: Store<AppState>
   ) {
-    this.latitude$ = this.store.select(getLatitude);
-    this.longitude$ = this.store.select(getLongitude);
-    this.markers$ = this.store.select(getAllMemorialMarkers);
+    this.latitude$ = this.store.pipe(select(getLatitude));
+    this.longitude$ = this.store.pipe(select(getLongitude));
+    this.markers$ = this.store.pipe(select(getAllMemorialMarkers));
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
     this.geo.findMe();
   }
 

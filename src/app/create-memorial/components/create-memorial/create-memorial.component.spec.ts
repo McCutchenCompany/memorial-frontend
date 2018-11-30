@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { configureTestSuite } from 'ng-bullet';
 
 import { CreateMemorialComponent } from './create-memorial.component';
 
@@ -6,12 +7,11 @@ describe('CreateMemorialComponent', () => {
   let component: CreateMemorialComponent;
   let fixture: ComponentFixture<CreateMemorialComponent>;
 
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [ CreateMemorialComponent ]
-    })
-    .compileComponents();
-  }));
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateMemorialComponent);

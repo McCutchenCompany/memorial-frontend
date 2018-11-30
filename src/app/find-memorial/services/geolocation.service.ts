@@ -13,6 +13,7 @@ export class GeolocationService {
   ) { }
 
   findMe() {
+    console.log('tried to start');
     navigator.geolocation.watchPosition(position => {
       const location = {
         latitude: position.coords.latitude,
@@ -22,6 +23,9 @@ export class GeolocationService {
         speed: position.coords.speed
       };
       this.store.dispatch(new GetPositionAction(location));
+    },
+    error => {
+      console.log(error);
     });
   }
 }
