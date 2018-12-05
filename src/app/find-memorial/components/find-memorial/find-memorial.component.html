@@ -1,6 +1,6 @@
 <agm-map [latitude]="latitude | async" [longitude]="longitude | async" [zoom]="12" (boundsChange)="onBoundChange($event)">
   <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
     <agm-marker [latitude]="latitude | async" [longitude]="longitude | async"></agm-marker>
-    <agm-marker *ngFor="let marker of (markers | async)" [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
+    <agm-marker (markerClick)="onClick(marker)" *ngFor="let marker of (markers | async)" [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
   </agm-marker-cluster>
 </agm-map>

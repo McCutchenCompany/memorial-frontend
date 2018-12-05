@@ -18,4 +18,9 @@ export class FindApiService {
     const path = `${this.API_URL}/locations/in_range?top=${range.top}&right=${range.right}&bottom=${range.bottom}&left=${range.left}`;
     return this.http.get(path);
   }
+
+  getSelectedMarker(uuid: string) {
+    const path = `${this.API_URL}/memorials/${uuid}`;
+    return this.http.get(path);
+  }
 }

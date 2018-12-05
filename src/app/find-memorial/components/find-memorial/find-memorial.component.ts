@@ -19,6 +19,8 @@ export class FindMemorialComponent implements OnInit {
   longitude$: Observable<number>;
   markers$: Observable<any[]>;
 
+  boundTimeout;
+
   get latitude(): Observable<number> {
     return this.latitude$;
   }
@@ -44,14 +46,21 @@ export class FindMemorialComponent implements OnInit {
     this.geo.findMe();
   }
 
+  onClick(event) {
+    console.log(event);
+  }
+
   onBoundChange(event) {
-    const payload = {
-      top: event.l.l,
-      right: event.j.l,
-      bottom: event.l.j,
-      left: event.j.j
-    };
-    this.store.dispatch(new GetInRange(payload));
+    clearTimeout(this.boundTimeout);
+    this.boundTimeout = setTimeout(() => {
+      const payload = {
+        top: event.l.l,
+        right: event.j.l,
+        bottom: event.l.j,
+        left: event.j.j
+      };
+      this.store.dispatch(new GetInRange(payload));
+    }, 500);
   }
 
 }
