@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   title: 'Memorial Staging',
-  api: 'https://memstag.mymemorial.co'
+  api: 'http://svc-stag.mymemorial.co'
 };
