@@ -1,10 +1,11 @@
 import { createSelector } from '@ngrx/store';
 
-import { getFindMemorialState } from './../find-memorial.reducer';
+import { getFindMemorialState } from './../reducers';
+
 
 export const getPositionState = createSelector(
   getFindMemorialState,
-  state => state.position
+  state => state.userPosition.position
 );
 
 export const getLatitude = createSelector(

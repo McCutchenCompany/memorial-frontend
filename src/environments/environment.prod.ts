@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  title: 'Memorial'
+  title: 'Memorial',
+  api: 'https://memprod.mymemorial.co'
 };

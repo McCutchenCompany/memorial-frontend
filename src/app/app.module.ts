@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
@@ -18,6 +19,7 @@ import { appReducer } from './store/app/app.reducer';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    HttpClientModule,
     RouterModule,
     StoreModule.forRoot({
       app: appReducer,

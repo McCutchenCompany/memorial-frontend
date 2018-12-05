@@ -1,11 +1,12 @@
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { configureTestSuite } from 'ng-bullet';
 
 import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
@@ -13,8 +14,8 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule
       ]
-    }).compileComponents();
-  }));
+    });
+  });
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;

@@ -1,4 +1,4 @@
-export class FindMemorialState {
+export class FindUserPositionState {
   loading: boolean;
   loaded: boolean;
   position: UserCoordinates;
