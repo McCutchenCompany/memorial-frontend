@@ -1,6 +1,6 @@
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
-import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { TestStore } from '@shared/testing/test-store';
 import { GetInRange } from '@store/find-memorial/actions/action.types';
@@ -52,10 +52,11 @@ describe('FindMemorialComponent', () => {
     component.ngOnInit();
     expect(service.findMe).toHaveBeenCalled();
   }));
-  it('should get markers on bound change', () => {
+  it('should get markers on bound change', fakeAsync(() => {
     spyOn(store, 'dispatch');
     const event = {l: {l: 1, j: 2}, j: {l: 1, j: 2}};
     component.onBoundChange(event);
+    tick(500);
     expect(store.dispatch).toHaveBeenCalledWith(new GetInRange({top: 1, right: 1, bottom: 2, left: 2}));
-  });
+  }));
 });
