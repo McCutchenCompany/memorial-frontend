@@ -48,10 +48,11 @@ deploy_stage:
     - apt-get -y install python-dev
     - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     - python get-pip.py
-    - pip install awscli
+    - pip install --user awscli
   script:
     - ./node_modules/@angular/cli/bin/ng build --configuration=staging
     - aws s3 cp ./dist/memorial s3://staging.mymemorial.co --recursive
+    - aws cloudfront create-invalidation --distribution-id 'E37RFS7KSZ0ZR' --paths '/*'
 
 deploy_production:
   stage: deploy
