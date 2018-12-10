@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   title: 'Memorial Local',
-  api: 'http://localhost:3000'
+  api: 'https://svc-stag.mymemorial.co'
 };
 
 /*
