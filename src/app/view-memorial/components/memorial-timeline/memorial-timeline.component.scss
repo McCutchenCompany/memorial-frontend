@@ -1,0 +1,44 @@
+@import "src/styles.scss";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: rem(1176);
+  margin: rem(70) auto;
+  .asset {
+    width: rem(684);
+    height: rem(500);
+  }
+  .info {
+    position: relative;
+    width: rem(392);
+    height: rem(436);
+    padding: rem(32);
+    background: map-get($colors, background);
+    h2 {
+      margin-bottom: rem(12);
+    }
+  }
+  .timeline-nav {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    display: flex;
+    justify-content: space-between;
+    p {
+      font-size: rem(12);
+    }
+    button {
+      background: none;
+      border: none;
+      width: rem(50);
+      &.next {
+        transform: scaleX(-1);
+      }
+      mat-icon {
+        font-size: rem(30);
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Location Details</h1>
+  <p>{{ location.description }}</p>
+  <agm-map
+    [latitude]="location.latitude"
+    [longitude]="location.longitude"
+    [zoom]="15"
+    [mapDraggable]="false"
+    [minZoom]="10">
+    <agm-marker
+      [latitude]="location.latitude"
+      [longitude]="location.longitude"></agm-marker>
+  </agm-map>
+</div>

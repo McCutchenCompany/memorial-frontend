@@ -1,0 +1,29 @@
+@import "src/styles.scss";
+
+.info {
+  width: rem(1176);
+  display: flex;
+  margin: rem(63) auto 0;
+  .birth {
+    width: rem(240);
+    padding-left: rem(120);
+  }
+  .death {
+    width: rem(240);
+  }
+  h3 {
+    margin-bottom: rem(6);
+  }
+}
+.description {
+  width: rem(1176);
+  margin: rem(64) auto 0;
+  h1 {
+    padding-left: rem(118);
+    margin-bottom: rem(6);
+  }
+  p {
+    padding: 0 rem(120);
+    column-count: 2;
+  }
+}

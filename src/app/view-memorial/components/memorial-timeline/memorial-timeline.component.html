@@ -1,0 +1,20 @@
+<div class="container">
+  <div
+    class="asset"
+    [style.background-image]="imgBackground.background"
+    [style.background-repeat]="imgBackground.repeat"
+    [style.background-position]="imgBackground.position"
+    [style.background-size]="imgBackground.size">
+  </div>
+  <div class="info">
+    <h2>{{ timeline[index].date | date:timeline[index].date_format }}</h2>
+    <p>{{ timeline[index].description }}</p>
+    <div class="timeline-nav">
+      <p>{{ index + 1 }} of {{ timeline.length }} Dates</p>
+      <div class="buttons">
+        <button class="previous" *ngIf="index != 0" (click)="onNavigate(-1)"><mat-icon>keyboard_backspace</mat-icon></button>
+        <button class="next" *ngIf="index + 1 < timeline.length" (click)="onNavigate(1)"><mat-icon>keyboard_backspace</mat-icon></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700');
+
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 
 $breakpoints: (
   'small':  767px,
@@ -25,7 +28,68 @@ $breakpoints: (
   }
 }
 
+$colors: (
+  black: #141E28,
+  white: #FFFFFF,
+  off-white: #F2F4F6,
+  background: #D8D8D8
+);
+
+@function rem($size) {
+  $remSize: $size / 16;
+  @return $remSize * 1rem;
+}
+
+$sansFont: 'Noto Sans', sans-serif;
+$serifFont: 'Noto Serif', serif;
 
 .agm-map-container-inner {
   width: 100% !important;
+}
+
+h1, h2, h3, h4, p {
+  color: map-get($colors, black);
+  margin: 0;
+}
+
+h1, h2 {
+  font-family: $serifFont;
+}
+
+h3, h4, p {
+  font-family: $sansFont;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: rem(36);
+}
+
+h3 {
+  font-weight: 700;
+  font-size: rem(16);
+}
+
+p {
+  font-size: rem(16);
+  line-height: rem(28);
+}
+
+button {
+  font-family: $sansFont;
+  font-size: rem(16);
+  outline: none;
+  &.clear-btn {
+    background: none;
+    border: none;
+  }
+  &.mat-button {
+    border: 1px solid map-get($colors, black);
+    border-radius: 2px;
+    span {
+      font-family: $sansFont;
+      font-size: rem(16);
+      font-weight: 700;
+    }
+  }
 }

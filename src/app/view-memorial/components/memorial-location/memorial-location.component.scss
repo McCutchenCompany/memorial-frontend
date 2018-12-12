@@ -1,0 +1,13 @@
+@import "src/styles.scss";
+
+.container {
+  width: rem(936);
+  margin: rem(64) auto;
+  p {
+    margin-bottom: rem(64);
+  }
+  agm-map {
+    width: 100%;
+    height: rem(500);
+  }
+}
