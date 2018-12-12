@@ -1,0 +1,6 @@
+<div *ngIf="loaded$ | async">
+  <app-memorial-header [memorial]="(selectedMemorial$ | async).memorial"></app-memorial-header>
+  <app-memorial-info [memorial]="(selectedMemorial$ | async).memorial" [location]="(selectedMemorial$ | async).location"></app-memorial-info>
+  <app-memorial-timeline [timeline]="(selectedMemorial$ | async).timeline"></app-memorial-timeline>
+  <app-memorial-location [location]="(selectedMemorial$ | async).location"></app-memorial-location>
+</div>

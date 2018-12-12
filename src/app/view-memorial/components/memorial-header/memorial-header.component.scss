@@ -1,0 +1,15 @@
+@import "src/styles.scss";
+
+.hero {
+  width: rem(1176);
+  height: rem(657);
+  margin: auto;
+  display: flex;
+  align-items: flex-end;
+  h1 {
+    margin-left: rem(122);
+    padding-bottom: rem(33);
+    font-size: rem(56);
+    color: map-get($colors, white);
+  }
+}

@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -10,17 +11,20 @@ import { StoreModule } from '../../node_modules/@ngrx/store';
 import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavHeaderComponent } from './shared/components/nav-header/nav-header.component';
 import { appReducer } from './store/app/app.reducer';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavHeaderComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     RouterModule,
+    MatButtonModule,
     StoreModule.forRoot({
       app: appReducer,
       router: routerReducer

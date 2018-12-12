@@ -1,6 +1,7 @@
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { TestStore } from '@shared/testing/test-store';
 import { GetInRange } from '@store/find-memorial/actions/action.types';
@@ -21,7 +22,8 @@ describe('FindMemorialComponent', () => {
       declarations: [ FindMemorialComponent ],
       imports: [
         AgmCoreModule.forRoot({}),
-        AgmJsMarkerClustererModule
+        AgmJsMarkerClustererModule,
+        RouterTestingModule
       ],
       providers: [
         {

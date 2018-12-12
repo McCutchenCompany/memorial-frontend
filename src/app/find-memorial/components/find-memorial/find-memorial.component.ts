@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { GetInRange } from '@store/find-memorial/actions/action.types';
 import { getAllMemorialMarkers } from '@store/find-memorial/selectors/memorial-markers.selector';
@@ -35,7 +36,8 @@ export class FindMemorialComponent implements OnInit {
 
   constructor(
     private geo: GeolocationService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {
     this.latitude$ = this.store.pipe(select(getLatitude));
     this.longitude$ = this.store.pipe(select(getLongitude));
@@ -47,20 +49,22 @@ export class FindMemorialComponent implements OnInit {
   }
 
   onClick(event) {
-    console.log(event);
+    this.router.navigate(['/memorial', event.memorial_id]);
   }
 
   onBoundChange(event) {
     clearTimeout(this.boundTimeout);
-    this.boundTimeout = setTimeout(() => {
-      const payload = {
-        top: event.l.l,
-        right: event.j.l,
-        bottom: event.l.j,
-        left: event.j.j
-      };
-      this.store.dispatch(new GetInRange(payload));
-    }, 500);
+    if (event.l.l - event.l.j < .5) {
+      this.boundTimeout = setTimeout(() => {
+        const payload = {
+          top: event.l.l,
+          right: event.j.l,
+          bottom: event.l.j,
+          left: event.j.j
+        };
+        this.store.dispatch(new GetInRange(payload));
+      }, 500);
+    }
   }
 
 }

@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 const appRoutes: Routes = [
   { path: 'explore', loadChildren: './find-memorial/find-memorial.module#FindMemorialModule' },
   { path: 'create', loadChildren: './create-memorial/create-memorial.module#CreateMemorialModule' },
-  { path: 'view', loadChildren: './view-memorial/view-memorial.module#ViewMemorialModule' },
+  { path: 'memorial', loadChildren: './view-memorial/view-memorial.module#ViewMemorialModule' },
   { path: '', redirectTo: '/explore', pathMatch: 'full' },
   { path: '**', redirectTo: '/explore', pathMatch: 'full' }
 ];
