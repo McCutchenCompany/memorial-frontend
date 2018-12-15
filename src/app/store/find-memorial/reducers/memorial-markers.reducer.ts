@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { LocationMarker } from '../../../shared/models/location-marker.model';
-import { All, findMemorialActionTypes } from '../actions/action.types';
+import { findMemorialActionTypes } from '../actions/action.types';
 
 export interface MemorialMarkersState extends EntityState<LocationMarker> {
   ids: string[];
@@ -22,7 +22,7 @@ export const initialState: MemorialMarkersState = adapter.getInitialState({
   error: null
 });
 
-export function memorialMarkerReducer(state = initialState, action: All): MemorialMarkersState {
+export function memorialMarkerReducer(state = initialState, action: any): MemorialMarkersState {
   switch (action.type) {
     case findMemorialActionTypes.GET_IN_RANGE: {
       return {

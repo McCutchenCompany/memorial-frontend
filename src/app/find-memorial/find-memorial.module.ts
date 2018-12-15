@@ -1,8 +1,8 @@
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material';
 import { EffectsModule } from '@ngrx/effects';
 
 import { StoreModule } from '../../../node_modules/@ngrx/store';
@@ -18,6 +18,7 @@ import { FindMemorialRoutingModule } from './find-memorial-routing.module';
     }),
     AgmJsMarkerClustererModule,
     CommonModule,
+    MatSnackBarModule,
     FindMemorialRoutingModule,
     StoreModule.forFeature('find-memorial', findMemorialReducer),
     EffectsModule.forFeature([

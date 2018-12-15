@@ -17,3 +17,8 @@ export const getLongitude = createSelector(
   getPositionState,
   state => state.longitude
 );
+
+export const getPermission = createSelector(
+  getFindMemorialState,
+  state => state.userPosition.permission
+);

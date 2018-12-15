@@ -8,7 +8,9 @@ export const findMemorialActionTypes = {
   GET_IN_RANGE_FAILURE: '[Find Memorial] Get in range failure',
   GET_SELECTED_MARKER: '[Find Memorial] Get selected marker',
   GET_SELECTED_MARKER_SUCCESS: '[Find Memorial] Get selected marker success',
-  GET_SELECTED_MARKER_FAILURE: '[Find Memorial] Get selected marker failure'
+  GET_SELECTED_MARKER_FAILURE: '[Find Memorial] Get selected marker failure',
+  LOCATION_DENIED: '[Find Memorial] Location denied',
+  LOCATION_ACCEPTED: '[Find Memorial] Location accepted'
 };
 
 export class GetPositionAction implements Action {
@@ -42,8 +44,17 @@ export class GetSelectedMarkerFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class LocationDenied implements Action {
+  readonly type = findMemorialActionTypes.LOCATION_DENIED;
+}
+export class LocationAccepted implements Action {
+  readonly type = findMemorialActionTypes.LOCATION_ACCEPTED;
+}
+
 export type All =
   | GetPositionAction
   | GetInRange
   | GetInRangeSuccess
-  | GetInRangeFailure;
+  | GetInRangeFailure
+  | LocationDenied
+  | LocationAccepted;
