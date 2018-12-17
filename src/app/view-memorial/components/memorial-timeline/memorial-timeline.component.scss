@@ -2,18 +2,19 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
-  width: rem(1176);
+  flex-direction: column;
+  width: rem(400);
   margin: rem(70) auto;
   .asset {
-    width: rem(684);
-    height: rem(500);
+    width: 100%;
+    height: rem(224);
   }
   .info {
+    margin-top: rem(16);
     position: relative;
-    width: rem(392);
-    height: rem(436);
-    padding: rem(32);
+    width: rem(352);
+    padding: rem(24) rem(24) rem(92);
+    height: fit-content;
     background: map-get($colors, background);
     h2 {
       margin-bottom: rem(12);
@@ -38,6 +39,64 @@
       }
       mat-icon {
         font-size: rem(30);
+      }
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(576);
+    .asset {
+      height: rem(320);
+    }
+    .info {
+      width: rem(528);
+    }
+  }
+
+}
+@include respond-to('medium') {
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: rem(1176);
+    margin: rem(70) auto;
+    .asset {
+      width: rem(684);
+      height: rem(500);
+    }
+    .info {
+      position: relative;
+      margin-top: 0;
+      width: rem(392);
+      height: rem(436);
+      padding: rem(32);
+      background: map-get($colors, background);
+      h2 {
+        margin-bottom: rem(12);
+      }
+    }
+    .timeline-nav {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      right: 32px;
+      display: flex;
+      justify-content: space-between;
+      p {
+        font-size: rem(12);
+      }
+      button {
+        background: none;
+        border: none;
+        width: rem(50);
+        &.next {
+          transform: scaleX(-1);
+        }
+        mat-icon {
+          font-size: rem(30);
+        }
       }
     }
   }

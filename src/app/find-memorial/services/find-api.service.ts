@@ -20,7 +20,7 @@ export class FindApiService {
   }
 
   getSelectedMarker(uuid: string) {
-    const path = `${this.API_URL}/memorials/${uuid}`;
+    const path = `${this.API_URL}/public_memorials/${uuid}`;
     return this.http.get(path);
   }
 }

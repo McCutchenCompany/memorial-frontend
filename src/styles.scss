@@ -5,7 +5,7 @@
 
 $breakpoints: (
   'small':  767px,
-  'medium': 992px,
+  'medium': 1176px,
   'large':  1200px
 ) !default;
 
@@ -32,7 +32,8 @@ $colors: (
   black: #141E28,
   white: #FFFFFF,
   off-white: #F2F4F6,
-  background: #D8D8D8
+  background: #D8D8D8,
+  warn: #711d1d
 );
 
 @function rem($size) {
@@ -90,6 +91,10 @@ button {
       font-family: $sansFont;
       font-size: rem(16);
       font-weight: 700;
+    }
+    &.warn-btn {
+      border: none;
+      color: map-get($colors, warn)
     }
   }
 }

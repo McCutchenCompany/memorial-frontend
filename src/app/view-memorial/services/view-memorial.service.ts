@@ -14,7 +14,7 @@ export class ViewMemorialService {
   ) { }
 
   getMemorial(id: string) {
-    const path = `${this.API_URL}/memorials/${id}`;
+    const path = `${this.API_URL}/public_memorials/${id}`;
     return this.http.get(path);
   }
 }

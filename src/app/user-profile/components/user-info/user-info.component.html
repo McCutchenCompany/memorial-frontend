@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Profile Details</h1>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="standard">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="first_name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="last_name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+    <div class="actions">
+      <button mat-button *ngIf="!editing" (click)="onEdit()">Edit</button>
+      <button mat-button *ngIf="editing" (click)="onSave()">Save</button>
+      <button mat-button class="warn-btn" *ngIf="editing" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

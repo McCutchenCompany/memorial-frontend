@@ -1,15 +1,37 @@
 @import "src/styles.scss";
 
 .hero {
-  width: rem(1176);
-  height: rem(657);
+  width: 100%;
+  height: 52vw;
   margin: auto;
   display: flex;
   align-items: flex-end;
   h1 {
-    margin-left: rem(122);
-    padding-bottom: rem(33);
-    font-size: rem(56);
+    margin-left: rem(8);
+    padding-bottom: rem(8);
+    font-size: rem(32);
     color: map-get($colors, white);
   }
 }
+@include respond-to('small') {
+  .hero {
+    width: rem(767);
+    height: rem(408);
+    h1 {
+      margin-left: rem(60);
+      font-size: rem(56);
+    }
+  }
+}
+@include respond-to('medium') {
+  .hero {
+    width: rem(1176);
+    height: rem(657);
+    h1 {
+      margin-left: rem(122);
+      padding-bottom: rem(33);
+      font-size: rem(56);
+    }
+  }
+}
+
