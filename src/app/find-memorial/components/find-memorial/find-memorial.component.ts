@@ -1,3 +1,4 @@
+import { getPermission } from './../../../store/find-memorial/selectors/position.selector';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -8,6 +9,7 @@ import { AppState } from '@store/models/app-state.model';
 import { Observable } from 'rxjs';
 
 import { GeolocationService } from '../../services/geolocation.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-find-memorial',
@@ -19,6 +21,7 @@ export class FindMemorialComponent implements OnInit {
   latitude$: Observable<number>;
   longitude$: Observable<number>;
   markers$: Observable<any[]>;
+  permission: Observable<boolean>;
 
   boundTimeout;
 
@@ -37,11 +40,17 @@ export class FindMemorialComponent implements OnInit {
   constructor(
     private geo: GeolocationService,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
   ) {
     this.latitude$ = this.store.pipe(select(getLatitude));
     this.longitude$ = this.store.pipe(select(getLongitude));
     this.markers$ = this.store.pipe(select(getAllMemorialMarkers));
+    this.store.pipe(select(getPermission)).subscribe(permission => {
+      if (!permission) {
+        this.openSnackbar();
+      }
+    });
   }
 
   ngOnInit() {
@@ -65,6 +74,10 @@ export class FindMemorialComponent implements OnInit {
         this.store.dispatch(new GetInRange(payload));
       }, 500);
     }
+  }
+
+  openSnackbar() {
+    this.snackbar.open(`You haven't given the `)
   }
 
 }

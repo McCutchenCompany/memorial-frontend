@@ -1,13 +1,36 @@
 @import "src/styles.scss";
 
 .container {
-  width: rem(936);
+  width: rem(400);
   margin: rem(64) auto;
+  h1, p {
+    padding-left: rem(8);
+  }
   p {
     margin-bottom: rem(64);
   }
   agm-map {
     width: 100%;
-    height: rem(500);
+    height: rem(320);
+  }
+}
+
+@include respond-to('small') {
+  .container {
+    width: rem(767)
+  }
+}
+
+@include respond-to('medium') {
+  .container {
+    width: rem(936);
+    margin: rem(64) auto;
+    p {
+      margin-bottom: rem(64);
+    }
+    agm-map {
+      width: 100%;
+      height: rem(500);
+    }
   }
 }

@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material';
   ],
   exports: [
     MatButtonModule
-  ]
+  ],
+  declarations: []
 })
 export class SharedModule { }

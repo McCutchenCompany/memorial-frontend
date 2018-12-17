@@ -1,11 +1,16 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CallbackComponent } from '@shared/components/callback/callback.component';
+
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: 'explore', loadChildren: './find-memorial/find-memorial.module#FindMemorialModule' },
-  { path: 'create', loadChildren: './create-memorial/create-memorial.module#CreateMemorialModule' },
+  { path: 'create', loadChildren: './create-memorial/create-memorial.module#CreateMemorialModule', canActivate: [AuthGuardService] },
   { path: 'memorial', loadChildren: './view-memorial/view-memorial.module#ViewMemorialModule' },
+  { path: 'profile', loadChildren: './user-profile/user-profile.module#UserProfileModule', canActivate: [AuthGuardService] },
+  { path: 'callback', component: CallbackComponent },
   { path: '', redirectTo: '/explore', pathMatch: 'full' },
   { path: '**', redirectTo: '/explore', pathMatch: 'full' }
 ];

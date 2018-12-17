@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AuthState } from '@store/models/auth-state.model';
 
 
 @Component({
@@ -6,6 +8,12 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  constructor() {}
+export class AppComponent implements OnInit {
+  constructor(private store: Store<AuthState>) {}
+
+  ngOnInit() {
+    if (localStorage.access_token) {
+      // this.store.dispatch(new LocalTokenCheck());
+    }
+  }
 }

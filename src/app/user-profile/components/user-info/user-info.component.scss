@@ -1,0 +1,16 @@
+@import "src/styles.scss";
+
+.container {
+  width: rem(1174);
+  margin: auto;
+  form {
+    padding-left: rem(120);
+    display: flex;
+    flex-direction: column;
+    width: rem(250);
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}

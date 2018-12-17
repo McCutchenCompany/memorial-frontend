@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetPositionAction } from '@store/find-memorial/actions/action.types';
+import { GetPositionAction, LocationAccepted, LocationDenied } from '@store/find-memorial/actions/action.types';
 import { AppState } from '@store/models/app-state.model';
 
 @Injectable({
@@ -21,10 +21,11 @@ export class GeolocationService {
         heading: position.coords.heading,
         speed: position.coords.speed
       };
+      this.store.dispatch(new LocationAccepted());
       this.store.dispatch(new GetPositionAction(location));
     },
     error => {
-      console.log(error);
+      this.store.dispatch(new LocationDenied());
     });
   }
 }

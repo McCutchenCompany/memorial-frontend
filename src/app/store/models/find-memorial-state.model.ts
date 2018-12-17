@@ -2,6 +2,7 @@ export class FindUserPositionState {
   loading: boolean;
   loaded: boolean;
   position: UserCoordinates;
+  permission: boolean;
 }
 
 export class UserCoordinates {
