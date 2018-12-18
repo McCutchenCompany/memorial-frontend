@@ -12,6 +12,7 @@ export class AuthState {
     updated_at: Date;
     created_at: Date;
     a0: any;
+    memorials: any[]
   };
   error: any;
   loading: boolean;

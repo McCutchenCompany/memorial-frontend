@@ -74,7 +74,8 @@ export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): 
         ...state,
         user: {
           ...state.user,
-          ...action.payload
+          ...action.payload.user,
+          memorials: action.payload.memorials
         },
         loading: false,
         loaded: true
