@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { LocalTokenCheck } from '@store/auth/auth.actions';
 import { AuthState } from '@store/models/auth-state.model';
 
 
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.access_token) {
-      // this.store.dispatch(new LocalTokenCheck());
+      this.store.dispatch(new LocalTokenCheck());
     }
   }
 }

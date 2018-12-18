@@ -3,10 +3,8 @@
     <img src="./assets/imgs/Memorial Logo.png" />
   </button>
   <div class="actions">
-    <button mat-button>Create Memorial</button>
-    <button class="clear-btn">Help</button>
-    <button *ngIf="!loggedIn" class="clear-btn">Sign Up</button>
-    <button *ngIf="!loggedIn" class="clear-btn" (click)="onLogin()">Log In</button>
-    <button *ngIf="loggedIn" class="clear-btn" [routerLink]="['/profile']">Profile</button>
+    <button class="create-btn" mat-button>Create Memorial</button>
+    <button *ngIf="!loggedIn" mat-button class="subtle" (click)="onLogin()">Login/Sign Up</button>
+    <button *ngIf="loggedIn" mat-button class="subtle" [routerLink]="['/profile']">Profile</button>
   </div>
 </div>

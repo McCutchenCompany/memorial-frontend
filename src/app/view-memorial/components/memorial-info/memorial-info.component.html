@@ -1,18 +1,18 @@
 <div class="info">
   <div class="birth">
-    <h3>Birth</h3>
-    <p>{{ memorial.birth_date | date }}</p>
+    <p>Birth</p>
+    <h6>{{ memorial.birth_date | date }}</h6>
   </div>
   <div class="death">
-    <h3>Death</h3>
-    <p>{{ memorial.death_date | date }}</p>
+    <p>Death</p>
+    <h6>{{ memorial.death_date | date }}</h6>
   </div>
   <div class="location">
-    <h3>Location</h3>
-    <p>{{ location.description || 'Unknown' }}</p>
+    <p>Location</p>
+    <h6>{{ location.description || 'Unknown' }}</h6>
   </div>
 </div>
 <div class="description">
-  <h1>About {{ memorial.first_name }}</h1>
+  <h3>About {{ memorial.first_name }}</h3>
   <p>{{ memorial.description }}</p>
 </div>

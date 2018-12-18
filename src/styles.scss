@@ -29,11 +29,19 @@ $breakpoints: (
 }
 
 $colors: (
+  primary: #3A559B,
+  primary-dark: #31488C,
+  primary-darkest: #0D2059,
+  primary-light: #657FC2,
+  primary-lightest: #BECAE8,
   black: #141E28,
   white: #FFFFFF,
-  off-white: #F2F4F6,
-  background: #D8D8D8,
-  warn: #711d1d
+  gray: #ACB3BF,
+  dark-gray: #6E737D,
+  off-white: #F2F3F5,
+  background: #DADEE6,
+  warn: #961414,
+  success: #0A6455
 );
 
 @function rem($size) {
@@ -48,53 +56,169 @@ $serifFont: 'Noto Serif', serif;
   width: 100% !important;
 }
 
-h1, h2, h3, h4, p {
+h1, h2, h3, h4, h5, h6, p {
   color: map-get($colors, black);
   margin: 0;
 }
 
-h1, h2 {
+h1, h2, h3, h5 {
   font-family: $serifFont;
 }
 
-h3, h4, p {
+h4, h6, p {
   font-family: $sansFont;
 }
 
 h1 {
   font-weight: 700;
-  font-size: rem(36);
+  font-size: rem(60);
+  line-height: rem(88);
+}
+
+h2 {
+  font-weight: 700;
+  font-size: rem(48);
+  line-height: rem(60);
 }
 
 h3 {
   font-weight: 700;
-  font-size: rem(16);
+  font-size: rem(34);
+  line-height: rem(56);
+}
+
+h4 {
+  font-weight: 700;
+  font-size: rem(24);
+  line-height: rem(36);
+}
+
+h5 {
+  font-weight: 700;
+  font-size: rem(20);
+  line-height: rem(32);
+}
+
+h6 {
+  font-weight: 700;
+  font-size: rem(20);
+  line-height: rem(32);
 }
 
 p {
   font-size: rem(16);
   line-height: rem(28);
+  &.caption {
+    font-size: rem(12);
+    line-height: rem(18);
+  }
 }
 
 button {
   font-family: $sansFont;
   font-size: rem(16);
   outline: none;
-  &.clear-btn {
+  &.secondary {
     background: none;
     border: none;
   }
   &.mat-button {
-    border: 1px solid map-get($colors, black);
-    border-radius: 2px;
     span {
       font-family: $sansFont;
-      font-size: rem(16);
+      font-size: rem(14);
+      letter-spacing: rem(.25);
+      line-height: rem(28);
       font-weight: 700;
     }
-    &.warn-btn {
+    &.create-btn {
+      span {
+        font-size: rem(16);
+      }
+    }
+    &.primary {
+      border-radius: 2px;
+      background-color: map-get($colors, primary);
+      span {
+        color: map-get($colors, white);
+      }
+      &:hover {
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2);
+        background-color: map-get($colors, primary-dark);
+      }
+      &:focus {
+        background-color: map-get($colors, primary-darkest);
+      }
+      &:disabled {
+        background-color: map-get($colors, off-white);
+        span {
+          color: map-get($colors, gray);
+        }
+      }
+    }
+    &.secondary {
+      border: 1px solid map-get($colors, gray);
+      border-radius: 2px;
+      span {
+        color: map-get($colors, gray);
+      }
+      &:hover {
+        background-color: rgba(0,0,0,0.04);
+      }
+      &:focus {
+        border: 1px solid map-get($colors, dark-gray);
+        span {
+          color: map-get($colors, dark-gray);
+        }
+      }
+      &:disabled {
+        border: none;
+        background-color: map-get($colors, off-white);
+      }
+    }
+    &.subtle {
       border: none;
-      color: map-get($colors, warn)
+      background: none;
+      span {
+        color: map-get($colors, dark-gray);
+      }
+      &:hover {
+        background-color: rgba(0,0,0,0.04);
+      }
+      &:focus {
+        background-color: rgba(0,0,0,0.04);
+        border: 1px solid map-get($colors, dark-gray);
+      }
+      &:disabled {
+        span {
+          color: map-get($colors, gray);
+        }
+      }
     }
   }
+  .link {
+    border: none;
+    background: none;
+    color: map-get($colors, primary);
+    padding: rem(3) rem(7);
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: map-get($colors, primary-light);
+    }
+    &:focus {
+      border: 1px solid map-get($colors, primary);
+      border-radius: 2px;
+    }
+    &:disabled {
+      color: map-get($colors, gray);
+    }
+  }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  height: rem(52);
+}
+
+.mat-form-field-appearance-outline
+.mat-form-field-infix {
+  padding: .4em 0 0;
 }
