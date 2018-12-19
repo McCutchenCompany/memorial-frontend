@@ -8,9 +8,9 @@ import * as auth0 from 'auth0-js';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
+import { AuthService } from './../../shared/services/auth.service';
 import { ProfileService } from './../../user-profile/services/profile.service';
 import {
-  Auth0Login,
   Auth0LoginFailure,
   Auth0LoginSuccess,
   AuthActionTypes,
@@ -28,6 +28,7 @@ export class AuthEffects {
   constructor(
     private actions: Actions,
     private api: ProfileService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -109,26 +110,15 @@ export class AuthEffects {
   public localTokenInvalid$: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOCAL_TOKEN_INVALID),
     map(() => {
-      localStorage.removeItem('access_token');
-    }),
-    switchMap(payload => [new CheckSession()])
+      return new CheckSession();
+    })
   );
 
-  @Effect()
+  @Effect({dispatch: false})
   checkSession$: Observable<Action> = this.actions.pipe(
     ofType(AuthActionTypes.CHECK_SESSION),
-    map(() => {
-      return this.auth0.checkSession({
-        audience: environment.auth0.audience,
-        scope: 'openid email profile',
-        redirectUri: window.location.origin,
-      }, (err, result) => {
-        if (err) {
-          return new Auth0Login();
-        } else {
-          return new Auth0LoginSuccess(result);
-        }
-      });
+    tap(() => {
+      this.authService.renewToken();
     })
   );
 
