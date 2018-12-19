@@ -17,7 +17,8 @@ export const INITIAL_STATE: AuthState = {
     auth0_id: null,
     created_at: null,
     updated_at: null,
-    a0: null
+    a0: null,
+    memorials: []
   },
   error: null,
   loading: false,
