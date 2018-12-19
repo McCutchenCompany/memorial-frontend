@@ -5,3 +5,10 @@
   justify-content: space-around;
   margin: rem(150) 0;
 }
+.container {
+  width: rem(1176);
+  margin: rem(60) auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}

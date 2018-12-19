@@ -193,6 +193,11 @@ button {
           color: map-get($colors, gray);
         }
       }
+      &.warn {
+        span {
+          color: map-get($colors, warn);
+        }
+      }
     }
   }
   .link {

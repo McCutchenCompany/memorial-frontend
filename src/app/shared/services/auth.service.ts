@@ -39,10 +39,8 @@ export class AuthService {
       redirectUri: window.location.origin,
     }, (err, result) => {
       if (err) {
-        console.log('returned error');
         this.store.dispatch(new Auth0Login());
       } else {
-        console.log('returned success');
         return new Auth0LoginSuccess(result);
       }
     });
