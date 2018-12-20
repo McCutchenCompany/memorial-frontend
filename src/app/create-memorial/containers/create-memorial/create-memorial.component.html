@@ -1,0 +1,2 @@
+<app-memorial-info *ngIf="loaded$ | async" [memorialInfo]="(memorial$ | async).memorial" (save)="onUpdateMemorial($event)"></app-memorial-info>
+<mat-progress-spinner *ngIf="loading$ | async"></mat-progress-spinner>

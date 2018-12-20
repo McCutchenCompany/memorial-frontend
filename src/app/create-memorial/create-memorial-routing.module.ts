@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CreateMemorialComponent } from './components/create-memorial/create-memorial.component';
+import { CreateMemorialComponent } from './containers/create-memorial/create-memorial.component';
 
 const createMemorialRoutes: Routes = [
   { path: '', component: CreateMemorialComponent }

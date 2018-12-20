@@ -1,3 +1,5 @@
+import { Memorial } from '@shared/models/memorial.model';
+
 export class User {
   uuid: string;
   first_name: string;
@@ -9,4 +11,5 @@ export class User {
   created_at: Date;
   updated_at: Date;
   a0: any;
+  memorials: Memorial[];
 }

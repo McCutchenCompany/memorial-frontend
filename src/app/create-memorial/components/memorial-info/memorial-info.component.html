@@ -1,0 +1,50 @@
+<div class="container">
+  <h2>Create a Memorial</h2>
+  <form [formGroup]="memorialInfoForm">
+    <h4>Name</h4>
+    <div class="name">
+      <mat-form-field appearance="outline">
+        <mat-label>First</mat-label>
+        <input matInput formControlName="first_name">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Middle</mat-label>
+        <input matInput formControlName="middle_name">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Last</mat-label>
+        <input matInput formControlName="last_name">
+      </mat-form-field>
+    </div>
+    <div class="dates">
+      <mat-form-field class="datepicker" appearance="outline">
+        <mat-label>Birth Date</mat-label>
+        <input matInput [matDatepicker]="birthDatepicker" formControlName="birth_date">
+        <mat-datepicker-toggle [for]="birthDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #birthDatepicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="datepicker" appearance="outline">
+        <mat-label>Death Date</mat-label>
+        <input matInput [matDatepicker]="deathDatepicker" formControlName="death_date">
+        <mat-datepicker-toggle [for]="deathDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #deathDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <h4>Start by sharing about their life</h4>
+    <div class="description">
+      <mat-form-field class="textarea" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          matTextareaAutosize
+          maxlength="1000"></textarea>
+        <mat-hint align="end">{{memorialInfoForm.value.description.length}} / 1000</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="actions">
+      <button mat-button *ngIf="memorialInfoForm.pristine" class="primary">Timeline <mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button mat-button *ngIf="memorialInfoForm.dirty" [disabled]="memorialInfoForm.invalid" class="primary" (click)="onSave()">Save and Continue</button>
+    </div>
+  </form>
+</div>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@environments/environment';
 import { Store } from '@ngrx/store';
-import { Auth0Login, Auth0LoginSuccess, LocalTokenCheck } from '@store/auth/auth.actions';
+import { Auth0Login, Auth0LoginSuccess } from '@store/auth/auth.actions';
 import * as auth0 from 'auth0-js';
 
 import { AuthService } from './auth.service';
@@ -20,11 +21,16 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
      // Check if there is an `access_token` in localStorage
     if (AuthService.getToken()) {
-      // Dispatch action to validate local token
-      localStorage.setItem('reroute', state.url);
-      this.store.dispatch(new LocalTokenCheck());
-      // TODO: Add a timer (expiration less 10 minutes) for silent token refresh.
-      return true;
+      const helper = new JwtHelperService();
+      const isExpired = helper.isTokenExpired(localStorage.access_token);
+      if (isExpired) {
+        // Dispatch action to validate local token
+        localStorage.setItem('reroute', state.url);
+        this.store.dispatch(new Auth0Login());
+      } else {
+        // TODO: Add a timer (expiration less 10 minutes) for silent token refresh.
+        return true;
+      }
     } else {
       localStorage.setItem('reroute', state.url);
       // Start the Auth0 Login process

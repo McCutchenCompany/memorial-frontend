@@ -1,0 +1,18 @@
+<mat-card>
+  <div class="image"
+  [style.background-image]="imgBackground.background"
+  [style.background-repeat]="imgBackground.repeat"
+  [style.background-position]="imgBackground.position"
+  [style.background-size]="imgBackground.size"></div>
+  <div class="container">
+    <div class="info">
+      <h5>{{ name }}</h5>
+      <p *ngIf="memorial.birth_date">{{ memorial.birth_date | date:'y' }} - {{ memorial.death_date | date:'y' }}</p>
+    </div>
+    <div class="actions">
+      <button mat-button class="primary" [routerLink]="['/memorial', memorial.uuid]">View</button>
+      <button mat-button class="subtle" [routerLink]="['/create', memorial.uuid]">Edit</button>
+      <button mat-button class="subtle warn">Delete</button>
+    </div>
+  </div>
+</mat-card>
