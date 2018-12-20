@@ -24,10 +24,23 @@ export class MemorialHeaderComponent implements OnInit {
     return name;
   }
 
-  get background() {
-    return `url(${this.memorial.image})`;
+  get imgBackground() {
+    if (this.memorial.image) {
+      return {
+        background: `url(${this.memorial.image})`,
+        position: 'center',
+        repeat: 'no-repeat',
+        size: 'cover'
+      };
+    } else {
+      return {
+        background: 'url(assets/imgs/default-memorial.jpg)',
+        position: 'center',
+        repeat: 'no-repeat',
+        size: 'cover'
+      };
+    }
   }
-
   constructor() { }
 
   ngOnInit() {

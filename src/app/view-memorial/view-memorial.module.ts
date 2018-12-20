@@ -2,7 +2,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatIconModule } from '@angular/material';
+import { MatFormFieldModule, MatIconModule } from '@angular/material';
 import { EffectsModule } from '@ngrx/effects';
 
 import { StoreModule } from '../../../node_modules/@ngrx/store';
@@ -19,6 +19,7 @@ import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
   imports: [
     CommonModule,
     MatIconModule,
+    MatFormFieldModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
     }),

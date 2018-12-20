@@ -223,7 +223,36 @@ button {
   height: rem(52);
 }
 
-.mat-form-field-appearance-outline
-.mat-form-field-infix {
-  padding: .4em 0 0;
+mat-form-field.textarea {
+  &.mat-form-field-appearance-outline .mat-form-field-flex {
+    height: rem(180);
+  }
 }
+
+.mat-form-field-appearance-outline {
+  &.datepicker {
+    .mat-form-field-infix {
+      display: flex;
+      padding: 0;
+    }
+  }
+  .mat-form-field-infix {
+    padding: .4em 0 0;
+    .mat-form-field-label-wrapper {
+      overflow: initial;
+    }
+  }
+}
+.mat-form-field-appearance-outline .mat-form-field-label {
+    margin-top: -0.55em;
+}
+
+mat-form-field.mat-form-field-appearance-outline {
+  .mat-form-field-outline-end {
+    border-radius: 0 2px 2px 0;
+  }
+  .mat-form-field-outline-start {
+    border-radius: 2px 0 0 2px;
+  }
+}
+

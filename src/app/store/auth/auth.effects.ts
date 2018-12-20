@@ -14,7 +14,6 @@ import {
   Auth0LoginFailure,
   Auth0LoginSuccess,
   AuthActionTypes,
-  CheckSession,
   GetProfile,
   GetProfileFailure,
   GetProfileSuccess,
@@ -106,11 +105,11 @@ export class AuthEffects {
     })
   );
 
-  @Effect()
+  @Effect({dispatch: false})
   public localTokenInvalid$: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOCAL_TOKEN_INVALID),
     map(() => {
-      return new CheckSession();
+      localStorage.removeItem('access_token');
     })
   );
 
@@ -129,12 +128,6 @@ export class AuthEffects {
       map(profile => new GetProfileSuccess(profile)),
       catchError(error => of(new GetProfileFailure(error)))
     ))
-  );
-
-  @Effect({dispatch: false})
-  getProfileSuccess$: Observable<Action> = this.actions.pipe(
-    ofType(AuthActionTypes.GET_PROFILE_SUCCESS),
-    tap(() => this.router.navigateByUrl('/profile'))
   );
 
   @Effect()

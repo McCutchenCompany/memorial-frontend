@@ -11,12 +11,21 @@ export class MyMemorialCardComponent implements OnInit {
   @Input() memorial: Memorial;
 
   get imgBackground() {
-    return {
-      background: `url(${this.memorial.image})`,
-      position: 'center',
-      repeat: 'no-repeat',
-      size: 'cover'
-    };
+    if (this.memorial.image) {
+      return {
+        background: `url(${this.memorial.image})`,
+        position: 'center',
+        repeat: 'no-repeat',
+        size: 'cover'
+      };
+    } else {
+      return {
+        background: 'url(assets/imgs/default-memorial.jpg)',
+        position: 'center',
+        repeat: 'no-repeat',
+        size: 'cover'
+      };
+    }
   }
 
   get name() {
@@ -29,6 +38,9 @@ export class MyMemorialCardComponent implements OnInit {
     }
     if (this.memorial.last_name) {
       name += ` ${this.memorial.last_name}`;
+    }
+    if (name === '') {
+      name = 'New Memorial';
     }
     return name;
   }

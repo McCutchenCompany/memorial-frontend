@@ -11,7 +11,7 @@ describe('MemorialInfoComponent', () => {
 
   configureTestSuite(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemorialInfoComponent ]
+      declarations: [ MemorialInfoComponent ],
     });
   });
 

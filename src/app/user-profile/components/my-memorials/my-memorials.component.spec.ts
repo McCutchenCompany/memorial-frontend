@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule, MatCardModule, MatIconModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { MyMemorialCardComponent } from '../my-memorial-card/my-memorial-card.component';
 import { MyMemorialsComponent } from './my-memorials.component';
 
 describe('MyMemorialsComponent', () => {
@@ -8,7 +11,16 @@ describe('MyMemorialsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyMemorialsComponent ]
+      declarations: [
+        MyMemorialsComponent,
+        MyMemorialCardComponent
+      ],
+      imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

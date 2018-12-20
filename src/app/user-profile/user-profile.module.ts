@@ -9,6 +9,10 @@ import {
   MatInputModule,
   MatProgressSpinnerModule,
 } from '@angular/material';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { UserProfileEffects } from '@store/user-profile/user-profile.effects';
+import { userProfileReducer } from '@store/user-profile/user-profile.reducer';
 
 import { MyMemorialCardComponent } from './components/my-memorial-card/my-memorial-card.component';
 import { MyMemorialsComponent } from './components/my-memorials/my-memorials.component';
@@ -27,7 +31,11 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature('userProfile', userProfileReducer),
+    EffectsModule.forFeature([
+      UserProfileEffects
+    ])
   ]
 })
 export class UserProfileModule { }

@@ -7,7 +7,7 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: 'explore', loadChildren: './find-memorial/find-memorial.module#FindMemorialModule' },
-  { path: 'create', loadChildren: './create-memorial/create-memorial.module#CreateMemorialModule', canActivate: [AuthGuardService] },
+  { path: 'create/:id', loadChildren: './create-memorial/create-memorial.module#CreateMemorialModule', canActivate: [AuthGuardService] },
   { path: 'memorial', loadChildren: './view-memorial/view-memorial.module#ViewMemorialModule' },
   { path: 'profile', loadChildren: './user-profile/user-profile.module#UserProfileModule', canActivate: [AuthGuardService] },
   { path: 'callback', component: CallbackComponent },
