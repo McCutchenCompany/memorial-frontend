@@ -1,15 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  MatCardModule,
   MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
   MatNativeDateModule,
   MatProgressSpinnerModule,
+  MatTabsModule,
 } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
+import { UploadImageComponent } from '@shared/components/upload-image/upload-image.component';
 import { TestStore } from '@shared/testing/test-store';
+import { ImageViewerComponent } from 'app/create-memorial/components/image-viewer/image-viewer.component';
 import { MemorialInfoComponent } from 'app/create-memorial/components/memorial-info/memorial-info.component';
 import { configureTestSuite } from 'ng-bullet';
 
@@ -23,7 +27,9 @@ describe('CreateMemorialComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         CreateMemorialComponent,
-        MemorialInfoComponent
+        MemorialInfoComponent,
+        ImageViewerComponent,
+        UploadImageComponent
       ],
       imports: [
         MatProgressSpinnerModule,
@@ -32,6 +38,8 @@ describe('CreateMemorialComponent', () => {
         MatDatepickerModule,
         MatNativeDateModule,
         MatIconModule,
+        MatCardModule,
+        MatTabsModule,
         RouterTestingModule
       ],
       providers: [
