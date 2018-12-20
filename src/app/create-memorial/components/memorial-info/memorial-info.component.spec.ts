@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  MatCardModule,
   MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
@@ -8,29 +9,36 @@ import {
   MatNativeDateModule,
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { UploadImageComponent } from '@shared/components/upload-image/upload-image.component';
 import { Memorial } from '@shared/models/memorial.model';
+import { configureTestSuite } from 'ng-bullet';
 
+import { ImageViewerComponent } from './../image-viewer/image-viewer.component';
 import { MemorialInfoComponent } from './memorial-info.component';
 
 describe('MemorialInfoComponent', () => {
   let component: MemorialInfoComponent;
   let fixture: ComponentFixture<MemorialInfoComponent>;
 
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemorialInfoComponent ],
+      declarations: [
+        MemorialInfoComponent,
+        ImageViewerComponent,
+        UploadImageComponent
+      ],
       imports: [
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatCardModule,
         MatIconModule,
         NoopAnimationsModule
       ]
-    })
-    .compileComponents();
-  }));
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MemorialInfoComponent);

@@ -1,0 +1,8 @@
+@import "src/styles.scss";
+
+.inputfile + label {
+  background-color: map-get($colors, primary);
+  border-radius: 2px;
+  font-family: $sansFont;
+  color: map-get($colors, white);
+}

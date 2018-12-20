@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from '@environments/environment';
 import { Memorial } from '@shared/models/memorial.model';
 
 @Component({
@@ -27,7 +28,7 @@ export class MemorialHeaderComponent implements OnInit {
   get imgBackground() {
     if (this.memorial.image) {
       return {
-        background: `url(${this.memorial.image})`,
+        background: `url(${environment.s3.url}${this.memorial.image})`,
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover'

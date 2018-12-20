@@ -256,3 +256,16 @@ mat-form-field.mat-form-field-appearance-outline {
   }
 }
 
+.inputfile:focus {
+  outline: none;
+}
+
+mat-tab-group.create-tabs {
+  mat-tab-header.mat-tab-header {
+    width: rem(1176);
+    margin: auto;
+  }
+  .mat-tab-labels {
+    justify-content: space-between;
+  }
+}
