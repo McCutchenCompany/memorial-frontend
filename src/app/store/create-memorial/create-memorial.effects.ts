@@ -12,6 +12,9 @@ import {
   AddTimelineEntryFaiure,
   AddTimelineEntrySuccess,
   CreateMemorialActionTypes,
+  DeleteMemorialImage,
+  DeleteMemorialImageFailure,
+  DeleteMemorialImageSuccess,
   GetCreateMemorial,
   GetCreateMemorialFailure,
   GetCreateMemorialSuccess,
@@ -73,11 +76,20 @@ export class CreateMemorialEffects {
   );
 
   @Effect()
-  UploadMemorialImage$: Observable<Action> = this.actions.pipe(
+  ploadMemorialImage$: Observable<Action> = this.actions.pipe(
     ofType(CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE),
     switchMap((action: UploadMemorialImage) => this.uploadService.uploadImage(action.payload.id, action.payload.image).pipe(
       map(memorial => new UploadMemorialImageSuccess(memorial)),
       catchError(error => of(new UploadMemorialImageFailure(error)))
+    ))
+  );
+
+  @Effect()
+  deleteMemorialImage$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE),
+    switchMap((action: DeleteMemorialImage) => this.uploadService.removeImage(action.payload.memorial_id, action.payload.route).pipe(
+      map(memorial => new DeleteMemorialImageSuccess(memorial)),
+      catchError(error => of(new DeleteMemorialImageFailure(error)))
     ))
   );
 

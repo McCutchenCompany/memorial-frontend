@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { environment } from '@environments/environment';
 
@@ -14,11 +14,12 @@ export class ImageViewerComponent implements OnInit {
 
   @Input() image: string;
   @Input() memorial_id: string;
+  @Output() remove: EventEmitter<{memorial_id: string, route: string}> = new EventEmitter<{memorial_id: string, route: string}>();
 
   get imgBackground() {
     if (this.image) {
       return {
-        background: `url(${environment.s3.url}${encodeURI(this.image)})`,
+        background: `url(${environment.s3.url}${this.image})`,
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover'
@@ -50,7 +51,7 @@ export class ImageViewerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.uploadService.removeImage(this.memorial_id, this.image);
+        this.remove.emit({memorial_id: this.memorial_id, route: this.image});
       }
     });
   }

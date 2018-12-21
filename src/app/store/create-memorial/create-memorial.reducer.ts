@@ -37,6 +37,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         error: action.payload
       };
     }
+    case CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE:
     case CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE:
     case CreateMemorialActionTypes.UPDATE_CREATE_MEMORIAL: {
       return {
@@ -45,6 +46,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         saved: false
       };
     }
+    case CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE_SUCCESS:
     case CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE_SUCCESS:
     case CreateMemorialActionTypes.UPDATE_CREATE_MEMORIAL_SUCCESS: {
       return {
@@ -57,6 +59,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         }
       };
     }
+    case CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE_FAILURE:
     case CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE_FAILURE:
     case CreateMemorialActionTypes.UPDATE_CREATE_MEMORIAL_FAILURE: {
       return {

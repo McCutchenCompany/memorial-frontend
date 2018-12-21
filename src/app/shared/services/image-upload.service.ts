@@ -22,7 +22,9 @@ export class ImageUploadService {
     return this.http.post(path, _formData);
   }
 
-  removeImage(memorialId, route, timeline_id?) {
+  removeImage(memorial_id, route) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/remove_image?file=${decodeURI(route)}`;
 
+    return this.http.delete(path);
   }
 }

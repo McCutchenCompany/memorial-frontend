@@ -9,8 +9,10 @@ import {
   MatNativeDateModule,
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Store } from '@ngrx/store';
 import { UploadImageComponent } from '@shared/components/upload-image/upload-image.component';
 import { Memorial } from '@shared/models/memorial.model';
+import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
 import { ImageViewerComponent } from './../image-viewer/image-viewer.component';
@@ -36,6 +38,12 @@ describe('MemorialInfoComponent', () => {
         MatCardModule,
         MatIconModule,
         NoopAnimationsModule
+      ],
+      providers: [
+        {
+          provide: Store,
+          useClass: TestStore
+        }
       ]
     });
   });

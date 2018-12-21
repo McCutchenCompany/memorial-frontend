@@ -1,7 +1,7 @@
 <div class="container">
   <form [formGroup]="memorialInfoForm">
     <h4>Cover Image</h4>
-    <app-image-viewer *ngIf="memorialInfo.image" [image]="memorialInfo.image" [memorial_id]="memorialInfo.uuid"></app-image-viewer>
+    <app-image-viewer *ngIf="memorialInfo.image" [image]="memorialInfo.image" [memorial_id]="memorialInfo.uuid" (remove)="onRemove($event)"></app-image-viewer>
     <app-upload-image *ngIf="!memorialInfo.image" [memorialId]="memorialInfo.uuid"></app-upload-image>
     <h4>Name</h4>
     <div class="name">

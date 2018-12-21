@@ -15,6 +15,7 @@ import { UploadMemorialImage } from './../../../store/create-memorial/create-mem
 export class UploadDialogComponent implements OnInit {
 
   selectedFiles: FileList;
+  error = '';
 
   constructor(
     private dialogRef: MatDialogRef<UploadDialogComponent>,
@@ -42,7 +43,14 @@ export class UploadDialogComponent implements OnInit {
   }
 
   onSelectFile(event) {
-    this.selectedFiles = event.target.files;
+    if (event.target.files[0].size > 512000) {
+      this.error = 'Your file is too big. It must be less than 500kb';
+    } else if (event.target.files[0].type !== 'image/jpeg' && event.target.files[0].type !== 'image/png') {
+      this.error = 'This file is the wrong type. You may only upload jpeg or png files';
+    } else {
+      this.error = '';
+      this.selectedFiles = event.target.files;
+    }
   }
 
 }
