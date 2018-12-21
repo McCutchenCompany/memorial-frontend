@@ -1,0 +1,10 @@
+<div class="container">
+  <button class="logo" [routerLink]="['/explore']" routerLinkActive="active">
+    <img src="./assets/imgs/Memorial Logo.png" />
+  </button>
+  <div class="actions">
+    <button class="create-btn" mat-button>Create Memorial</button>
+    <button *ngIf="!loggedIn" mat-button class="subtle" (click)="onLogin()">Login/Sign Up</button>
+    <button *ngIf="loggedIn" mat-button class="subtle" [routerLink]="['/profile']">Profile</button>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+@import "src/styles.scss";
+
+mat-card {
+  position: relative;
+  height: rem(136);
+  width: rem(655);
+  .image {
+    position: absolute;
+    height: rem(168);
+    width: rem(320);
+    top: 0;
+    left: 0;
+  }
+  .container {
+    padding-left: rem(320);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}

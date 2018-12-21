@@ -1,0 +1,66 @@
+@import "src/styles.scss";
+
+.info {
+  width: 95%;
+  display: flex;
+  margin: rem(63) auto 0;
+  .birth {
+    width: rem(240);
+  }
+  .death {
+    width: rem(240);
+  }
+  h3 {
+    margin-bottom: rem(6);
+  }
+}
+.description {
+  width: 95%;
+  margin: rem(64) auto 0;
+  h3 {
+    margin-bottom: rem(6);
+  }
+}
+@include respond-to('small') {
+  .info {
+    width: rem(767);
+    .birth {
+      padding-left: 0;
+    }
+  }
+  .description {
+    width: rem(767);
+    p {
+      column-count: 2;
+      column-gap: rem(24);
+    }
+  }
+}
+@include respond-to('medium') {
+  .info {
+    width: rem(1176);
+    display: flex;
+    margin: rem(63) auto 0;
+    .birth {
+      width: rem(240);
+      padding-left: rem(120);
+    }
+    .death {
+      width: rem(240);
+    }
+    h3 {
+      margin-bottom: rem(6);
+    }
+  }
+  .description {
+    width: rem(1176);
+    margin: rem(64) auto 0;
+    h3 {
+      padding-left: rem(118);
+      margin-bottom: rem(6);
+    }
+    p {
+      padding: 0 rem(120);
+    }
+  }
+}

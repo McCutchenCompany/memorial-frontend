@@ -4,7 +4,19 @@
 
 export const environment = {
   production: false,
-  title: 'Memorial Local'
+  title: 'Memorial Local',
+  api: 'https://svc-stag.mymemorial.co',
+  auth0: {
+    clientID: 'ToDTNgJYq3WcLe2KdA7LrnTImrcwzP5C',
+    domain: 'mitch-mccutchen.auth0.com',
+    responseType: 'token id_token',
+    audience: 'https://memorial-auth/',
+    redirectUri: 'http://localhost:4200/callback',
+    scope: 'openid email profile'
+  },
+  s3: {
+    url: 'https://memorial-staging-imgs.s3.amazonaws.com/'
+  }
 };
 
 /*

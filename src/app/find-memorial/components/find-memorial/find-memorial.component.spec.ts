@@ -1,25 +1,66 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { MatSnackBarModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Store } from '@ngrx/store';
+import { TestStore } from '@shared/testing/test-store';
+import { GetInRange } from '@store/find-memorial/actions/action.types';
+import { configureTestSuite } from 'ng-bullet';
+import { of } from 'rxjs';
 
+import { GeolocationService } from './../../services/geolocation.service';
 import { FindMemorialComponent } from './find-memorial.component';
 
 describe('FindMemorialComponent', () => {
   let component: FindMemorialComponent;
   let fixture: ComponentFixture<FindMemorialComponent>;
 
-  beforeEach(async(() => {
+  let store: TestStore<any>;
+
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
-      declarations: [ FindMemorialComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [ FindMemorialComponent ],
+      imports: [
+        AgmCoreModule.forRoot({}),
+        AgmJsMarkerClustererModule,
+        RouterTestingModule,
+        MatSnackBarModule
+      ],
+      providers: [
+        {
+          provide: Store,
+          useClass: TestStore
+        }
+      ]
+    });
+  });
 
   beforeEach(() => {
+    store = TestBed.get(Store);
+    store.setState({
+      latitude: 1,
+      longitude: 1
+    });
     fixture = TestBed.createComponent(FindMemorialComponent);
     component = fixture.componentInstance;
+    component.markers$ = of([]);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should get current location', inject([GeolocationService], (service) => {
+    spyOn(service, 'findMe');
+    component.ngOnInit();
+    expect(service.findMe).toHaveBeenCalled();
+  }));
+  it('should get markers on bound change', fakeAsync(() => {
+    spyOn(store, 'dispatch');
+    const event = {l: {l: 1, j: 2}, j: {l: 1, j: 2}};
+    component.onBoundChange(event);
+    tick(500);
+    expect(store.dispatch).toHaveBeenCalledWith(new GetInRange({top: 1, right: 1, bottom: 2, left: 2}));
+  }));
 });

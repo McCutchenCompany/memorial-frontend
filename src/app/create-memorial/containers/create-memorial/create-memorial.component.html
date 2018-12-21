@@ -1,0 +1,24 @@
+<h2>Create a Memorial</h2>
+<mat-progress-spinner *ngIf="loading$ | async"></mat-progress-spinner>
+<mat-tab-group *ngIf="loaded$ | async" class="create-tabs">
+  <mat-tab label="Basic Info">
+    <ng-template matTabContent>
+      <app-memorial-info *ngIf="loaded$ | async" [memorialInfo]="(memorial$ | async).memorial" (save)="onUpdateMemorial($event)"></app-memorial-info>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Timeline">
+    <ng-template matTabContent>
+
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Location">
+    <ng-template matTabContent>
+
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Memories">
+    <ng-template matTabContent>
+
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

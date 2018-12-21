@@ -1,1 +1,271 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700');
+
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
+$breakpoints: (
+  'small':  767px,
+  'medium': 1176px,
+  'large':  1200px
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin respond-to($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+$colors: (
+  primary: #3A559B,
+  primary-dark: #31488C,
+  primary-darkest: #0D2059,
+  primary-light: #657FC2,
+  primary-lightest: #BECAE8,
+  black: #141E28,
+  white: #FFFFFF,
+  gray: #ACB3BF,
+  dark-gray: #6E737D,
+  off-white: #F2F3F5,
+  background: #DADEE6,
+  warn: #961414,
+  success: #0A6455
+);
+
+@function rem($size) {
+  $remSize: $size / 16;
+  @return $remSize * 1rem;
+}
+
+$sansFont: 'Noto Sans', sans-serif;
+$serifFont: 'Noto Serif', serif;
+
+.agm-map-container-inner {
+  width: 100% !important;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: map-get($colors, black);
+  margin: 0;
+}
+
+h1, h2, h3, h5 {
+  font-family: $serifFont;
+}
+
+h4, h6, p {
+  font-family: $sansFont;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: rem(60);
+  line-height: rem(88);
+}
+
+h2 {
+  font-weight: 700;
+  font-size: rem(48);
+  line-height: rem(60);
+}
+
+h3 {
+  font-weight: 700;
+  font-size: rem(34);
+  line-height: rem(56);
+}
+
+h4 {
+  font-weight: 700;
+  font-size: rem(24);
+  line-height: rem(36);
+}
+
+h5 {
+  font-weight: 700;
+  font-size: rem(20);
+  line-height: rem(32);
+}
+
+h6 {
+  font-weight: 700;
+  font-size: rem(20);
+  line-height: rem(32);
+}
+
+p {
+  font-size: rem(16);
+  line-height: rem(28);
+  &.caption {
+    font-size: rem(12);
+    line-height: rem(18);
+  }
+}
+
+button {
+  font-family: $sansFont;
+  font-size: rem(16);
+  outline: none;
+  &.secondary {
+    background: none;
+    border: none;
+  }
+  &.mat-button {
+    span {
+      font-family: $sansFont;
+      font-size: rem(14);
+      letter-spacing: rem(.25);
+      line-height: rem(28);
+      font-weight: 700;
+    }
+    &.create-btn {
+      span {
+        font-size: rem(16);
+      }
+    }
+    &.primary {
+      border-radius: 2px;
+      background-color: map-get($colors, primary);
+      span {
+        color: map-get($colors, white);
+      }
+      &:hover {
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2);
+        background-color: map-get($colors, primary-dark);
+      }
+      &:focus {
+        background-color: map-get($colors, primary-darkest);
+      }
+      &:disabled {
+        background-color: map-get($colors, off-white);
+        span {
+          color: map-get($colors, gray);
+        }
+      }
+    }
+    &.secondary {
+      border: 1px solid map-get($colors, gray);
+      border-radius: 2px;
+      span {
+        color: map-get($colors, gray);
+      }
+      &:hover {
+        background-color: rgba(0,0,0,0.04);
+      }
+      &:focus {
+        border: 1px solid map-get($colors, dark-gray);
+        span {
+          color: map-get($colors, dark-gray);
+        }
+      }
+      &:disabled {
+        border: none;
+        background-color: map-get($colors, off-white);
+      }
+    }
+    &.subtle {
+      border: none;
+      background: none;
+      span {
+        color: map-get($colors, dark-gray);
+      }
+      &:hover {
+        background-color: rgba(0,0,0,0.04);
+      }
+      &:focus {
+        background-color: rgba(0,0,0,0.04);
+        border: 1px solid map-get($colors, dark-gray);
+      }
+      &:disabled {
+        span {
+          color: map-get($colors, gray);
+        }
+      }
+      &.warn {
+        span {
+          color: map-get($colors, warn);
+        }
+      }
+    }
+  }
+  .link {
+    border: none;
+    background: none;
+    color: map-get($colors, primary);
+    padding: rem(3) rem(7);
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: map-get($colors, primary-light);
+    }
+    &:focus {
+      border: 1px solid map-get($colors, primary);
+      border-radius: 2px;
+    }
+    &:disabled {
+      color: map-get($colors, gray);
+    }
+  }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  height: rem(52);
+}
+
+mat-form-field.textarea {
+  &.mat-form-field-appearance-outline .mat-form-field-flex {
+    height: rem(180);
+  }
+}
+
+.mat-form-field-appearance-outline {
+  &.datepicker {
+    .mat-form-field-infix {
+      display: flex;
+      padding: 0;
+    }
+  }
+  .mat-form-field-infix {
+    padding: .4em 0 0;
+    .mat-form-field-label-wrapper {
+      overflow: initial;
+    }
+  }
+}
+.mat-form-field-appearance-outline .mat-form-field-label {
+    margin-top: -0.55em;
+}
+
+mat-form-field.mat-form-field-appearance-outline {
+  .mat-form-field-outline-end {
+    border-radius: 0 2px 2px 0;
+  }
+  .mat-form-field-outline-start {
+    border-radius: 2px 0 0 2px;
+  }
+}
+
+.inputfile:focus {
+  outline: none;
+}
+
+mat-tab-group.create-tabs {
+  mat-tab-header.mat-tab-header {
+    width: rem(1176);
+    margin: auto;
+  }
+  .mat-tab-labels {
+    justify-content: space-between;
+  }
+}

@@ -51,7 +51,8 @@ deploy_stage:
     - pip install awscli
   script:
     - ./node_modules/@angular/cli/bin/ng build --configuration=staging
-    - aws s3 cp ./dist/memorial s3://memorial-frontend-staging --recursive
+    - aws s3 cp ./dist/memorial s3://staging.mymemorial.co --recursive
+    - aws cloudfront create-invalidation --distribution-id 'E37RFS7KSZ0ZR' --paths '/*'
 
 deploy_production:
   stage: deploy

@@ -1,0 +1,18 @@
+<div class="info">
+  <div class="birth">
+    <p>Birth</p>
+    <h6>{{ memorial.birth_date | date }}</h6>
+  </div>
+  <div class="death">
+    <p>Death</p>
+    <h6>{{ memorial.death_date | date }}</h6>
+  </div>
+  <div class="location">
+    <p>Location</p>
+    <h6>{{ location?.description || 'Unknown' }}</h6>
+  </div>
+</div>
+<div class="description">
+  <h3>About {{ memorial.first_name }}</h3>
+  <p>{{ memorial.description }}</p>
+</div>

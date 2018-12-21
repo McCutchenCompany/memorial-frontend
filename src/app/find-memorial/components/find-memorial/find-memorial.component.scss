@@ -1,0 +1,16 @@
+@import "src/styles.scss";
+
+agm-map {
+  width: 100%;
+  height: 100vw;
+  float: none;
+}
+@include respond-to('medium') {
+  agm-map {
+    display: block;
+    height: 50vw;
+    width: 50%;
+    float: right;
+  }
+}
+

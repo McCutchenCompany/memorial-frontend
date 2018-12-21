@@ -1,0 +1,4 @@
+<form>
+  <input type="file" name="file" class="inputfile" (change)="onSelectFile($event)"/>
+  <button mat-button class="primary" [disabled]="!selectedFiles" (click)="onUpload()">Upload</button>
+</form>

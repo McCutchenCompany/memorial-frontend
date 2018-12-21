@@ -1,0 +1,8 @@
+<div class="container" *ngIf="(user$ | async) && (loaded$ | async)">
+  <app-user-info [user]="user$ | async" (saveUser)="onEdit($event)"></app-user-info>
+  <app-my-memorials [memorials]="(user$ | async).memorials" [user]="user$ | async" (addLicense)="onAddMemorial($event)"></app-my-memorials>
+</div>
+<div class="loading-container" *ngIf="loading$ | async">
+  <mat-spinner [mode]="'indeterminate'"></mat-spinner>
+</div>
+
