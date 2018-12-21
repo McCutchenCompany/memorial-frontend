@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
+import { ImageUploadService } from '@shared/services/image-upload.service';
 import { CreateMemorialService } from 'app/create-memorial/services/create-memorial.service';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -20,6 +21,9 @@ import {
   UpdateCreateMemorial,
   UpdateCreateMemorialFailure,
   UpdateCreateMemorialSuccess,
+  UploadMemorialImage,
+  UploadMemorialImageFailure,
+  UploadMemorialImageSuccess,
 } from './create-memorial.actions';
 
 
@@ -28,6 +32,7 @@ export class CreateMemorialEffects {
   constructor(
     private actions: Actions,
     private api: CreateMemorialService,
+    private uploadService: ImageUploadService,
     private router: Router
   ) {}
 
@@ -64,6 +69,15 @@ export class CreateMemorialEffects {
     switchMap((action: RemoveTimelineEntry) => this.api.removeTimelineEntry(action.payload).pipe(
       map(res => new RemoveTimelineEntrySuccess(res)),
       catchError(error => of(new RemoveTimelineEntryFaiure(error)))
+    ))
+  );
+
+  @Effect()
+  UploadMemorialImage$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE),
+    switchMap((action: UploadMemorialImage) => this.uploadService.uploadImage(action.payload.id, action.payload.image).pipe(
+      map(memorial => new UploadMemorialImageSuccess(memorial)),
+      catchError(error => of(new UploadMemorialImageFailure(error)))
     ))
   );
 

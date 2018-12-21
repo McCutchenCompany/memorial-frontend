@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule, MatCardModule, MatDialogModule } from '@angular/material';
 import { Store } from '@ngrx/store';
@@ -16,7 +17,8 @@ describe('ImageViewerComponent', () => {
       imports: [
         MatCardModule,
         MatButtonModule,
-        MatDialogModule
+        MatDialogModule,
+        HttpClientTestingModule
       ],
       providers: [
         {

@@ -22,16 +22,10 @@ export class AuthInterceptorService {
     const token = AuthService.getToken();
     request = request.clone({
         setHeaders: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Authorization': `Bearer ${token}`
         }
     });
   } else {
-    request = request.clone({
-      setHeaders: {
-          'Content-Type': 'application/json'
-      }
-    });
   }
 
   return next.handle(request);

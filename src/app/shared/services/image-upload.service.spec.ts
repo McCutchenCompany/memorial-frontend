@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { TestStore } from '@shared/testing/test-store';
@@ -11,6 +12,9 @@ describe('ImageUploadService', () => {
         provide: Store,
         useClass: TestStore
       }
+    ],
+    imports: [
+      HttpClientTestingModule
     ]
   }));
 

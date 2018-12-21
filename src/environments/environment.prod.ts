@@ -11,9 +11,6 @@ export const environment = {
     scope: 'openid email profile'
   },
   s3: {
-    accessKeyId: 'AKIAIB42X6566NMXGCOQ',
-    secretAccessKey: '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',
-    region: 'us-east-1',
     bucket: 'memorial-staging-imgs'
   }
 };

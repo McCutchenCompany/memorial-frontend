@@ -37,6 +37,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         error: action.payload
       };
     }
+    case CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE:
     case CreateMemorialActionTypes.UPDATE_CREATE_MEMORIAL: {
       return {
         ...state,
@@ -44,6 +45,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         saved: false
       };
     }
+    case CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE_SUCCESS:
     case CreateMemorialActionTypes.UPDATE_CREATE_MEMORIAL_SUCCESS: {
       return {
         ...state,
@@ -55,6 +57,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         }
       };
     }
+    case CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE_FAILURE:
     case CreateMemorialActionTypes.UPDATE_CREATE_MEMORIAL_FAILURE: {
       return {
         ...state,
@@ -82,4 +85,12 @@ export const getCreateLoading = createSelector(
 export const getCreateLoaded = createSelector(
   getCreateMemorialState,
   state => state.loaded
+);
+export const getCreatedSaving = createSelector(
+  getCreateMemorialState,
+  state => state.saving
+);
+export const getCreatedSaved = createSelector(
+  getCreateMemorialState,
+  state => state.saved
 );

@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
@@ -28,6 +29,9 @@ describe('UploadDialogComponent', () => {
           provide: Store,
           useClass: TestStore
         }
+      ],
+      imports: [
+        HttpClientTestingModule
       ]
     })
     .overrideModule(BrowserDynamicTestingModule, {

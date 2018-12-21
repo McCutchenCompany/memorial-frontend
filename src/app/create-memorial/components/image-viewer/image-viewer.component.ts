@@ -18,7 +18,7 @@ export class ImageViewerComponent implements OnInit {
   get imgBackground() {
     if (this.image) {
       return {
-        background: `url(${environment.s3.url}${this.image})`,
+        background: `url(${environment.s3.url}${encodeURI(this.image)})`,
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover'
