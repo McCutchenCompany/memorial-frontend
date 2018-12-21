@@ -17,7 +17,10 @@ export enum CreateMemorialActionTypes {
   REMOVE_TIMELINE_ENTRY_FAILURE = '[Create] Remove timeline entry failure',
   UPLOAD_MEMORIAL_IMAGE = '[Create] Upload memorial image',
   UPLOAD_MEMORIAL_IMAGE_SUCCESS = '[Create] Upload memorial image success',
-  UPLOAD_MEMORIAL_IMAGE_FAILURE = '[Create] Upload memorial image failure'
+  UPLOAD_MEMORIAL_IMAGE_FAILURE = '[Create] Upload memorial image failure',
+  DELETE_MEMORIAL_IMAGE = '[Create] Delete memorial image',
+  DELETE_MEMORIAL_IMAGE_SUCCESS = '[Create] Delete memorial image success',
+  DELETE_MEMORIAL_IMAGE_FAILURE = '[Create] Delete memorial image failure'
 }
 
 export class GetCreateMemorial implements Action {
@@ -85,6 +88,19 @@ export class UploadMemorialImageFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class DeleteMemorialImage implements Action {
+  readonly type = CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE;
+  constructor (public payload: {memorial_id: string, route: string}) {}
+}
+export class DeleteMemorialImageSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class DeleteMemorialImageFailure implements Action {
+  readonly type = CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetCreateMemorial
   | GetCreateMemorialSuccess
@@ -100,4 +116,7 @@ export type All =
   | RemoveTimelineEntryFaiure
   | UploadMemorialImage
   | UploadMemorialImageSuccess
-  | UploadMemorialImageFailure;
+  | UploadMemorialImageFailure
+  | DeleteMemorialImage
+  | DeleteMemorialImageSuccess
+  | DeleteMemorialImageFailure;

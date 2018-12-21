@@ -14,7 +14,7 @@ export class MyMemorialCardComponent implements OnInit {
   get imgBackground() {
     if (this.memorial.image) {
       return {
-        background: `url(${environment.s3.url}${encodeURI(this.memorial.image)})`,
+        background: `url(${environment.s3.url}${this.memorial.image})`,
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover'
