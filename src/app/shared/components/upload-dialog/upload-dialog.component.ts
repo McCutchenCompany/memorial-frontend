@@ -5,7 +5,7 @@ import { ImageUploadService } from '@shared/services/image-upload.service';
 import { getCreatedSaved } from '@store/create-memorial';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 
-import { UploadMemorialImage } from './../../../store/create-memorial/create-memorial.actions';
+import { ReplaceMemorialImage, UploadMemorialImage } from './../../../store/create-memorial/create-memorial.actions';
 
 @Component({
   selector: 'app-upload-dialog',
@@ -25,6 +25,7 @@ export class UploadDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.data);
   }
 
 
@@ -33,7 +34,11 @@ export class UploadDialogComponent implements OnInit {
       id: this.data.memorial,
       image: this.selectedFiles[0]
     };
-    this.store.dispatch(new UploadMemorialImage(payload));
+    if (this.data.action === 'upload') {
+      this.store.dispatch(new UploadMemorialImage(payload));
+    } else if (this.data.action === 'replace') {
+      this.store.dispatch(new ReplaceMemorialImage(payload));
+    }
     const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
       if (res) {
         this.dialogRef.close();

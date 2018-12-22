@@ -22,6 +22,7 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { CreateMemorialComponent } from './containers/create-memorial/create-memorial.component';
 import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
+import { CreateTimelineComponent } from './containers/create-timeline/create-timeline.component';
 
 @NgModule({
   imports: [
@@ -43,6 +44,6 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
       CreateMemorialEffects
     ])
   ],
-  declarations: [CreateMemorialComponent, MemorialInfoComponent, ImageViewerComponent]
+  declarations: [CreateMemorialComponent, MemorialInfoComponent, ImageViewerComponent, CreateTimelineComponent]
 })
 export class CreateMemorialModule { }

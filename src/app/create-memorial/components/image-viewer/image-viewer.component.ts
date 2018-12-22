@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { environment } from '@environments/environment';
+import { UploadDialogComponent } from '@shared/components/upload-dialog/upload-dialog.component';
 
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ImageUploadService } from './../../../shared/services/image-upload.service';
@@ -52,6 +53,15 @@ export class ImageViewerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.remove.emit({memorial_id: this.memorial_id, route: this.image});
+      }
+    });
+  }
+
+  onReplace() {
+    this.dialog.open(UploadDialogComponent, {
+      data: {
+        memorial: this.memorial_id,
+        action: 'replace'
       }
     });
   }

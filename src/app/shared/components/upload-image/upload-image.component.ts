@@ -22,7 +22,8 @@ export class UploadImageComponent implements OnInit {
   onOpenDialog() {
     this.dialog.open(UploadDialogComponent, {
       data: {
-        memorial: this.memorialId
+        memorial: this.memorialId,
+        action: 'upload'
       }
     });
   }
