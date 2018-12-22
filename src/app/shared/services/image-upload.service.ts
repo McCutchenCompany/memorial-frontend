@@ -23,7 +23,7 @@ export class ImageUploadService {
   }
 
   removeImage(memorial_id, route) {
-    const path = `${this.API_URL}/memorials/${memorial_id}/remove_image?file=${decodeURI(route)}`;
+    const path = `${this.API_URL}/memorials/${memorial_id}/remove_image?file=${route}`;
 
     return this.http.delete(path);
   }
