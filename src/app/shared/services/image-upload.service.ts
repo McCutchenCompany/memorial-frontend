@@ -33,4 +33,16 @@ export class ImageUploadService {
     _formData.append('file', image, encodeURI(image.name));
     return this.http.patch(path, _formData);
   }
+
+  uploadTimelineFile(timeline_id: string, file: File, type: string) {
+    const path = `${this.API_URL}/timelines/${timeline_id}/file?asset_type=${type}`;
+    const _formData = new FormData();
+    _formData.append('file', file, encodeURI(file.name));
+    return this.http.post(path, _formData);
+  }
+
+  removeTimelineFile(timeline_id: string, route: string) {
+    const path = `${this.API_URL}/timelines/${timeline_id}/remove_file?file=${route}`;
+    return this.http.delete(path);
+  }
 }

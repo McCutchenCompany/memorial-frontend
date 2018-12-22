@@ -1,0 +1,65 @@
+<div class="container">
+  <form [formGroup]="timelineForm">
+    <div class="date">
+      <mat-form-field class="datepicker" appearance="outline">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="datepicker" formControlName="date">
+        <mat-datepicker-toggle [for]="datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Date Format</mat-label>
+        <mat-select formControlName="date_format">
+          <mat-option *ngFor="let option of formatOptions" [value]="option.value">
+            {{ option.display }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="event">
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="event">
+          <mat-option *ngFor="let option of categoryOptions" [value]="option.value">
+            {{ option.display }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field [class.inactive]="timelineForm.value.event != 0" appearance="outline">
+        <mat-label>Custom Category</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+    </div>
+    <mat-form-field class="textarea" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        matTextareaAutosize
+        maxlength="1000"></textarea>
+      <mat-hint align="end">{{timelineForm.value.description.length}} / 1000</mat-hint>
+    </mat-form-field>
+  </form>
+  <form [formGroup]="assetForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Media type</mat-label>
+      <mat-select formControlName="asset_type">
+        <mat-option *ngFor="let option of assetOptions" [value]="option.value">
+          {{ option.display }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="assetForm.value.asset_type === 'image'">
+      <app-image-viewer
+        *ngIf="timeline.asset_link"
+        [image]="timeline.asset_link"
+        [id]="timeline.uuid"
+        [type]="'timeline'"
+        (remove)="onRemoveFile($event)"></app-image-viewer>
+      <app-upload-image
+        *ngIf="!timeline.asset_link"
+        [id]="timeline.uuid"
+        [type]="'timeline'"></app-upload-image>
+    </div>
+  </form>
+</div>

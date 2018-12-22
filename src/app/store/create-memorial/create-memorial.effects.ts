@@ -21,6 +21,9 @@ import {
   RemoveTimelineEntry,
   RemoveTimelineEntryFaiure,
   RemoveTimelineEntrySuccess,
+  RemoveTimelineFile,
+  RemoveTimelineFileFailure,
+  RemoveTimelineFileSuccess,
   ReplaceMemorialImage,
   ReplaceMemorialImageFailure,
   ReplaceMemorialImageSuccess,
@@ -30,6 +33,9 @@ import {
   UploadMemorialImage,
   UploadMemorialImageFailure,
   UploadMemorialImageSuccess,
+  UploadTimelineFile,
+  UploadTimelineFileFailure,
+  UploadTimelineFileSuccess,
 } from './create-memorial.actions';
 
 
@@ -90,7 +96,7 @@ export class CreateMemorialEffects {
   @Effect()
   deleteMemorialImage$: Observable<Action> = this.actions.pipe(
     ofType(CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE),
-    switchMap((action: DeleteMemorialImage) => this.uploadService.removeImage(action.payload.memorial_id, action.payload.route).pipe(
+    switchMap((action: DeleteMemorialImage) => this.uploadService.removeImage(action.payload.id, action.payload.route).pipe(
       map(memorial => new DeleteMemorialImageSuccess(memorial)),
       catchError(error => of(new DeleteMemorialImageFailure(error)))
     ))
@@ -102,6 +108,25 @@ export class CreateMemorialEffects {
     switchMap((action: ReplaceMemorialImage) => this.uploadService.replaceImage(action.payload.id, action.payload.image).pipe(
       map(memorial => new ReplaceMemorialImageSuccess(memorial)),
       catchError(error => of(new ReplaceMemorialImageFailure(error)))
+    ))
+  );
+
+  @Effect()
+  uploadTimelineFile$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE),
+    switchMap((action: UploadTimelineFile) => {
+      return this.uploadService.uploadTimelineFile(action.payload.id, action.payload.file, action.payload.asset_type).pipe(
+      map(memorial => new UploadTimelineFileSuccess(memorial)),
+      catchError(error => of(new UploadTimelineFileFailure(error)))
+    );
+  }));
+
+  @Effect()
+  removeTimelineFile$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.REMOVE_TIMELINE_FILE),
+    switchMap((action: RemoveTimelineFile) => this.uploadService.removeTimelineFile(action.payload.id, action.payload.route).pipe(
+      map(memorial => new RemoveTimelineFileSuccess(memorial)),
+      catchError(error => of(new RemoveTimelineFileFailure(error)))
     ))
   );
 

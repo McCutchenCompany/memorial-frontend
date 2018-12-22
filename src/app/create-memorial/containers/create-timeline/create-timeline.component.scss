@@ -1,0 +1,10 @@
+@import "src/styles.scss";
+
+.container {
+  width: rem(696);
+  margin: rem(68) auto rem(125);
+  .spacer {
+    width: 100%;
+    border: 1px solid map-get($colors, gray);
+  }
+}

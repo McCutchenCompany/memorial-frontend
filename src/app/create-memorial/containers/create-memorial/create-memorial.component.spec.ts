@@ -7,6 +7,7 @@ import {
   MatIconModule,
   MatNativeDateModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatTabsModule,
 } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -15,8 +16,10 @@ import { UploadImageComponent } from '@shared/components/upload-image/upload-ima
 import { TestStore } from '@shared/testing/test-store';
 import { ImageViewerComponent } from 'app/create-memorial/components/image-viewer/image-viewer.component';
 import { MemorialInfoComponent } from 'app/create-memorial/components/memorial-info/memorial-info.component';
+import { TimelineFormComponent } from 'app/create-memorial/components/timeline-form/timeline-form.component';
 import { configureTestSuite } from 'ng-bullet';
 
+import { CreateTimelineComponent } from './../create-timeline/create-timeline.component';
 import { CreateMemorialComponent } from './create-memorial.component';
 
 describe('CreateMemorialComponent', () => {
@@ -29,7 +32,9 @@ describe('CreateMemorialComponent', () => {
         CreateMemorialComponent,
         MemorialInfoComponent,
         ImageViewerComponent,
-        UploadImageComponent
+        UploadImageComponent,
+        CreateTimelineComponent,
+        TimelineFormComponent
       ],
       imports: [
         MatProgressSpinnerModule,
@@ -40,6 +45,7 @@ describe('CreateMemorialComponent', () => {
         MatIconModule,
         MatCardModule,
         MatTabsModule,
+        MatSelectModule,
         RouterTestingModule
       ],
       providers: [

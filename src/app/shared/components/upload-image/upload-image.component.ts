@@ -10,7 +10,8 @@ import { UploadDialogComponent } from '../upload-dialog/upload-dialog.component'
 })
 export class UploadImageComponent implements OnInit {
 
-  @Input() memorialId: string;
+  @Input() id: string;
+  @Input() type: 'memorial' | 'timeline';
 
   constructor(
     private dialog: MatDialog
@@ -20,12 +21,21 @@ export class UploadImageComponent implements OnInit {
   }
 
   onOpenDialog() {
-    this.dialog.open(UploadDialogComponent, {
-      data: {
-        memorial: this.memorialId,
-        action: 'upload'
-      }
-    });
+    if (this.type === 'memorial') {
+      this.dialog.open(UploadDialogComponent, {
+        data: {
+          memorial: this.id,
+          action: 'upload'
+        }
+      });
+    } else if (this.type === 'timeline') {
+      this.dialog.open(UploadDialogComponent, {
+        data: {
+          timeline: this.id,
+          action: 'upload'
+        }
+      });
+    }
   }
 
 }
