@@ -1,11 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { select, Store } from '@ngrx/store';
-import { ImageUploadService } from '@shared/services/image-upload.service';
 import { getCreatedSaved } from '@store/create-memorial';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 
-import { UploadMemorialImage } from './../../../store/create-memorial/create-memorial.actions';
+import {
+  ReplaceMemorialImage,
+  UploadMemorialImage,
+  UploadTimelineFile,
+} from './../../../store/create-memorial/create-memorial.actions';
 
 @Component({
   selector: 'app-upload-dialog',
@@ -16,24 +19,40 @@ export class UploadDialogComponent implements OnInit {
 
   selectedFiles: FileList;
   error = '';
+  fileType;
 
   constructor(
     private dialogRef: MatDialogRef<UploadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private uploadService: ImageUploadService,
     private store: Store<CreateMemorialState>
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 
   onUpload() {
-    const payload = {
-      id: this.data.memorial,
-      image: this.selectedFiles[0]
-    };
-    this.store.dispatch(new UploadMemorialImage(payload));
+    if (this.data.memorial) {
+      const payload = {
+        id: this.data.memorial,
+        image: this.selectedFiles[0]
+      };
+      if (this.data.action === 'upload') {
+        this.store.dispatch(new UploadMemorialImage(payload));
+      } else if (this.data.action === 'replace') {
+        this.store.dispatch(new ReplaceMemorialImage(payload));
+      }
+    } else if (this.data.timeline) {
+      const payload = {
+        id: this.data.timeline,
+        file: this.selectedFiles[0],
+        asset_type: this.fileType
+      };
+      if (this.data.action === 'upload') {
+        this.store.dispatch(new UploadTimelineFile(payload));
+      } else if (this.data.action === 'replace') {
+        // this.store.dispatch(new ReplaceMemorialImage(payload));
+      }
+    }
     const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
       if (res) {
         this.dialogRef.close();
@@ -50,6 +69,9 @@ export class UploadDialogComponent implements OnInit {
     } else {
       this.error = '';
       this.selectedFiles = event.target.files;
+      if (this.selectedFiles[0].type.includes('image')) {
+        this.fileType = 'image';
+      }
     }
   }
 

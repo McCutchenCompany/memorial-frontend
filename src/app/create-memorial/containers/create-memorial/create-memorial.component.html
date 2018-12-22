@@ -8,7 +8,7 @@
   </mat-tab>
   <mat-tab label="Timeline">
     <ng-template matTabContent>
-
+      <app-create-timeline *ngIf="loaded$ | async" [memorial]="(memorial$ | async).memorial" [timeline]="(memorial$ | async).timeline"></app-create-timeline>
     </ng-template>
   </mat-tab>
   <mat-tab label="Location">

@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { environment } from '@environments/environment';
+import { UploadDialogComponent } from '@shared/components/upload-dialog/upload-dialog.component';
 
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { ImageUploadService } from './../../../shared/services/image-upload.service';
 
 @Component({
   selector: 'app-image-viewer',
@@ -13,8 +13,9 @@ import { ImageUploadService } from './../../../shared/services/image-upload.serv
 export class ImageViewerComponent implements OnInit {
 
   @Input() image: string;
-  @Input() memorial_id: string;
-  @Output() remove: EventEmitter<{memorial_id: string, route: string}> = new EventEmitter<{memorial_id: string, route: string}>();
+  @Input() id: string;
+  @Input() type: 'memorial' | 'timeline';
+  @Output() remove: EventEmitter<{id: string, route: string}> = new EventEmitter<{id: string, route: string}>();
 
   get imgBackground() {
     if (this.image) {
@@ -35,8 +36,7 @@ export class ImageViewerComponent implements OnInit {
   }
 
   constructor(
-    private dialog: MatDialog,
-    private uploadService: ImageUploadService
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -51,9 +51,20 @@ export class ImageViewerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.remove.emit({memorial_id: this.memorial_id, route: this.image});
+        this.remove.emit({id: this.id, route: this.image});
       }
     });
+  }
+
+  onReplace() {
+    if (this.type === 'memorial') {
+      this.dialog.open(UploadDialogComponent, {
+        data: {
+          memorial: this.id,
+          action: 'replace'
+        }
+      });
+    }
   }
 
 }

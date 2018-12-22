@@ -6,6 +6,8 @@ export class Timeline {
   description: string;
   asset_link: string;
   asset_type: string;
+  title: string;
+  event: string;
   created_at: Date;
   updated_at: Date;
 }

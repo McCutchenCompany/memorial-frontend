@@ -1,5 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material';
+import { configureTestSuite } from 'ng-bullet';
 
 import { UploadImageComponent } from './upload-image.component';
 
@@ -7,7 +8,7 @@ describe('UploadImageComponent', () => {
   let component: UploadImageComponent;
   let fixture: ComponentFixture<UploadImageComponent>;
 
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [
         UploadImageComponent
@@ -15,9 +16,8 @@ describe('UploadImageComponent', () => {
       imports: [
         MatDialogModule
       ]
-    })
-    .compileComponents();
-  }));
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UploadImageComponent);

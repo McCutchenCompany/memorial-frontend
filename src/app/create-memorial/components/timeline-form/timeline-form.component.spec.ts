@@ -4,49 +4,40 @@ import {
   MatCardModule,
   MatDatepickerModule,
   MatFormFieldModule,
-  MatIconModule,
+  MatInputModule,
   MatNativeDateModule,
-  MatProgressSpinnerModule,
   MatSelectModule,
-  MatTabsModule,
 } from '@angular/material';
-import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { UploadImageComponent } from '@shared/components/upload-image/upload-image.component';
+import { Timeline } from '@shared/models/timeline.model';
 import { TestStore } from '@shared/testing/test-store';
 import { ImageViewerComponent } from 'app/create-memorial/components/image-viewer/image-viewer.component';
-import { MemorialInfoComponent } from 'app/create-memorial/components/memorial-info/memorial-info.component';
-import { TimelineFormComponent } from 'app/create-memorial/components/timeline-form/timeline-form.component';
 import { configureTestSuite } from 'ng-bullet';
 
-import { CreateTimelineComponent } from './../create-timeline/create-timeline.component';
-import { CreateMemorialComponent } from './create-memorial.component';
+import { TimelineFormComponent } from './timeline-form.component';
 
-describe('CreateMemorialComponent', () => {
-  let component: CreateMemorialComponent;
-  let fixture: ComponentFixture<CreateMemorialComponent>;
+describe('TimelineFormComponent', () => {
+  let component: TimelineFormComponent;
+  let fixture: ComponentFixture<TimelineFormComponent>;
 
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [
-        CreateMemorialComponent,
-        MemorialInfoComponent,
+        TimelineFormComponent,
         ImageViewerComponent,
-        UploadImageComponent,
-        CreateTimelineComponent,
-        TimelineFormComponent
+        UploadImageComponent
       ],
       imports: [
-        MatProgressSpinnerModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatDatepickerModule,
+        MatInputModule,
         MatNativeDateModule,
-        MatIconModule,
-        MatCardModule,
-        MatTabsModule,
+        NoopAnimationsModule,
         MatSelectModule,
-        RouterTestingModule
+        MatCardModule
       ],
       providers: [
         {
@@ -58,8 +49,15 @@ describe('CreateMemorialComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateMemorialComponent);
+    fixture = TestBed.createComponent(TimelineFormComponent);
     component = fixture.componentInstance;
+    component.timeline = {
+      date: new Date(),
+      date_format: 'MMM dd, y',
+      description: '',
+      event: null,
+      title: ''
+    } as Timeline;
     fixture.detectChanges();
   });
 

@@ -20,7 +20,16 @@ export enum CreateMemorialActionTypes {
   UPLOAD_MEMORIAL_IMAGE_FAILURE = '[Create] Upload memorial image failure',
   DELETE_MEMORIAL_IMAGE = '[Create] Delete memorial image',
   DELETE_MEMORIAL_IMAGE_SUCCESS = '[Create] Delete memorial image success',
-  DELETE_MEMORIAL_IMAGE_FAILURE = '[Create] Delete memorial image failure'
+  DELETE_MEMORIAL_IMAGE_FAILURE = '[Create] Delete memorial image failure',
+  REPLACE_MEMORIAL_IMAGE = '[Create] Replace memorial image',
+  REPLACE_MEMORIAL_IMAGE_SUCCESS = '[Create] Replace memorial image success',
+  REPLACE_MEMORIAL_IMAGE_FAILURE = '[Create] Replace memorial image failure',
+  UPLOAD_TIMELINE_FILE = '[Create] Upload timeline file',
+  UPLOAD_TIMELINE_FILE_SUCCESS = '[Create] Upload timeline file success',
+  UPLOAD_TIMELINE_FILE_FAILURE = '[Create] Upload timeline file failure',
+  REMOVE_TIMELINE_FILE = '[Create] Remove timeline file',
+  REMOVE_TIMELINE_FILE_SUCCESS = '[Create] Remove timeline file success',
+  REMOVE_TIMELINE_FILE_FAILURE = '[Create] Remove timeline file failure'
 }
 
 export class GetCreateMemorial implements Action {
@@ -90,7 +99,7 @@ export class UploadMemorialImageFailure implements Action {
 
 export class DeleteMemorialImage implements Action {
   readonly type = CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE;
-  constructor (public payload: {memorial_id: string, route: string}) {}
+  constructor (public payload: {id: string, route: string}) {}
 }
 export class DeleteMemorialImageSuccess implements Action {
   readonly type = CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE_SUCCESS;
@@ -98,6 +107,45 @@ export class DeleteMemorialImageSuccess implements Action {
 }
 export class DeleteMemorialImageFailure implements Action {
   readonly type = CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class ReplaceMemorialImage implements Action {
+  readonly type = CreateMemorialActionTypes.REPLACE_MEMORIAL_IMAGE;
+  constructor (public payload: any) {}
+}
+export class ReplaceMemorialImageSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.REPLACE_MEMORIAL_IMAGE_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class ReplaceMemorialImageFailure implements Action {
+  readonly type = CreateMemorialActionTypes.REPLACE_MEMORIAL_IMAGE_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class UploadTimelineFile implements Action {
+  readonly type = CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE;
+  constructor (public payload: any) {}
+}
+export class UploadTimelineFileSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class UploadTimelineFileFailure implements Action {
+  readonly type = CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class RemoveTimelineFile implements Action {
+  readonly type = CreateMemorialActionTypes.REMOVE_TIMELINE_FILE;
+  constructor (public payload: any) {}
+}
+export class RemoveTimelineFileSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.REMOVE_TIMELINE_FILE_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class RemoveTimelineFileFailure implements Action {
+  readonly type = CreateMemorialActionTypes.REMOVE_TIMELINE_FILE_FAILURE;
   constructor (public payload: any) {}
 }
 
@@ -119,4 +167,13 @@ export type All =
   | UploadMemorialImageFailure
   | DeleteMemorialImage
   | DeleteMemorialImageSuccess
-  | DeleteMemorialImageFailure;
+  | DeleteMemorialImageFailure
+  | ReplaceMemorialImage
+  | ReplaceMemorialImageSuccess
+  | ReplaceMemorialImageFailure
+  | UploadTimelineFile
+  | UploadTimelineFileSuccess
+  | UploadTimelineFileFailure
+  | RemoveTimelineFile
+  | RemoveTimelineFileSuccess
+  | RemoveTimelineFileFailure;
