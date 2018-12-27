@@ -2,12 +2,13 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatFormFieldModule, MatIconModule } from '@angular/material';
+import { MatFormFieldModule, MatIconModule, MatTooltipModule } from '@angular/material';
 import { EffectsModule } from '@ngrx/effects';
 
 import { StoreModule } from '../../../node_modules/@ngrx/store';
 import * as fromStore from '../store/view-memorial';
 import { ViewMemorialEffects } from './../store/view-memorial/view-memorial.effect';
+import { InteractiveTimelineComponent } from './components/interactive-timeline/interactive-timeline.component';
 import { MemorialHeaderComponent } from './components/memorial-header/memorial-header.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { MemorialLocationComponent } from './components/memorial-location/memorial-location.component';
@@ -20,6 +21,7 @@ import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
     CommonModule,
     MatIconModule,
     MatFormFieldModule,
+    MatTooltipModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
     }),
@@ -35,7 +37,8 @@ import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
     MemorialHeaderComponent,
     MemorialInfoComponent,
     MemorialTimelineComponent,
-    MemorialLocationComponent
+    MemorialLocationComponent,
+    InteractiveTimelineComponent
   ]
 })
 export class ViewMemorialModule { }

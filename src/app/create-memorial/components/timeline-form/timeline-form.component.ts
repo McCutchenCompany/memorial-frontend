@@ -2,8 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Timeline } from '@shared/models/timeline.model';
-import { RemoveTimelineFile } from '@store/create-memorial/create-memorial.actions';
+import { RemoveTimelineEntry, RemoveTimelineFile, SetEditingTimeline } from '@store/create-memorial/create-memorial.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
+
+import { UpdateTimeline } from './../../../store/create-memorial/create-memorial.actions';
 
 @Component({
   selector: 'app-timeline-form',
@@ -13,9 +15,12 @@ import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 export class TimelineFormComponent implements OnInit {
 
   @Input() timeline: Timeline;
+  @Input() editingIds: string[];
 
   timelineForm: FormGroup;
   assetForm: FormGroup;
+
+  expanded = true;
 
   formatOptions = [
     {value: 'MMM dd, y', display: 'Full (Jan 1, 2018)'},
@@ -41,6 +46,7 @@ export class TimelineFormComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+    this.checkExpanded();
   }
 
   buildForm() {
@@ -56,9 +62,43 @@ export class TimelineFormComponent implements OnInit {
     });
   }
 
+  checkExpanded() {
+    if (!this.editingIds.includes(this.timeline.uuid) && this.timeline.date) {
+      this.expanded = false;
+    }
+  }
+
+  toggleForm() {
+    this.expanded = !this.expanded;
+    if (this.expanded) {
+      this.editingIds.push(this.timeline.uuid);
+      this.store.dispatch(new SetEditingTimeline(this.editingIds));
+    } else {
+      const index = this.editingIds.indexOf(this.timeline.uuid);
+      this.editingIds.splice(index, 1);
+      this.store.dispatch(new SetEditingTimeline(this.editingIds));
+    }
+  }
+
   onRemoveFile(payload) {
-    console.log(payload);
     this.store.dispatch(new RemoveTimelineFile(payload));
+  }
+
+  onRemoveTimelineEntry() {
+    this.store.dispatch(new RemoveTimelineEntry(this.timeline.uuid));
+  }
+
+  onSaveChanges() {
+    const payload = {
+      memorial_id: this.timeline.memorial_id,
+      timelines: [
+        {
+          uuid: this.timeline.uuid,
+          ...this.timelineForm.value
+        }
+      ]
+    };
+    this.store.dispatch(new UpdateTimeline(payload));
   }
 
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
+import { Timeline } from '@shared/models/timeline.model';
 import { ImageUploadService } from '@shared/services/image-upload.service';
 import { CreateMemorialService } from 'app/create-memorial/services/create-memorial.service';
 import { Observable, of } from 'rxjs';
@@ -30,6 +31,9 @@ import {
   UpdateCreateMemorial,
   UpdateCreateMemorialFailure,
   UpdateCreateMemorialSuccess,
+  UpdateTimeline,
+  UpdateTimelineFailure,
+  UpdateTimelineSuccess,
   UploadMemorialImage,
   UploadMemorialImageFailure,
   UploadMemorialImageSuccess,
@@ -81,6 +85,15 @@ export class CreateMemorialEffects {
     switchMap((action: RemoveTimelineEntry) => this.api.removeTimelineEntry(action.payload).pipe(
       map(res => new RemoveTimelineEntrySuccess(res)),
       catchError(error => of(new RemoveTimelineEntryFaiure(error)))
+    ))
+  );
+
+  @Effect()
+  updateTimeline$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPDATE_TIMELINE),
+    switchMap((action: UpdateTimeline) => this.api.updateTimeline(action.payload.memorial_id, action.payload.timelines).pipe(
+      map((res: Timeline[]) => new UpdateTimelineSuccess(res)),
+      catchError(error => of(new UpdateTimelineFailure(error)))
     ))
   );
 

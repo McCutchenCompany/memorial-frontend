@@ -10,6 +10,9 @@
     height: rem(224);
   }
   .info {
+    &.text-only {
+      width: 100%;
+    }
     margin-top: rem(16);
     position: relative;
     width: rem(352);

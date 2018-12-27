@@ -1,12 +1,14 @@
+<app-interactive-timeline [timeline]="timeline" [memorial]="memorial" [currentDate]="timeline[index].date" (navigate)="onNavigateToIndex($event)"></app-interactive-timeline>
 <div class="container">
   <div
     class="asset"
+    *ngIf="timeline[index].asset_type === 'image'"
     [style.background-image]="imgBackground.background"
     [style.background-repeat]="imgBackground.repeat"
     [style.background-position]="imgBackground.position"
     [style.background-size]="imgBackground.size">
   </div>
-  <div class="info">
+  <div class="info" [ngClass]="timeline[index].asset_type || 'text-only'">
     <h3>{{ timeline[index].date | date:timeline[index].date_format }}</h3>
     <p>{{ timeline[index].description }}</p>
     <div class="timeline-nav">

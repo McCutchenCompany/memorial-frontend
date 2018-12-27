@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="line"></div>
+  <div class="points">
+    <div class="point" (click)="onNavigate(year)" [class.start]="i === 0" [class.end]="i === years.length - 1" *ngFor="let year of years; let i = index">
+      <p>{{ year }}</p>
+      <mat-icon *ngIf="!isCurrent(year)" [matTooltip]="numOfEvents(year)">radio_button_unchecked</mat-icon>
+      <mat-icon *ngIf="isCurrent(year)" class="selected">lens</mat-icon>
+    </div>
+  </div>
+</div>

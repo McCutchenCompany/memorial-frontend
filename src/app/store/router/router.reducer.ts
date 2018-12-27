@@ -6,6 +6,7 @@ export interface RouterStateUrl {
   url: string;
   queryParams: Params;
   params: Params;
+  root?: any;
 }
 
 export class CustomSerializer

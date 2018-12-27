@@ -4,6 +4,7 @@ import {
   MatCardModule,
   MatDatepickerModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
   MatNativeDateModule,
   MatSelectModule,
@@ -34,6 +35,7 @@ describe('TimelineFormComponent', () => {
         MatFormFieldModule,
         MatDatepickerModule,
         MatInputModule,
+        MatIconModule,
         MatNativeDateModule,
         NoopAnimationsModule,
         MatSelectModule,
@@ -58,6 +60,7 @@ describe('TimelineFormComponent', () => {
       event: null,
       title: ''
     } as Timeline;
+    component.editingIds = [''];
     fixture.detectChanges();
   });
 

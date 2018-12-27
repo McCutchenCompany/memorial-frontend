@@ -9,6 +9,9 @@ export const INITIAL_STATE: CreateMemorialState = {
   saving: false,
   saved: false,
   memorial: null,
+  editingTimeline: {
+    editingIds: []
+  },
   error: null
 };
 
@@ -37,6 +40,8 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         error: action.payload
       };
     }
+    case CreateMemorialActionTypes.UPDATE_TIMELINE:
+    case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY:
     case CreateMemorialActionTypes.REMOVE_TIMELINE_FILE:
     case CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE:
     case CreateMemorialActionTypes.REPLACE_MEMORIAL_IMAGE:
@@ -49,6 +54,18 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         saved: false
       };
     }
+    case CreateMemorialActionTypes.UPDATE_TIMELINE_SUCCESS:
+    case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        saved: true,
+        memorial: {
+          ...state.memorial,
+          timeline: action.payload.reverse()
+        }
+      };
+    }
     case CreateMemorialActionTypes.REMOVE_TIMELINE_FILE_SUCCESS:
     case CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE_SUCCESS: {
       return {
@@ -57,7 +74,8 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         saved: true,
         memorial: {
           ...state.memorial,
-          ...action.payload
+          ...action.payload,
+          timline: action.payload.timeline.reverse()
         }
       };
     }
@@ -75,6 +93,8 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         }
       };
     }
+    case CreateMemorialActionTypes.UPDATE_TIMELINE_FAILURE:
+    case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY_FAILURE:
     case CreateMemorialActionTypes.REMOVE_TIMELINE_FILE_FAILURE:
     case CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE_FAILURE:
     case CreateMemorialActionTypes.REPLACE_MEMORIAL_IMAGE_FAILURE:
@@ -86,6 +106,15 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         saving: false,
         saved: false,
         error: action.payload
+      };
+    }
+    case CreateMemorialActionTypes.SET_EDITING_TIMELINE: {
+      return {
+        ...state,
+        editingTimeline: {
+          ...state.editingTimeline,
+          editingIds: action.payload
+        }
       };
     }
     default: {
@@ -115,4 +144,8 @@ export const getCreatedSaving = createSelector(
 export const getCreatedSaved = createSelector(
   getCreateMemorialState,
   state => state.saved
+);
+export const getEditingIds = createSelector(
+  getCreateMemorialState,
+  state => state.editingTimeline.editingIds
 );
