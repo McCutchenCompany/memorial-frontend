@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
 
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
@@ -17,6 +17,7 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
   ],
   exports: [
     MatButtonModule,
+    MatProgressSpinnerModule,
     UploadImageComponent,
     ConfirmDialogComponent
   ],

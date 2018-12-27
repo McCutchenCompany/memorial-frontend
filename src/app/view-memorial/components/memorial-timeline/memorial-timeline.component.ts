@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from '@environments/environment';
+import { Memorial } from '@shared/models/memorial.model';
 import { Timeline } from '@shared/models/timeline.model';
 
 @Component({
@@ -9,12 +11,13 @@ import { Timeline } from '@shared/models/timeline.model';
 export class MemorialTimelineComponent implements OnInit {
 
   @Input() timeline: Timeline[];
+  @Input() memorial: Memorial;
 
   index = 0;
 
   get imgBackground() {
     return {
-      background: `url(${this.timeline[this.index].asset_link})`,
+      background: `url(${environment.s3.url}${this.timeline[this.index].asset_link})`,
       position: 'center',
       repeat: 'no-repeat',
       size: 'cover'
@@ -28,6 +31,10 @@ export class MemorialTimelineComponent implements OnInit {
 
   onNavigate(dir: number) {
     this.index += dir;
+  }
+
+  onNavigateToIndex(index: number) {
+    this.index = index;
   }
 
 }

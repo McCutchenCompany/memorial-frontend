@@ -7,4 +7,7 @@
     width: 100%;
     border: 1px solid map-get($colors, gray);
   }
+  button {
+    margin: rem(60) 0;
+  }
 }

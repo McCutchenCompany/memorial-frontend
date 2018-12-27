@@ -6,5 +6,8 @@ export class CreateMemorialState {
   saving: boolean;
   saved: boolean;
   memorial: Memorial;
+  editingTimeline: {
+    editingIds: string[]
+  };
   error: any;
 }

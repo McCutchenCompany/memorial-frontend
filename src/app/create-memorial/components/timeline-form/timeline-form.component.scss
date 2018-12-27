@@ -6,9 +6,27 @@
     width: 100%;
   }
   form {
-    margin: rem(64) 0;
+    margin: rem(16) 0;
+    .date, .event {
+      display: flex;
+      justify-content: space-between;
+      mat-form-field {
+        width: 48%;
+      }
+    }
   }
   .inactive {
     display: none;
+  }
+  .expand-container {
+    display: flex;
+    justify-content: space-between;
+    margin: rem(16) 0;
+    .info {
+      width: 75%;
+    }
+    .delete {
+      color: map-get($colors, warn);
+    }
   }
 }

@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatTooltipModule } from '@angular/material';
+import { Memorial } from '@shared/models/memorial.model';
 import { Timeline } from '@shared/models/timeline.model';
 import { configureTestSuite } from 'ng-bullet';
 
+import { InteractiveTimelineComponent } from '../interactive-timeline/interactive-timeline.component';
 import { MemorialTimelineComponent } from './memorial-timeline.component';
 
 describe('MemorialTimelineComponent', () => {
@@ -11,9 +13,10 @@ describe('MemorialTimelineComponent', () => {
 
   configureTestSuite(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemorialTimelineComponent ],
+      declarations: [ MemorialTimelineComponent, InteractiveTimelineComponent ],
       imports: [
-        MatIconModule
+        MatIconModule,
+        MatTooltipModule
       ]
     });
   });
@@ -28,6 +31,10 @@ describe('MemorialTimelineComponent', () => {
         date_format: 'MMM, y'
       } as Timeline
     ];
+    component.memorial = {
+      birth_date: new Date(),
+      death_date: new Date()
+    } as Memorial;
     fixture.detectChanges();
   });
 

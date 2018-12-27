@@ -49,4 +49,10 @@ export class CreateMemorialService {
     return this.http.delete(path);
   }
 
+  updateTimeline(memorial_id, timelines) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/update_timeline`;
+    const body = {timelines: timelines};
+    return this.http.patch(path, body);
+  }
+
 }

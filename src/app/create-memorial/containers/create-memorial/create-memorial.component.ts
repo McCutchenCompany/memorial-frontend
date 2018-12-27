@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { GetCreateMemorial, UpdateCreateMemorial } from '@store/create-memorial/create-memorial.actions';
 import { Observable } from 'rxjs';
@@ -21,12 +21,32 @@ export class CreateMemorialComponent implements OnInit {
   memorial$: Observable<any>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
+  routeFragment = 'info';
 
   memorialUUID;
 
+  get activeTab() {
+    switch (this.routeFragment) {
+      case 'info': {
+        return 0;
+      }
+      case 'timeline': {
+        return 1;
+      }
+      case 'location': {
+        return 2;
+      }
+      case 'memories': {
+        return 3;
+      }
+      default: return 0;
+    }
+  }
+
   constructor(
     private route: ActivatedRoute,
-    private store: Store<CreateMemorialState>
+    private store: Store<CreateMemorialState>,
+    private router: Router
   ) {
     this.memorial$ = this.store.pipe(select(getCreateMemorial));
     this.loading$ = this.store.pipe(select(getCreateLoading));
@@ -39,10 +59,18 @@ export class CreateMemorialComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.fragment.subscribe(fragment => this.routeFragment = fragment);
     this.route.params.subscribe(params => {
       if (params.id) {
         this.store.dispatch(new GetCreateMemorial(params.id));
       }
+    });
+  }
+
+  onTabChange(event) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      fragment: event.tab.textLabel.toLowerCase() !== 'basic info' ? event.tab.textLabel.toLowerCase() : null
     });
   }
 

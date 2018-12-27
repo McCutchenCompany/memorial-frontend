@@ -1,5 +1,7 @@
 import { Action } from '@ngrx/store';
 
+import { Timeline } from './../../shared/models/timeline.model';
+
 
 
 export enum CreateMemorialActionTypes {
@@ -15,6 +17,9 @@ export enum CreateMemorialActionTypes {
   REMOVE_TIMELINE_ENTRY = '[Create] Remove timeline entry',
   REMOVE_TIMELINE_ENTRY_SUCCESS = '[Create] Remove timeline entry success',
   REMOVE_TIMELINE_ENTRY_FAILURE = '[Create] Remove timeline entry failure',
+  UPDATE_TIMELINE = '[Create] Update timeline',
+  UPDATE_TIMELINE_SUCCESS = '[Create] Update timeline success',
+  UPDATE_TIMELINE_FAILURE = '[Create] Update timeline failure',
   UPLOAD_MEMORIAL_IMAGE = '[Create] Upload memorial image',
   UPLOAD_MEMORIAL_IMAGE_SUCCESS = '[Create] Upload memorial image success',
   UPLOAD_MEMORIAL_IMAGE_FAILURE = '[Create] Upload memorial image failure',
@@ -29,7 +34,8 @@ export enum CreateMemorialActionTypes {
   UPLOAD_TIMELINE_FILE_FAILURE = '[Create] Upload timeline file failure',
   REMOVE_TIMELINE_FILE = '[Create] Remove timeline file',
   REMOVE_TIMELINE_FILE_SUCCESS = '[Create] Remove timeline file success',
-  REMOVE_TIMELINE_FILE_FAILURE = '[Create] Remove timeline file failure'
+  REMOVE_TIMELINE_FILE_FAILURE = '[Create] Remove timeline file failure',
+  SET_EDITING_TIMELINE = '[Create] Set editing timeline'
 }
 
 export class GetCreateMemorial implements Action {
@@ -81,6 +87,19 @@ export class RemoveTimelineEntrySuccess implements Action {
 }
 export class RemoveTimelineEntryFaiure implements Action {
   readonly type = CreateMemorialActionTypes.REMOVE_TIMELINE_ENTRY_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class UpdateTimeline implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_TIMELINE;
+  constructor (public payload: {memorial_id: string, timelines: any[]}) {}
+}
+export class UpdateTimelineSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_TIMELINE_SUCCESS;
+  constructor (public payload: Timeline[]) {}
+}
+export class UpdateTimelineFailure implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_TIMELINE_FAILURE;
   constructor (public payload: any) {}
 }
 
@@ -149,6 +168,11 @@ export class RemoveTimelineFileFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class SetEditingTimeline implements Action {
+  readonly type = CreateMemorialActionTypes.SET_EDITING_TIMELINE;
+  constructor (public payload: string[]) {}
+}
+
 export type All =
   | GetCreateMemorial
   | GetCreateMemorialSuccess
@@ -162,6 +186,9 @@ export type All =
   | RemoveTimelineEntry
   | RemoveTimelineEntrySuccess
   | RemoveTimelineEntryFaiure
+  | UpdateTimeline
+  | UpdateTimelineSuccess
+  | UpdateTimelineFailure
   | UploadMemorialImage
   | UploadMemorialImageSuccess
   | UploadMemorialImageFailure
@@ -176,4 +203,5 @@ export type All =
   | UploadTimelineFileFailure
   | RemoveTimelineFile
   | RemoveTimelineFileSuccess
-  | RemoveTimelineFileFailure;
+  | RemoveTimelineFileFailure
+  | SetEditingTimeline;
