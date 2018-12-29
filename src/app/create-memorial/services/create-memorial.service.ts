@@ -55,4 +55,10 @@ export class CreateMemorialService {
     return this.http.patch(path, body);
   }
 
+  updateLocation(memorial_id, location: {latitude: number, longitude: number}) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/location`;
+    const body = location;
+    return this.http.post(path, body);
+  }
+
 }

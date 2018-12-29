@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Timeline } from '@shared/models/timeline.model';
@@ -31,6 +30,9 @@ import {
   UpdateCreateMemorial,
   UpdateCreateMemorialFailure,
   UpdateCreateMemorialSuccess,
+  UpdateLocation,
+  UpdateLocationFailure,
+  UpdateLocationSuccess,
   UpdateTimeline,
   UpdateTimelineFailure,
   UpdateTimelineSuccess,
@@ -48,8 +50,7 @@ export class CreateMemorialEffects {
   constructor(
     private actions: Actions,
     private api: CreateMemorialService,
-    private uploadService: ImageUploadService,
-    private router: Router
+    private uploadService: ImageUploadService
   ) {}
 
   @Effect()
@@ -143,4 +144,12 @@ export class CreateMemorialEffects {
     ))
   );
 
+  @Effect()
+  updateLocation$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPDATE_LOCATION),
+    switchMap((action: UpdateLocation) => this.api.updateLocation(action.payload.id, action.payload.location).pipe(
+      map(res => new UpdateLocationSuccess(res)),
+      catchError(error => of(new UpdateLocationFailure(error)))
+    ))
+  );
 }

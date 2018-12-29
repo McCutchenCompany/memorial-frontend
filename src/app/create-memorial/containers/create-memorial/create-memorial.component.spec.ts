@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
@@ -19,6 +20,7 @@ import { MemorialInfoComponent } from 'app/create-memorial/components/memorial-i
 import { TimelineFormComponent } from 'app/create-memorial/components/timeline-form/timeline-form.component';
 import { configureTestSuite } from 'ng-bullet';
 
+import { AddLocationComponent } from './../../components/add-location/add-location.component';
 import { CreateTimelineComponent } from './../create-timeline/create-timeline.component';
 import { CreateMemorialComponent } from './create-memorial.component';
 
@@ -34,7 +36,8 @@ describe('CreateMemorialComponent', () => {
         ImageViewerComponent,
         UploadImageComponent,
         CreateTimelineComponent,
-        TimelineFormComponent
+        TimelineFormComponent,
+        AddLocationComponent
       ],
       imports: [
         MatProgressSpinnerModule,
@@ -46,7 +49,8 @@ describe('CreateMemorialComponent', () => {
         MatCardModule,
         MatTabsModule,
         MatSelectModule,
-        RouterTestingModule
+        RouterTestingModule,
+        AgmCoreModule.forRoot({})
       ],
       providers: [
         {

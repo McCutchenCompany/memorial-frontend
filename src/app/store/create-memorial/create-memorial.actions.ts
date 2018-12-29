@@ -20,6 +20,9 @@ export enum CreateMemorialActionTypes {
   UPDATE_TIMELINE = '[Create] Update timeline',
   UPDATE_TIMELINE_SUCCESS = '[Create] Update timeline success',
   UPDATE_TIMELINE_FAILURE = '[Create] Update timeline failure',
+  UPDATE_LOCATION = '[Create] Update location',
+  UPDATE_LOCATION_SUCCESS = '[Create] Update location success',
+  UPDATE_LOCATION_FAILURE = '[Create] Update location failure',
   UPLOAD_MEMORIAL_IMAGE = '[Create] Upload memorial image',
   UPLOAD_MEMORIAL_IMAGE_SUCCESS = '[Create] Upload memorial image success',
   UPLOAD_MEMORIAL_IMAGE_FAILURE = '[Create] Upload memorial image failure',
@@ -35,7 +38,10 @@ export enum CreateMemorialActionTypes {
   REMOVE_TIMELINE_FILE = '[Create] Remove timeline file',
   REMOVE_TIMELINE_FILE_SUCCESS = '[Create] Remove timeline file success',
   REMOVE_TIMELINE_FILE_FAILURE = '[Create] Remove timeline file failure',
-  SET_EDITING_TIMELINE = '[Create] Set editing timeline'
+  SET_EDITING_TIMELINE = '[Create] Set editing timeline',
+  SEARCH_ADDRESS = '[Create] Search Address',
+  SEARCH_ADDRESS_SUCCESS = '[Create] Search Address success',
+  SEARCH_ADDRESS_FAILURE = '[Create] Search Address failure'
 }
 
 export class GetCreateMemorial implements Action {
@@ -173,6 +179,32 @@ export class SetEditingTimeline implements Action {
   constructor (public payload: string[]) {}
 }
 
+export class SearchAddress implements Action {
+  readonly type = CreateMemorialActionTypes.SEARCH_ADDRESS;
+  constructor (public payload: string) {}
+}
+export class SearchAddressSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.SEARCH_ADDRESS_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class SearchAddressFailure implements Action {
+  readonly type = CreateMemorialActionTypes.SEARCH_ADDRESS_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class UpdateLocation implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_LOCATION;
+  constructor (public payload: {id: string, location: {latitude: number, longitude: number}}) {}
+}
+export class UpdateLocationSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_LOCATION_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class UpdateLocationFailure implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_LOCATION_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetCreateMemorial
   | GetCreateMemorialSuccess
@@ -204,4 +236,10 @@ export type All =
   | RemoveTimelineFile
   | RemoveTimelineFileSuccess
   | RemoveTimelineFileFailure
-  | SetEditingTimeline;
+  | SetEditingTimeline
+  | SearchAddress
+  | SearchAddressSuccess
+  | SearchAddressFailure
+  | UpdateLocation
+  | UpdateLocationSuccess
+  | UpdateLocationFailure;

@@ -1,5 +1,6 @@
 <div class="container">
-  <form [formGroup]="memorialInfoForm">
+  <form (submit)="onSave()" [formGroup]="memorialInfoForm">
+    <h4>Start by adding a photo and sharing about their life</h4>
     <h4>Cover Image</h4>
     <app-image-viewer *ngIf="memorialInfo.image" [image]="memorialInfo.image" [id]="memorialInfo.uuid" [type]="'memorial'" (remove)="onRemove($event)"></app-image-viewer>
     <app-upload-image *ngIf="!memorialInfo.image" [id]="memorialInfo.uuid" [type]="'memorial'"></app-upload-image>
@@ -32,7 +33,6 @@
         <mat-datepicker #deathDatepicker></mat-datepicker>
       </mat-form-field>
     </div>
-    <h4>Start by sharing about their life</h4>
     <div class="description">
       <mat-form-field class="textarea" appearance="outline">
         <mat-label>Description</mat-label>
@@ -46,7 +46,7 @@
     </div>
     <div class="actions">
       <button mat-button *ngIf="memorialInfoForm.pristine" class="primary">Timeline <mat-icon>keyboard_arrow_right</mat-icon></button>
-      <button mat-button *ngIf="memorialInfoForm.dirty" [disabled]="memorialInfoForm.invalid" class="primary" (click)="onSave()">Save and Continue</button>
+      <button mat-button *ngIf="memorialInfoForm.dirty" [disabled]="memorialInfoForm.invalid" class="primary" type="submit">Save and Continue</button>
     </div>
   </form>
 </div>

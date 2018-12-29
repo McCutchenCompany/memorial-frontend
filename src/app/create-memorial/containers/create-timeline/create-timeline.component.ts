@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Memorial } from '@shared/models/memorial.model';
 import { Timeline } from '@shared/models/timeline.model';
@@ -18,6 +18,8 @@ export class CreateTimelineComponent implements OnInit {
   @Input() memorial: Memorial;
   @Input() timeline: Timeline[];
 
+  @Output() toLocation: EventEmitter<any> = new EventEmitter<any>();
+
   editingIds$: Observable<string[]>;
 
   constructor(
@@ -35,6 +37,10 @@ export class CreateTimelineComponent implements OnInit {
       body: {}
     };
     this.store.dispatch(new AddTimelineEntry(payload));
+  }
+
+  onNavToLocation() {
+    this.toLocation.emit({tab: {textLabel: 'location'}});
   }
 
 }

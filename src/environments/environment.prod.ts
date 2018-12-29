@@ -12,5 +12,8 @@ export const environment = {
   },
   s3: {
     bucket: 'memorial-staging-imgs'
+  },
+  google: {
+    apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
   }
 };

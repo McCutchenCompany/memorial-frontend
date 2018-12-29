@@ -10,4 +10,8 @@
   button {
     margin: rem(60) 0;
   }
+  .action {
+    display: flex;
+    justify-content: space-between;
+  }
 }

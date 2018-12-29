@@ -1,0 +1,16 @@
+<div class="container">
+  <h4>Finally, Add the Location</h4>
+  <p>Find your location by searching for an address. Click the map to place the memorial.</p>
+  <form [formGroup]="searchForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input #search matInput formControlName="searchTerm">
+    </mat-form-field>
+  </form>
+  <agm-map (mapClick)="onMapClick($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker [latitude]="(memorialLocation$ | async)?.latitude" [longitude]="(memorialLocation$ | async)?.longitude"></agm-marker>
+  </agm-map>
+  <div class="actions">
+    <button mat-button class="primary" (click)="onNav()">Memories <mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+</div>
