@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { GetCreateMemorial, UpdateCreateMemorial } from '@store/create-memorial/create-memorial.actions';
-import { Observable } from 'rxjs';
-
 import {
+  getCreatedSaved,
   getCreateLoaded,
   getCreateLoading,
   getCreateMemorial,
-} from './../../../store/create-memorial/create-memorial.reducer';
-import { CreateMemorialState } from './../../../store/models/create-memorial-state.model';
+  getCreateSearchAddress,
+} from '@store/create-memorial/create-memorial.reducer';
+import { CreateMemorialState } from '@store/models/create-memorial-state.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-memorial',
@@ -21,6 +22,7 @@ export class CreateMemorialComponent implements OnInit {
   memorial$: Observable<any>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
+  locationSearch$: Observable<any>;
   routeFragment = 'info';
 
   memorialUUID;
@@ -51,8 +53,9 @@ export class CreateMemorialComponent implements OnInit {
     this.memorial$ = this.store.pipe(select(getCreateMemorial));
     this.loading$ = this.store.pipe(select(getCreateLoading));
     this.loaded$ = this.store.pipe(select(getCreateLoaded));
+    this.locationSearch$ = this.store.pipe(select(getCreateSearchAddress));
     this.memorial$.subscribe(res => {
-      if (res) {
+      if (res && res.memorial) {
         this.memorialUUID = res.memorial.uuid;
       }
     });
@@ -80,6 +83,12 @@ export class CreateMemorialComponent implements OnInit {
       body
     };
     this.store.dispatch(new UpdateCreateMemorial(payload));
+    const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
+      if (res) {
+        this.onTabChange({tab: {textLabel: 'timeline'}});
+        sub.unsubscribe();
+      }
+    });
   }
 
 }

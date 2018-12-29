@@ -8,15 +8,26 @@ export const INITIAL_STATE: CreateMemorialState = {
   loaded: false,
   saving: false,
   saved: false,
-  memorial: null,
+  memorial: {
+    memorial: null,
+    location: null,
+    timeline: []
+  },
   editingTimeline: {
     editingIds: []
+  },
+  addressSearch: {
+    address: null,
+    latitude: 38.876422,
+    longitude: -77.073024,
+    zoom: 1
   },
   error: null
 };
 
 export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE, action: All) {
   switch (action.type) {
+    case CreateMemorialActionTypes.SEARCH_ADDRESS:
     case CreateMemorialActionTypes.GET_CREATE_MEMORIAL: {
       return {
         ...state,
@@ -24,14 +35,29 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         loaded: false
       };
     }
+    case CreateMemorialActionTypes.SEARCH_ADDRESS_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        addressSearch: action.payload
+      };
+    }
     case CreateMemorialActionTypes.GET_CREATE_MEMORIAL_SUCCESS: {
       return {
         ...state,
         loading: false,
         loaded: true,
-        memorial: action.payload
+        memorial: action.payload,
+        addressSearch: {
+          ...state.addressSearch,
+          latitude: action.payload.location ? action.payload.location.latitude : INITIAL_STATE.addressSearch.latitude,
+          longitude: action.payload.location ? action.payload.location.longitude : INITIAL_STATE.addressSearch.longitude,
+          zoom: action.payload.location ? 15 : INITIAL_STATE.addressSearch.zoom
+        }
       };
     }
+    case CreateMemorialActionTypes.SEARCH_ADDRESS_FAILURE:
     case CreateMemorialActionTypes.GET_CREATE_MEMORIAL_FAILURE: {
       return {
         ...state,
@@ -40,6 +66,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         error: action.payload
       };
     }
+    case CreateMemorialActionTypes.UPDATE_LOCATION:
     case CreateMemorialActionTypes.UPDATE_TIMELINE:
     case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY:
     case CreateMemorialActionTypes.REMOVE_TIMELINE_FILE:
@@ -52,6 +79,17 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         ...state,
         saving: true,
         saved: false
+      };
+    }
+    case CreateMemorialActionTypes.UPDATE_LOCATION_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        saved: true,
+        memorial: {
+          ...state.memorial,
+          location: action.payload
+        }
       };
     }
     case CreateMemorialActionTypes.UPDATE_TIMELINE_SUCCESS:
@@ -93,6 +131,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         }
       };
     }
+    case CreateMemorialActionTypes.UPDATE_LOCATION_FAILURE:
     case CreateMemorialActionTypes.UPDATE_TIMELINE_FAILURE:
     case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY_FAILURE:
     case CreateMemorialActionTypes.REMOVE_TIMELINE_FILE_FAILURE:
@@ -129,6 +168,10 @@ export const getCreateMemorial = createSelector(
   getCreateMemorialState,
   state => state.memorial
 );
+export const getCreateMemorialLocation = createSelector(
+  getCreateMemorial,
+  state => state.location
+);
 export const getCreateLoading = createSelector(
   getCreateMemorialState,
   state => state.loading
@@ -148,4 +191,8 @@ export const getCreatedSaved = createSelector(
 export const getEditingIds = createSelector(
   getCreateMemorialState,
   state => state.editingTimeline.editingIds
+);
+export const getCreateSearchAddress = createSelector(
+  getCreateMemorialState,
+  state => state.addressSearch
 );

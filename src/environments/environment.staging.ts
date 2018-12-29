@@ -12,5 +12,8 @@ export const environment = {
   },
   s3: {
     url: 'https://memorial-staging-imgs.s3.amazonaws.com/'
+  },
+  google: {
+    apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
   }
 };

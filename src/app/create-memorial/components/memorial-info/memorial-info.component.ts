@@ -14,6 +14,7 @@ export class MemorialInfoComponent implements OnInit {
 
   @Input() memorialInfo: Memorial;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
+  @Output() toTimeline: EventEmitter<any> = new EventEmitter<any>();
 
   memorialInfoForm: FormGroup;
 
@@ -43,6 +44,10 @@ export class MemorialInfoComponent implements OnInit {
 
   onRemove(payload) {
     this.store.dispatch(new DeleteMemorialImage(payload));
+  }
+
+  onNav() {
+    this.toTimeline.emit({tab: {textLable: 'timeline'}});
   }
 
 }

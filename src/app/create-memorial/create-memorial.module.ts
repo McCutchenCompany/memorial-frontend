@@ -1,3 +1,5 @@
+import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +21,7 @@ import { SharedModule } from '@shared/shared.module';
 
 import * as fromStore from '../store/create-memorial';
 import { CreateMemorialEffects } from './../store/create-memorial/create-memorial.effects';
+import { AddLocationComponent } from './components/add-location/add-location.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { TimelineFormComponent } from './components/timeline-form/timeline-form.component';
@@ -45,8 +48,20 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     StoreModule.forFeature('createMemorial', fromStore.createMemorialReducer),
     EffectsModule.forFeature([
       CreateMemorialEffects
-    ])
+    ]),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE',
+      libraries: ['places']
+    }),
+    AgmJsMarkerClustererModule
   ],
-  declarations: [CreateMemorialComponent, MemorialInfoComponent, ImageViewerComponent, CreateTimelineComponent, TimelineFormComponent]
+  declarations: [
+    CreateMemorialComponent,
+    MemorialInfoComponent,
+    ImageViewerComponent,
+    CreateTimelineComponent,
+    TimelineFormComponent,
+    AddLocationComponent
+  ]
 })
 export class CreateMemorialModule { }
