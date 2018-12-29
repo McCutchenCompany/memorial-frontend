@@ -24,7 +24,7 @@ import { AddLocationComponent } from './../../components/add-location/add-locati
 import { CreateTimelineComponent } from './../create-timeline/create-timeline.component';
 import { CreateMemorialComponent } from './create-memorial.component';
 
-fdescribe('CreateMemorialComponent', () => {
+describe('CreateMemorialComponent', () => {
   let component: CreateMemorialComponent;
   let fixture: ComponentFixture<CreateMemorialComponent>;
 

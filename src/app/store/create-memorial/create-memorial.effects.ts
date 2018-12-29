@@ -27,9 +27,6 @@ import {
   ReplaceMemorialImage,
   ReplaceMemorialImageFailure,
   ReplaceMemorialImageSuccess,
-  SearchAddress,
-  SearchAddressFailure,
-  SearchAddressSuccess,
   UpdateCreateMemorial,
   UpdateCreateMemorialFailure,
   UpdateCreateMemorialSuccess,
@@ -53,8 +50,7 @@ export class CreateMemorialEffects {
   constructor(
     private actions: Actions,
     private api: CreateMemorialService,
-    private uploadService: ImageUploadService,
-    private google: GoogleApiService
+    private uploadService: ImageUploadService
   ) {}
 
   @Effect()
@@ -145,15 +141,6 @@ export class CreateMemorialEffects {
     switchMap((action: RemoveTimelineFile) => this.uploadService.removeTimelineFile(action.payload.id, action.payload.route).pipe(
       map(memorial => new RemoveTimelineFileSuccess(memorial)),
       catchError(error => of(new RemoveTimelineFileFailure(error)))
-    ))
-  );
-
-  @Effect()
-  searchAddress$: Observable<Action> = this.actions.pipe(
-    ofType(CreateMemorialActionTypes.SEARCH_ADDRESS),
-    switchMap((action: SearchAddress) => this.google.searchAddress(action.payload).pipe(
-      map(res => new SearchAddressSuccess(res)),
-      catchError(error => of(new SearchAddressFailure(error)))
     ))
   );
 

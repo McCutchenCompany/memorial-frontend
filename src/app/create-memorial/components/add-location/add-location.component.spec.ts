@@ -1,12 +1,16 @@
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatFormFieldModule, MatIconModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatIconModule, MatInputModule } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Store } from '@ngrx/store';
+import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
 import { AddLocationComponent } from './add-location.component';
 
-fdescribe('AddLocationComponent', () => {
+describe('AddLocationComponent', () => {
   let component: AddLocationComponent;
   let fixture: ComponentFixture<AddLocationComponent>;
 
@@ -16,8 +20,17 @@ fdescribe('AddLocationComponent', () => {
       imports: [
         MatIconModule,
         MatFormFieldModule,
+        MatInputModule,
+        NoopAnimationsModule,
         AgmCoreModule.forRoot({}),
-        AgmJsMarkerClustererModule
+        AgmJsMarkerClustererModule,
+        ReactiveFormsModule
+      ],
+      providers: [
+        {
+          provide: Store,
+          useClass: TestStore
+        }
       ]
     });
   });
