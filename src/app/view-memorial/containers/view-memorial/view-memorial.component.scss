@@ -3,3 +3,14 @@
 .container {
   margin-bottom: rem(150);
 }
+.preview {
+  position: fixed;
+  top: rem(32);
+  left: rem(20);
+  right: rem(20);
+  mat-card {
+    display: flex;
+    justify-content: space-between;
+    background: map-get($colors, primary-lightest);
+  }
+}

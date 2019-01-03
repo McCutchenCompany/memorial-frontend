@@ -269,3 +269,9 @@ mat-tab-group.create-tabs {
     justify-content: space-between;
   }
 }
+
+mat-card.mat-card {
+  .mat-card-header-text {
+    margin: 0;
+  }
+}

@@ -57,12 +57,10 @@ export class AuthEffects {
   auth0LoginSuccess$: Observable<Action> = this.actions.pipe(
     ofType(AuthActionTypes.AUTH0_LOGIN_SUCCESS),
     map((action: Auth0LoginSuccess) => action.payload),
-    tap(payload => {
+    map(payload => {
       // Set the token
       localStorage.setItem('access_token', payload.accessToken);
-    }),
-    map(() => {
-      return new GetProfile();
+      return new GetProfile(payload);
     })
   );
 
@@ -101,7 +99,7 @@ export class AuthEffects {
   public localTokenValid$: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOCAL_TOKEN_VALID),
     map((action: LocalTokenValid) => {
-      return new GetProfile();
+      return new GetProfile({});
     })
   );
 
@@ -124,7 +122,7 @@ export class AuthEffects {
   @Effect()
   getProfile$: Observable<Action> = this.actions.pipe(
     ofType(AuthActionTypes.GET_PROFILE),
-    switchMap(() => this.api.getProfile().pipe(
+    switchMap((action: GetProfile) => this.api.getProfile(action.payload).pipe(
       map(profile => new GetProfileSuccess(profile)),
       catchError(error => of(new GetProfileFailure(error)))
     ))

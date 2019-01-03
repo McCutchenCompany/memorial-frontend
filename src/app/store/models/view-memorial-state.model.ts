@@ -5,6 +5,8 @@ import { Timeline } from './../../shared/models/timeline.model';
 export class ViewMemorialState {
   loading: boolean;
   loaded: boolean;
+  saving: boolean;
+  saved: boolean;
   selectedMemorial: {
     memorial: Memorial;
     location: LocationMarker;

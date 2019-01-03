@@ -1,7 +1,8 @@
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-import { MatSnackBarModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule, MatIconModule, MatSnackBarModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { TestStore } from '@shared/testing/test-store';
@@ -9,7 +10,9 @@ import { GetInRange } from '@store/find-memorial/actions/action.types';
 import { configureTestSuite } from 'ng-bullet';
 import { of } from 'rxjs';
 
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { GeolocationService } from './../../services/geolocation.service';
+import { MemorialResultCardComponent } from './../memorial-result-card/memorial-result-card.component';
 import { FindMemorialComponent } from './find-memorial.component';
 
 describe('FindMemorialComponent', () => {
@@ -20,12 +23,19 @@ describe('FindMemorialComponent', () => {
 
   configureTestSuite(() => {
     TestBed.configureTestingModule({
-      declarations: [ FindMemorialComponent ],
+      declarations: [
+        FindMemorialComponent,
+        SearchBarComponent,
+        MemorialResultCardComponent
+      ],
       imports: [
         AgmCoreModule.forRoot({}),
         AgmJsMarkerClustererModule,
         RouterTestingModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatIconModule,
+        MatCardModule,
+        ReactiveFormsModule
       ],
       providers: [
         {
@@ -45,6 +55,7 @@ describe('FindMemorialComponent', () => {
     fixture = TestBed.createComponent(FindMemorialComponent);
     component = fixture.componentInstance;
     component.markers$ = of([]);
+    component.memorials$ = of([]);
     fixture.detectChanges();
   });
 

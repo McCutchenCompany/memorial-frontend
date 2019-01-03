@@ -1,0 +1,33 @@
+@import "src/styles.scss";
+
+.container {
+  width: rem(696);
+  margin: rem(64) auto;
+  .memory-container {
+    margin-top: rem(36);
+  }
+  .memories {
+    width: 100%;
+    div {
+      width: 100%;
+    }
+  }
+  .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .number {
+      height: rem(24);
+      width: rem(24);
+      margin-left: rem(16);
+      background: map-get($colors, primary-light);
+      border-radius: 100px;
+      p {
+        transform: translateY(-8%);
+        text-align: center;
+        font-size: rem(12);
+        color: map-get($colors, white);
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@import "src/styles.scss";
+
+.container {
+  width: rem(1176);
+  margin: auto;
+  .form {
+    width: rem(936);
+    margin: auto;
+    mat-form-field {
+      width: 100%;
+    }
+    .textarea {
+      height: 250px;
+    }
+  }
+  .memory-display {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    div {
+      width: rem(578);
+      margin-bottom: rem(36);
+    }
+  }
+  .post-memory {
+    margin: rem(50) 0;
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}

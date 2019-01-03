@@ -61,4 +61,9 @@ export class CreateMemorialService {
     return this.http.post(path, body);
   }
 
+  updateMemoryStatus(memory_id, body) {
+    const path = `${this.API_URL}/memories/${memory_id}`;
+    return this.http.patch(path, body);
+  }
+
 }

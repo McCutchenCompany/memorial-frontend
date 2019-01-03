@@ -1,0 +1,16 @@
+<mat-card [class.unpublished]="!public && !memory.published">
+  <mat-card-header>
+    <div class="container">
+      <div class="title">
+        <mat-card-title>{{ memory.title }}</mat-card-title>
+        <mat-card-subtitle>{{ memory.first_name }} {{ memory.last_name }}</mat-card-subtitle>
+      </div>
+      <div *ngIf="!public && !memory.published" class="status">
+        <p>Waiting for Approval</p>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ memory.description }}</p>
+  </mat-card-content>
+</mat-card>

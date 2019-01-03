@@ -23,4 +23,9 @@ export class FindApiService {
     const path = `${this.API_URL}/public_memorials/${uuid}`;
     return this.http.get(path);
   }
+
+  searchMemorials(query: string) {
+    const path = `${this.API_URL}/public_memorials/search?query=${encodeURI(query)}`;
+    return this.http.get(path);
+  }
 }

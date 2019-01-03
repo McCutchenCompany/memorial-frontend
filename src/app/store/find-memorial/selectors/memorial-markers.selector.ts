@@ -27,3 +27,8 @@ export const {
   selectAll: getAllMemorialMarkers,
   selectTotal: getTotalMemrialMarkers
 } = adapter.getSelectors(getMemorialMarkersState);
+
+export const getMarkerMemorials = createSelector(
+  getAllMemorialMarkers,
+  state => state.map(marker => marker.memorial)
+);

@@ -13,13 +13,24 @@ export class ProfileService {
     private http: HttpClient
   ) { }
 
-  getProfile() {
-    const path = `${this.API_URL}/users/profile`;
+  getProfile(payload) {
+    let params = '?';
+    if (payload && payload.idTokenPayload) {
+      if (payload.idTokenPayload.email) {
+        params += `email=${payload.idTokenPayload.email}`;
+      }
+      if (payload.idTokenPayload.given_name || payload.idTokenPayload.first_name) {
+        params += `&first_name=${payload.idTokenPayload.given_name || payload.idTokenPayload.first_name}`;
+      }
+      if (payload.idTokenPayload.family_name || payload.idTokenPayload.last_name) {
+        params += `&last_name=${payload.idTokenPayload.family_name || payload.idTokenPayload.last_name}`;
+      }
+    }
+    const path = `${this.API_URL}/users/profile${params}`;
     return this.http.get(path);
   }
 
   updateProfile(payload: any) {
-    console.log('service', payload);
     const path = `${this.API_URL}/users/${payload.uuid}`;
     const body = {
       first_name: payload.first_name,

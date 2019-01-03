@@ -19,9 +19,11 @@ import { MyMemorialsComponent } from './components/my-memorials/my-memorials.com
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { UserProfileComponent } from './containers/user-profile/user-profile.component';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
+import { WelcomeComponent } from './containers/welcome/welcome.component';
+import { OnboardingComponent } from './components/onboarding/onboarding.component';
 
 @NgModule({
-  declarations: [UserProfileComponent, UserInfoComponent, MyMemorialsComponent, MyMemorialCardComponent],
+  declarations: [UserProfileComponent, UserInfoComponent, MyMemorialsComponent, MyMemorialCardComponent, WelcomeComponent, OnboardingComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,

@@ -1,0 +1,1 @@
+<app-onboarding *ngIf="(user$ | async).email" [user]="user$ | async" (saveUser)="onSave($event)"></app-onboarding>
