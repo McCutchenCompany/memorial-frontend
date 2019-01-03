@@ -83,12 +83,24 @@ export class CreateMemorialComponent implements OnInit {
       body
     };
     this.store.dispatch(new UpdateCreateMemorial(payload));
-    const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
-      if (res) {
-        this.onTabChange({tab: {textLabel: 'timeline'}});
-        sub.unsubscribe();
+    if (body.first_name) {
+      const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
+        if (res) {
+          this.onTabChange({tab: {textLabel: 'timeline'}});
+          sub.unsubscribe();
+        }
+      });
+    }
+  }
+
+  togglePublish(published) {
+    const payload = {
+      uuid: this.memorialUUID,
+      body: {
+        published: published
       }
-    });
+    };
+    this.store.dispatch(new UpdateCreateMemorial(payload));
   }
 
 }

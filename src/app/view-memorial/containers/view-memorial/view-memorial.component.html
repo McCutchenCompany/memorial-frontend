@@ -3,4 +3,19 @@
   <app-memorial-info [memorial]="(selectedMemorial$ | async).memorial" [location]="(selectedMemorial$ | async).location"></app-memorial-info>
   <app-memorial-timeline *ngIf="(selectedMemorial$ | async).timeline.length > 0" [timeline]="(selectedMemorial$ | async).timeline" [memorial]="(selectedMemorial$ | async).memorial"></app-memorial-timeline>
   <app-memorial-location *ngIf="(selectedMemorial$ | async).location" [location]="(selectedMemorial$ | async).location"></app-memorial-location>
+  <app-memorial-memories
+    *ngIf="(selectedMemorial$ | async).memories"
+    [memories]="(selectedMemorial$ | async).memories"
+    [public]="(selectedMemorial$ | async).memorial.public_post"
+    [user]="user$ | async"
+    (addEvent)="onAddMemory($event)"
+    (login)="onLogin()"></app-memorial-memories>
+</div>
+<div *ngIf="(selectedMemorial$ | async).memorial && !(selectedMemorial$ | async).memorial?.published" class="preview">
+  <mat-card>
+    <h4>Memorial Preview</h4>
+    <div class="actions">
+      <button mat-button class="subtle" [routerLink]="['/create', (selectedMemorial$ | async).memorial?.uuid]">Exit Preview</button>
+    </div>
+  </mat-card>
 </div>

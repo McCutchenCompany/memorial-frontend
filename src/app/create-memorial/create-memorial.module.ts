@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
@@ -22,6 +23,8 @@ import { SharedModule } from '@shared/shared.module';
 import * as fromStore from '../store/create-memorial';
 import { CreateMemorialEffects } from './../store/create-memorial/create-memorial.effects';
 import { AddLocationComponent } from './components/add-location/add-location.component';
+import { ApprovalCardComponent } from './components/approval-card/approval-card.component';
+import { ApproveMemoriesComponent } from './components/approve-memories/approve-memories.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { TimelineFormComponent } from './components/timeline-form/timeline-form.component';
@@ -40,6 +43,7 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatIconModule,
     MatTabsModule,
     MatSelectModule,
@@ -61,7 +65,9 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     ImageViewerComponent,
     CreateTimelineComponent,
     TimelineFormComponent,
-    AddLocationComponent
+    AddLocationComponent,
+    ApproveMemoriesComponent,
+    ApprovalCardComponent
   ]
 })
 export class CreateMemorialModule { }

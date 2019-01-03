@@ -11,7 +11,8 @@ export const INITIAL_STATE: CreateMemorialState = {
   memorial: {
     memorial: null,
     location: null,
-    timeline: []
+    timeline: [],
+    memories: []
   },
   editingTimeline: {
     editingIds: []
@@ -66,6 +67,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         error: action.payload
       };
     }
+    case CreateMemorialActionTypes.UPDATE_MEMORY_STATUS:
     case CreateMemorialActionTypes.UPDATE_LOCATION:
     case CreateMemorialActionTypes.UPDATE_TIMELINE:
     case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY:
@@ -113,7 +115,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         memorial: {
           ...state.memorial,
           ...action.payload,
-          timline: action.payload.timeline.reverse()
+          timeline: action.payload.timeline.reverse()
         }
       };
     }
@@ -131,6 +133,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         }
       };
     }
+    case CreateMemorialActionTypes.UPDATE_MEMORY_STATUS_FAILURE:
     case CreateMemorialActionTypes.UPDATE_LOCATION_FAILURE:
     case CreateMemorialActionTypes.UPDATE_TIMELINE_FAILURE:
     case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY_FAILURE:
@@ -153,6 +156,17 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         editingTimeline: {
           ...state.editingTimeline,
           editingIds: action.payload
+        }
+      };
+    }
+    case CreateMemorialActionTypes.UPDATE_MEMORY_STATUS_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        saved: true,
+        memorial: {
+          ...state.memorial,
+          memories: action.payload
         }
       };
     }

@@ -1,0 +1,41 @@
+<div class="container">
+  <h3>Memories</h3>
+  <div class="post-memory">
+    <button *ngIf="!adding && user.uuid" mat-button class="primary" (click)="toggleForm()">Add Memory</button>
+    <button *ngIf="!adding && !user.uuid" mat-button class="primary" (click)="onLogin()">Login to Add Memory</button>
+    <div class="form" *ngIf="adding">
+      <h4>Add a Memory</h4>
+      <p *ngIf="!public">
+        This memorial requires that memories be approved before they are displayed.
+        The memorial owner will be notified that a new memory has been submitted.
+      </p>
+      <form [formGroup]="memoryForm" (submit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+        </mat-form-field>
+        <mat-form-field class="textarea" appearance="outline">
+          <mat-label>Memory</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            matTextareaAutosize
+            maxlength="1000"></textarea>
+          <mat-hint align="end">{{memoryForm.value.description.length}} / 1000</mat-hint>
+        </mat-form-field>
+        <div class="actions">
+          <button mat-button type="submit" [disabled]="memoryForm.invalid" class="primary">Finish</button>
+          <button mat-button class="secondary" (click)="toggleForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="memory-display">
+    <div *ngFor="let memory of memories">
+      <app-memory-card [memory]="memory" [public]="public" [user]="user"></app-memory-card>
+    </div>
+    <div *ngIf="memories.length === 0">
+      <h4>There are no published memories for this memorial yet. You could be the first!</h4>
+    </div>
+  </div>
+</div>

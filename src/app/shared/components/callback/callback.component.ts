@@ -28,8 +28,10 @@ export class CallbackComponent implements OnInit {
 
   ngOnInit() {
     this.profile$.subscribe(user => {
-      if (user && user.uuid) {
-        this.router.navigateByUrl('/profile');
+      if (user && user.first_name) {
+        this.router.navigateByUrl(localStorage.getItem('reroute' || '/profile'));
+      } else if (user.uuid && !user.first_name) {
+        this.router.navigateByUrl('/profile/welcome');
       }
     });
     // This page gets hit from the Auth0 callback

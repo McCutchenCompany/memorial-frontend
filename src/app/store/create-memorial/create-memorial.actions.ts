@@ -41,7 +41,10 @@ export enum CreateMemorialActionTypes {
   SET_EDITING_TIMELINE = '[Create] Set editing timeline',
   SEARCH_ADDRESS = '[Create] Search Address',
   SEARCH_ADDRESS_SUCCESS = '[Create] Search Address success',
-  SEARCH_ADDRESS_FAILURE = '[Create] Search Address failure'
+  SEARCH_ADDRESS_FAILURE = '[Create] Search Address failure',
+  UPDATE_MEMORY_STATUS = '[Create] Update Memory status',
+  UPDATE_MEMORY_STATUS_SUCCESS = '[Create] Update Memory status success',
+  UPDATE_MEMORY_STATUS_FAILURE = '[Create] Update Memory status failure'
 }
 
 export class GetCreateMemorial implements Action {
@@ -205,6 +208,19 @@ export class UpdateLocationFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class UpdateMemoryStatus implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_MEMORY_STATUS;
+  constructor (public payload: {memory_id: string, body: any}) {}
+}
+export class UpdateMemoryStatusSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_MEMORY_STATUS_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class UpdateMemoryStatusFailure implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_MEMORY_STATUS_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetCreateMemorial
   | GetCreateMemorialSuccess
@@ -242,4 +258,7 @@ export type All =
   | SearchAddressFailure
   | UpdateLocation
   | UpdateLocationSuccess
-  | UpdateLocationFailure;
+  | UpdateLocationFailure
+  | UpdateMemoryStatus
+  | UpdateMemoryStatusSuccess
+  | UpdateMemoryStatusFailure;

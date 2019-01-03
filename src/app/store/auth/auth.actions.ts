@@ -13,6 +13,8 @@ export enum AuthActionTypes {
   GET_PROFILE_SUCCESS = '[Auth] Get profile success',
   GET_PROFILE_FAILURE = '[Auth] Get profile failure',
   UPDATE_PROFILE = '[Auth] Update profile',
+  UPDATE_PROFILE_SUCCESS = '[Auth] Update profile success',
+  UPDATE_PROFILE_FAILURE = '[Auth] Update profile failure',
   SIGNOUT = '[Auth] Sign Out',
 }
 
@@ -58,6 +60,7 @@ export class CheckSession implements Action {
 
 export class GetProfile implements Action {
   readonly type = AuthActionTypes.GET_PROFILE;
+  constructor (public payload: any) {}
 }
 export class GetProfileSuccess implements Action {
   readonly type = AuthActionTypes.GET_PROFILE_SUCCESS;
@@ -70,7 +73,15 @@ export class GetProfileFailure implements Action {
 
 export class UpdateProfile implements Action {
   readonly type = AuthActionTypes.UPDATE_PROFILE;
-  constructor (public payload: string) {}
+  constructor (public payload: any) {}
+}
+export class UpdateProfileSuccess implements Action {
+  readonly type = AuthActionTypes.UPDATE_PROFILE_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class UpdateProfileFailure implements Action {
+  readonly type = AuthActionTypes.UPDATE_PROFILE_FAILURE;
+  constructor (public payload: any) {}
 }
 
 export type AuthActions =
@@ -86,4 +97,6 @@ export type AuthActions =
   | GetProfile
   | GetProfileSuccess
   | GetProfileFailure
-  | UpdateProfile;
+  | UpdateProfile
+  | UpdateProfileSuccess
+  | UpdateProfileFailure;

@@ -1,0 +1,17 @@
+<mat-card [class.unpublished]="needsApproval">
+    <mat-card-header>
+      <div class="container">
+        <div class="title">
+          <mat-card-title>{{ memory.title }}</mat-card-title>
+          <mat-card-subtitle>{{ memory.first_name }} {{ memory.last_name }}</mat-card-subtitle>
+        </div>
+        <div *ngIf="needsApproval" class="status">
+          <button mat-button class="approve" (click)="onApprove()"><mat-icon>check</mat-icon></button>
+          <button mat-button class="deny" (click)="onDeny()"><mat-icon>clear</mat-icon></button>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ memory.description }}</p>
+    </mat-card-content>
+  </mat-card>

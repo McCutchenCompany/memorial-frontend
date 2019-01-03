@@ -2,7 +2,15 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatFormFieldModule, MatIconModule, MatTooltipModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatTooltipModule,
+} from '@angular/material';
 import { EffectsModule } from '@ngrx/effects';
 
 import { StoreModule } from '../../../node_modules/@ngrx/store';
@@ -12,7 +20,9 @@ import { InteractiveTimelineComponent } from './components/interactive-timeline/
 import { MemorialHeaderComponent } from './components/memorial-header/memorial-header.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { MemorialLocationComponent } from './components/memorial-location/memorial-location.component';
+import { MemorialMemoriesComponent } from './components/memorial-memories/memorial-memories.component';
 import { MemorialTimelineComponent } from './components/memorial-timeline/memorial-timeline.component';
+import { MemoryCardComponent } from './components/memory-card/memory-card.component';
 import { ViewMemorialComponent } from './containers/view-memorial/view-memorial.component';
 import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
 
@@ -21,7 +31,11 @@ import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
     CommonModule,
     MatIconModule,
     MatFormFieldModule,
+    MatInputModule,
     MatTooltipModule,
+    MatButtonModule,
+    MatCardModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
     }),
@@ -38,7 +52,9 @@ import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
     MemorialInfoComponent,
     MemorialTimelineComponent,
     MemorialLocationComponent,
-    InteractiveTimelineComponent
+    InteractiveTimelineComponent,
+    MemorialMemoriesComponent,
+    MemoryCardComponent
   ]
 })
 export class ViewMemorialModule { }

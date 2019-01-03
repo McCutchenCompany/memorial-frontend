@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new GetProfile());
+    this.store.dispatch(new GetProfile({}));
   }
 
   onEdit(payload) {

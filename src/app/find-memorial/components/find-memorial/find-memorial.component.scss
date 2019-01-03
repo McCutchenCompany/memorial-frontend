@@ -1,16 +1,52 @@
 @import "src/styles.scss";
 
+.map {
+  position: fixed;
+  top: rem(94);
+  right: 0;
+  left: 59%;
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    h3 {
+      color: map-get($colors, white);
+      width: rem(432);
+      text-align: center;
+    }
+  }
+}
 agm-map {
   width: 100%;
   height: 100vw;
   float: none;
 }
+.container {
+  width: rem(1176);
+  margin: auto;
+  .memorials {
+    width: rem(696);
+  }
+  .results {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: rem(49) 0;
+    .cards {
+      margin-bottom: rem(20);
+    }
+  }
+}
 @include respond-to('medium') {
   agm-map {
     display: block;
-    height: 50vw;
-    width: 50%;
-    float: right;
+    height: calc(100vh - 94px);
   }
 }
 

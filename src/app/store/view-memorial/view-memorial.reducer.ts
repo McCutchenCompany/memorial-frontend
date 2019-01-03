@@ -7,6 +7,8 @@ import { All, ViewMemorialActionTypes } from './view-memorial.actions';
 export const INITIAL_STATE: ViewMemorialState = {
   loading: false,
   loaded: false,
+  saving: false,
+  saved: false,
   selectedMemorial: {
     memorial: null,
     location: null,
@@ -37,6 +39,32 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
         ...state,
         loading: false,
         loaded: false,
+        error: action.payload
+      };
+    }
+    case ViewMemorialActionTypes.ADD_MEMORY: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
+    case ViewMemorialActionTypes.ADD_MEMORY_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        saved: true,
+        selectedMemorial: {
+          ...state.selectedMemorial,
+          memories: action.payload
+        }
+      };
+    }
+    case ViewMemorialActionTypes.ADD_MEMORY_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
         error: action.payload
       };
     }

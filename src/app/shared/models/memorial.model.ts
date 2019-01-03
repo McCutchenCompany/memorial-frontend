@@ -9,4 +9,8 @@ export class Memorial {
   create_at: Date;
   updated_at: Date;
   description: string;
+  public_post: boolean;
+  published: boolean;
+  latitude?: number;
+  longitude?: number;
 }

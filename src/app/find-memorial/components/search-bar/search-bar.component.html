@@ -1,0 +1,6 @@
+<mat-card>
+  <form (submit)="onSubmit()" [formGroup]="searchForm">
+    <mat-icon>search</mat-icon>
+    <input formControlName="query" type="text" placeholder="Search">
+  </form>
+</mat-card>

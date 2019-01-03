@@ -1,0 +1,70 @@
+<div class="container">
+  <h4>Memories</h4>
+  <mat-checkbox [value]="!public" (change)="togglePublic()" color="primary">Ask for my approval before publishing memories</mat-checkbox>
+  <div class="memory-container" *ngIf="!public">
+    <div class="for-approval">
+      <div class="title">
+        <div class="actions">
+          <button mat-button (click)="toggleExpand('toApprove')">
+            <mat-icon *ngIf="!showToApprove">arrow_drop_down</mat-icon>
+            <mat-icon *ngIf="showToApprove">arrow_drop_up</mat-icon>
+          </button>
+        </div>
+        <h4>Need Approval</h4>
+        <div class="number">
+          <p>{{ toApprove.length }}</p>
+        </div>
+      </div>
+      <div *ngIf="showToApprove" class="memories">
+        <div *ngFor="let memory of toApprove">
+          <app-approval-card [memory]="memory" [needsApproval]="true"></app-approval-card>
+        </div>
+      </div>
+    </div>
+    <div class="denied">
+      <div class="title">
+        <div class="actions">
+          <button mat-button (click)="toggleExpand('denied')">
+            <mat-icon *ngIf="!showDenied">arrow_drop_down</mat-icon>
+            <mat-icon *ngIf="showDenied">arrow_drop_up</mat-icon>
+          </button>
+        </div>
+        <h4>Denied</h4>
+        <div class="number">
+          <p>{{ denied.length }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showDenied" class="memories">
+      <div *ngFor="let memory of denied">
+        <app-approval-card [memory]="memory" [needsApproval]="false"></app-approval-card>
+      </div>
+    </div>
+    <div class="approved">
+      <div class='title'>
+        <div class="actions">
+          <button mat-button (click)="toggleExpand('approved')">
+            <mat-icon *ngIf="!showApproved">arrow_drop_down</mat-icon>
+            <mat-icon *ngIf="showApproved">arrow_drop_up</mat-icon>
+          </button>
+        </div>
+        <h4>Approved</h4>
+        <div class="number">
+          <p>{{ approved.length }}</p>
+        </div>
+      </div>
+      <div *ngIf="showApproved" class="memories">
+        <div *ngFor="let memory of approved">
+          <app-approval-card [memory]="memory" [needsApproval]="false"></app-approval-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="memory-container" *ngIf="public">
+    <div class="memories">
+      <div *ngFor="let memory of memories">
+        <app-approval-card [memory]="memory" [needsApproval]="false"></app-approval-card>
+      </div>
+    </div>
+  </div>
+</div>

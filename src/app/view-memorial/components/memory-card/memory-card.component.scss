@@ -1,0 +1,26 @@
+@import "src/styles.scss";
+
+mat-card.mat-card {
+  background: map-get($colors, background);
+  border-radius: 2px;
+  padding: rem(21) rem(30) rem(30);
+  .mat-header, .mat-card-title {
+    color: map-get($colors, black);
+    font-family: $serifFont;
+    font-weight: 700;
+  }
+  &.unpublished {
+    opacity: .7;
+    background: map-get($colors, primary-lightest);
+  }
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .status {
+      p {
+        font-size: rem(12);
+      }
+    }
+  }
+}

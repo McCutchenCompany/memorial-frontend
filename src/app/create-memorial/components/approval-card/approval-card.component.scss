@@ -1,0 +1,35 @@
+@import "src/styles.scss";
+
+mat-card.mat-card {
+  background: map-get($colors, background);
+  border-radius: 2px;
+  padding: rem(21) rem(30) rem(30);
+  margin: 0 0 rem(16);
+  .mat-header, .mat-card-title {
+    color: map-get($colors, black);
+    font-family: $serifFont;
+    font-weight: 700;
+  }
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .status {
+      display: flex;
+      justify-content: space-between;
+      width: rem(140);
+      height: fit-content;
+      p {
+        font-size: rem(12);
+      }
+    }
+    .approve {
+      background: map-get($colors, success);
+      color: map-get($colors, white);
+    }
+    .deny {
+      background: map-get($colors, warn);
+      color: map-get($colors, white);
+    }
+  }
+}

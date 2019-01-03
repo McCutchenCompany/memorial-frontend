@@ -33,6 +33,9 @@ import {
   UpdateLocation,
   UpdateLocationFailure,
   UpdateLocationSuccess,
+  UpdateMemoryStatus,
+  UpdateMemoryStatusFailure,
+  UpdateMemoryStatusSuccess,
   UpdateTimeline,
   UpdateTimelineFailure,
   UpdateTimelineSuccess,
@@ -150,6 +153,15 @@ export class CreateMemorialEffects {
     switchMap((action: UpdateLocation) => this.api.updateLocation(action.payload.id, action.payload.location).pipe(
       map(res => new UpdateLocationSuccess(res)),
       catchError(error => of(new UpdateLocationFailure(error)))
+    ))
+  );
+
+  @Effect()
+  udpateMemoryStatus$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPDATE_MEMORY_STATUS),
+    switchMap((action: UpdateMemoryStatus) => this.api.updateMemoryStatus(action.payload.memory_id, action.payload.body).pipe(
+      map(res => new UpdateMemoryStatusSuccess(res)),
+      catchError(error => of(new UpdateMemoryStatusFailure(error)))
     ))
   );
 }

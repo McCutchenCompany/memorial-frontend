@@ -63,6 +63,13 @@ export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): 
     case AuthActionTypes.LOCAL_TOKEN_INVALID: {
       return INITIAL_STATE;
     }
+    case AuthActionTypes.UPDATE_PROFILE: {
+      return {
+        ...state,
+        loading: true,
+        loaded: false
+      };
+    }
     case AuthActionTypes.GET_PROFILE: {
       return {
         ...state,
