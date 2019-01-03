@@ -86,6 +86,10 @@ export class AddLocationComponent implements OnInit {
     }
   }
 
+  onCheckBounds(event) {
+    console.log(event);
+  }
+
   onNav() {
     this.toMemories.emit({tab: {textLabel: 'memories'}});
   }

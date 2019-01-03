@@ -22,6 +22,7 @@
     [latitude]="latitude | async"
     [longitude]="longitude | async"
     [zoom]="12"
+    [streetViewControl]="false"
     [mapDraggable]="false"
     [draggableCursor]="'default'"
     (boundsChange)="onBoundChange($event)">
@@ -44,6 +45,7 @@
     [longitude]="hoveredCard.longitude"
     [zoom]="15"
     [mapDraggable]=false
+    [streetViewControl]="false"
     [draggableCursor]="'default'">
     <agm-marker
     iconUrl="assets/imgs/marker-hover.svg"
