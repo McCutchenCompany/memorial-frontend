@@ -1,21 +1,37 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule, MatFormFieldModule } from '@angular/material';
+import { User } from '@shared/models/user.model';
+import { configureTestSuite } from 'ng-bullet';
 
+import { MemoryCardComponent } from './../memory-card/memory-card.component';
 import { MemorialMemoriesComponent } from './memorial-memories.component';
 
 describe('MemorialMemoriesComponent', () => {
   let component: MemorialMemoriesComponent;
   let fixture: ComponentFixture<MemorialMemoriesComponent>;
 
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemorialMemoriesComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [
+        MemorialMemoriesComponent,
+        MemoryCardComponent
+      ],
+      imports: [
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatCardModule
+      ]
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MemorialMemoriesComponent);
     component = fixture.componentInstance;
+    component.memories = [];
+    component.user = {
+      uuid: '1234'
+    } as User;
     fixture.detectChanges();
   });
 
