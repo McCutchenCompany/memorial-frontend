@@ -18,4 +18,9 @@ export class MemorialInfoComponent implements OnInit {
   ngOnInit() {
   }
 
+  shareFacebook() {
+    window.open('https://www.facebook.com/sharer/sharer.php?u='
+    + 'http://localhost:4200/memorial/0761353d-5c91-4d4d-87f0-b663952b5d93', '_blank', 'width=500, height=300');
+  }
+
 }

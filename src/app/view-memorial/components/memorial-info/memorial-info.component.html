@@ -11,6 +11,9 @@
     <p>Location</p>
     <h6>{{ location?.description || 'Unknown' }}</h6>
   </div>
+  <div class="social">
+    <button (click)="shareFacebook()">Facebook</button>
+  </div>
 </div>
 <div class="description">
   <h3>About {{ memorial.first_name }}</h3>

@@ -19,7 +19,8 @@ export const environment = {
   },
   google: {
     apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
-  }
+  },
+  url: 'http://localhost:4200/'
 };
 
 /*

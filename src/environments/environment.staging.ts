@@ -15,5 +15,6 @@ export const environment = {
   },
   google: {
     apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
-  }
+  },
+  url: 'https://staging.mymemorial.co/'
 };

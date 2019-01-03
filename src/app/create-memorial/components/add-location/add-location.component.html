@@ -8,7 +8,7 @@
     </mat-form-field>
   </form>
   <agm-map (mapClick)="onMapClick($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-    <agm-marker [latitude]="(memorialLocation$ | async)?.latitude" [longitude]="(memorialLocation$ | async)?.longitude"></agm-marker>
+    <agm-marker iconUrl="assets/imgs/marker-initial.svg" [latitude]="(memorialLocation$ | async)?.latitude" [longitude]="(memorialLocation$ | async)?.longitude"></agm-marker>
   </agm-map>
   <div class="actions">
     <button mat-button class="primary" (click)="onNav()">Memories <mat-icon>keyboard_arrow_right</mat-icon></button>

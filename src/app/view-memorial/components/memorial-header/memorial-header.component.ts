@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
 import { Memorial } from '@shared/models/memorial.model';
 
@@ -42,9 +43,18 @@ export class MemorialHeaderComponent implements OnInit {
       };
     }
   }
-  constructor() { }
+  constructor(
+    private meta: Meta
+  ) { }
 
   ngOnInit() {
+    this.updateMeta();
+  }
+
+  updateMeta() {
+    this.meta.updateTag({ property: 'og:title', content: this.name });
+    this.meta.updateTag({ property: 'og:image', content: `${environment.s3.url}${this.memorial.image}`});
+    this.meta.updateTag({ property: 'og:url', content: `${environment.url}memorials/${this.memorial.uuid}`});
   }
 
 }
