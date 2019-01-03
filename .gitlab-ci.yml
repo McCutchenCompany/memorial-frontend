@@ -68,5 +68,5 @@ deploy_production:
     - python get-pip.py
     - pip install awscli
   script:
-    - ./node_modules/@angular/cli/bin/ng build --prod
+    - ./node_modules/@angular/cli/bin/ng build --prod --aot
     - aws s3 cp ./dist/memorial s3://memorial-frontend --recursive
