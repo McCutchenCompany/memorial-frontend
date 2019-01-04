@@ -1,5 +1,9 @@
 <div class="container">
   <div class="memorials">
+    <div class="hidden-desktop">
+      <button mat-button *ngIf="!displayMap" class="primary" (click)="toggleMap()">Display Map</button>
+      <button mat-button *ngIf="displayMap" class="primary" (click)="toggleMap()">Hide Map</button>
+    </div>
     <app-search-bar [searchQuery]="searchQuery$ | async" (search)="onSearch($event)"></app-search-bar>
     <div class="results">
       <div class="cards" (mouseenter)="onCardHover(memorial)" (mouseleave)="onCardHover()" *ngFor="let memorial of (memorials$ | async)">
@@ -17,7 +21,7 @@
     </div>
   </div>
 </div>
-<div class="map" *ngIf="!(searchQuery$ | async)">
+<div class="map" [class.hide]="!displayMap" *ngIf="!(searchQuery$ | async)">
   <agm-map
     [latitude]="latitude | async"
     [longitude]="longitude | async"
@@ -39,7 +43,7 @@
     </agm-marker-cluster>
   </agm-map>
 </div>
-<div class="map" *ngIf="searchQuery$ | async">
+<div class="map mobile-hide" *ngIf="searchQuery$ | async">
   <agm-map
     [latitude]="hoveredCard.latitude"
     [longitude]="hoveredCard.longitude"
