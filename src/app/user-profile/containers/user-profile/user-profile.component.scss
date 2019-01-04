@@ -6,9 +6,25 @@
   margin: rem(150) 0;
 }
 .container {
-  width: rem(1176);
+  width: 100%;
   margin: rem(60) auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: flex-start;
+  app-user-info {
+    width: 90%;
+  }
+}
+@include respond-to('small') {
+
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(1176);
+    flex-wrap: nowrap;
+    app-user-info {
+      width: initial;
+    }
+  }
 }
