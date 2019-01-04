@@ -29,7 +29,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="event">
+    <!-- <div class="event">
       <mat-form-field appearance="outline">
         <mat-label>Event</mat-label>
         <mat-select formControlName="event">
@@ -42,7 +42,7 @@
         <mat-label>Title</mat-label>
         <input matInput formControlName="title">
       </mat-form-field>
-    </div>
+    </div> -->
     <mat-form-field class="textarea" appearance="outline">
       <mat-label>Description</mat-label>
       <textarea
@@ -53,7 +53,7 @@
       <mat-hint align="end">{{timelineForm.value.description.length}} / 1000</mat-hint>
     </mat-form-field>
   </form>
-  <form *ngIf="expanded" [formGroup]="assetForm">
+  <form class="media-form" *ngIf="expanded" [formGroup]="assetForm">
     <mat-form-field appearance="outline">
       <mat-label>Media type</mat-label>
       <mat-select formControlName="asset_type">
@@ -62,15 +62,24 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field *ngIf="assetForm.value.asset_type === 'video'" class="youtube-link" appearance="outline">
+      <mat-label>Youtube link</mat-label>
+      <input matInput formControlName="asset_link" (change)="onLink()">
+    </mat-form-field>
+  </form>
+  <div class="asset-view" *ngIf="expanded">
+    <div *ngIf="assetForm.value.asset_type === 'video'">
+      <iframe *ngIf="timeline.asset_link?.length === 11" width="660" height="371" [src]="videoSrc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
     <div *ngIf="assetForm.value.asset_type === 'image'">
       <app-image-viewer
-        *ngIf="timeline.asset_link"
+        *ngIf="timeline.asset_link && timeline.asset_type === 'image'"
         [image]="timeline.asset_link"
         [id]="timeline.uuid"
         [type]="'timeline'"
         (remove)="onRemoveFile($event)"></app-image-viewer>
       <app-upload-image
-        *ngIf="!timeline.asset_link"
+        *ngIf="!timeline.asset_link || timeline.asset_type !== 'image'"
         [id]="timeline.uuid"
         [type]="'timeline'"
         (click)="onSaveChanges()"></app-upload-image>
@@ -78,5 +87,5 @@
     <div *ngIf="timelineForm.dirty">
       <button mat-button class="primary" [disabled]="timelineForm.invalid" (click)="onSaveChanges()">Save Changes</button>
     </div>
-  </form>
+  </div>
 </div>
