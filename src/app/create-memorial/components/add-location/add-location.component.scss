@@ -1,7 +1,7 @@
 @import "src/styles.scss";
 
 .container {
-  width: rem(696);
+  width: 95%;
   margin: rem(64) auto;
   form, mat-form-field {
     width: 100%;
@@ -14,5 +14,10 @@
     display: flex;
     justify-content: flex-end;
     margin: rem(48) auto
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(696);
   }
 }

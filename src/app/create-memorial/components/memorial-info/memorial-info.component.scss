@@ -1,8 +1,14 @@
 @import "src/styles.scss";
 
 .container {
-  width: rem(696);
+  width: 95%;
   margin: rem(68) auto rem(125);
+  .name {
+    flex-wrap: wrap;
+    mat-form-field {
+      width: 100%;
+    }
+  }
   .name, .dates {
     width: 100%;
     display: flex;
@@ -28,4 +34,17 @@
     display: flex;
     justify-content: flex-end;
   }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(696);
+    .name {
+      flex-wrap: initial;
+      mat-form-field {
+        width: initial;
+      }
+    }
+  }
+}
+@include respond-to('medium') {
 }

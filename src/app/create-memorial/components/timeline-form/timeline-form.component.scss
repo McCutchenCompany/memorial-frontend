@@ -32,11 +32,33 @@
   .media-form {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     .youtube-link {
-      width: 60%;
+      width: 100%;
     }
   }
   .asset-view {
     margin-bottom: rem(64);
+    iframe {
+      width: 100%;
+      height: 53vw;
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(696);
+    .media-form {
+      flex-wrap: initial;
+      .youtube-link {
+        width: 60%;
+      }
+    }
+    .asset-view {
+      iframe {
+        width: rem(660);
+        height: rem(371);
+      }
+    }
   }
 }

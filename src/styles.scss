@@ -262,8 +262,11 @@ mat-form-field.mat-form-field-appearance-outline {
 
 mat-tab-group.create-tabs {
   mat-tab-header.mat-tab-header {
-    width: rem(1176);
+    width: 100%;
     margin: auto;
+    @include respond-to('medium') {
+      width: rem(1176);
+    }
   }
   .mat-tab-labels {
     justify-content: space-between;
