@@ -8,6 +8,12 @@
   .asset {
     width: 100%;
     height: rem(224);
+    &.video-asset {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: map-get($colors, background);
+    }
   }
   .info {
     &.text-only {

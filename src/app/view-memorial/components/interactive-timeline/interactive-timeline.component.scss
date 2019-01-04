@@ -1,19 +1,21 @@
 @import "src/styles.scss";
 
 .container {
-  width: rem(1176);
+  width: 100%;
   margin: rem(136) auto 0;
   position: relative;
+  overflow-y: scroll;
+  padding: rem(30) 0;
   .line {
-    width: 98%;
+    width: rem(1175);
     margin: auto;
     border: 1px solid map-get($colors, gray);
   }
   .points {
     position: absolute;
     left: 0;
-    top: 0;
-    right: 0;
+    top: 30px;
+    width: rem(1172);
     transform: translateY(-78%);
     display: flex;
     justify-content: space-between;
@@ -44,6 +46,24 @@
       &:hover {
         color: map-get($colors, primary);
       }
+    }
+  }
+}
+@include respond-to('small') {
+
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(1176);
+    overflow-y: initial;
+    padding: initial;
+    .points {
+      top: 0;
+      width: initial;
+      right: 0;
+    }
+    .line {
+      width: 98%;
     }
   }
 }

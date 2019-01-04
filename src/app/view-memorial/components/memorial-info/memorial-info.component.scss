@@ -3,12 +3,13 @@
 .info {
   width: 95%;
   display: flex;
-  margin: rem(63) auto 0;
+  flex-wrap: wrap;
+  margin: rem(8) auto 0;
   .birth {
-    width: rem(240);
+    width: rem(150);
   }
   .death {
-    width: rem(240);
+    width: rem(150);
   }
   h3 {
     margin-bottom: rem(6);
@@ -57,18 +58,41 @@
     height: rem(28);
   }
 }
+.birth {
+  padding-left: 0;
+  width: rem(150);
+  margin: auto;
+}
+.death {
+  width: rem(150);
+  margin: auto;
+}
+.location {
+  display: none;
+}
 .social {
   display: flex;
   align-items: center;
-  width: rem(130);
-  justify-content: space-between;
-  margin-left: rem(200);
+  margin: 0 auto rem(32);
+  order: -1;
+  width: 100%;
+  justify-content: center;
+  #fb-share-button {
+    margin-right: rem(8);
+  }
 }
 @include respond-to('small') {
   .info {
     width: rem(767);
-    .birth {
-      padding-left: 0;
+    margin-top: rem(60);
+    .social {
+      width: rem(136);
+      justify-content: space-between;
+      margin-left: rem(200);
+      order: initial;
+    }
+    .location {
+      display: initial;
     }
   }
   .description {
