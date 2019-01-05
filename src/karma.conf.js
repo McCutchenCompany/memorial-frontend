@@ -24,6 +24,7 @@ module.exports = function (config) {
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
+    browserNoActivityTimeout: 20000,
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
