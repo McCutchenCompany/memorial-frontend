@@ -1,7 +1,7 @@
 @import "src/styles.scss";
 
 .container {
-  width: rem(696);
+  width: 95%;
   margin: rem(64) auto;
   .memory-container {
     margin-top: rem(36);
@@ -29,5 +29,10 @@
         color: map-get($colors, white);
       }
     }
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(696);
   }
 }

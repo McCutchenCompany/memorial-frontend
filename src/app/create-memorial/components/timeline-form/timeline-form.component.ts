@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Timeline } from '@shared/models/timeline.model';
 import { RemoveTimelineEntry, RemoveTimelineFile, SetEditingTimeline } from '@store/create-memorial/create-memorial.actions';
@@ -35,13 +36,19 @@ export class TimelineFormComponent implements OnInit {
 
   assetOptions = [
     {value: 'image', display: 'Image'},
-    {value: 'video', display: 'Video'},
-    {value: 'audio', display: 'Audio'}
+    {value: 'video', display: 'Video'}
   ];
+
+  get videoSrc() {
+    if (this.timeline.asset_link && this.timeline.asset_link.length === 11) {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.timeline.asset_link}`);
+    }
+  }
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<CreateMemorialState>
+    private store: Store<CreateMemorialState>,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -58,7 +65,10 @@ export class TimelineFormComponent implements OnInit {
       title: [this.timeline.title || '']
     });
     this.assetForm = this.fb.group({
-      asset_type: this.timeline.asset_type || null
+      asset_type: this.timeline.asset_type || null,
+      asset_link: this.timeline.asset_type === 'video' ?
+        `https://www.youtube.com/watch?v=${this.timeline.asset_link}` : null
+        || null
     });
   }
 
@@ -94,11 +104,32 @@ export class TimelineFormComponent implements OnInit {
       timelines: [
         {
           uuid: this.timeline.uuid,
-          ...this.timelineForm.value
+          asset_type: this.assetForm.value.asset_type,
+          ...this.timelineForm.value,
         }
       ]
     };
     this.store.dispatch(new UpdateTimeline(payload));
+  }
+
+  onLink() {
+    if (this.assetForm.value.asset_type === 'video') {
+      const params = new URLSearchParams(this.assetForm.value.asset_link.split('?').pop());
+      const videoId = params.get('v');
+      if (videoId.length === 11) {
+        const payload = {
+          memorial_id: this.timeline.memorial_id,
+          timelines: [
+            {
+              uuid: this.timeline.uuid,
+              asset_type: this.assetForm.value.asset_type,
+              asset_link: videoId
+            }
+          ]
+        };
+        this.store.dispatch(new UpdateTimeline(payload));
+      }
+    }
   }
 
 }

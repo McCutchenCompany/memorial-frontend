@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700');
 
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "src/theme.scss";
 
 
 $breakpoints: (
@@ -262,8 +262,11 @@ mat-form-field.mat-form-field-appearance-outline {
 
 mat-tab-group.create-tabs {
   mat-tab-header.mat-tab-header {
-    width: rem(1176);
+    width: 100%;
     margin: auto;
+    @include respond-to('medium') {
+      width: rem(1176);
+    }
   }
   .mat-tab-labels {
     justify-content: space-between;

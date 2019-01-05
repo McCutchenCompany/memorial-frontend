@@ -6,3 +6,29 @@
 mat-icon {
   font-size: rem(21);
 }
+h2 {
+  font-size: rem(32);
+}
+@include respond-to('small') {
+  .container {
+    width: 760px;
+    margin: auto;
+  }
+  h2 {
+    font-size: rem(48)
+  }
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+@include respond-to('medium') {
+  .container {
+    width: initial;
+    margin: initial;
+  }
+  .card-container {
+    display: initial;
+  }
+}

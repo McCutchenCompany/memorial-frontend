@@ -2,8 +2,8 @@
 
 mat-card {
   position: relative;
-  height: rem(136);
-  width: rem(655);
+  min-height: rem(283);
+  width: rem(286);
   .image {
     position: absolute;
     height: rem(168);
@@ -12,15 +12,31 @@ mat-card {
     left: 0;
   }
   .container {
-    padding-left: rem(320);
-    height: 100%;
+    padding: rem(168) 0 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .info {
+      padding-right: rem(16);
+    }
     .actions {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+  }
+}
+@include respond-to('small') {
+
+}
+@include respond-to('medium') {
+  mat-card {
+    height: rem(136);
+    width: rem(655);
+    min-height: initial;
+    .container {
+      padding: 0 0 0 rem(320);
+      height: 100%;
     }
   }
 }

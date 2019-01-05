@@ -2,9 +2,15 @@
 
 .map {
   position: fixed;
-  top: rem(94);
+  top: rem(142);
   right: 0;
-  left: 59%;
+  left: 0;
+  &.hide {
+    visibility: hidden;
+  }
+  &.mobile-hide {
+    display: none;
+  }
   .cover {
     position: absolute;
     top: 0;
@@ -24,14 +30,18 @@
 }
 agm-map {
   width: 100%;
-  height: 100vw;
+  height: 100vh;
   float: none;
 }
 .container {
-  width: rem(1176);
+  width: 100%;
   margin: auto;
+  .hidden-desktop {
+    margin-bottom: rem(12);
+  }
   .memorials {
-    width: rem(696);
+    width: rem(336);
+    margin: auto;
   }
   .results {
     display: flex;
@@ -43,10 +53,38 @@ agm-map {
     }
   }
 }
+@include respond-to('small') {
+  .container {
+    .memorials {
+      width: rem(696);
+    }
+  }
+}
 @include respond-to('medium') {
+  .map {
+    visibility: initial;
+    left: 59%;
+    top: rem(94);
+    &.hide {
+      visibility: initial;
+    }
+    &.mobile-hide {
+      display: initial;
+    }
+  }
   agm-map {
+    height: 100vw;
     display: block;
     height: calc(100vh - 94px);
+  }
+  .container {
+    width: rem(1176);
+    .memorials {
+      margin: initial;
+    }
+    .hidden-desktop {
+      display: none;
+    }
   }
 }
 

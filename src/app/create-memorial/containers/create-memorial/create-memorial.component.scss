@@ -5,11 +5,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: rem(1176);
+  width: 95%;
+  flex-wrap: wrap;
   .actions {
     display: flex;
     justify-content: space-between;
     height: fit-content;
     width: rem(350);
+  }
+  h2 {
+    font-size: rem(32);
+  }
+}
+@include respond-to('small') {
+  .container {
+    h2 {
+      font-size: rem(48);
+    }
+  }
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(1176);
   }
 }

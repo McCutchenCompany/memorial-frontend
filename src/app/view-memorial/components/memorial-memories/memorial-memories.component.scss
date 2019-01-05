@@ -1,11 +1,13 @@
 @import "src/styles.scss";
 
 .container {
-  width: rem(1176);
+  width: 100%;
   margin: auto;
+  h3 {
+    padding-left: rem(8);
+  }
   .form {
-    width: rem(936);
-    margin: auto;
+    width: 98%;
     mat-form-field {
       width: 100%;
     }
@@ -17,16 +19,44 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    flex-direction: column;
     div {
-      width: rem(578);
-      margin-bottom: rem(36);
+      width: 98%;
+      margin: 0 auto rem(36);
     }
   }
   .post-memory {
-    margin: rem(50) 0;
+    margin: rem(50) 0 rem(50) rem(16);
   }
   .actions {
     display: flex;
     justify-content: space-between;
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(767);
+  }
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(1176);
+    h3 {
+      padding-left: 0;
+    }
+    .form {
+      width: rem(936);
+      margin: auto;
+    }
+    .memory-display {
+      flex-direction: row;
+      div {
+        width: rem(578);
+        margin: 0 0 rem(36);
+      }
+    }
+    .post-memory {
+      margin: rem(50) 0;
+    }
   }
 }

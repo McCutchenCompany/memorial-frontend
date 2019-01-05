@@ -38,6 +38,7 @@ export class FindMemorialComponent implements OnInit {
   hoveredCard: Memorial = new Memorial();
 
   boundTimeout;
+  displayMap = false;
 
   get latitude(): Observable<number> {
     return this.latitude$;
@@ -132,6 +133,10 @@ export class FindMemorialComponent implements OnInit {
     } else {
       this.hoveredCard = new Memorial;
     }
+  }
+
+  toggleMap() {
+    this.displayMap = !this.displayMap;
   }
 
 }
