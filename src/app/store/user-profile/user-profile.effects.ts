@@ -27,16 +27,20 @@ export class UserProfileEffects {
   @Effect()
   purchaseLicense$: Observable<Action> = this.actions.pipe(
     ofType(UserProfileActionTypes.PURCHASE_LICENSE),
-    switchMap((action: PurchaseLicense) => this.api.addLicense(action.payload.uuid, action.payload.licenses).pipe(
-      map(res => new PurchaseLicenseSuccess(res)),
-      catchError(error => of(new PurchaseLicenseFailure(error)))
-    ))
+    switchMap((action: PurchaseLicense) => {
+      return this.api.addLicense(action.payload.token, action.payload.quantity, action.payload.discount || null).pipe(
+        map(res => new PurchaseLicenseSuccess(res)),
+        catchError(error => of(new PurchaseLicenseFailure(error)))
+      );
+    })
   );
 
-  @Effect()
-  purchaseLicenseSuccess$: Observable<Action> = this.actions.pipe(
+  @Effect({dispatch: false})
+  purchaseLicenseSuccess$ = this.actions.pipe(
     ofType(UserProfileActionTypes.PURCHASE_LICENSE_SUCCESS),
-    map((action: PurchaseLicenseSuccess) => new CreateMemorial(action.payload.uuid))
+    map((action: PurchaseLicenseSuccess) => {
+      this.router.navigateByUrl(`/create/${action.payload.memorials[0].uuid}`);
+    })
   );
 
   @Effect()

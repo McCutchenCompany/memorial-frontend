@@ -13,12 +13,16 @@ export class CreateMemorialService {
     private http: HttpClient
   ) { }
 
-  addLicense(user_id, licenses) {
-    const path = `${this.API_URL}/users/${user_id}`;
-    const body = {
-      licenses
+  addLicense(token, quantity, discount?) {
+    const path = `${this.API_URL}/billing/purchase`;
+    const body: any = {
+      stripeToken: token,
+      quantity: quantity
     };
-    return this.http.patch(path, body);
+    if (discount) {
+      body.discount = discount;
+    }
+    return this.http.post(path, body);
   }
 
   createMemorial(user_id) {
