@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { PaymentComponent } from '@shared/components/payment/payment.component';
 import { Auth0Login } from '@store/auth/auth.actions';
-import { AuthState } from '@store/models/auth-state.model';
-
-import { PaymentComponent } from './../payment/payment.component';
+import { AppState } from '@store/models/app-state.model';
 
 @Component({
-  selector: 'app-nav-header',
-  templateUrl: './nav-header.component.html',
-  styleUrls: ['./nav-header.component.scss']
+  selector: 'app-landing-page',
+  templateUrl: './landing-page.component.html',
+  styleUrls: ['./landing-page.component.scss']
 })
-export class NavHeaderComponent implements OnInit {
+export class LandingPageComponent implements OnInit {
 
   get loggedIn() {
     const token = localStorage.getItem('access_token');
@@ -23,15 +22,11 @@ export class NavHeaderComponent implements OnInit {
   }
 
   constructor(
-    private store: Store<AuthState>,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit() {
-  }
-
-  onLogin() {
-    this.store.dispatch(new Auth0Login());
   }
 
   onCreateMemorial() {

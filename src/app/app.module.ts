@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
@@ -18,6 +18,7 @@ import { StoreModule } from '../../node_modules/@ngrx/store';
 import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LandingPageComponent } from './landing-page/containers/landing-page/landing-page.component';
 import { NavHeaderComponent } from './shared/components/nav-header/nav-header.component';
 import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
 
@@ -25,7 +26,8 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
   declarations: [
     AppComponent,
     NavHeaderComponent,
-    CallbackComponent
+    CallbackComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -34,6 +36,7 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
     HttpClientModule,
     RouterModule,
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
     MatProgressSpinnerModule,
     SharedModule,
