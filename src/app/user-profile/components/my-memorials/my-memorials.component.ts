@@ -23,7 +23,9 @@ export class MyMemorialsComponent implements OnInit {
   }
 
   onAddMemorial() {
-    this.dialog.open(PaymentComponent);
+    this.dialog.open(PaymentComponent, {
+      closeOnNavigation: true
+    });
   }
 
 }

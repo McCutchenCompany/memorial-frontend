@@ -13,11 +13,12 @@ export class CreateMemorialService {
     private http: HttpClient
   ) { }
 
-  addLicense(token, quantity, discount?) {
+  addLicense(token, quantity, price, discount?) {
     const path = `${this.API_URL}/billing/purchase`;
     const body: any = {
       stripeToken: token,
-      quantity: quantity
+      quantity: quantity,
+      price: price
     };
     if (discount) {
       body.discount = discount;
@@ -68,6 +69,11 @@ export class CreateMemorialService {
   updateMemoryStatus(memory_id, body) {
     const path = `${this.API_URL}/memories/${memory_id}`;
     return this.http.patch(path, body);
+  }
+
+  checkDiscount(code) {
+    const path = `${this.API_URL}/billing/${code}/check_discount`;
+    return this.http.get(path);
   }
 
 }

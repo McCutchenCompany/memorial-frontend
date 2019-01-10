@@ -1,0 +1,40 @@
+@import "src/styles.scss";
+
+form {
+  .card-number {
+    width: 100%;
+  }
+  .details {
+    display: flex;
+    justify-content: space-between;
+    .exp {
+      display: flex;
+      justify-content: space-between;
+      width: 50%;
+      mat-form-field {
+        width: 45%;
+      }
+    }
+  }
+  .error {
+    float: right;
+    color: map-get($colors, warn);
+  }
+  .loading {
+    padding: rem(8) rem(42);
+  }
+}
+mat-expansion-panel {
+  margin-bottom: rem(36);
+  form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mat-form-field {
+      width: 70%;
+    }
+    button {
+      transform: translateY(-25%);
+    }
+  }
+}

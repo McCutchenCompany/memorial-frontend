@@ -10,9 +10,6 @@ import {
   CreateMemorial,
   CreateMemorialFailure,
   CreateMemorialSuccess,
-  PurchaseLicense,
-  PurchaseLicenseFailure,
-  PurchaseLicenseSuccess,
   UserProfileActionTypes,
 } from './user-profile.actions';
 
@@ -21,27 +18,8 @@ export class UserProfileEffects {
   constructor(
     private actions: Actions,
     private api: CreateMemorialService,
-    private router: Router
+    private router: Router,
   ) {}
-
-  @Effect()
-  purchaseLicense$: Observable<Action> = this.actions.pipe(
-    ofType(UserProfileActionTypes.PURCHASE_LICENSE),
-    switchMap((action: PurchaseLicense) => {
-      return this.api.addLicense(action.payload.token, action.payload.quantity, action.payload.discount || null).pipe(
-        map(res => new PurchaseLicenseSuccess(res)),
-        catchError(error => of(new PurchaseLicenseFailure(error)))
-      );
-    })
-  );
-
-  @Effect({dispatch: false})
-  purchaseLicenseSuccess$ = this.actions.pipe(
-    ofType(UserProfileActionTypes.PURCHASE_LICENSE_SUCCESS),
-    map((action: PurchaseLicenseSuccess) => {
-      this.router.navigateByUrl(`/create/${action.payload.memorials[0].uuid}`);
-    })
-  );
 
   @Effect()
   createMemorial$: Observable<Action> = this.actions.pipe(

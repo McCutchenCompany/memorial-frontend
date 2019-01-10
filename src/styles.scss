@@ -278,3 +278,8 @@ mat-card.mat-card {
     margin: 0;
   }
 }
+
+mat-dialog-container.mat-dialog-container {
+  max-height: fit-content;
+  height: 100vh;
+}
