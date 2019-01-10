@@ -16,6 +16,9 @@ export enum AuthActionTypes {
   UPDATE_PROFILE_SUCCESS = '[Auth] Update profile success',
   UPDATE_PROFILE_FAILURE = '[Auth] Update profile failure',
   SIGNOUT = '[Auth] Sign Out',
+  UPDATE_USER_MEMORIAL = '[Profile] Update user memorial',
+  UPDATE_USER_MEMORIAL_SUCCESS = '[Profile] Update user memorial success',
+  UPDATE_USER_MEMORIAL_FAILURE = '[Profile] Update user memorial failure'
 }
 
 // Auth 0
@@ -84,6 +87,19 @@ export class UpdateProfileFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class UpdateUserMemorial implements Action {
+  readonly type = AuthActionTypes.UPDATE_USER_MEMORIAL;
+  constructor (public payload: any) {}
+}
+export class UpdateUserMemorialSuccess implements Action {
+  readonly type = AuthActionTypes.UPDATE_USER_MEMORIAL_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class UpdateUserMemorialFailure implements Action {
+  readonly type = AuthActionTypes.UPDATE_USER_MEMORIAL_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type AuthActions =
   | LocalTokenCheck
   | LocalTokenValid
@@ -99,4 +115,7 @@ export type AuthActions =
   | GetProfileFailure
   | UpdateProfile
   | UpdateProfileSuccess
-  | UpdateProfileFailure;
+  | UpdateProfileFailure
+  | UpdateUserMemorial
+  | UpdateUserMemorialSuccess
+  | UpdateUserMemorialFailure;

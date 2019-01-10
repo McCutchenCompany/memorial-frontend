@@ -3,9 +3,9 @@ import { Action } from '@ngrx/store';
 
 
 export enum UserProfileActionTypes {
-  CREATE_MEMORIAL = '[Create] Create memorial',
-  CREATE_MEMORIAL_SUCCESS = '[Create] Create memorial success',
-  CREATE_MEMORIAL_FAILURE = '[Create] Create memorial failure'
+  CREATE_MEMORIAL = '[Profile] Create memorial',
+  CREATE_MEMORIAL_SUCCESS = '[Profile] Create memorial success',
+  CREATE_MEMORIAL_FAILURE = '[Profile] Create memorial failure'
 }
 
 export class CreateMemorial implements Action {
@@ -20,6 +20,7 @@ export class CreateMemorialFailure implements Action {
   readonly type = UserProfileActionTypes.CREATE_MEMORIAL_FAILURE;
   constructor (public payload: any) {}
 }
+
 
 export type All =
   | CreateMemorial

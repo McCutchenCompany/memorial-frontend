@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { CreateMemorialService } from 'app/create-memorial/services/create-memorial.service';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -19,6 +19,7 @@ export class UserProfileEffects {
     private actions: Actions,
     private api: CreateMemorialService,
     private router: Router,
+    private store: Store<any>
   ) {}
 
   @Effect()
@@ -37,4 +38,5 @@ export class UserProfileEffects {
       this.router.navigateByUrl(`/create/${action.payload.uuid}`);
     })
   );
+
 }
