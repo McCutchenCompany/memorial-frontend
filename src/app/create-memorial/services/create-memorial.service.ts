@@ -13,12 +13,17 @@ export class CreateMemorialService {
     private http: HttpClient
   ) { }
 
-  addLicense(user_id, licenses) {
-    const path = `${this.API_URL}/users/${user_id}`;
-    const body = {
-      licenses
+  addLicense(token, quantity, price, discount?) {
+    const path = `${this.API_URL}/billing/purchase`;
+    const body: any = {
+      stripeToken: token,
+      quantity: quantity,
+      price: price
     };
-    return this.http.patch(path, body);
+    if (discount) {
+      body.discount = discount;
+    }
+    return this.http.post(path, body);
   }
 
   createMemorial(user_id) {
@@ -64,6 +69,11 @@ export class CreateMemorialService {
   updateMemoryStatus(memory_id, body) {
     const path = `${this.API_URL}/memories/${memory_id}`;
     return this.http.patch(path, body);
+  }
+
+  checkDiscount(code) {
+    const path = `${this.API_URL}/billing/${code}/check_discount`;
+    return this.http.get(path);
   }
 
 }

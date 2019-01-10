@@ -9,16 +9,14 @@ export const INITIAL_STATE: UserProfileState = {
 
 export function userProfileReducer(state: UserProfileState = INITIAL_STATE, action: All) {
   switch (action.type) {
-    case UserProfileActionTypes.CREATE_MEMORIAL:
-    case UserProfileActionTypes.PURCHASE_LICENSE: {
+    case UserProfileActionTypes.CREATE_MEMORIAL: {
       return {
         ...state,
         loading: true,
         loaded: false
       };
     }
-    case UserProfileActionTypes.CREATE_MEMORIAL_FAILURE:
-    case UserProfileActionTypes.PURCHASE_LICENSE_FAILURE: {
+    case UserProfileActionTypes.CREATE_MEMORIAL_FAILURE: {
       return {
         ...state,
         loading: false,

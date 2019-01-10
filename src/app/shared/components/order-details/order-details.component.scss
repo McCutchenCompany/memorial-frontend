@@ -1,0 +1,32 @@
+@import "src/styles.scss";
+
+.cost {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  mat-form-field {
+    width: rem(80);
+  }
+}
+.order {
+  .section {
+    padding: rem(8) 0;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid map-get($colors, black);
+    border-bottom: 1px solid map-get($colors, black);
+  }
+  .discounted-unit {
+    border-top: 1px solid map-get($colors, black);
+    border-bottom: 1px solid map-get($colors, black);
+    .original, .discount {
+      display: flex;
+      justify-content: space-between
+    }
+  }
+  .total {
+    display: flex;
+    justify-content: flex-end;
+    padding: rem(16) 0;
+  }
+}

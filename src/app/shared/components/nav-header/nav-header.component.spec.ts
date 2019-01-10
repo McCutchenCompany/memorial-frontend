@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
+import { SharedModule } from '@shared/shared.module';
 import { TestStore } from '@shared/testing/test-store';
 import { Auth0Login } from '@store/auth/auth.actions';
 import { configureTestSuite } from 'ng-bullet';
@@ -18,7 +19,8 @@ describe('NavHeaderComponent', () => {
         NavHeaderComponent
       ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        SharedModule
       ],
       providers: [
         {
