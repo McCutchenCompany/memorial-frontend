@@ -29,7 +29,7 @@ export class CallbackComponent implements OnInit {
   ngOnInit() {
     this.profile$.subscribe(user => {
       if (user && user.first_name) {
-        this.router.navigateByUrl(localStorage.getItem('reroute' || '/profile'));
+        this.router.navigateByUrl(localStorage.getItem('reroute') || '/profile');
       } else if (user.uuid && !user.first_name) {
         this.router.navigateByUrl('/profile/welcome');
       }

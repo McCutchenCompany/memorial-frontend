@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
+  MatCardModule,
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -29,6 +30,7 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatCardModule,
     ReactiveFormsModule,
     FormsModule,
     CreditCardDirectivesModule

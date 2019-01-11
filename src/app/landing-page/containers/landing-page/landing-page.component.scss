@@ -1,0 +1,187 @@
+@import "src/styles.scss";
+
+.container {
+  width: 100%;
+  margin: auto;
+  .hero {
+    .hero-container {
+      background-image: url("/assets/imgs/hero-temp.jpeg");
+      background-position: 50% 10%;
+      background-size: cover;
+      width: 100%;
+      height: rem(360);
+      z-index: -1;
+    }
+    .container {
+      mat-card {
+        width: fit-content;
+        padding-left: rem(32);
+        margin: rem(-62) auto 0;
+      }
+      h1 {
+        font-size: rem(32);
+        line-height: initial;
+      }
+      h1, h6 {
+        width: rem(334);
+      }
+      h6 {
+        margin-top: rem(16);
+      }
+      .action {
+        margin: rem(32) 0;
+        display: flex;
+        justify-content: space-between;
+        width: rem(330);
+      }
+    }
+  }
+  .subheader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    margin-top: rem(64);
+    .about-img {
+      background-image: url("/assets/imgs/about-temp.jpeg");
+      background-position: 50% 65%;
+      background-size: cover;
+      width: rem(708);
+      height: rem(400);
+    }
+    .text {
+      width: rem(338);
+      height: fit-content;
+      h3 {
+        margin-bottom: rem(32);
+      }
+    }
+  }
+  .description {
+    margin: rem(104) 0 rem(64);
+    h3 {
+      width: 85%;
+      margin: auto;
+    }
+    .container {
+      margin-top: rem(32);
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .location-img {
+      background-image: url("/assets/imgs/location-temp.jpeg");
+    }
+    .timeline-img {
+      background-image: url("/assets/imgs/timeline-temp.jpg");
+    }
+    .memories-img {
+      background-image: url("/assets/imgs/memories-temp.jpg");
+    }
+    .location-img, .memories-img, .timeline-img {
+      height: rem(272);
+      width: rem(336);
+      background-size: cover;
+    }
+    .location, .timeline, .memories {
+      width: rem(336);
+      margin-bottom: rem(32);
+      background-color: map-get($colors, background);
+      h5 {
+        margin: rem(16) 0;
+        padding-left: rem(16);
+      }
+      p {
+        padding: 0 rem(16) rem(32);
+      }
+    }
+  }
+  .cta {
+    margin: 0 auto rem(133);
+    width: rem(390);
+    text-align: center;
+    h6 {
+      margin: rem(16) 0 rem(32);
+    }
+    .action {
+      display: flex;
+      justify-content: space-between;
+      width: rem(335);
+      margin: auto;
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    .hero {
+      .hero-container {
+        height: rem(456);
+      }
+      .container {
+        h1, h6 {
+          width: rem(654);
+        }
+      }
+    }
+    .subheader {
+      .text {
+        width: rem(562);
+        h3 {
+          width: 75%;
+        }
+      }
+    }
+  }
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(1176);
+    .hero {
+      .hero-container {
+        width: rem(1176);
+        height: rem(720);
+      }
+      .container {
+        margin: rem(-238) 0 rem(100) rem(100);
+        mat-card {
+          margin: initial;
+        }
+        h1 {
+          font-size: rem(60);
+          line-height: rem(88);
+        }
+        h1, h6 {
+          width: rem(620);
+        }
+      }
+    }
+    .subheader {
+      flex-wrap: initial;
+      justify-content: space-between;
+      margin-top: initial;
+      .text {
+        width: rem(456);
+        h3 {
+          width: 90%;
+        }
+      }
+    }
+    .description {
+      margin: rem(104) 0 rem(128);
+      h3 {
+        width: initial;
+        margin: initial;
+      }
+      .container {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+      }
+      .location, .timeline, .memories {
+        margin-bottom: initial;
+      }
+    }
+    .cta {
+      width: rem(566);
+    }
+  }
+}

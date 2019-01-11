@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material';
+import { configureTestSuite } from 'ng-bullet';
 
 import { PrivacyPolicyComponent } from './privacy-policy.component';
 
@@ -6,12 +8,14 @@ describe('PrivacyPolicyComponent', () => {
   let component: PrivacyPolicyComponent;
   let fixture: ComponentFixture<PrivacyPolicyComponent>;
 
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrivacyPolicyComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [ PrivacyPolicyComponent ],
+      imports: [
+        MatCardModule
+      ]
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PrivacyPolicyComponent);

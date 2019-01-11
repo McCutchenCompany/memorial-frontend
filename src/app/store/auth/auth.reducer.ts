@@ -63,6 +63,7 @@ export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): 
     case AuthActionTypes.LOCAL_TOKEN_INVALID: {
       return INITIAL_STATE;
     }
+    case AuthActionTypes.UPDATE_USER_MEMORIAL:
     case AuthActionTypes.UPDATE_PROFILE: {
       return {
         ...state,
@@ -89,11 +90,24 @@ export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): 
         loaded: true
       };
     }
+    case AuthActionTypes.UPDATE_USER_MEMORIAL_FAILURE:
     case AuthActionTypes.GET_PROFILE_FAILURE: {
       return {
         ...state,
         loading: false,
-        loaded: false
+        loaded: false,
+        error: action.payload
+      };
+    }
+    case AuthActionTypes.UPDATE_USER_MEMORIAL_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        user: {
+          ...state.user,
+          memorials: action.payload
+        }
       };
     }
     default: {

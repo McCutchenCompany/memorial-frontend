@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="hero">
+    <div class="hero-container">
+    </div>
+    <div class="container">
+      <mat-card>
+        <h1>Everyone Deserves to be Remembered.</h1>
+        <h6>Memorialize your loved one's life story and provide a place for their memory to live on for future generations.</h6>
+        <div class="action">
+          <button mat-button class="secondary" [routerLink]="['/explore']">Search Memorials</button>
+          <button mat-button class="primary" (click)="onCreateMemorial()">Create Memorial</button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div class="subheader">
+    <div class="text">
+      <h3>Create a lasting tribute to your loved ones.</h3>
+      <p>
+        Your life is more than a name and a couple of dates etched
+        into a stone. Turn your loved one's final resting place into a
+        celebration of their life and accomplishments for all to see,
+        or create a lasting tribute at their favorite location on earth.
+        We don't mean to forget, and now you never will.
+      </p>
+    </div>
+    <div class="about-img"></div>
+  </div>
+  <div class="description">
+    <h3>How it Works</h3>
+    <div class="container">
+      <div class="location mat-elevation-z2">
+        <div class="location-img"></div>
+        <h5>Location</h5>
+        <p>
+          Erect your digital memorial in a physical location for all to see.
+          This could be at their final resting place, their favorite getaway,
+          or the home you shared together, but only you know the best place
+          to honor their memory.
+        </p>
+      </div>
+      <div class="timeline mat-elevation-z2">
+        <div class="timeline-img"></div>
+        <h5>Timeline</h5>
+        <p>
+          Each memorial features a timeline comprised of text, images or
+          videos that tell the story of your loved one’s life.
+        </p>
+      </div>
+      <div class="memories mat-elevation-z2">
+        <div class="memories-img"></div>
+        <h5>Share Memories</h5>
+        <p>
+          Memorials provide a place for visitors to share their favorite
+          memories. Each memory added paints a deeper picture of the life
+          you want to remember.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <h3>Get Started</h3>
+    <h6>
+      Memorial helps you preserve the memory of your loved one for future generations.
+      It’s more than a name and a couple of dates, it’s a celebration of their life.
+    </h6>
+    <div class="action">
+      <button mat-button class="secondary" [routerLink]="['/explore']">Search Memorials</button>
+      <button mat-button class="primary" (click)="onCreateMemorial()">Create Memorial</button>
+    </div>
+  </div>
+</div>
