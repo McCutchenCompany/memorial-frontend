@@ -17,6 +17,7 @@ import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { PaymentConfirmationComponent } from './components/payment-confirmation/payment-confirmation.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { ResponseDialogComponent } from './components/response-dialog/response-dialog.component';
@@ -57,13 +58,15 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     OrderDetailsComponent,
     FooterComponent,
     ResponseDialogComponent,
-    TermsOfServiceComponent
+    TermsOfServiceComponent,
+    PaymentConfirmationComponent
   ],
   entryComponents: [
     UploadDialogComponent,
     ConfirmDialogComponent,
     PaymentComponent,
-    ResponseDialogComponent
+    ResponseDialogComponent,
+    PaymentConfirmationComponent
   ]
 })
 export class SharedModule { }

@@ -16,4 +16,5 @@ export class Discount {
   percent: number;
   code: string;
   error: any;
+  one_time_use: boolean;
 }

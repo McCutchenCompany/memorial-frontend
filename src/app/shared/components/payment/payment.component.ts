@@ -39,6 +39,14 @@ export class PaymentComponent implements OnInit {
     return years;
   }
 
+  get disableBtn() {
+    if (this.quantityForm.value.price === 0) {
+      return false;
+    } else if (this.cardForm.invalid) {
+      return true;
+    }
+  }
+
   constructor(
     public fb: FormBuilder,
     public store: Store<any>,
@@ -65,7 +73,9 @@ export class PaymentComponent implements OnInit {
       number: [null, Validators.required],
       exp_month: [null, Validators.required],
       exp_year: [null, Validators.required],
-      cvc: [null, Validators.required]
+      cvc: [null, Validators.required],
+      address_zip: [null, Validators.required],
+      name: [null, Validators.required]
     });
     this.discountForm = this.fb.group({
       code: ['', [Validators.required, Validators.minLength(36)]]
@@ -85,24 +95,39 @@ export class PaymentComponent implements OnInit {
   }
 
   createToken(card) {
-    (<any>window).Stripe.card.createToken(card, (status: number, response: any) => {
-      if (status === 200) {
-        const body = {
-          token: response.id,
-          quantity: this.quantityForm.value.quantity,
-          price: this.quantityForm.value.price
-        };
-        this.store.dispatch(new PurchaseLicense(body));
-        const sub = this.store.pipe(select(getPurchased)).subscribe(res => {
-          if (res) {
-            this.dialogRef.close();
-            sub.unsubscribe();
-          }
-        });
-      } else {
-        console.log('ERROR: ', response);
-      }
-    });
+    if (this.quantityForm.value.price > 0) {
+      (<any>window).Stripe.card.createToken(card, (status: number, response: any) => {
+        if (status === 200) {
+          const body = {
+            token: response.id,
+            quantity: this.quantityForm.value.quantity,
+            price: this.quantityForm.value.price
+          };
+          this.store.dispatch(new PurchaseLicense(body));
+          const sub = this.store.pipe(select(getPurchased)).subscribe(res => {
+            if (res) {
+              this.dialogRef.close();
+              sub.unsubscribe();
+            }
+          });
+        } else {
+          console.log('ERROR: ', response);
+        }
+      });
+    } else {
+      const body = {
+        token: null,
+        quantity: this.quantityForm.value.quantity,
+        price: this.quantityForm.value.price
+      };
+      this.store.dispatch(new PurchaseLicense(body));
+      const sub = this.store.pipe(select(getPurchased)).subscribe(res => {
+        if (res) {
+          this.dialogRef.close();
+          sub.unsubscribe();
+        }
+      });
+    }
   }
 
 }

@@ -96,6 +96,21 @@
       }
     }
   }
+  .price {
+    text-align: center;
+    .price-cut {
+      display: flex;
+      align-items: flex-end;
+      width: fit-content;
+      margin: auto;
+      .strike {
+        text-decoration: line-through;
+      }
+      .final-price {
+        color: map-get($colors, success);
+      }
+    }
+  }
   .cta {
     margin: 0 auto rem(133);
     width: rem(390);
@@ -128,6 +143,20 @@
         width: rem(562);
         h3 {
           width: 75%;
+        }
+      }
+    }
+    .price {
+      width: rem(776);
+      margin: 0 auto rem(128);
+      .price-cut {
+        .strike {
+          font-size: rem(32);
+          line-height: rem(32);
+        }
+        .final-price {
+          font-size: rem(64);
+          line-height: rem(64);
         }
       }
     }

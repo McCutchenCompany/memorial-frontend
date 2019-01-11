@@ -1,20 +1,34 @@
 @import "src/styles.scss";
 
 form {
+  .cardholder {
+    display: flex;
+    justify-content: space-between;
+    .name {
+      width: 100%;
+    }
+  }
   .card-number {
     width: 100%;
   }
   .details {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     .exp {
       display: flex;
       justify-content: space-between;
-      width: 50%;
+      width: 100%;
       mat-form-field {
         width: 45%;
       }
     }
+    .cvc, .zip {
+      width: 45%;
+    }
+  }
+  .desktop {
+    display: none;
   }
   .error {
     float: right;
@@ -30,11 +44,47 @@ mat-expansion-panel {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     mat-form-field {
-      width: 70%;
+      width: 100%;
     }
     button {
       transform: translateY(-25%);
     }
   }
+}
+@include respond-to('small') {
+  form {
+    .cardholder {
+      .name {
+        width: 50%;
+      }
+      .desktop {
+        display: initial;
+      }
+    }
+    .details {
+      flex-wrap: initial;
+      .exp {
+        width: 50%;
+      }
+      .cvc {
+        width: initial;
+      }
+      .mobile {
+        display: none;
+      }
+    }
+  }
+  mat-expansion-panel {
+    form {
+      flex-wrap: nowrap;
+      mat-form-field {
+        width: 70%;
+      }
+    }
+  }
+}
+@include respond-to('medium') {
+
 }
