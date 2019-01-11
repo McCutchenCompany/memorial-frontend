@@ -1,11 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { select, Store } from '@ngrx/store';
-import { getCreatedSaved } from '@store/create-memorial';
+import { getCreatedSaved, getCreatedSaving } from '@store/create-memorial';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
+import { Observable } from 'rxjs';
 
 import {
   ReplaceMemorialImage,
+  ReplaceTimelineFile,
   UploadMemorialImage,
   UploadTimelineFile,
 } from './../../../store/create-memorial/create-memorial.actions';
@@ -20,12 +22,15 @@ export class UploadDialogComponent implements OnInit {
   selectedFiles: FileList;
   error = '';
   fileType;
+  saving$: Observable<boolean>;
 
   constructor(
     private dialogRef: MatDialogRef<UploadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private store: Store<CreateMemorialState>
-  ) { }
+  ) {
+    this.saving$ = this.store.pipe(select(getCreatedSaving));
+  }
 
   ngOnInit() {}
 
@@ -50,7 +55,7 @@ export class UploadDialogComponent implements OnInit {
       if (this.data.action === 'upload') {
         this.store.dispatch(new UploadTimelineFile(payload));
       } else if (this.data.action === 'replace') {
-        // this.store.dispatch(new ReplaceMemorialImage(payload));
+        this.store.dispatch(new ReplaceTimelineFile(payload));
       }
     }
     const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
@@ -62,8 +67,8 @@ export class UploadDialogComponent implements OnInit {
   }
 
   onSelectFile(event) {
-    if (event.target.files[0].size > 512000) {
-      this.error = 'Your file is too big. It must be less than 500kb';
+    if (event.target.files[0].size > 2000000) {
+      this.error = 'Your file is too big. It must be less than 2MB';
     } else if (event.target.files[0].type !== 'image/jpeg' && event.target.files[0].type !== 'image/png') {
       this.error = 'This file is the wrong type. You may only upload jpeg or png files';
     } else {

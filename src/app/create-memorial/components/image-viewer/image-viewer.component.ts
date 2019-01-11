@@ -64,6 +64,13 @@ export class ImageViewerComponent implements OnInit {
           action: 'replace'
         }
       });
+    } else if (this.type === 'timeline') {
+      this.dialog.open(UploadDialogComponent, {
+        data: {
+          timeline: this.id,
+          action: 'replace'
+        }
+      });
     }
   }
 

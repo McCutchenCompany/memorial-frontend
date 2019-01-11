@@ -9,6 +9,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatProgressSpinnerModule,
   MatTooltipModule,
 } from '@angular/material';
 import { EffectsModule } from '@ngrx/effects';
@@ -35,6 +36,7 @@ import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
     MatTooltipModule,
     MatButtonModule,
     MatCardModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'

@@ -27,6 +27,9 @@ import {
   ReplaceMemorialImage,
   ReplaceMemorialImageFailure,
   ReplaceMemorialImageSuccess,
+  ReplaceTimelineFile,
+  ReplaceTimelineFileFailure,
+  ReplaceTimelineFileSuccess,
   UpdateCreateMemorial,
   UpdateCreateMemorialFailure,
   UpdateCreateMemorialSuccess,
@@ -135,6 +138,16 @@ export class CreateMemorialEffects {
       return this.uploadService.uploadTimelineFile(action.payload.id, action.payload.file, action.payload.asset_type).pipe(
       map(memorial => new UploadTimelineFileSuccess(memorial)),
       catchError(error => of(new UploadTimelineFileFailure(error)))
+    );
+  }));
+
+  @Effect()
+  replaceTimelineFile$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.REPLACE_TIMELINE_FILE),
+    switchMap((action: ReplaceTimelineFile) => {
+      return this.uploadService.uploadTimelineFile(action.payload.id, action.payload.file, action.payload.asset_type).pipe(
+      map(memorial => new ReplaceTimelineFileSuccess(memorial)),
+      catchError(error => of(new ReplaceTimelineFileFailure(error)))
     );
   }));
 

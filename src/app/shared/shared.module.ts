@@ -8,6 +8,7 @@ import {
   MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
+  MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
 } from '@angular/material';
@@ -36,6 +37,7 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCardModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     FormsModule,
     CreditCardDirectivesModule,

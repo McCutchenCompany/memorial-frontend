@@ -3,7 +3,14 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatIconModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+} from '@angular/material';
 import { EffectsModule } from '@ngrx/effects';
 
 import { StoreModule } from '../../../node_modules/@ngrx/store';
@@ -26,6 +33,7 @@ import { FindMemorialRoutingModule } from './find-memorial-routing.module';
     MatCardModule,
     MatTooltipModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     FindMemorialRoutingModule,
     ReactiveFormsModule,
     StoreModule.forFeature('find-memorial', findMemorialReducer),
