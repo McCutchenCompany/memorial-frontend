@@ -20,6 +20,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { PaymentComponent } from './components/payment/payment.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { ResponseDialogComponent } from './components/response-dialog/response-dialog.component';
+import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 
@@ -55,7 +56,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     PaymentComponent,
     OrderDetailsComponent,
     FooterComponent,
-    ResponseDialogComponent
+    ResponseDialogComponent,
+    TermsOfServiceComponent
   ],
   entryComponents: [
     UploadDialogComponent,
