@@ -3,6 +3,11 @@ export class AppState {
   loaded: boolean;
   purchasing: boolean;
   purchased: boolean;
+  email: {
+    sending: boolean;
+    sent: boolean;
+    error: any;
+  };
   error: any;
   discount: Discount;
 }

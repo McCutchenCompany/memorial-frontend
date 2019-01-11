@@ -11,15 +11,18 @@ import {
   MatProgressSpinnerModule,
   MatSelectModule,
 } from '@angular/material';
+import { RouterModule } from '@angular/router';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
 
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { ResponseDialogComponent } from './components/response-dialog/response-dialog.component';
+import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
-import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 
 @NgModule({
   imports: [
@@ -34,14 +37,16 @@ import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-
     MatCardModule,
     ReactiveFormsModule,
     FormsModule,
-    CreditCardDirectivesModule
+    CreditCardDirectivesModule,
+    RouterModule
   ],
   exports: [
     MatButtonModule,
     MatProgressSpinnerModule,
     UploadImageComponent,
     ConfirmDialogComponent,
-    PaymentComponent
+    PaymentComponent,
+    FooterComponent
   ],
   declarations: [
     UploadImageComponent,
@@ -50,12 +55,15 @@ import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-
     PrivacyPolicyComponent,
     PaymentComponent,
     OrderDetailsComponent,
+    FooterComponent,
+    ResponseDialogComponent,
     TermsOfServiceComponent
   ],
   entryComponents: [
     UploadDialogComponent,
     ConfirmDialogComponent,
-    PaymentComponent
+    PaymentComponent,
+    ResponseDialogComponent
   ]
 })
 export class SharedModule { }
