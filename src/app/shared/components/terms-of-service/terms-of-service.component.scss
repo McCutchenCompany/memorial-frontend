@@ -1,0 +1,12 @@
+@import "src/styles";
+
+mat-card {
+  width: rem(1176);
+  margin: rem(64) auto;
+  h2 {
+    text-align: center;
+  }
+  h1, h2, h3, h4 {
+    margin: rem(32) 0;
+  }
+}
