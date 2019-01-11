@@ -1,0 +1,7 @@
+@import "src/styles.scss";
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  margin: rem(150) 0;
+}

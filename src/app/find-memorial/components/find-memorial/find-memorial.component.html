@@ -1,10 +1,13 @@
 <div class="container">
   <div class="memorials">
-    <div class="hidden-desktop">
+    <div *ngIf="!(searchQuery$ | async)" class="hidden-desktop">
       <button mat-button *ngIf="!displayMap" class="primary" (click)="toggleMap()">Display Map</button>
       <button mat-button *ngIf="displayMap" class="primary" (click)="toggleMap()">Hide Map</button>
     </div>
     <app-search-bar [searchQuery]="searchQuery$ | async" (search)="onSearch($event)"></app-search-bar>
+    <div class="loading" *ngIf="(searchLoading$ | async) || (markersLoading$ | async)">
+      <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
     <div class="results">
       <div class="cards" (mouseenter)="onCardHover(memorial)" (mouseleave)="onCardHover()" *ngFor="let memorial of (memorials$ | async)">
         <app-memorial-result-card [memorial]="memorial" [markerHover]="hoveredMarker.memorial?.uuid"></app-memorial-result-card>
@@ -13,7 +16,7 @@
     <div *ngIf="(searchLoaded$ | async) && (searchQuery$ | async) && (memorials$ | async).length === 0">
       <h4>There are no results for {{ searchQuery$ | async }}</h4>
     </div>
-    <div *ngIf="(searchLoaded$ | async) && !(searchQuery$ | async)">
+    <div *ngIf="!(searchQuery$ | async) && (memorials$ | async).length > 0">
       <h4>There are no more memorials within range of you.</h4>
     </div>
     <div *ngIf="(searchLoaded$ | async) && !(searchQuery$ | async) && (memorials$ | async).length === 0">
@@ -30,7 +33,7 @@
     [mapDraggable]="false"
     [draggableCursor]="'default'"
     (boundsChange)="onBoundChange($event)">
-    <agm-marker-cluster>
+    <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
       <agm-marker iconUrl="assets/imgs/baseline-my_location-24px.svg" [latitude]="latitude | async" [longitude]="longitude | async"></agm-marker>
       <agm-marker
         [iconUrl]="markerIcon(marker)"

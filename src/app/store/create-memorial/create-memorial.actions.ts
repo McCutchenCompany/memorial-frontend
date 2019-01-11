@@ -38,6 +38,9 @@ export enum CreateMemorialActionTypes {
   REMOVE_TIMELINE_FILE = '[Create] Remove timeline file',
   REMOVE_TIMELINE_FILE_SUCCESS = '[Create] Remove timeline file success',
   REMOVE_TIMELINE_FILE_FAILURE = '[Create] Remove timeline file failure',
+  REPLACE_TIMELINE_FILE = '[Create] Replace timeline file',
+  REPLACE_TIMELINE_FILE_SUCCESS = '[Create] Replace timeline file success',
+  REPLACE_TIMELINE_FILE_FAILURE = '[Create] Replace timeline file failure',
   SET_EDITING_TIMELINE = '[Create] Set editing timeline',
   SEARCH_ADDRESS = '[Create] Search Address',
   SEARCH_ADDRESS_SUCCESS = '[Create] Search Address success',
@@ -164,6 +167,20 @@ export class UploadTimelineFileFailure implements Action {
   constructor (public payload: any) {}
 }
 
+
+export class ReplaceTimelineFile implements Action {
+  readonly type = CreateMemorialActionTypes.REPLACE_TIMELINE_FILE;
+  constructor (public payload: any) {}
+}
+export class ReplaceTimelineFileSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.REPLACE_TIMELINE_FILE_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class ReplaceTimelineFileFailure implements Action {
+  readonly type = CreateMemorialActionTypes.REPLACE_TIMELINE_FILE_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export class RemoveTimelineFile implements Action {
   readonly type = CreateMemorialActionTypes.REMOVE_TIMELINE_FILE;
   constructor (public payload: any) {}
@@ -249,6 +266,9 @@ export type All =
   | UploadTimelineFile
   | UploadTimelineFileSuccess
   | UploadTimelineFileFailure
+  | ReplaceTimelineFile
+  | ReplaceTimelineFileSuccess
+  | ReplaceTimelineFileFailure
   | RemoveTimelineFile
   | RemoveTimelineFileSuccess
   | RemoveTimelineFileFailure

@@ -2,7 +2,13 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule, MatFormFieldModule, MatIconModule, MatTooltipModule } from '@angular/material';
+import {
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatTooltipModule,
+} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { LocationMarker } from '@shared/models/location-marker.model';
@@ -46,7 +52,8 @@ describe('ViewMemorialComponent', () => {
         ReactiveFormsModule,
         AgmCoreModule.forRoot({}),
         AgmJsMarkerClustererModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatProgressSpinnerModule
       ],
       providers: [
         {

@@ -3,6 +3,11 @@
 .container {
   margin-bottom: rem(150);
 }
+.loading {
+  display: flex;
+  justify-content: space-around;
+  margin-top: rem(150);
+}
 .preview {
   position: fixed;
   top: rem(32);

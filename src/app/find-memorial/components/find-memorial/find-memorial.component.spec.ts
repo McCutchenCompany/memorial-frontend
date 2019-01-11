@@ -2,7 +2,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule, MatIconModule, MatSnackBarModule } from '@angular/material';
+import { MatCardModule, MatIconModule, MatProgressSpinnerModule, MatSnackBarModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { TestStore } from '@shared/testing/test-store';
@@ -34,6 +34,7 @@ describe('FindMemorialComponent', () => {
         RouterTestingModule,
         MatSnackBarModule,
         MatIconModule,
+        MatProgressSpinnerModule,
         MatCardModule,
         ReactiveFormsModule
       ],

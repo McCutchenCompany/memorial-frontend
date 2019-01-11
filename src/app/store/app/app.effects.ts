@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, select, Store } from '@ngrx/store';
@@ -6,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { CreateMemorialService } from './../../create-memorial/services/create-memorial.service';
+import { PaymentConfirmationComponent } from './../../shared/components/payment-confirmation/payment-confirmation.component';
 import {
   AppActionTypes,
   CheckDiscount,
@@ -29,7 +31,8 @@ export class AppEffects {
     private actions: Actions,
     private api: CreateMemorialService,
     private store: Store<any>,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   @Effect()
@@ -58,6 +61,9 @@ export class AppEffects {
     ofType(AppActionTypes.PURCHASE_LICENSE_SUCCESS),
     map((action: PurchaseLicenseSuccess) => {
       this.router.navigateByUrl(`/create/${action.payload.memorials[0].uuid}`);
+      this.dialog.open(PaymentConfirmationComponent, {
+        data: action.payload
+      });
     })
   );
 

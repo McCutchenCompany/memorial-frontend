@@ -33,4 +33,9 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
+  clearSearch() {
+    this.searchForm.setValue({query: ''});
+    this.search.emit(this.searchForm.value);
+  }
+
 }

@@ -11,10 +11,12 @@ import { Observable } from 'rxjs';
 
 import { GeolocationService } from '../../services/geolocation.service';
 import { Memorial } from './../../../shared/models/memorial.model';
+import { getMarkersLoading } from './../../../store/find-memorial/selectors/memorial-markers.selector';
 import { getPermission } from './../../../store/find-memorial/selectors/position.selector';
 import {
   getAllSearchMemorials,
   getSearchLoaded,
+  getSearchLoading,
   getSearchQuery,
 } from './../../../store/find-memorial/selectors/search-memorials.selector';
 
@@ -31,6 +33,8 @@ export class FindMemorialComponent implements OnInit {
   permission: Observable<boolean>;
   searchQuery$: Observable<any>;
   searchLoaded$: Observable<boolean>;
+  searchLoading$: Observable<boolean>;
+  markersLoading$: Observable<boolean>;
 
   memorials$: Observable<Memorial[]>;
 
@@ -71,6 +75,8 @@ export class FindMemorialComponent implements OnInit {
     this.markers$ = this.store.pipe(select(getAllMemorialMarkers));
     this.searchQuery$ = this.store.pipe(select(getSearchQuery));
     this.searchLoaded$ = this.store.pipe(select(getSearchLoaded));
+    this.searchLoading$ = this.store.pipe(select(getSearchLoading));
+    this.markersLoading$ = this.store.pipe(select(getMarkersLoading));
     this.searchQuery$.subscribe(query => {
       if (query) {
         this.memorials$ = this.store.pipe(select(getAllSearchMemorials));

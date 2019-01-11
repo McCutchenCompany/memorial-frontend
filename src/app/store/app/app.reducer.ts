@@ -15,8 +15,9 @@ export const INITIAL_STATE: AppState = {
   },
   error: null,
   discount: {
-    percent: null,
-    code: null,
+    percent: 50,
+    code: '404b3a80-df95-4915-be00-4c8b3bfe3803',
+    one_time_use: false,
     error: null
   }
 };
@@ -65,7 +66,8 @@ export function appReducer(state: AppState = INITIAL_STATE, action: All) {
       return {
         ...state,
         purchasing: false,
-        purchased: true
+        purchased: true,
+        discount: INITIAL_STATE.discount
       };
     }
     case AppActionTypes.PURCHASE_LICENSE_FAILURE: {

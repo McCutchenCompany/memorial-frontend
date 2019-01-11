@@ -1,0 +1,16 @@
+@import "src/styles.scss";
+
+.container {
+  img {
+    margin: rem(32) auto;
+    display: block;
+  }
+  h2 {
+    margin: rem(64) 0;
+    text-align: center;
+  }
+  h6 {
+    margin-bottom: rem(64);
+    text-align: center;
+  }
+}
