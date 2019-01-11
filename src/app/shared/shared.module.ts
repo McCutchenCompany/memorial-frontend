@@ -19,6 +19,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     ConfirmDialogComponent,
     PrivacyPolicyComponent,
     PaymentComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    TermsOfServiceComponent
   ],
   entryComponents: [
     UploadDialogComponent,
