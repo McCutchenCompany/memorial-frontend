@@ -8,6 +8,12 @@ export enum AppActionTypes {
   PURCHASE_LICENSE = '[Create] Purchase license',
   PURCHASE_LICENSE_SUCCESS = '[Create] Purchase license success',
   PURCHASE_LICENSE_FAILURE = '[Create] Purchase license failure',
+  SEND_SUPPORT_EMAIL = '[App] Send support email',
+  SEND_SUPPORT_EMAIL_SUCCESS = '[App] Send support email success',
+  SEND_SUPPORT_EMAIL_FAILURE = '[App] Send suport email failure',
+  SEND_BUG_EMAIL = '[App] Send bug email',
+  SEND_BUG_EMAIL_SUCCESS = '[App] Send bug email success',
+  SEND_BUG_EMAIL_FAILURE = '[App] Send bug email failure'
 }
 
 export class CheckDiscount implements Action {
@@ -40,6 +46,32 @@ export class PurchaseLicenseFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class SendSupportEmail implements Action {
+  readonly type = AppActionTypes.SEND_SUPPORT_EMAIL;
+  constructor (public payload: {email: string, subject: string, content: string}) {}
+}
+export class SendSupportEmailSuccess implements Action {
+  readonly type = AppActionTypes.SEND_SUPPORT_EMAIL_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class SendSupportEmailFailure implements Action {
+  readonly type = AppActionTypes.SEND_SUPPORT_EMAIL_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class SendBugEmail implements Action {
+  readonly type = AppActionTypes.SEND_BUG_EMAIL;
+  constructor (public payload: {email: string, subject: string, content: string}) {}
+}
+export class SendBugEmailSuccess implements Action {
+  readonly type = AppActionTypes.SEND_BUG_EMAIL_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class SendBugEmailFailure implements Action {
+  readonly type = AppActionTypes.SEND_BUG_EMAIL_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | CheckDiscount
   | CheckDiscountSuccess
@@ -47,4 +79,10 @@ export type All =
   | ClearDiscount
   | PurchaseLicense
   | PurchaseLicenseSuccess
-  | PurchaseLicenseFailure;
+  | PurchaseLicenseFailure
+  | SendSupportEmail
+  | SendSupportEmailSuccess
+  | SendSupportEmailFailure
+  | SendBugEmail
+  | SendBugEmailSuccess
+  | SendBugEmailFailure;

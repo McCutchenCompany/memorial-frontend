@@ -8,6 +8,11 @@ export const INITIAL_STATE: AppState = {
   loaded: false,
   purchasing: false,
   purchased: false,
+  email: {
+    sending: false,
+    sent: false,
+    error: null,
+  },
   error: null,
   discount: {
     percent: null,
@@ -77,6 +82,38 @@ export function appReducer(state: AppState = INITIAL_STATE, action: All) {
         discount: INITIAL_STATE.discount
       };
     }
+    case AppActionTypes.SEND_BUG_EMAIL:
+    case AppActionTypes.SEND_SUPPORT_EMAIL: {
+      return {
+        ...state,
+        email: {
+          sending: true,
+          sent: false,
+          error: INITIAL_STATE.email.error
+        }
+      };
+    }
+    case AppActionTypes.SEND_SUPPORT_EMAIL_SUCCESS:
+    case AppActionTypes.SEND_BUG_EMAIL_SUCCESS: {
+      return {
+        ...state,
+        email: {
+          sending: false,
+          sent: true,
+        }
+      };
+    }
+    case AppActionTypes.SEND_BUG_EMAIL_FAILURE:
+    case AppActionTypes.SEND_SUPPORT_EMAIL_FAILURE: {
+      return {
+        ...state,
+        email: {
+          sending: false,
+          sent: false,
+          error: action.payload
+        }
+      };
+    }
     default: {
       return state;
     }
@@ -113,4 +150,8 @@ export const getPurchased = createSelector(
 export const getAppError = createSelector(
   getAppState,
   state => state.error
+);
+export const getEmailState = createSelector(
+  getAppState,
+  state => state.email
 );

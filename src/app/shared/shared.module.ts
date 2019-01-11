@@ -11,12 +11,15 @@ import {
   MatProgressSpinnerModule,
   MatSelectModule,
 } from '@angular/material';
+import { RouterModule } from '@angular/router';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
 
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { ResponseDialogComponent } from './components/response-dialog/response-dialog.component';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 
@@ -33,14 +36,16 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MatCardModule,
     ReactiveFormsModule,
     FormsModule,
-    CreditCardDirectivesModule
+    CreditCardDirectivesModule,
+    RouterModule
   ],
   exports: [
     MatButtonModule,
     MatProgressSpinnerModule,
     UploadImageComponent,
     ConfirmDialogComponent,
-    PaymentComponent
+    PaymentComponent,
+    FooterComponent
   ],
   declarations: [
     UploadImageComponent,
@@ -48,12 +53,15 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     ConfirmDialogComponent,
     PrivacyPolicyComponent,
     PaymentComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    FooterComponent,
+    ResponseDialogComponent
   ],
   entryComponents: [
     UploadDialogComponent,
     ConfirmDialogComponent,
-    PaymentComponent
+    PaymentComponent,
+    ResponseDialogComponent
   ]
 })
 export class SharedModule { }

@@ -3,6 +3,7 @@ import { MatDialogModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { NavHeaderComponent } from '@shared/components/nav-header/nav-header.component';
+import { SharedModule } from '@shared/shared.module';
 import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
@@ -17,7 +18,8 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        MatDialogModule
+        MatDialogModule,
+        SharedModule
       ],
       providers: [
         {

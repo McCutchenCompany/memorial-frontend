@@ -76,4 +76,14 @@ export class CreateMemorialService {
     return this.http.get(path);
   }
 
+  sendSupportEmail(payload: {email: string, subject: string, content: string}) {
+    const path = `${this.API_URL}/response/support`;
+    return this.http.post(path, payload);
+  }
+
+  sendBugEmail(payload: {email: string, subject: string, content: string}) {
+    const path = `${this.API_URL}/response/bug`;
+    return this.http.post(path, payload);
+  }
+
 }

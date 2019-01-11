@@ -14,6 +14,12 @@ import {
   PurchaseLicense,
   PurchaseLicenseFailure,
   PurchaseLicenseSuccess,
+  SendBugEmail,
+  SendBugEmailFailure,
+  SendBugEmailSuccess,
+  SendSupportEmail,
+  SendSupportEmailFailure,
+  SendSupportEmailSuccess,
 } from './app.actions';
 import { getDiscountCode } from './app.reducer';
 
@@ -53,5 +59,23 @@ export class AppEffects {
     map((action: PurchaseLicenseSuccess) => {
       this.router.navigateByUrl(`/create/${action.payload.memorials[0].uuid}`);
     })
+  );
+
+  @Effect()
+  sendSupportEmail$: Observable<Action> = this.actions.pipe(
+    ofType(AppActionTypes.SEND_SUPPORT_EMAIL),
+    switchMap((action: SendSupportEmail) => this.api.sendSupportEmail(action.payload).pipe(
+      map(res => new SendSupportEmailSuccess(res)),
+      catchError(error => of(new SendSupportEmailFailure(error)))
+    ))
+  );
+
+  @Effect()
+  SendBugEmail$: Observable<Action> = this.actions.pipe(
+    ofType(AppActionTypes.SEND_BUG_EMAIL),
+    switchMap((action: SendBugEmail) => this.api.sendBugEmail(action.payload).pipe(
+      map(res => new SendBugEmailSuccess(res)),
+      catchError(error => of(new SendBugEmailFailure(error)))
+    ))
   );
 }

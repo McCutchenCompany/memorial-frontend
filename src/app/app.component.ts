@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { LocalTokenCheck } from '@store/auth/auth.actions';
 import { AuthState } from '@store/models/auth-state.model';
+import { getRouterState } from '@store/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,7 +12,12 @@ import { AuthState } from '@store/models/auth-state.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private store: Store<AuthState>) {}
+
+  route$: Observable<any>;
+
+  constructor(private store: Store<AuthState>) {
+    this.route$ = this.store.pipe(select(getRouterState));
+  }
 
   ngOnInit() {
     if (localStorage.access_token) {
