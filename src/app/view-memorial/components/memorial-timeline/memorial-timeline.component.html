@@ -9,7 +9,7 @@
     [style.background-size]="imgBackground.size">
   </div>
   <div class="asset video-asset" *ngIf="timeline[index].asset_type === 'video'">
-    <iframe width="660" height="371" [src]="videoSrc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe [src]="videoSrc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
   <div class="info" [ngClass]="timeline[index].asset_type || 'text-only'">
     <h3>{{ timeline[index].date | date:timeline[index].date_format }}</h3>

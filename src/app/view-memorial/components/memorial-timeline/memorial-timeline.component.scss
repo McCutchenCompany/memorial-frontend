@@ -13,12 +13,13 @@
       align-items: center;
       justify-content: space-around;
       background: map-get($colors, background);
+      iframe {
+        width: rem(400);
+        height: rem(224);
+      }
     }
   }
   .info {
-    &.text-only {
-      width: 100%;
-    }
     margin-top: rem(16);
     position: relative;
     width: rem(352);
@@ -57,9 +58,18 @@
     width: rem(576);
     .asset {
       height: rem(320);
+      &.video-asset {
+        iframe {
+          width: rem(496);
+          height: rem(272);
+        }
+      }
     }
     .info {
       width: rem(528);
+      &.text-only {
+        width: 100%;
+      }
     }
   }
 
@@ -74,6 +84,12 @@
     .asset {
       width: rem(684);
       height: rem(500);
+      &.video-asset {
+        iframe {
+          width: rem(600);
+          height: rem(371);
+        }
+      }
     }
     .info {
       position: relative;
