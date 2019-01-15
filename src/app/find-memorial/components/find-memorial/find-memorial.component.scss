@@ -8,6 +8,7 @@
   &.hide {
     visibility: hidden;
     pointer-events: none;
+    left: initial;
   }
   &.mobile-hide {
     display: none;
