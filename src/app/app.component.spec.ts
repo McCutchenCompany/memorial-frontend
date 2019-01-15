@@ -1,5 +1,5 @@
 import { async, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { NavHeaderComponent } from '@shared/components/nav-header/nav-header.component';
@@ -19,6 +19,8 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         MatDialogModule,
+        MatMenuModule,
+        MatIconModule,
         SharedModule
       ],
       providers: [
