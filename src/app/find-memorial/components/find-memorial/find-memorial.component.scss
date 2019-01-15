@@ -80,6 +80,8 @@ agm-map {
     top: rem(94);
     &.hide {
       visibility: initial;
+      pointer-events: initial;
+      left: 59%;
     }
     &.mobile-hide {
       display: initial;

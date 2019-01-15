@@ -43,6 +43,7 @@ export class FindMemorialComponent implements OnInit {
 
   boundTimeout;
   displayMap = false;
+  current = {j: {j: 0, l: 0}, l: {j: 0, l: 0}};
 
   get latitude(): Observable<number> {
     return this.latitude$;
@@ -101,17 +102,23 @@ export class FindMemorialComponent implements OnInit {
 
   onBoundChange(event) {
     clearTimeout(this.boundTimeout);
-    if (event.l.l - event.l.j < .5) {
-      this.boundTimeout = setTimeout(() => {
-        const payload = {
-          top: event.l.l,
-          right: event.j.l,
-          bottom: event.l.j,
-          left: event.j.j
-        };
-        this.store.dispatch(new GetInRange(payload));
-      }, 500);
-    }
+    if (this.current.j.j - event.j.j > 0.05
+      || this.current.j.j - event.j.j < -0.05
+      || this.current.l.j - event.l.j > 0.1
+      || this.current.l.j - event.l.j < -0.1) {
+        if (event.l.l - event.l.j < .5 ) {
+          this.current = event;
+          this.boundTimeout = setTimeout(() => {
+            const payload = {
+              top: event.l.l,
+              right: event.j.l,
+              bottom: event.l.j,
+              left: event.j.j
+            };
+            this.store.dispatch(new GetInRange(payload));
+          }, 500);
+        }
+      }
   }
 
   openSnackbar() {
