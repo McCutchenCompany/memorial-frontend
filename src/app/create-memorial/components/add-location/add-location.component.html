@@ -7,9 +7,14 @@
       <input #search matInput formControlName="searchTerm">
     </mat-form-field>
   </form>
-  <agm-map (boundsChange)="onCheckBounds($event)"  [streetViewControl]="false" (mapClick)="onMapClick($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-    <agm-marker iconUrl="assets/imgs/marker-initial.svg" [latitude]="(memorialLocation$ | async)?.latitude" [longitude]="(memorialLocation$ | async)?.longitude"></agm-marker>
-  </agm-map>
+  <div class="map-container">
+    <div *ngIf="saving$ | async" class="saving">
+      <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
+    <agm-map (boundsChange)="onCheckBounds($event)"  [streetViewControl]="false" (mapClick)="onMapClick($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+      <agm-marker iconUrl="assets/imgs/marker-initial.svg" [latitude]="(memorialLocation$ | async)?.latitude" [longitude]="(memorialLocation$ | async)?.longitude"></agm-marker>
+    </agm-map>
+  </div>
   <div class="actions">
     <button mat-button class="primary" (click)="onNav()">Memories <mat-icon>keyboard_arrow_right</mat-icon></button>
   </div>

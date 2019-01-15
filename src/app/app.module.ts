@@ -1,6 +1,13 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatIconModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
@@ -38,6 +45,8 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
+    MatMenuModule,
+    MatIconModule,
     MatProgressSpinnerModule,
     SharedModule,
     StoreModule.forRoot({

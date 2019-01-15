@@ -2,7 +2,7 @@
   <div class="memorials">
     <div *ngIf="!(searchQuery$ | async)" class="hidden-desktop">
       <button mat-button *ngIf="!displayMap" class="primary" (click)="toggleMap()">Display Map</button>
-      <button mat-button *ngIf="displayMap" class="primary" (click)="toggleMap()">Hide Map</button>
+      <button mat-button *ngIf="displayMap" class="primary fixed" (click)="toggleMap()">Hide Map</button>
     </div>
     <app-search-bar [searchQuery]="searchQuery$ | async" (search)="onSearch($event)"></app-search-bar>
     <div class="loading" *ngIf="(searchLoading$ | async) || (markersLoading$ | async)">

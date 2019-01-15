@@ -2,7 +2,7 @@ import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { getCreateMemorialLocation } from '@store/create-memorial';
+import { getCreatedSaving, getCreateMemorialLocation } from '@store/create-memorial';
 import { SearchAddressSuccess, UpdateLocation } from '@store/create-memorial/create-memorial.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
@@ -24,6 +24,7 @@ export class AddLocationComponent implements OnInit {
   @ViewChild('search') searchElRef: ElementRef;
 
   memorialLocation$: Observable<any>;
+  saving$: Observable<boolean>;
   searchForm: FormGroup;
 
   constructor(
@@ -33,6 +34,7 @@ export class AddLocationComponent implements OnInit {
     private ngZone: NgZone
   ) {
     this.memorialLocation$ = this.store.pipe(select(getCreateMemorialLocation));
+    this.saving$ = this.store.pipe(select(getCreatedSaving));
   }
 
   ngOnInit() {

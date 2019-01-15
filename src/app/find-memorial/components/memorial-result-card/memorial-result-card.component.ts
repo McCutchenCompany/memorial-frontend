@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Memorial } from '@shared/models/memorial.model';
 

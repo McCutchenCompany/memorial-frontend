@@ -6,7 +6,12 @@ import { Auth0Login } from '@store/auth/auth.actions';
 import { getUser } from '@store/auth/auth.reducer';
 import { ViewMemorialState } from '@store/models/view-memorial-state.model';
 import { AddMemory, GetMemorial } from '@store/view-memorial/view-memorial.actions';
-import { getViewMemorial, getViewMemorialLoaded, getViewMemorialLoading } from '@store/view-memorial/view-memorial.reducer';
+import {
+  getViewMemorial,
+  getViewMemorialError,
+  getViewMemorialLoaded,
+  getViewMemorialLoading,
+} from '@store/view-memorial/view-memorial.reducer';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,6 +25,7 @@ export class ViewMemorialComponent implements OnInit {
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   user$: Observable<User>;
+  error$: Observable<any>;
 
   memorial_id: string;
 
@@ -31,6 +37,7 @@ export class ViewMemorialComponent implements OnInit {
     this.loading$ = this.store.pipe(select(getViewMemorialLoading));
     this.loaded$ = this.store.pipe(select(getViewMemorialLoaded));
     this.user$ = this.store.pipe(select(getUser));
+    this.error$ = this.store.pipe(select(getViewMemorialError));
   }
 
   ngOnInit() {

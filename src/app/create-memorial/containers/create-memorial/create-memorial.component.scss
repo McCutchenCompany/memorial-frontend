@@ -17,6 +17,12 @@
     font-size: rem(32);
   }
 }
+.error {
+  div {
+    width: rem(336);
+    margin: rem(64) auto;
+  }
+}
 @include respond-to('small') {
   .container {
     h2 {

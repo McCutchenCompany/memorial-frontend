@@ -97,7 +97,17 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
       };
     }
     case CreateMemorialActionTypes.REMOVE_TIMELINE_ENTRY_SUCCESS:
-    case CreateMemorialActionTypes.UPDATE_TIMELINE_SUCCESS:
+    case CreateMemorialActionTypes.UPDATE_TIMELINE_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        saved: true,
+        memorial: {
+          ...state.memorial,
+          timeline: action.payload.reverse()
+        }
+      };
+    }
     case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY_SUCCESS: {
       return {
         ...state,
@@ -106,6 +116,12 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         memorial: {
           ...state.memorial,
           timeline: action.payload.reverse()
+        },
+        editingTimeline: {
+          editingIds: [
+            ...state.editingTimeline.editingIds,
+            action.payload[action.payload.length - 1].uuid
+          ]
         }
       };
     }
@@ -215,4 +231,8 @@ export const getEditingIds = createSelector(
 export const getCreateSearchAddress = createSelector(
   getCreateMemorialState,
   state => state.addressSearch
+);
+export const getCreateError = createSelector(
+  getCreateMemorialState,
+  state => state.error
 );

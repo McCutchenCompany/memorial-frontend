@@ -16,4 +16,9 @@ mat-card {
   .info {
     margin-top: rem(180);
   }
+  .date-and-loc {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 }

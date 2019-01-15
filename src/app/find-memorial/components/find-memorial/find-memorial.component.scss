@@ -2,7 +2,7 @@
 
 .map {
   position: fixed;
-  top: rem(142);
+  top: 0;
   right: 0;
   left: 0;
   &.hide {
@@ -43,6 +43,12 @@ agm-map {
   margin: auto;
   .hidden-desktop {
     margin-bottom: rem(12);
+    button {
+      z-index: 100;
+      &.fixed {
+        position: fixed;
+      }
+    }
   }
   .memorials {
     width: rem(336);

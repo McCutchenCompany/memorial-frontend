@@ -5,7 +5,14 @@
     <div class="spacer"></div>
   </div>
   <div class="action">
-    <button mat-button class="primary" (click)="onAddEvent()"><mat-icon>add</mat-icon> Add Event</button>
+    <button mat-button class="primary" [class.saving]="(saving$ | async)" [disabled]="saving$ | async" (click)="onAddEvent()">
+      <span *ngIf="!(saving$ | async)">
+        <mat-icon>add</mat-icon> Add Event
+      </span>
+      <span *ngIf="saving$ | async">
+        <mat-progress-spinner strokeWidth="1" diameter="20" mode="indeterminate" color="secondary"></mat-progress-spinner>
+      </span>
+    </button>
     <button mat-button class="primary" (click)="onNavToLocation()">Location <mat-icon>keyboard_arrow_right</mat-icon></button>
   </div>
 </div>

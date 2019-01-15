@@ -98,15 +98,20 @@
   }
   .price {
     text-align: center;
+    margin-top: rem(64);
     .price-cut {
       display: flex;
       align-items: flex-end;
       width: fit-content;
-      margin: auto;
+      margin: rem(16) auto rem(8);
       .strike {
         text-decoration: line-through;
+        font-size: rem(18);
+        line-height: rem(18);
       }
       .final-price {
+        font-size: rem(32);
+        line-height: rem(32);
         color: map-get($colors, success);
       }
     }

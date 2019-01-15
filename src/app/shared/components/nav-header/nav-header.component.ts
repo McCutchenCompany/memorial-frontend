@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
-import { Auth0Login } from '@store/auth/auth.actions';
+import { Auth0Login, SignOut } from '@store/auth/auth.actions';
 import { AuthState } from '@store/models/auth-state.model';
 
 import { PaymentComponent } from './../payment/payment.component';
@@ -32,6 +32,10 @@ export class NavHeaderComponent implements OnInit {
 
   onLogin() {
     this.store.dispatch(new Auth0Login());
+  }
+
+  onLogout() {
+    this.store.dispatch(new SignOut());
   }
 
   onCreateMemorial() {

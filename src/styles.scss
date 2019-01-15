@@ -231,7 +231,10 @@ button {
 
 mat-form-field.textarea {
   &.mat-form-field-appearance-outline .mat-form-field-flex {
-    height: rem(180);
+    height: rem(250);
+  }
+  textarea {
+    height: rem(217);
   }
 }
 

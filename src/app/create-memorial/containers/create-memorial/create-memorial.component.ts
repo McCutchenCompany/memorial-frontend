@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { GetCreateMemorial, UpdateCreateMemorial } from '@store/create-memorial/create-memorial.actions';
 import {
   getCreatedSaved,
+  getCreateError,
   getCreateLoaded,
   getCreateLoading,
   getCreateMemorial,
@@ -23,6 +24,7 @@ export class CreateMemorialComponent implements OnInit {
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   locationSearch$: Observable<any>;
+  error$: Observable<any>;
   routeFragment = 'info';
 
   memorialUUID;
@@ -54,6 +56,7 @@ export class CreateMemorialComponent implements OnInit {
     this.loading$ = this.store.pipe(select(getCreateLoading));
     this.loaded$ = this.store.pipe(select(getCreateLoaded));
     this.locationSearch$ = this.store.pipe(select(getCreateSearchAddress));
+    this.error$ = this.store.pipe(select(getCreateError));
     this.memorial$.subscribe(res => {
       if (res && res.memorial) {
         this.memorialUUID = res.memorial.uuid;

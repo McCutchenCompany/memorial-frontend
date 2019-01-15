@@ -9,10 +9,17 @@
   }
   button {
     margin: rem(60) 0;
+    span {
+      display: flex;
+      align-items: center;
+    }
   }
   .action {
     display: flex;
     justify-content: space-between;
+  }
+  .saving {
+    padding: rem(8) rem(42);
   }
 }
 @include respond-to('small') {
