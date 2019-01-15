@@ -33,7 +33,8 @@ export class UploadImageComponent implements OnInit {
         data: {
           timeline: this.id,
           action: 'upload'
-        }
+        },
+        closeOnNavigation: false
       });
     }
   }

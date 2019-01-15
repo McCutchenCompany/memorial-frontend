@@ -1,4 +1,18 @@
-<div class="container">
+<div *ngIf="error$ | async" class="error">
+  <div *ngIf="(error$ | async).status === 401">
+    <h1>Error</h1>
+    <h6>You do not have permission to edit this memorial</h6>
+  </div>
+  <div *ngIf="(error$ | async).status === 404">
+    <h1>Error</h1>
+    <h6>This memorial does not exist</h6>
+  </div>
+  <div *ngIf="(error$ | async).status !== 401 && (error$ | async).status !== 404">
+    <h1>Error</h1>
+    <h6>An unexpected error occurred. Try again. If the error continues please contact support.</h6>
+  </div>
+</div>
+<div *ngIf="(loaded$ | async) && !(error$ | async)" class="container">
   <h2>Create a Memorial</h2>
   <div class="actions">
     <button *ngIf="!(memorial$ | async).memorial?.published" mat-button class="primary" (click)="togglePublish(true)">Publish Memorial</button>

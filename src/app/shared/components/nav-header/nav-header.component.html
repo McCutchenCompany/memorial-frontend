@@ -2,9 +2,19 @@
   <button class="logo" [routerLink]="['/explore']" routerLinkActive="active">
     <img src="./assets/imgs/Memorial Logo.png" />
   </button>
-  <div class="actions">
+  <div class="actions desktop">
     <button class="create-btn" mat-button (click)="onCreateMemorial()">Create Memorial</button>
     <button *ngIf="!loggedIn" mat-button class="subtle" (click)="onLogin()">Login/Sign Up</button>
-    <button *ngIf="loggedIn" mat-button class="subtle" [routerLink]="['/profile']">Profile</button>
+    <button *ngIf="loggedIn" mat-button class="subtle" [routerLink]="['profile']">Profile</button>
+    <button *ngIf="loggedIn" mat-button class="subtle" (click)="onLogout()">Logout</button>
+  </div>
+  <div class="actions mobile">
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onCreateMemorial()">Create Memorial</button>
+      <button *ngIf="!loggedIn" mat-menu-item (click)="onLogin()">Login/Sign Up</button>
+      <button *ngIf="loggedIn" mat-menu-item [routerLink]="['profile']">Profile</button>
+      <button *ngIf="loggedIn" mat-menu-item (click)="onLogout()">Logout</button>
+    </mat-menu>
   </div>
 </div>

@@ -33,7 +33,10 @@ export class InteractiveTimelineComponent implements OnInit {
       }
       this.years.push(date.getFullYear());
     });
-    this.years.push(new Date(this.memorial.death_date).getFullYear());
+    const death = new Date(this.memorial.death_date).getFullYear();
+    if (!this.years.includes(death)) {
+      this.years.push(death);
+    }
   }
 
   isCurrent(year) {

@@ -19,6 +19,21 @@
         font-size: rem(16);
       }
     }
+    &.desktop {
+      display: none;
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    .actions {
+      &.desktop {
+        display: initial;
+      }
+      &.mobile {
+        display: none;
+      }
+    }
   }
 }
 @include respond-to('medium') {

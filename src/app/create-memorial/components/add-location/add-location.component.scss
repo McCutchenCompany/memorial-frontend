@@ -15,6 +15,21 @@
     justify-content: flex-end;
     margin: rem(48) auto
   }
+  .map-container {
+    position: relative;
+    .saving {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-around;
+      padding-top: rem(116);
+      background: rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+  }
 }
 @include respond-to('small') {
   .container {

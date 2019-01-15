@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule, MatMenuModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { SharedModule } from '@shared/shared.module';
@@ -20,7 +21,9 @@ describe('NavHeaderComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        SharedModule
+        SharedModule,
+        MatMenuModule,
+        MatIconModule
       ],
       providers: [
         {

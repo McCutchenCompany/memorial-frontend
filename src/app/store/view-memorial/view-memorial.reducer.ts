@@ -23,7 +23,8 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
       return {
         ...state,
         loading: true,
-        loaded: false
+        loaded: false,
+        error: INITIAL_STATE.error
       };
     }
     case ViewMemorialActionTypes.GET_MEMORIAL_SUCCESS: {

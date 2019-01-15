@@ -60,9 +60,7 @@ export class TimelineFormComponent implements OnInit {
     this.timelineForm = this.fb.group({
       date: [this.timeline.date || '', Validators.required],
       date_format: [this.timeline.date_format || 'MMM dd, y', Validators.required],
-      description: [this.timeline.description || '', Validators.required],
-      event: [this.timeline.event || null, Validators.required],
-      title: [this.timeline.title || '']
+      description: [this.timeline.description || '', Validators.required]
     });
     this.assetForm = this.fb.group({
       asset_type: this.timeline.asset_type || null,
@@ -123,7 +121,8 @@ export class TimelineFormComponent implements OnInit {
             {
               uuid: this.timeline.uuid,
               asset_type: this.assetForm.value.asset_type,
-              asset_link: videoId
+              asset_link: videoId,
+              ...this.timelineForm.value
             }
           ]
         };

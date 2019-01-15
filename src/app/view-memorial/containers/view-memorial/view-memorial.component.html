@@ -1,6 +1,16 @@
 <div class="loading" *ngIf="loading$ | async">
   <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
+<div *ngIf="!(loading$ | async) && (error$ | async)" class="error">
+  <div class="image">
+
+  </div>
+  <div class="info">
+    <h1>There was an error loading this memorial.</h1>
+    <h6 *ngIf="(error$ | async).status === 504">{{ (error$ | async).error?.error }}</h6>
+    <p>If this memorial belongs to you, you must login and publish your memorial to make it visible to others.</p>
+  </div>
+</div>
 <div class="container" *ngIf="loaded$ | async">
   <app-memorial-header [memorial]="(selectedMemorial$ | async).memorial"></app-memorial-header>
   <app-memorial-info [memorial]="(selectedMemorial$ | async).memorial" [location]="(selectedMemorial$ | async).location"></app-memorial-info>

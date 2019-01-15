@@ -10,6 +10,9 @@
   [style.background-size]="imgBackground.size"></div>
   <div class="info">
     <h4>{{ name }}</h4>
-    <p>{{ memorial.birth_date | date:'y' }} - {{ memorial.death_date | date:'y' }}</p>
+    <div class="date-and-loc">
+      <p>{{ memorial.birth_date | date:'y' }} - {{ memorial.death_date | date:'y' }}</p>
+      <p>{{ memorial.location }}</p>
+    </div>
   </div>
 </mat-card>

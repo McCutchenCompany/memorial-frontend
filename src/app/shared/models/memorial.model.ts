@@ -13,4 +13,5 @@ export class Memorial {
   published: boolean;
   latitude?: number;
   longitude?: number;
+  location?: string;
 }

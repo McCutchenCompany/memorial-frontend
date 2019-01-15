@@ -79,6 +79,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: rem(1176);
     margin: rem(70) auto;
     .asset {
@@ -95,8 +96,10 @@
       position: relative;
       margin-top: 0;
       width: rem(392);
-      height: rem(436);
+      min-height: rem(392);
       padding: rem(32);
+      padding-bottom: rem(80);
+      height: fit-content;
       background: map-get($colors, background);
       h2 {
         margin-bottom: rem(12);

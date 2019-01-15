@@ -48,11 +48,13 @@
       <textarea
         matInput
         formControlName="description"
-        matTextareaAutosize
         maxlength="1000"></textarea>
       <mat-hint align="end">{{timelineForm.value.description.length}} / 1000</mat-hint>
     </mat-form-field>
   </form>
+  <div class="save" *ngIf="timelineForm.dirty">
+    <button mat-button class="primary" [disabled]="timelineForm.invalid" (click)="onSaveChanges()">Save Changes</button>
+  </div>
   <form class="media-form" *ngIf="expanded" [formGroup]="assetForm">
     <mat-form-field appearance="outline">
       <mat-label>Media type</mat-label>
@@ -64,7 +66,7 @@
     </mat-form-field>
     <mat-form-field *ngIf="assetForm.value.asset_type === 'video'" class="youtube-link" appearance="outline">
       <mat-label>Youtube link</mat-label>
-      <input matInput formControlName="asset_link" (change)="onLink()">
+      <input matInput formControlName="asset_link" (keyup)="onLink()" (change)="onLink()">
     </mat-form-field>
   </form>
   <div class="asset-view" *ngIf="expanded">
@@ -83,9 +85,6 @@
         [id]="timeline.uuid"
         [type]="'timeline'"
         (click)="onSaveChanges()"></app-upload-image>
-    </div>
-    <div *ngIf="timelineForm.dirty">
-      <button mat-button class="primary" [disabled]="timelineForm.invalid" (click)="onSaveChanges()">Save Changes</button>
     </div>
   </div>
 </div>

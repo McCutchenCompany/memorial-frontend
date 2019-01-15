@@ -2,7 +2,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatIconModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatIconModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { TestStore } from '@shared/testing/test-store';
@@ -21,6 +21,7 @@ describe('AddLocationComponent', () => {
         MatIconModule,
         MatFormFieldModule,
         MatInputModule,
+        MatProgressSpinnerModule,
         NoopAnimationsModule,
         AgmCoreModule.forRoot({}),
         AgmJsMarkerClustererModule,
