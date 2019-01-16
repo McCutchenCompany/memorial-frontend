@@ -33,6 +33,7 @@
     "@ngrx/store-devtools": "^6.1.0",
     "angular-cc-library": "^1.2.5",
     "auth0-js": "^9.8.2",
+    "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
     "js-marker-clusterer": "^1.0.0",
     "normalize-css": "^2.3.1",
