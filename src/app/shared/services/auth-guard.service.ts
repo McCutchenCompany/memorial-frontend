@@ -35,8 +35,6 @@ export class AuthGuardService implements CanActivate {
     } else {
       localStorage.setItem('reroute', state.url);
       // Start the Auth0 Login process
-      console.log('check session');
-      console.log('does this happen');
       return this.checkSession();
     }
   }

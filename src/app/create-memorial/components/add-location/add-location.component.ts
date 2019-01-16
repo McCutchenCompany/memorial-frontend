@@ -89,7 +89,6 @@ export class AddLocationComponent implements OnInit {
   }
 
   onCheckBounds(event) {
-    console.log(event);
   }
 
   onNav() {
