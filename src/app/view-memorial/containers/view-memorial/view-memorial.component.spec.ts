@@ -6,6 +6,7 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatIconModule,
+  MatMenuModule,
   MatProgressSpinnerModule,
   MatTooltipModule,
 } from '@angular/material';
@@ -47,6 +48,7 @@ describe('ViewMemorialComponent', () => {
       imports: [
         MatTooltipModule,
         MatIconModule,
+        MatMenuModule,
         MatCardModule,
         MatFormFieldModule,
         ReactiveFormsModule,

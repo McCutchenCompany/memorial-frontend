@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule, MatFormFieldModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { User } from '@shared/models/user.model';
 import { configureTestSuite } from 'ng-bullet';
 
@@ -20,7 +20,9 @@ describe('MemorialMemoriesComponent', () => {
       imports: [
         ReactiveFormsModule,
         MatFormFieldModule,
-        MatCardModule
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule
       ]
     });
   });

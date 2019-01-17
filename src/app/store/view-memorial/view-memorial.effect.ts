@@ -9,6 +9,12 @@ import {
   AddMemory,
   AddMemoryFailure,
   AddMemorySuccess,
+  DeleteMemory,
+  DeleteMemoryFailure,
+  DeleteMemorySuccess,
+  EditMemory,
+  EditMemoryFailure,
+  EditMemorySuccess,
   GetMemorial,
   GetMemorialFailure,
   GetMemorialSuccess,
@@ -37,6 +43,24 @@ export class ViewMemorialEffects {
     switchMap((action: AddMemory) => this.api.addMemory(action.payload.memorial_id, action.payload.body).pipe(
       map(res => new AddMemorySuccess(res)),
       catchError(error => of(new AddMemoryFailure(error)))
+    ))
+  );
+
+  @Effect()
+  deleteMemory$: Observable<Action> = this.actions.pipe(
+    ofType(ViewMemorialActionTypes.DELETE_MEMORY),
+    switchMap((action: DeleteMemory) => this.api.deleteMemory(action.payload).pipe(
+      map(memories => new DeleteMemorySuccess(memories)),
+      catchError(error => of(new DeleteMemoryFailure(error)))
+    ))
+  );
+
+  @Effect()
+  editMemory$: Observable<Action> = this.actions.pipe(
+    ofType(ViewMemorialActionTypes.EDIT_MEMORY),
+    switchMap((action: EditMemory) => this.api.editMemory(action.payload.memory_id, action.payload.title, action.payload.description).pipe(
+      map(res => new EditMemorySuccess(res)),
+      catchError(error => of(new EditMemoryFailure(error)))
     ))
   );
 }

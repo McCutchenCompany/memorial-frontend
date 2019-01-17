@@ -43,6 +43,8 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
         error: action.payload
       };
     }
+    case ViewMemorialActionTypes.EDIT_MEMORY:
+    case ViewMemorialActionTypes.DELETE_MEMORY:
     case ViewMemorialActionTypes.ADD_MEMORY: {
       return {
         ...state,
@@ -50,6 +52,8 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
         saved: false
       };
     }
+    case ViewMemorialActionTypes.EDIT_MEMORY_SUCCESS:
+    case ViewMemorialActionTypes.DELETE_MEMORY_SUCCESS:
     case ViewMemorialActionTypes.ADD_MEMORY_SUCCESS: {
       return {
         ...state,
@@ -61,6 +65,8 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
         }
       };
     }
+    case ViewMemorialActionTypes.EDIT_MEMORY_FAILURE:
+    case ViewMemorialActionTypes.DELETE_MEMORY_FAILURE:
     case ViewMemorialActionTypes.ADD_MEMORY_FAILURE: {
       return {
         ...state,
@@ -95,4 +101,14 @@ export const getViewMemorialError = createSelector(
 export const getViewMemorial = createSelector(
   getViewMemorialState,
   state => state.selectedMemorial
+);
+
+export const getViewSaving = createSelector(
+  getViewMemorialState,
+  state => state.saving
+);
+
+export const getViewSaved = createSelector(
+  getViewMemorialState,
+  state => state.saved
 );

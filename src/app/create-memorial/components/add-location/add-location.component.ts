@@ -75,7 +75,6 @@ export class AddLocationComponent implements OnInit {
 
   onSearch(event) {
     if (event.key === 'Enter' && this.searchForm.value.searchTerm.length > 0) {
-      event.preventDefault();
       this.store.dispatch(new SearchAddress(this.searchForm.value.searchTerm));
     }
   }

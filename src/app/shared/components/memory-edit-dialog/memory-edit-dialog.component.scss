@@ -1,0 +1,19 @@
+@import "src/styles.scss";
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  h4 {
+    margin-bottom: rem(32);
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@include respond-to('small') {
+  form {
+    width: rem(480);
+  }
+}

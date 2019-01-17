@@ -9,6 +9,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatMenuModule,
   MatProgressSpinnerModule,
   MatTooltipModule,
 } from '@angular/material';
@@ -36,6 +37,7 @@ import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
     MatTooltipModule,
     MatButtonModule,
     MatCardModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({

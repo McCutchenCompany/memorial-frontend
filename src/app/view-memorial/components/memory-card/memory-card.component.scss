@@ -17,6 +17,9 @@ mat-card.mat-card {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    .status-container {
+      display: flex;
+    }
     .status {
       p {
         font-size: rem(12);

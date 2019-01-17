@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatDialogModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { Store } from '@ngrx/store';
 import { Memory } from '@shared/models/memory.model';
+import { User } from '@shared/models/user.model';
+import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
 import { MemoryCardComponent } from './memory-card.component';
@@ -13,7 +16,16 @@ describe('MemoryCardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ MemoryCardComponent ],
       imports: [
-        MatCardModule
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule,
+        MatDialogModule
+      ],
+      providers: [
+        {
+          provide: Store,
+          useClass: TestStore
+        }
       ]
     });
   });
@@ -27,6 +39,9 @@ describe('MemoryCardComponent', () => {
       last_name: 'last',
       description: 'describe'
     } as Memory;
+    component.user = {
+      uuid: '1234'
+    } as User;
     fixture.detectChanges();
   });
 
