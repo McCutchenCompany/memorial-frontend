@@ -50,9 +50,7 @@ export class AddLocationComponent implements OnInit {
 
   apiLoader() {
       this.mapsAPILoader.load().then(() => {
-        const autocomplete = new window['google'].maps.places.Autocomplete(this.searchElRef.nativeElement, {
-          types: ['address']
-        });
+        const autocomplete = new window['google'].maps.places.Autocomplete(this.searchElRef.nativeElement, {});
         autocomplete.addListener('place_changed', () => {
           this.ngZone.run(() => {
             // get the place result
