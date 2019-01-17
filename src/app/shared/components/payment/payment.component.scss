@@ -37,6 +37,9 @@ form {
   .loading {
     padding: rem(8) rem(42);
   }
+  &.card-form {
+    padding-bottom: rem(64);
+  }
 }
 mat-expansion-panel {
   margin-bottom: rem(36);
@@ -74,6 +77,9 @@ mat-expansion-panel {
       .mobile {
         display: none;
       }
+    }
+    &.card-form {
+      padding-bottom: initial;
     }
   }
   mat-expansion-panel {

@@ -12,7 +12,7 @@
     <button mat-button class="primary" type="submit" [disabled]="discountForm.invalid">Apply Code</button>
   </form>
 </mat-expansion-panel>
-<form [formGroup]="cardForm">
+<form class="card-form" [formGroup]="cardForm">
   <h3>Payment Details</h3>
   <div class="cardholder">
     <mat-form-field class="name" appearance="outline">
