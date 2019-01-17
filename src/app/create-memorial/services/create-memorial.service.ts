@@ -86,4 +86,9 @@ export class CreateMemorialService {
     return this.http.post(path, payload);
   }
 
+  searchLocation(query) {
+    const path = `${this.API_URL}/find_places?query=${encodeURI(query)}`;
+    return this.http.get(path);
+  }
+
 }

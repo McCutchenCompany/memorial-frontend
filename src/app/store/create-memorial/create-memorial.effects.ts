@@ -30,6 +30,9 @@ import {
   ReplaceTimelineFile,
   ReplaceTimelineFileFailure,
   ReplaceTimelineFileSuccess,
+  SearchAddress,
+  SearchAddressFailure,
+  SearchAddressSuccess,
   UpdateCreateMemorial,
   UpdateCreateMemorialFailure,
   UpdateCreateMemorialSuccess,
@@ -175,6 +178,23 @@ export class CreateMemorialEffects {
     switchMap((action: UpdateMemoryStatus) => this.api.updateMemoryStatus(action.payload.memory_id, action.payload.body).pipe(
       map(res => new UpdateMemoryStatusSuccess(res)),
       catchError(error => of(new UpdateMemoryStatusFailure(error)))
+    ))
+  );
+
+  @Effect()
+  searchLocation$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.SEARCH_ADDRESS),
+    switchMap((action: SearchAddress) => this.api.searchLocation(action.payload).pipe(
+      map((res: any) => {
+        const payload = {
+          address: res.address,
+          latitude: res.lat,
+          longitude: res.lng,
+          zoom: 15
+        };
+        return new SearchAddressSuccess(payload);
+      }),
+      catchError(error => of(new SearchAddressFailure(error)))
     ))
   );
 }

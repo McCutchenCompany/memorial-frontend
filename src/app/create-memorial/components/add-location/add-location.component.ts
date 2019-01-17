@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, Vie
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { getCreatedSaving, getCreateMemorialLocation } from '@store/create-memorial';
-import { SearchAddressSuccess, UpdateLocation } from '@store/create-memorial/create-memorial.actions';
+import { SearchAddress, SearchAddressSuccess, UpdateLocation } from '@store/create-memorial/create-memorial.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
 
@@ -71,6 +71,13 @@ export class AddLocationComponent implements OnInit {
           });
         });
       });
+  }
+
+  onSearch(event) {
+    if (event.key === 'Enter' && this.searchForm.value.searchTerm.length > 0) {
+      event.preventDefault();
+      this.store.dispatch(new SearchAddress(this.searchForm.value.searchTerm));
+    }
   }
 
   onMapClick(event) {

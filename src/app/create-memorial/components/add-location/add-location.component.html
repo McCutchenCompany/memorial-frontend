@@ -4,7 +4,7 @@
   <form [formGroup]="searchForm">
     <mat-form-field appearance="outline">
       <mat-label>Address</mat-label>
-      <input #search matInput formControlName="searchTerm">
+      <input (keydown)="onSearch($event)" #search matInput formControlName="searchTerm">
     </mat-form-field>
   </form>
   <div class="map-container">
