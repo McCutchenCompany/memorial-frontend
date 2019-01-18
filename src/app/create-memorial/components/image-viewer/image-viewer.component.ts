@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { environment } from '@environments/environment';
 import { UploadDialogComponent } from '@shared/components/upload-dialog/upload-dialog.component';
+import { ImageFormat } from '@store/models/image-format.model';
 
+import { ImageEditorComponent } from '../image-editor/image-editor.component';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
@@ -15,6 +17,7 @@ export class ImageViewerComponent implements OnInit {
   @Input() image: string;
   @Input() id: string;
   @Input() type: 'memorial' | 'timeline';
+  @Input() format: ImageFormat;
   @Output() remove: EventEmitter<{id: string, route: string}> = new EventEmitter<{id: string, route: string}>();
 
   get imgBackground() {
@@ -72,6 +75,17 @@ export class ImageViewerComponent implements OnInit {
         }
       });
     }
+  }
+
+  onEdit() {
+    this.dialog.open(ImageEditorComponent, {
+      data: {
+        id: this.id,
+        type: this.type,
+        image: this.image,
+        format: this.format
+      }
+    });
   }
 
 }

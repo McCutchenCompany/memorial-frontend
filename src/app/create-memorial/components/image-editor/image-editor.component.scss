@@ -1,0 +1,25 @@
+@import "src/styles.scss";
+
+.container {
+
+  .image-viewer {
+    height: rem(168);
+    width: rem(320);
+    cursor: move;
+    background-color: map-get($colors, gray);
+  }
+  .image-border {
+    width: rem(320);
+    height: rem(168);
+    overflow: hidden;
+    border: 3px solid map-get($colors, dark-gray);
+    background-color: map-get($colors, gray);
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  mat-slider {
+    width: 100%;
+  }
+}

@@ -20,6 +20,9 @@ export enum CreateMemorialActionTypes {
   UPDATE_TIMELINE = '[Create] Update timeline',
   UPDATE_TIMELINE_SUCCESS = '[Create] Update timeline success',
   UPDATE_TIMELINE_FAILURE = '[Create] Update timeline failure',
+  UPDATE_SINGLE_TIMELINE = '[Create] Update single timeline',
+  UPDATE_SINGLE_TIMELINE_SUCCESS = '[Create] Update single timeline success',
+  UPDATE_SINGLE_TIMELINE_FAILURE = '[Create] Update single timeline failure',
   UPDATE_LOCATION = '[Create] Update location',
   UPDATE_LOCATION_SUCCESS = '[Create] Update location success',
   UPDATE_LOCATION_FAILURE = '[Create] Update location failure',
@@ -112,6 +115,19 @@ export class UpdateTimelineSuccess implements Action {
 }
 export class UpdateTimelineFailure implements Action {
   readonly type = CreateMemorialActionTypes.UPDATE_TIMELINE_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class UpdateSingleTimeline implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_SINGLE_TIMELINE;
+  constructor(public payload: {timeline_id: string, body: any}) {}
+}
+export class UpdateSingleTimelineSuccess implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_SINGLE_TIMELINE_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class UPdateSingleTimelineFailure implements Action {
+  readonly type = CreateMemorialActionTypes.UPDATE_SINGLE_TIMELINE_FAILURE;
   constructor (public payload: any) {}
 }
 
@@ -254,6 +270,9 @@ export type All =
   | UpdateTimeline
   | UpdateTimelineSuccess
   | UpdateTimelineFailure
+  | UpdateSingleTimeline
+  | UpdateSingleTimelineSuccess
+  | UPdateSingleTimelineFailure
   | UploadMemorialImage
   | UploadMemorialImageSuccess
   | UploadMemorialImageFailure

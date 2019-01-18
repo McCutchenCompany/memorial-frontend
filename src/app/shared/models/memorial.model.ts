@@ -14,4 +14,8 @@ export class Memorial {
   latitude?: number;
   longitude?: number;
   location?: string;
+  posX: number;
+  posY: number;
+  scale: number;
+  rot: number;
 }

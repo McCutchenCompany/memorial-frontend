@@ -3,7 +3,7 @@
 mat-card {
   position: relative;
   padding: 0;
-  height: rem(206);
+  height: rem(244);
   width: rem(320);
   .image {
     position: absolute;
@@ -14,12 +14,16 @@ mat-card {
   }
   .actions {
     display: flex;
+    flex-wrap: wrap;
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     button {
       flex-grow: 1;
+      &.edit {
+        width: 100%;
+      }
     }
   }
 }

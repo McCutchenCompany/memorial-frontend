@@ -10,4 +10,8 @@ export class Timeline {
   event: string;
   created_at: Date;
   updated_at: Date;
+  posX: number;
+  posY: number;
+  scale: number;
+  rot: number;
 }

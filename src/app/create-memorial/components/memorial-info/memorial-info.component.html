@@ -2,7 +2,7 @@
   <form (submit)="onSave()" [formGroup]="memorialInfoForm">
     <h4>Start by adding a photo and sharing about their life</h4>
     <h4>Cover Image</h4>
-    <app-image-viewer *ngIf="memorialInfo.image" [image]="memorialInfo.image" [id]="memorialInfo.uuid" [type]="'memorial'" (remove)="onRemove($event)"></app-image-viewer>
+    <app-image-viewer *ngIf="memorialInfo.image" [image]="memorialInfo.image" [id]="memorialInfo.uuid" [type]="'memorial'" [format]="imageFormat" (remove)="onRemove($event)"></app-image-viewer>
     <app-upload-image *ngIf="!memorialInfo.image" [id]="memorialInfo.uuid" [type]="'memorial'"></app-upload-image>
     <h4>Name</h4>
     <div class="name">

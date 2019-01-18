@@ -60,6 +60,11 @@ export class CreateMemorialService {
     return this.http.patch(path, body);
   }
 
+  updateSingleTimeline(timeline_id, body) {
+    const path = `${this.API_URL}/timelines/${timeline_id}`;
+    return this.http.patch(path, body);
+  }
+
   updateLocation(memorial_id, location: {latitude: number, longitude: number}) {
     const path = `${this.API_URL}/memorials/${memorial_id}/location`;
     const body = location;

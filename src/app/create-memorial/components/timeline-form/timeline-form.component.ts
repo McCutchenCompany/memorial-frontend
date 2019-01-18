@@ -39,6 +39,15 @@ export class TimelineFormComponent implements OnInit {
     {value: 'video', display: 'Video'}
   ];
 
+  get imageFormat() {
+    return {
+      posX: this.timeline.posX,
+      posY: this.timeline.posY,
+      scale: this.timeline.scale,
+      rot: this.timeline.rot
+    };
+  }
+
   get videoSrc() {
     if (this.timeline.asset_link && this.timeline.asset_link.length === 11) {
       return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.timeline.asset_link}`);
