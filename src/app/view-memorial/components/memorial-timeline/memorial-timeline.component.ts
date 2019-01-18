@@ -19,9 +19,11 @@ export class MemorialTimelineComponent implements OnInit {
   get imgBackground() {
     return {
       background: `url(${environment.s3.url}${this.timeline[this.index].asset_link})`,
-      position: 'center',
       repeat: 'no-repeat',
-      size: 'cover'
+      position: `${this.timeline[this.index].posX.toString()}px ${this.timeline[this.index].posY.toString()}px`,
+      size: `cover`,
+      scale: this.sanitizer.bypassSecurityTrustStyle(
+        `scale(${this.timeline[this.index].scale / 100}) rotate(${this.timeline[this.index].rot}deg)`)
     };
   }
 

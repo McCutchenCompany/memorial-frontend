@@ -5,12 +5,17 @@ mat-card {
   padding: 0;
   height: rem(244);
   width: rem(320);
-  .image {
+  .image-border {
     position: absolute;
-    height: rem(168);
-    width: rem(320);
     top: 0;
     left: 0;
+    width: rem(320);
+    height: rem(168);
+    overflow: hidden;
+  }
+  .image {
+    height: rem(168);
+    width: rem(320);
   }
   .actions {
     display: flex;

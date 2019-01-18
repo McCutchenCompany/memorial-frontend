@@ -1,9 +1,13 @@
 <mat-card>
-  <div class="image"
-  [style.background-image]="imgBackground.background"
-  [style.background-repeat]="imgBackground.repeat"
-  [style.background-position]="imgBackground.position"
-  [style.background-size]="imgBackground.size"></div>
+  <div class="image-border">
+    <div class="image"
+    [style.background-image]="imgBackground.background"
+    [style.background-repeat]="imgBackground.repeat"
+    [style.background-position]="imgBackground.position"
+    [style.background-size]="imgBackground.size"
+    [style.transform]="imgBackground.scale"
+    [style.height]="imgBackground.height"></div>
+  </div>
   <div class="actions">
     <button mat-button type="button" class="secondary edit" (click)="onEdit()">Edit</button>
     <button mat-button type="button" class="secondary" (click)="onRemove()">Remove</button>

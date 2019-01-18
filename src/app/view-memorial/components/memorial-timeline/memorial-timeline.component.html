@@ -1,12 +1,16 @@
 <app-interactive-timeline [timeline]="timeline" [memorial]="memorial" [currentDate]="timeline[index].date" (navigate)="onNavigateToIndex($event)"></app-interactive-timeline>
 <div class="container">
-  <div
-    class="asset"
-    *ngIf="timeline[index].asset_type === 'image'"
-    [style.background-image]="imgBackground.background"
-    [style.background-repeat]="imgBackground.repeat"
-    [style.background-position]="imgBackground.position"
-    [style.background-size]="imgBackground.size">
+  <div class="asset image-border"
+    *ngIf="timeline[index].asset_type === 'image'">
+    <div
+      class="asset"
+      [style.background-image]="imgBackground.background"
+      [style.background-repeat]="imgBackground.repeat"
+      [style.background-position]="imgBackground.position"
+      [style.background-size]="imgBackground.size"
+      [style.transform]="imgBackground.scale"
+      [class.portrait]="timeline[index].rot === 90 || timeline[index].rot === 270">
+    </div>
   </div>
   <div class="asset video-asset" *ngIf="timeline[index].asset_type === 'video'">
     <iframe [src]="videoSrc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

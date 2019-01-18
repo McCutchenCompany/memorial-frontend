@@ -1,20 +1,29 @@
 @import "src/styles.scss";
 
-.hero {
+.image-border {
+  position: relative;
   width: 100%;
   height: 52vw;
+  overflow: hidden;
   margin: auto;
-  display: flex;
-  align-items: flex-end;
   h2 {
+    position: absolute;
+    bottom: 0;
     margin-left: rem(8);
     padding-bottom: rem(8);
     font-size: rem(32);
     color: map-get($colors, white);
   }
 }
+.hero {
+  width: 100%;
+  height: 52vw;
+  &.portrait {
+    height: 100vw;
+  }
+}
 @include respond-to('small') {
-  .hero {
+  .image-border {
     width: rem(767);
     height: rem(408);
     h2 {
@@ -22,15 +31,29 @@
       font-size: rem(56);
     }
   }
+  .hero {
+    width: rem(767);
+    height: rem(408);
+    &.portrait {
+      height: rem(767);
+    }
+  }
 }
 @include respond-to('medium') {
-  .hero {
+  .image-border {
     width: rem(1176);
     height: rem(657);
     h2 {
       margin-left: rem(122);
       padding-bottom: rem(33);
       font-size: rem(56);
+    }
+  }
+  .hero {
+    width: rem(1176);
+    height: rem(657);
+    &.portrait {
+      height: rem(1176);
     }
   }
 }

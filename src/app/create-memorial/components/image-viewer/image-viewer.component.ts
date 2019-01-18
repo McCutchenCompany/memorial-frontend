@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
 import { UploadDialogComponent } from '@shared/components/upload-dialog/upload-dialog.component';
 import { ImageFormat } from '@store/models/image-format.model';
@@ -22,11 +23,15 @@ export class ImageViewerComponent implements OnInit {
 
   get imgBackground() {
     if (this.image) {
+      const height = this.format.rot === 90 || this.format.rot === 270 ? '20' : '10.5';
       return {
         background: `url(${environment.s3.url}${this.image})`,
-        position: 'center',
         repeat: 'no-repeat',
-        size: 'cover'
+        position: `${this.format.posX.toString()}px ${this.format.posY.toString()}px`,
+        size: `cover`,
+        scale: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.format.scale / 100}) rotate(${this.format.rot}deg)`),
+        height: `${height}rem`
       };
     } else {
       return {
@@ -39,7 +44,8 @@ export class ImageViewerComponent implements OnInit {
   }
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {

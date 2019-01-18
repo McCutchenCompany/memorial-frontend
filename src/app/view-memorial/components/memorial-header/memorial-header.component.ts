@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { DomSanitizer, Meta } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
 import { Memorial } from '@shared/models/memorial.model';
 
@@ -30,9 +30,11 @@ export class MemorialHeaderComponent implements OnInit {
     if (this.memorial.image) {
       return {
         background: `url(${environment.s3.url}${this.memorial.image})`,
-        position: 'center',
         repeat: 'no-repeat',
-        size: 'cover'
+        position: `${this.memorial.posX.toString()}px ${this.memorial.posY.toString()}px`,
+        size: `cover`,
+        scale: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`)
       };
     } else {
       return {
@@ -44,7 +46,8 @@ export class MemorialHeaderComponent implements OnInit {
     }
   }
   constructor(
-    private meta: Meta
+    private meta: Meta,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
