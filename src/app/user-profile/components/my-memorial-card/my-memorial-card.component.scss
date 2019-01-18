@@ -4,12 +4,20 @@ mat-card {
   position: relative;
   min-height: rem(283);
   width: rem(286);
-  .image {
+  .image-border {
     position: absolute;
     height: rem(168);
     width: rem(320);
     top: 0;
     left: 0;
+    overflow: hidden;
+  }
+  .image {
+    height: rem(168);
+    width: rem(320);
+    &.portrait {
+      height: rem(320);
+    }
   }
   .container {
     padding: rem(168) 0 0 0;
