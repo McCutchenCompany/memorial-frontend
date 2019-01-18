@@ -1,5 +1,8 @@
 @import "src/styles.scss";
 
+.desktop {
+  display: none;
+}
 .image-border {
   position: relative;
   width: 100%;
@@ -23,6 +26,12 @@
   }
 }
 @include respond-to('small') {
+  .tablet {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
   .image-border {
     width: rem(767);
     height: rem(408);
@@ -40,6 +49,12 @@
   }
 }
 @include respond-to('medium') {
+  .desktop {
+    display: block;
+  }
+  .tablet {
+    display: none;
+  }
   .image-border {
     width: rem(1176);
     height: rem(657);

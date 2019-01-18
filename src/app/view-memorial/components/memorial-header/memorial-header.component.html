@@ -1,11 +1,29 @@
 <div class="image-border">
   <div
-    class="hero"
+    class="hero mobile"
     [style.background-image]="imgBackground.background"
     [style.background-repeat]="imgBackground.repeat"
     [style.background-position]="imgBackground.position"
     [style.background-size]="imgBackground.size"
     [style.transform]="imgBackground.scale"
+    [class.portrait]="memorial.rot === 90 || memorial.rot === 270">
+  </div>
+  <div
+    class="hero tablet"
+    [style.background-image]="imgBackgroundTablet.background"
+    [style.background-repeat]="imgBackgroundTablet.repeat"
+    [style.background-position]="imgBackgroundTablet.position"
+    [style.background-size]="imgBackgroundTablet.size"
+    [style.transform]="imgBackgroundTablet.scale"
+    [class.portrait]="memorial.rot === 90 || memorial.rot === 270">
+  </div>
+  <div
+    class="hero desktop"
+    [style.background-image]="imgBackgroundDesktop.background"
+    [style.background-repeat]="imgBackgroundDesktop.repeat"
+    [style.background-position]="imgBackgroundDesktop.position"
+    [style.background-size]="imgBackgroundDesktop.size"
+    [style.transform]="imgBackgroundDesktop.scale"
     [class.portrait]="memorial.rot === 90 || memorial.rot === 270">
   </div>
   <h2>{{ name }}</h2>

@@ -1,5 +1,8 @@
 @import "src/styles.scss";
 
+.desktop {
+  display: none;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -60,6 +63,12 @@
   }
 }
 @include respond-to('small') {
+  .mobile {
+    display: none;
+  }
+  .desktop {
+    display: block;
+  }
   .container {
     width: rem(576);
     .asset {
@@ -93,7 +102,7 @@
     margin: rem(70) auto;
     .asset {
       width: rem(704);
-      height: rem(370);
+      height: rem(448);
       &.portrait {
         height: rem(704);
       }
@@ -108,7 +117,7 @@
       position: relative;
       margin-top: 0;
       width: rem(392);
-      min-height: rem(257);
+      min-height: rem(336);
       padding: rem(32);
       padding-bottom: rem(80);
       height: fit-content;

@@ -3,12 +3,21 @@
   <div class="asset image-border"
     *ngIf="timeline[index].asset_type === 'image'">
     <div
-      class="asset"
+      class="asset desktop"
       [style.background-image]="imgBackground.background"
       [style.background-repeat]="imgBackground.repeat"
       [style.background-position]="imgBackground.position"
       [style.background-size]="imgBackground.size"
       [style.transform]="imgBackground.scale"
+      [class.portrait]="timeline[index].rot === 90 || timeline[index].rot === 270">
+    </div>
+    <div
+      class="asset mobile"
+      [style.background-image]="imgBackgroundMobile.background"
+      [style.background-repeat]="imgBackgroundMobile.repeat"
+      [style.background-position]="imgBackgroundMobile.position"
+      [style.background-size]="imgBackgroundMobile.size"
+      [style.transform]="imgBackgroundMobile.scale"
       [class.portrait]="timeline[index].rot === 90 || timeline[index].rot === 270">
     </div>
   </div>

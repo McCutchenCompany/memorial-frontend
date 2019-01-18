@@ -20,7 +20,18 @@ export class MemorialTimelineComponent implements OnInit {
     return {
       background: `url(${environment.s3.url}${this.timeline[this.index].asset_link})`,
       repeat: 'no-repeat',
-      position: `${this.timeline[this.index].posX.toString()}px ${this.timeline[this.index].posY.toString()}px`,
+      position: `${(this.timeline[this.index].posX * 1.5).toString()}px ${(this.timeline[this.index].posY * 1.5).toString()}px`,
+      size: `cover`,
+      scale: this.sanitizer.bypassSecurityTrustStyle(
+        `scale(${this.timeline[this.index].scale / 100}) rotate(${this.timeline[this.index].rot}deg)`)
+    };
+  }
+
+  get imgBackgroundMobile() {
+    return {
+      background: `url(${environment.s3.url}${this.timeline[this.index].asset_link})`,
+      repeat: 'no-repeat',
+      position: `${(this.timeline[this.index].posX).toString()}px ${(this.timeline[this.index].posY).toString()}px`,
       size: `cover`,
       scale: this.sanitizer.bypassSecurityTrustStyle(
         `scale(${this.timeline[this.index].scale / 100}) rotate(${this.timeline[this.index].rot}deg)`)

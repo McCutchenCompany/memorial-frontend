@@ -7,25 +7,33 @@
     [style.background-position]="imgBackground.position"
     [style.background-size]="imgBackground.size"
     [style.transform]="imgBackground.scale"
-    [style.height]="imgBackground.height"
+    [class.portrait]="imageFormat.value.rot === 90 || imageFormat.value.rot === 270"
     (pointermove)="onDrag($event)"></div>
   </div>
-  <div class="actions">
-    <button mat-button class="primary" [disabled]="imageFormat.value.posY === 0 && imageFormat.value.posX === 0" type="button" (click)="recenter()">Recenter</button>
-    <div class="rotation">
+  <div class="rotation">
+    <h6>Rotate</h6>
+    <div class="actions">
       <button mat-button class="subtle" (click)="onRotate('left')"><mat-icon>rotate_left</mat-icon></button>
       <button mat-button class="subtle" (click)="onRotate('right')"><mat-icon>rotate_right</mat-icon></button>
     </div>
   </div>
+  <div class="center">
+    <h6>Recenter</h6>
+    <div class="actions">
+      <button mat-button class="subtle one-side" (click)="onCenterVert()">Verical</button>
+      <button mat-button class="subtle one-side" (click)="onCenterHorz()">Horizontal</button>
+      <button mat-button class="subtle" [disabled]="imageFormat.value.posY === 0 && imageFormat.value.posX === 0" type="button" (click)="recenter()">Both</button>
+    </div>
+  </div>
   <form [formGroup]="imageFormat">
-    <mat-label>Scale</mat-label>
+    <h6>Scale</h6>
     <mat-slider
       formControlName="scale"
       min="100"
       max="200"
       color="primary"></mat-slider>
   </form>
-  <div class="action">
+  <div class="actions">
     <button mat-button class="primary" (click)="onSave()">Save Changes</button>
     <button mat-button class="subtle" (click)="dialogRef.close()">Cancel</button>
   </div>

@@ -59,6 +59,38 @@ export class ImageEditorComponent implements OnInit {
     this.imageFormat.patchValue({posY: 0, posX: 0});
   }
 
+  onCenterVert() {
+    switch (this.imageFormat.value.rot) {
+      case 0:
+      case 180: {
+        this.imageFormat.patchValue({posY: 0});
+        break;
+      }
+      case 90:
+      case 270: {
+        this.imageFormat.patchValue({posX: 0});
+        break;
+      }
+      default: break;
+    }
+  }
+
+  onCenterHorz() {
+    switch (this.imageFormat.value.rot) {
+      case 0:
+      case 180: {
+        this.imageFormat.patchValue({posX: 0});
+        break;
+      }
+      case 90:
+      case 270: {
+        this.imageFormat.patchValue({posY: 0});
+        break;
+      }
+      default: break;
+    }
+  }
+
   onDrag(event) {
     if (event.pressure > 0) {
       switch (this.imageFormat.value.rot) {

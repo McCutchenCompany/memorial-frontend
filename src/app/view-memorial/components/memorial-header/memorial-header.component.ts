@@ -31,7 +31,7 @@ export class MemorialHeaderComponent implements OnInit {
       return {
         background: `url(${environment.s3.url}${this.memorial.image})`,
         repeat: 'no-repeat',
-        position: `${this.memorial.posX.toString()}px ${this.memorial.posY.toString()}px`,
+        position: `${(this.memorial.posX * 1.3).toString()}px ${(this.memorial.posY * 1.3).toString()}px`,
         size: `cover`,
         scale: this.sanitizer.bypassSecurityTrustStyle(
           `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`)
@@ -45,6 +45,47 @@ export class MemorialHeaderComponent implements OnInit {
       };
     }
   }
+
+  get imgBackgroundTablet() {
+    if (this.memorial.image) {
+      return {
+        background: `url(${environment.s3.url}${this.memorial.image})`,
+        repeat: 'no-repeat',
+        position: `${(this.memorial.posX * 2.4).toString()}px ${(this.memorial.posY * 2.4).toString()}px`,
+        size: `cover`,
+        scale: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`)
+      };
+    } else {
+      return {
+        background: 'url(assets/imgs/default-memorial.jpg)',
+        position: 'center',
+        repeat: 'no-repeat',
+        size: 'cover'
+      };
+    }
+  }
+
+  get imgBackgroundDesktop() {
+    if (this.memorial.image) {
+      return {
+        background: `url(${environment.s3.url}${this.memorial.image})`,
+        repeat: 'no-repeat',
+        position: `${(this.memorial.posX * 4).toString()}px ${(this.memorial.posY * 4).toString()}px`,
+        size: `cover`,
+        scale: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`)
+      };
+    } else {
+      return {
+        background: 'url(assets/imgs/default-memorial.jpg)',
+        position: 'center',
+        repeat: 'no-repeat',
+        size: 'cover'
+      };
+    }
+  }
+
   constructor(
     private meta: Meta,
     private sanitizer: DomSanitizer
