@@ -1,8 +1,53 @@
 @import "src/styles.scss";
 
+.flourish {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  .flourish-container {
+    position: relative;
+    width: 100%;
+    height: rem(1342);
+    overflow: hidden;
+    .box-1, .box-2, .box-3 {
+      position: absolute;
+    }
+    .box-1 {
+      background: map-get($colors, primary-lightest);
+      transform: rotate(-165deg);
+      width: 200%;
+      height: rem(340);
+      left: rem(-35);
+      top: rem(93);
+    }
+    .box-2 {
+      background: map-get($colors, primary-light);
+      transform: rotate(8deg);
+      width: 150%;
+      height: rem(400);
+      left: rem(-60);
+    }
+    .box-3 {
+      background: map-get($colors, primary);
+      transform: rotate(5deg);
+      width: 150%;
+      height: rem(420);
+      left: rem(-50);
+      top: rem(-40);
+    }
+  }
+}
 .container {
   width: 95%;
   margin: rem(68) auto rem(125);
+  form {
+    background-color: rgba(255,255,255,0.9);
+    padding: rem(32);
+    border-radius: 2px;
+    .title {
+      margin-top: 0;
+    }
+  }
   .name {
     flex-wrap: wrap;
     mat-form-field {
@@ -47,4 +92,29 @@
   }
 }
 @include respond-to('medium') {
+  .flourish {
+    .flourish-container {
+      .box-1 {
+        width: 200%;
+        height: rem(420);
+        left: -30%;
+        transform: rotate(-126deg);
+      }
+      .box-2 {
+        width: 200%;
+        height: rem(640);
+        transform: rotate(11deg);
+        top: rem(80);
+        left: -30%;
+        transform: rotate(5deg);
+      }
+      .box-3 {
+        width: 200%;
+        height: rem(804);
+        left: -34%;
+        top: rem(-130);
+        transform: rotate(3deg);
+      }
+    }
+  }
 }
