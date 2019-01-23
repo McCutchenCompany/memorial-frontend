@@ -5,6 +5,8 @@
   display: flex;
   flex-wrap: wrap;
   margin: rem(8) auto 0;
+  padding: rem(16);
+  background-color: map-get($colors, white);
   .birth {
     width: rem(150);
   }
@@ -88,7 +90,6 @@
     .social {
       width: rem(136);
       justify-content: space-between;
-      margin-left: rem(200);
       order: initial;
     }
     .location {
@@ -105,12 +106,16 @@
 }
 @include respond-to('medium') {
   .info {
-    width: rem(1176);
+    width: rem(1112);
+    padding: rem(32);
     display: flex;
     margin: rem(63) auto 0;
     .birth {
       width: rem(240);
-      padding-left: rem(120);
+      padding-left: 0;
+    }
+    .social {
+      margin-left: rem(200);
     }
     .death {
       width: rem(240);

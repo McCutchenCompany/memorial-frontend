@@ -3,6 +3,7 @@ export class FindUserPositionState {
   loaded: boolean;
   position: UserCoordinates;
   permission: boolean;
+  setLocation: boolean;
 }
 
 export class UserCoordinates {

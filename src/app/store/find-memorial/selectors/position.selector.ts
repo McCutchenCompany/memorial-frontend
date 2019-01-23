@@ -22,3 +22,8 @@ export const getPermission = createSelector(
   getFindMemorialState,
   state => state.userPosition.permission
 );
+
+export const getSetLocation = createSelector(
+  getFindMemorialState,
+  state => state.userPosition.setLocation
+);

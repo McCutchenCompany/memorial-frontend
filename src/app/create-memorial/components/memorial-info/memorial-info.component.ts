@@ -18,6 +18,15 @@ export class MemorialInfoComponent implements OnInit {
 
   memorialInfoForm: FormGroup;
 
+  get imageFormat() {
+    return {
+      posX: this.memorialInfo.posX,
+      posY: this.memorialInfo.posY,
+      scale: this.memorialInfo.scale,
+      rot: this.memorialInfo.rot
+    };
+  }
+
   constructor(
     private fb: FormBuilder,
     private store: Store<CreateMemorialState>

@@ -5,10 +5,22 @@
       <button mat-button *ngIf="displayMap" class="primary fixed" (click)="toggleMap()">Hide Map</button>
     </div>
     <app-search-bar [searchQuery]="searchQuery$ | async" (search)="onSearch($event)"></app-search-bar>
+    <div *ngIf="!(searchQuery$ | async)" class="label">
+      <p>Memorials near you</p>
+      <div class="divider"></div>
+    </div>
+    <div *ngIf="(searchQuery$ | async)" class="label">
+      <p>Search results</p>
+      <div class="divider"></div>
+    </div>
+    <div *ngIf="!(locationSet$ | async)" class="finding-location">
+      <mat-progress-spinner mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      <p>Finding your location...</p>
+    </div>
     <div class="loading" *ngIf="(searchLoading$ | async) || (markersLoading$ | async)">
       <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
     </div>
-    <div class="results">
+    <div *ngIf="(locationSet$ | async)" class="results">
       <div class="cards" (mouseenter)="onCardHover(memorial)" (mouseleave)="onCardHover()" *ngFor="let memorial of (memorials$ | async)">
         <app-memorial-result-card [memorial]="memorial" [markerHover]="hoveredMarker.memorial?.uuid"></app-memorial-result-card>
       </div>
@@ -16,11 +28,12 @@
     <div *ngIf="(searchLoaded$ | async) && (searchQuery$ | async) && (memorials$ | async).length === 0">
       <h4>There are no results for {{ searchQuery$ | async }}</h4>
     </div>
-    <div *ngIf="!(searchQuery$ | async) && (memorials$ | async).length > 0">
-      <h4>There are no more memorials within range of you.</h4>
-    </div>
     <div *ngIf="(searchLoaded$ | async) && !(searchQuery$ | async) && (memorials$ | async).length === 0">
       <h4>There are no memorials in range. Search for a memorial by name.</h4>
+    </div>
+    <div *ngIf="!(searchQuery$ | async)" class="label">
+      <p>Most viewed Memorials</p>
+      <div class="divider"></div>
     </div>
   </div>
 </div>
@@ -45,6 +58,10 @@
         (mouseOut)="onMarkerLeave()"></agm-marker>
     </agm-marker-cluster>
   </agm-map>
+  <div class="cover" *ngIf="!(locationSet$ | async)">
+    <h3 *ngIf="!(permission | async)">Finding your location...</h3>
+    <h3 *ngIf="(permission | async)">You have not given Memorial permission to access your location.</h3>
+  </div>
 </div>
 <div class="map mobile-hide" *ngIf="searchQuery$ | async">
   <agm-map

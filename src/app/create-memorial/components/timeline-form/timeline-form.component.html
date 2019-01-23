@@ -79,6 +79,7 @@
         [image]="timeline.asset_link"
         [id]="timeline.uuid"
         [type]="'timeline'"
+        [format]="imageFormat"
         (remove)="onRemoveFile($event)"></app-image-viewer>
       <app-upload-image
         *ngIf="!timeline.asset_link || timeline.asset_type !== 'image'"

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
 import { Store } from '@ngrx/store';
 import { Memorial } from '@shared/models/memorial.model';
@@ -17,9 +18,11 @@ export class MyMemorialCardComponent implements OnInit {
     if (this.memorial.image) {
       return {
         background: `url(${environment.s3.url}${this.memorial.image})`,
-        position: 'center',
         repeat: 'no-repeat',
-        size: 'cover'
+        position: `${this.memorial.posX.toString()}px ${this.memorial.posY.toString()}px`,
+        size: `cover`,
+        scale: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`)
       };
     } else {
       return {
@@ -49,7 +52,8 @@ export class MyMemorialCardComponent implements OnInit {
   }
 
   constructor(
-    private store: Store<any>
+    private store: Store<any>,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {

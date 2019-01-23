@@ -71,6 +71,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
     case CreateMemorialActionTypes.UPDATE_MEMORY_STATUS:
     case CreateMemorialActionTypes.UPDATE_LOCATION:
     case CreateMemorialActionTypes.UPDATE_TIMELINE:
+    case CreateMemorialActionTypes.UPDATE_SINGLE_TIMELINE:
     case CreateMemorialActionTypes.ADD_TIMELINE_ENTRY:
     case CreateMemorialActionTypes.REMOVE_TIMELINE_FILE:
     case CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE:
@@ -96,6 +97,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         }
       };
     }
+    case CreateMemorialActionTypes.UPDATE_SINGLE_TIMELINE_SUCCESS:
     case CreateMemorialActionTypes.REMOVE_TIMELINE_ENTRY_SUCCESS:
     case CreateMemorialActionTypes.UPDATE_TIMELINE_SUCCESS: {
       return {
@@ -153,6 +155,7 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         }
       };
     }
+    case CreateMemorialActionTypes.UPDATE_SINGLE_TIMELINE_FAILURE:
     case CreateMemorialActionTypes.REMOVE_TIMELINE_ENTRY_FAILURE:
     case CreateMemorialActionTypes.UPDATE_MEMORY_STATUS_FAILURE:
     case CreateMemorialActionTypes.UPDATE_LOCATION_FAILURE:

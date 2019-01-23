@@ -1,5 +1,8 @@
 @import "src/styles.scss";
 
+.desktop {
+  display: none;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -8,6 +11,12 @@
   .asset {
     width: 100%;
     height: rem(224);
+    &.portrait {
+      height: rem(400)
+    }
+    &.image-border {
+      overflow: hidden;
+    }
     &.video-asset {
       display: flex;
       align-items: center;
@@ -54,10 +63,19 @@
   }
 }
 @include respond-to('small') {
+  .mobile {
+    display: none;
+  }
+  .desktop {
+    display: block;
+  }
   .container {
     width: rem(576);
     .asset {
       height: rem(320);
+      &.portrait {
+        height: rem(576);
+      }
       &.video-asset {
         iframe {
           width: rem(496);
@@ -83,8 +101,11 @@
     width: rem(1176);
     margin: rem(70) auto;
     .asset {
-      width: rem(684);
-      height: rem(500);
+      width: rem(704);
+      height: rem(448);
+      &.portrait {
+        height: rem(704);
+      }
       &.video-asset {
         iframe {
           width: rem(600);
@@ -96,7 +117,7 @@
       position: relative;
       margin-top: 0;
       width: rem(392);
-      min-height: rem(392);
+      min-height: rem(336);
       padding: rem(32);
       padding-bottom: rem(80);
       height: fit-content;

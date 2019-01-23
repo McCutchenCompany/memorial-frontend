@@ -1,7 +1,9 @@
 <div class="container">
-  <h4>Memories</h4>
-  <mat-checkbox [value]="!public" (change)="togglePublic()" color="primary">Ask for my approval before publishing memories</mat-checkbox>
-  <div class="memory-container" *ngIf="!public">
+  <div class="form-container mat-elevation-z3">
+    <h4>Memories</h4>
+    <mat-checkbox [value]="!public" (change)="togglePublic()" color="primary">Ask for my approval before publishing memories</mat-checkbox>
+  </div>
+  <div class="memory-container mat-elevation-z3" *ngIf="!public">
     <div class="for-approval">
       <div class="title">
         <div class="actions">
@@ -11,7 +13,7 @@
           </button>
         </div>
         <h4>Need Approval</h4>
-        <div class="number">
+        <div class="number" [class.empty]="toApprove.length === 0">
           <p>{{ toApprove.length }}</p>
         </div>
       </div>
@@ -30,7 +32,7 @@
           </button>
         </div>
         <h4>Denied</h4>
-        <div class="number">
+        <div class="number" [class.empty]="denied.length === 0">
           <p>{{ denied.length }}</p>
         </div>
       </div>
@@ -49,7 +51,7 @@
           </button>
         </div>
         <h4>Approved</h4>
-        <div class="number">
+        <div class="number" [class.empty]="approved.length === 0">
           <p>{{ approved.length }}</p>
         </div>
       </div>

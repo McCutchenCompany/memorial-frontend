@@ -42,6 +42,9 @@ import {
   UpdateMemoryStatus,
   UpdateMemoryStatusFailure,
   UpdateMemoryStatusSuccess,
+  UpdateSingleTimeline,
+  UPdateSingleTimelineFailure,
+  UpdateSingleTimelineSuccess,
   UpdateTimeline,
   UpdateTimelineFailure,
   UpdateTimelineSuccess,
@@ -104,6 +107,15 @@ export class CreateMemorialEffects {
     switchMap((action: UpdateTimeline) => this.api.updateTimeline(action.payload.memorial_id, action.payload.timelines).pipe(
       map((res: Timeline[]) => new UpdateTimelineSuccess(res)),
       catchError(error => of(new UpdateTimelineFailure(error)))
+    ))
+  );
+
+  @Effect()
+  updateSingleTimeline$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPDATE_SINGLE_TIMELINE),
+    switchMap((action: UpdateSingleTimeline) => this.api.updateSingleTimeline(action.payload.timeline_id, action.payload.body).pipe(
+      map(res => new UpdateSingleTimelineSuccess(res)),
+      catchError(error => of(new UPdateSingleTimelineFailure(error)))
     ))
   );
 

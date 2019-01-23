@@ -1,0 +1,51 @@
+@import "src/styles.scss";
+
+.container {
+
+  .image-viewer {
+    height: rem(156);
+    width: rem(256);
+    cursor: move;
+    background-color: map-get($colors, gray);
+  }
+  .image-border {
+    width: rem(256);
+    height: rem(156);
+    overflow: hidden;
+    border: 3px solid map-get($colors, dark-gray);
+    background-color: map-get($colors, gray);
+    .portrait {
+      height: rem(256);
+    }
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .center, .rotation {
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+    }
+  }
+  mat-slider {
+    width: 100%;
+  }
+}
+@include respond-to('small') {
+  .container {
+    .image-viewer {
+      height: rem(168);
+      width: rem(320);
+    }
+    .image-border {
+      width: rem(320);
+      height: rem(168);
+      .portrait {
+        height: rem(320);
+      }
+    }
+  }
+}
