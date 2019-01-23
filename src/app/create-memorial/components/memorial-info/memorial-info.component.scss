@@ -18,7 +18,7 @@
       width: 200%;
       height: rem(340);
       left: rem(-35);
-      top: rem(93);
+      top: rem(320);
     }
     .box-2 {
       background: map-get($colors, primary-light);
@@ -26,6 +26,7 @@
       width: 150%;
       height: rem(400);
       left: rem(-60);
+      top: rem(100);
     }
     .box-3 {
       background: map-get($colors, primary);
@@ -98,6 +99,7 @@
         width: 200%;
         height: rem(420);
         left: -30%;
+        top: rem(93);
         transform: rotate(-126deg);
       }
       .box-2 {

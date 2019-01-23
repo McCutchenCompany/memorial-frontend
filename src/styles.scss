@@ -230,6 +230,15 @@ button {
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+@include respond-to('medium') {
+  .no-scroll {
+    overflow: initial;
+  }
+}
+
 .mat-form-field-appearance-outline .mat-form-field-flex {
   height: rem(52);
 }
@@ -296,4 +305,8 @@ mat-card.mat-card {
 mat-dialog-container.mat-dialog-container {
   max-height: fit-content;
   height: 100vh;
+}
+
+mat-checkbox label.mat-checkbox-layout {
+  white-space: normal;
 }

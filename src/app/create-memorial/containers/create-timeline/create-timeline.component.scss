@@ -1,8 +1,51 @@
 @import "src/styles.scss";
 
+.flourish {
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+  transform: translateY(-9%);
+  .flourish-container {
+    position: relative;
+    width: 100%;
+    .box-2, .box-3 {
+      position: absolute;
+    }
+    .box-1-container {
+      width: rem(1286);
+      margin: auto;
+      padding-top: rem(20);
+    }
+    .box-1 {
+      height: rem(840);
+      background: map-get($colors, primary);
+      width: rem(340);
+      clip-path: polygon(0 0, 75% 7%,75% 100%, 0% 100%);
+    }
+    .box-2 {
+      height: rem(850);
+      width: rem(350);
+      background: map-get($colors, primary-light);
+      top: rem(176);
+      left: rem(290);
+      clip-path: polygon(0 4%, 75% 0, 75% 100%, 0% 100%);
+    }
+    .box-3 {
+      height: rem(900);
+      width: rem(370);
+      background: map-get($colors, primary-lightest);
+      right: rem(60);
+      top: rem(120);
+      clip-path: polygon(0 0%, 74% 25%, 75% 100%, 0% 100%);
+    }
+  }
+}
 .container {
-  width: 95%;
+  width: 89%;
   margin: rem(68) auto rem(125);
+  background: rgba(255,255,255,0.9);
+  padding: rem(16) rem(16) 0;
+  border-radius: 4px;
   .spacer {
     width: 100%;
     border: 1px solid map-get($colors, gray);
@@ -25,5 +68,6 @@
 @include respond-to('small') {
   .container {
     width: rem(696);
+    padding: rem(32) rem(32) 0;
   }
 }
