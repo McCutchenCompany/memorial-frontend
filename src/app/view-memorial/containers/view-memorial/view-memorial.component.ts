@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { User } from '@shared/models/user.model';
+import { GoogleAnalyticsService } from '@shared/services/google-analytics.service';
 import { Auth0Login } from '@store/auth/auth.actions';
 import { getUser } from '@store/auth/auth.reducer';
 import { ViewMemorialState } from '@store/models/view-memorial-state.model';
@@ -31,7 +32,8 @@ export class ViewMemorialComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public store: Store<ViewMemorialState>
+    public store: Store<ViewMemorialState>,
+    private analytics: GoogleAnalyticsService
   ) {
     this.selectedMemorial$ = this.store.pipe(select(getViewMemorial));
     this.loading$ = this.store.pipe(select(getViewMemorialLoading));
@@ -45,6 +47,7 @@ export class ViewMemorialComponent implements OnInit {
       if (params.id) {
         this.memorial_id = params.id;
         this.store.dispatch(new GetMemorial(params.id));
+        this.analytics.sendEvent(params.id, 'Memorial View', 'Memorial ID');
       }
     });
   }

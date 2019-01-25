@@ -5,6 +5,8 @@ import { AuthState } from '@store/models/auth-state.model';
 import { getRouterState } from '@store/router';
 import { Observable } from 'rxjs';
 
+import { GoogleAnalyticsService } from './shared/services/google-analytics.service';
+
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,10 @@ export class AppComponent implements OnInit {
 
   route$: Observable<any>;
 
-  constructor(private store: Store<AuthState>) {
+  constructor(
+    private store: Store<AuthState>,
+    private analytics: GoogleAnalyticsService
+  ) {
     this.route$ = this.store.pipe(select(getRouterState));
   }
 
@@ -23,5 +28,7 @@ export class AppComponent implements OnInit {
     if (localStorage.access_token) {
       this.store.dispatch(new LocalTokenCheck());
     }
+    this.analytics.sendPageViews();
+    this.analytics.sendUserId();
   }
 }
