@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { GoogleAnalyticsService } from '@shared/services/google-analytics.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -14,7 +15,8 @@ export class SearchBarComponent implements OnInit {
   searchForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private analytics: GoogleAnalyticsService
   ) { }
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class SearchBarComponent implements OnInit {
   onSubmit() {
     if (this.searchForm.dirty) {
       this.search.emit(this.searchForm.value);
+      this.analytics.sendEvent(this.searchForm.value, 'Search Term');
     }
   }
 

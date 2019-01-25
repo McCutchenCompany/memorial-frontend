@@ -1,6 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import {
+  GestureConfig,
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
@@ -8,7 +9,7 @@ import {
   MatMenuModule,
   MatProgressSpinnerModule,
 } from '@angular/material';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -70,6 +71,10 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: GestureConfig
     }
   ],
   entryComponents: [

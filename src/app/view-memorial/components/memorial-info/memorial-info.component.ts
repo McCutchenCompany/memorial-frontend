@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { environment } from '@environments/environment.staging';
 import { LocationMarker } from '@shared/models/location-marker.model';
 import { Memorial } from '@shared/models/memorial.model';
+import { GoogleAnalyticsService } from '@shared/services/google-analytics.service';
 
 @Component({
   selector: 'app-memorial-info',
@@ -13,12 +14,15 @@ export class MemorialInfoComponent implements OnInit {
   @Input() memorial: Memorial;
   @Input() location: LocationMarker;
 
-  constructor() { }
+  constructor(
+    private analytics: GoogleAnalyticsService
+  ) { }
 
   ngOnInit() {
   }
 
   shareFacebook() {
+    this.analytics.sendEvent(`Facebook: ${this.memorial.uuid}`, 'Shared', 'Facebook');
     const body = {
       'og:url': `https://staging.mymemorial.co/memorial/${this.memorial.uuid}`,
       'og:title': `${this.memorial.first_name} ${this.memorial.last_name}`,
@@ -34,6 +38,7 @@ export class MemorialInfoComponent implements OnInit {
   }
 
   sharePinterest() {
+    this.analytics.sendEvent(`Pinterest: ${this.memorial.uuid}`, 'Shared', 'Pinterest');
     window['PinUtils'].pinOne({
       url: `https://staging.mymemorial.co/memorial/${this.memorial.uuid}`,
       media: `${environment.s3.url}${this.memorial.image}`,

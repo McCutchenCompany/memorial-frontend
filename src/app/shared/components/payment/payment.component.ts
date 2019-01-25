@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { environment } from '@environments/environment';
 import { select, Store } from '@ngrx/store';
+import { GoogleAnalyticsService } from '@shared/services/google-analytics.service';
 import { getDiscountError, PurchaseLicense } from '@store/app';
 import { CheckDiscount } from '@store/app/app.actions';
 import { getAppError, getDiscount, getPurchased } from '@store/app/app.reducer';
@@ -50,7 +51,8 @@ export class PaymentComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     public store: Store<any>,
-    public dialogRef: MatDialogRef<PaymentComponent>
+    public dialogRef: MatDialogRef<PaymentComponent>,
+    private analytics: GoogleAnalyticsService
   ) {
     this.discountError$ = this.store.pipe(select(getDiscountError));
     this.discount$ = this.store.pipe(select(getDiscount));
@@ -59,6 +61,7 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.analytics.sendEvent('Opened Purchase', 'Sales');
     this.buildForm();
     this.setStripeKey();
     this.discountError$.subscribe(res => {
@@ -95,6 +98,7 @@ export class PaymentComponent implements OnInit {
   }
 
   createToken(card) {
+    this.analytics.sendEvent('Complete Purchase', 'Sales', 'Conversion', this.quantityForm.value.price);
     if (this.quantityForm.value.price > 0) {
       (<any>window).Stripe.card.createToken(card, (status: number, response: any) => {
         if (status === 200) {

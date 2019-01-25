@@ -20,6 +20,7 @@ export class ImageEditorComponent implements OnInit {
   imageFormat: FormGroup;
 
   rotations = [0, 90, 180, 270];
+  position = {x: 0, y: 0};
 
   get imgBackground() {
     const height = this.imageFormat.value.rot === 90 || this.imageFormat.value.rot === 270 ? '20' : '10.5';
@@ -57,6 +58,25 @@ export class ImageEditorComponent implements OnInit {
 
   recenter() {
     this.imageFormat.patchValue({posY: 0, posX: 0});
+  }
+
+  onMobileDrag(event) {
+    if (event.type === 'panstart') {
+      this.position = {x: 0, y: 0};
+    }
+    const drag = {
+      pressure: 1,
+      movementX: 0,
+      movementY: 0
+    };
+    if (this.position.x !== event.deltaX) {
+      drag.movementX = event.deltaX - this.position.x;
+    }
+    if (this.position.y !== event.deltaY) {
+      drag.movementY = event.deltaY - this.position.y;
+    }
+    this.position = {x: event.deltaX, y: event.deltaY};
+    this.onDrag(drag);
   }
 
   onCenterVert() {

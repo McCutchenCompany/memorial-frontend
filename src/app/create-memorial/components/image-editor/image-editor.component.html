@@ -8,7 +8,8 @@
     [style.background-size]="imgBackground.size"
     [style.transform]="imgBackground.scale"
     [class.portrait]="imageFormat.value.rot === 90 || imageFormat.value.rot === 270"
-    (pointermove)="onDrag($event)"></div>
+    (panstart)="onMobileDrag($event)"
+    (panmove)="onMobileDrag($event)"></div>
   </div>
   <div class="rotation">
     <h6>Rotate</h6>
