@@ -17,7 +17,7 @@ export class GoogleAnalyticsService {
   userId;
 
   constructor(
-    private store: Store<RouterReducerState<RouterStateUrl>>
+    public store: Store<RouterReducerState<RouterStateUrl>>
   ) {
     this.routerState$ = this.store.pipe(select(getRouterState));
     this.user$ = this.store.pipe(select(getUser));

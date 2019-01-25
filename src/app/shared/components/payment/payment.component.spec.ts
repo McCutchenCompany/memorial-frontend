@@ -55,6 +55,7 @@ describe('PaymentComponent', () => {
         return;
       }
     };
+    (<any>window).gtag = () => {};
     fixture = TestBed.createComponent(PaymentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
