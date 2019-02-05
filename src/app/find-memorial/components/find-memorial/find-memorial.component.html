@@ -35,6 +35,11 @@
       <p>Most viewed Memorials</p>
       <div class="divider"></div>
     </div>
+    <div *ngIf="!(searchQuery$ | async)" class="results">
+      <div class="cards" (mouseenter)="onCardHover(memorial)" (mouseleave)="onCardHover()" *ngFor="let memorial of (popularMemorials$ | async)">
+        <app-memorial-result-card [memorial]="memorial" [markerHover]="hoveredMarker.memorial?.uuid"></app-memorial-result-card>
+      </div>
+    </div>
   </div>
 </div>
 <div class="map" [class.hide]="!displayMap" *ngIf="!(searchQuery$ | async)">

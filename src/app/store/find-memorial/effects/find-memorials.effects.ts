@@ -6,6 +6,9 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 
 import {
   findMemorialActionTypes,
+  GetPopularMemorials,
+  GetPopularMemorialsFailure,
+  GetPopularMemorialsSuccess,
   SearchMemorials,
   SearchMemorialsFailure,
   SearchMemorialsSuccess,
@@ -38,6 +41,15 @@ export class FindMemorialsEffects {
     switchMap((action: SearchMemorials) => this.apiService.searchMemorials(action.payload).pipe(
       map((memorials: Memorial[]) => new SearchMemorialsSuccess(memorials)),
       catchError(error => of(new SearchMemorialsFailure(error)))
+    ))
+  );
+
+  @Effect()
+  getPopularMemorials$: Observable<Action> = this.actions.pipe(
+    ofType(findMemorialActionTypes.GET_POPULAR_MEMORIALS),
+    switchMap((action: GetPopularMemorials) => this.apiService.getPopularMemorials().pipe(
+      map(res => new GetPopularMemorialsSuccess(res)),
+      catchError(error => of(new GetPopularMemorialsFailure(error)))
     ))
   );
 }

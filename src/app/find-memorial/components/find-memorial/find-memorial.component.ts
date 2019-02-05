@@ -3,8 +3,14 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { LocationMarker } from '@shared/models/location-marker.model';
-import { ClearSearchMemorials, GetInRange, SearchMemorials } from '@store/find-memorial/actions/action.types';
+import {
+  ClearSearchMemorials,
+  GetInRange,
+  GetPopularMemorials,
+  SearchMemorials,
+} from '@store/find-memorial/actions/action.types';
 import { getAllMemorialMarkers, getMarkerMemorials } from '@store/find-memorial/selectors/memorial-markers.selector';
+import { getAllPopularMemorials } from '@store/find-memorial/selectors/popular-memorials.selector';
 import { getLatitude, getLongitude, getSetLocation } from '@store/find-memorial/selectors/position.selector';
 import { AppState } from '@store/models/app-state.model';
 import { Observable } from 'rxjs';
@@ -36,6 +42,8 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
   searchLoading$: Observable<boolean>;
   markersLoading$: Observable<boolean>;
   locationSet$: Observable<boolean>;
+  popularMemorials$: Observable<Memorial[]>;
+  popularLoading$: Observable<boolean>;
 
   memorials$: Observable<Memorial[]>;
 
@@ -81,6 +89,7 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
     this.searchLoading$ = this.store.pipe(select(getSearchLoading));
     this.markersLoading$ = this.store.pipe(select(getMarkersLoading));
     this.locationSet$ = this.store.pipe(select(getSetLocation));
+    this.popularMemorials$ = this.store.pipe(select(getAllPopularMemorials));
     this.searchQuery$.subscribe(query => {
       if (query) {
         this.memorials$ = this.store.pipe(select(getAllSearchMemorials));
@@ -97,6 +106,7 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.geo.findMe();
+    this.store.dispatch(new GetPopularMemorials());
   }
 
   ngOnDestroy() {

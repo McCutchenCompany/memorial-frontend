@@ -14,10 +14,10 @@ import {
 import { EffectsModule } from '@ngrx/effects';
 
 import { StoreModule } from '../../../node_modules/@ngrx/store';
+import { SharedModule } from './../shared/shared.module';
 import { FindMemorialsEffects } from './../store/find-memorial/effects/find-memorials.effects';
 import { findMemorialReducer } from './../store/find-memorial/reducers';
 import { FindMemorialComponent } from './components/find-memorial/find-memorial.component';
-import { MemorialResultCardComponent } from './components/memorial-result-card/memorial-result-card.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FindMemorialRoutingModule } from './find-memorial-routing.module';
 
@@ -36,11 +36,12 @@ import { FindMemorialRoutingModule } from './find-memorial-routing.module';
     MatProgressSpinnerModule,
     FindMemorialRoutingModule,
     ReactiveFormsModule,
+    SharedModule,
     StoreModule.forFeature('find-memorial', findMemorialReducer),
     EffectsModule.forFeature([
       FindMemorialsEffects
     ])
   ],
-  declarations: [FindMemorialComponent, SearchBarComponent, MemorialResultCardComponent]
+  declarations: [FindMemorialComponent, SearchBarComponent ]
 })
 export class FindMemorialModule { }

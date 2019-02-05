@@ -19,6 +19,7 @@ import { SharedModule } from '@shared/shared.module';
 import { AppEffects, appReducer } from '@store/app';
 import { AuthEffects } from '@store/auth/auth.effects';
 import { reducer } from '@store/auth/auth.reducer';
+import { popularMemorialsReducer } from '@store/find-memorial/reducers/popular.reducer';
 
 import { RouterModule } from '../../node_modules/@angular/router';
 import { routerReducer, StoreRouterConnectingModule } from '../../node_modules/@ngrx/router-store';
@@ -29,6 +30,7 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/containers/landing-page/landing-page.component';
 import { NavHeaderComponent } from './shared/components/nav-header/nav-header.component';
 import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
+import { FindMemorialsEffects } from './store/find-memorial/effects/find-memorials.effects';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
     StoreModule.forRoot({
       app: appReducer,
       router: routerReducer,
-      auth: reducer
+      auth: reducer,
+      popular: popularMemorialsReducer
     }),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router'
@@ -63,7 +66,8 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
       : [],
     EffectsModule.forRoot([
       AuthEffects,
-      AppEffects
+      AppEffects,
+      FindMemorialsEffects
     ])
   ],
   providers: [

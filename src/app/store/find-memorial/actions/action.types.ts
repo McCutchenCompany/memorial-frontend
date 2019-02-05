@@ -16,6 +16,9 @@ export const findMemorialActionTypes = {
   SEARCH_MEMORIALS: '[Find Memorials] Search memorials',
   SEARCH_MEMORIALS_SUCCESS: '[Find Memorials] Search memorials success',
   SEARCH_MEMORIALS_FAILURE: '[Find Memorials] Search memorials failure',
+  GET_POPULAR_MEMORIALS: '[Find Memorials] Get popular memorials',
+  GET_POPULAR_MEMORIALS_SUCCESS: '[Find Memorials] Get popular memorials success',
+  GET_POPULAR_MEMORIALS_FAILURE: '[Find Memorials] Get popular memorials failure',
   CLEAR_SEARCH_MEMORIALS: '[Find Memorials] Clear search memorials'
 };
 
@@ -70,6 +73,18 @@ export class SearchMemorialsFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class GetPopularMemorials implements Action {
+  readonly type = findMemorialActionTypes.GET_POPULAR_MEMORIALS;
+}
+export class GetPopularMemorialsSuccess implements Action {
+  readonly type = findMemorialActionTypes.GET_POPULAR_MEMORIALS_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class GetPopularMemorialsFailure implements Action {
+  readonly type = findMemorialActionTypes.GET_POPULAR_MEMORIALS_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export class ClearSearchMemorials implements Action {
   readonly type = findMemorialActionTypes.CLEAR_SEARCH_MEMORIALS;
 }
@@ -84,4 +99,7 @@ export type All =
   | SearchMemorials
   | SearchMemorialsSuccess
   | SearchMemorialsFailure
+  | GetPopularMemorials
+  | GetPopularMemorialsSuccess
+  | GetPopularMemorialsFailure
   | ClearSearchMemorials;

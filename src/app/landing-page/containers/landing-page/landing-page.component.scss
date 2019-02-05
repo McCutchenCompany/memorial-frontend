@@ -116,8 +116,23 @@
       }
     }
   }
+  .most-viewed {
+    h3 {
+      margin-bottom: rem(32);
+    }
+  }
+  .popular {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: rem(390);
+    margin: auto;
+    app-memorial-result-card {
+      margin-bottom: rem(32);
+    }
+  }
   .cta {
-    margin: 0 auto rem(133);
+    margin: rem(64) auto rem(133);
     width: rem(390);
     text-align: center;
     h6 {
@@ -150,6 +165,10 @@
           width: 75%;
         }
       }
+    }
+    .popular {
+      width: rem(720);
+      margin: auto;
     }
     .price {
       width: rem(776);
@@ -199,6 +218,9 @@
           width: 90%;
         }
       }
+    }
+    .popular {
+      width: 100%;
     }
     .description {
       margin: rem(104) 0 rem(128);

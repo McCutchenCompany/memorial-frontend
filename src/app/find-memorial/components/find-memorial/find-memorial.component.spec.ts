@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { GeolocationService } from './../../services/geolocation.service';
-import { MemorialResultCardComponent } from './../memorial-result-card/memorial-result-card.component';
+import { MemorialResultCardComponent } from '@shared/components/memorial-result-card/memorial-result-card.component';
 import { FindMemorialComponent } from './find-memorial.component';
 
 describe('FindMemorialComponent', () => {

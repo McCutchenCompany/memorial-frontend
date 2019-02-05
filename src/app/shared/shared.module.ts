@@ -19,6 +19,7 @@ import { CreditCardDirectivesModule } from 'angular-cc-library';
 
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MemorialResultCardComponent } from './components/memorial-result-card/memorial-result-card.component';
 import { MemoryEditDialogComponent } from './components/memory-edit-dialog/memory-edit-dialog.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { PaymentConfirmationComponent } from './components/payment-confirmation/payment-confirmation.component';
@@ -55,7 +56,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     ConfirmDialogComponent,
     PaymentComponent,
     FooterComponent,
-    MemoryEditDialogComponent
+    MemoryEditDialogComponent,
+    MemorialResultCardComponent
   ],
   declarations: [
     UploadImageComponent,
@@ -68,7 +70,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     ResponseDialogComponent,
     TermsOfServiceComponent,
     PaymentConfirmationComponent,
-    MemoryEditDialogComponent
+    MemoryEditDialogComponent,
+    MemorialResultCardComponent
   ],
   entryComponents: [
     UploadDialogComponent,

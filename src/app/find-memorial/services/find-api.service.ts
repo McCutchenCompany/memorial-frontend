@@ -28,4 +28,9 @@ export class FindApiService {
     const path = `${this.API_URL}/public_memorials/search?query=${encodeURI(query)}`;
     return this.http.get(path);
   }
+
+  getPopularMemorials() {
+    const path = `${this.API_URL}/public_memorials/popular`;
+    return this.http.get(path);
+  }
 }
