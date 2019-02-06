@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { GetCreateMemorial, UpdateCreateMemorial } from '@store/create-memorial/create-memorial.actions';
 import {
-  getCreatedSaved,
   getCreateError,
   getCreateLoaded,
   getCreateLoading,
@@ -81,19 +80,7 @@ export class CreateMemorialComponent implements OnInit {
   }
 
   onUpdateMemorial(body) {
-    const payload = {
-      uuid: this.memorialUUID,
-      body
-    };
-    this.store.dispatch(new UpdateCreateMemorial(payload));
-    if (body.first_name) {
-      const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
-        if (res) {
-          this.onTabChange({tab: {textLabel: 'timeline'}});
-          sub.unsubscribe();
-        }
-      });
-    }
+
   }
 
   togglePublish(published) {
