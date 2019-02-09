@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule, MatCheckboxModule, MatIconModule } from '@angular/material';
+import { MatCardModule, MatCheckboxModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { configureTestSuite } from 'ng-bullet';
 
 import { ApprovalCardComponent } from './../approval-card/approval-card.component';
@@ -18,7 +18,8 @@ describe('ApproveMemoriesComponent', () => {
       imports: [
         MatCheckboxModule,
         MatIconModule,
-        MatCardModule
+        MatCardModule,
+        MatProgressSpinnerModule
       ]
     });
   });

@@ -5,9 +5,15 @@
           <mat-card-title>{{ memory.title }}</mat-card-title>
           <mat-card-subtitle>{{ memory.first_name }} {{ memory.last_name }}</mat-card-subtitle>
         </div>
-        <div *ngIf="needsApproval" class="status">
-          <button mat-button class="approve" (click)="onApprove()"><mat-icon>check</mat-icon></button>
-          <button mat-button class="deny" (click)="onDeny()"><mat-icon>clear</mat-icon></button>
+        <div class="status">
+          <button mat-button *ngIf="needsApproval || memory.denied" [disabled]="saving$ | async" class="approve" (click)="onApprove()">
+            <mat-icon *ngIf="!(saving$ | async)">check</mat-icon>
+            <mat-progress-spinner *ngIf="(saving$ | async)" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+          </button>
+          <button mat-button *ngIf="needsApproval || memory.published" [disabled]="saving$ | async" class="deny" (click)="onDeny()">
+            <mat-icon *ngIf="!(saving$ | async)">clear</mat-icon>
+            <mat-progress-spinner *ngIf="saving$ | async" mode="indeterminate" color="accent" strokeWidth="1" diameter="20"></mat-progress-spinner>
+          </button>
         </div>
       </div>
     </mat-card-header>

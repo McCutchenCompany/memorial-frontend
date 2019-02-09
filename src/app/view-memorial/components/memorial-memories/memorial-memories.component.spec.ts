@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule, MatFormFieldModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatIconModule, MatMenuModule, MatSnackBarModule } from '@angular/material';
+import { Store } from '@ngrx/store';
 import { User } from '@shared/models/user.model';
+import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
 import { MemoryCardComponent } from './../memory-card/memory-card.component';
@@ -22,7 +24,14 @@ describe('MemorialMemoriesComponent', () => {
         MatFormFieldModule,
         MatCardModule,
         MatMenuModule,
-        MatIconModule
+        MatIconModule,
+        MatSnackBarModule
+      ],
+      providers: [
+        {
+          provide: Store,
+          useClass: TestStore
+        }
       ]
     });
   });
