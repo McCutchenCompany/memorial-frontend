@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { select, Store } from '@ngrx/store';
 import { Memory } from '@shared/models/memory.model';
 import { User } from '@shared/models/user.model';
+import { ViewMemorialState } from '@store/models/view-memorial-state.model';
+import { getViewSaved, getViewSaving } from '@store/view-memorial';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-memorial-memories',
@@ -17,12 +22,20 @@ export class MemorialMemoriesComponent implements OnInit {
   @Output() addEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() login: EventEmitter<any> = new EventEmitter<any>();
 
+  saving$: Observable<boolean>;
+  saved$: Observable<boolean>;
+
   memoryForm: FormGroup;
   adding = false;
 
   constructor(
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private store: Store<ViewMemorialState>,
+    public snackbar: MatSnackBar
+  ) {
+    this.saving$ = this.store.pipe(select(getViewSaving));
+    this.saved$ = this.store.pipe(select(getViewSaved));
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -41,6 +54,14 @@ export class MemorialMemoriesComponent implements OnInit {
 
   onSubmit() {
     this.addEvent.emit(this.memoryForm.value);
+    const sub = this.saved$.subscribe(res => {
+      if (res) {
+        this.memoryForm.reset();
+        this.toggleForm();
+        this.snackbar.open('Your memory has been added', '', {duration: 3000});
+        sub.unsubscribe();
+      }
+    });
   }
 
   onLogin() {

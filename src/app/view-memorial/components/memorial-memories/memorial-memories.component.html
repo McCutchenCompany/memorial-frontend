@@ -23,18 +23,33 @@
           <mat-hint align="end">{{memoryForm.value.description.length}} / 1000</mat-hint>
         </mat-form-field>
         <div class="actions">
-          <button mat-button type="submit" [disabled]="memoryForm.invalid" class="primary">Finish</button>
+          <button mat-button type="submit" [disabled]="memoryForm.invalid || (saving$ | async)" class="primary">
+            <span *ngIf="!(saving$ | async)">Finish</span>
+            <span *ngIf="(saving$ | async)">...Sending</span>
+          </button>
           <button mat-button class="secondary" (click)="toggleForm()">Cancel</button>
         </div>
       </form>
     </div>
   </div>
-  <div class="memory-display">
+  <div class="memory-display desktop">
+    <div class="left">
+      <div *ngFor="let memory of memories; let i = index" [class.hide]="i % 2 === 0">
+        <app-memory-card *ngIf="i % 2 !== 0" [memory]="memory" [public]="public" [user]="user"></app-memory-card>
+      </div>
+    </div>
+    <div class="right">
+      <div *ngFor="let memory of memories; let i = index" [class.hide]="i % 2 !== 0">
+        <app-memory-card *ngIf="i % 2 === 0" [memory]="memory" [public]="public" [user]="user"></app-memory-card>
+      </div>
+    </div>
+  </div>
+  <div class="memory-display mobile">
     <div *ngFor="let memory of memories">
       <app-memory-card [memory]="memory" [public]="public" [user]="user"></app-memory-card>
     </div>
-    <div *ngIf="memories.length === 0">
-      <h4>There are no published memories for this memorial yet. You could be the first!</h4>
-    </div>
+  </div>
+  <div *ngIf="memories.length === 0">
+    <h4>There are no published memories for this memorial yet. You could be the first!</h4>
   </div>
 </div>

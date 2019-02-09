@@ -23,6 +23,9 @@
     justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: column;
+    &.desktop {
+      display: none;
+    }
     div {
       width: 98%;
       margin: 0 auto rem(36);
@@ -53,6 +56,15 @@
     }
     .memory-display {
       flex-direction: row;
+      &.desktop {
+        display: flex;
+        .hide {
+          display: none;
+        }
+      }
+      &.mobile {
+        display: none;
+      }
       div {
         width: rem(578);
         margin: 0 0 rem(36);
