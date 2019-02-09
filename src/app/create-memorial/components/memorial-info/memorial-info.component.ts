@@ -46,29 +46,29 @@ export class MemorialInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buildForm();
+    this.updateForm();
   }
 
   updateForm() {
-    this.memorialInfoForm.setValue({
-      first_name: this.memorialInfo.first_name || '',
-      middle_name: this.memorialInfo.middle_name || '',
-      last_name: this.memorialInfo.last_name || '',
-      birth_date: this.memorialInfo.birth_date,
-      death_date: this.memorialInfo.death_date,
-      description: this.memorialInfo.description || ''
-    });
-  }
-
-  buildForm() {
-    this.memorialInfoForm = this.fb.group({
-      first_name: ['', Validators.required],
-      middle_name: '',
-      last_name: ['', Validators.required],
-      birth_date: [null, Validators.required],
-      death_date: [null, Validators.required],
-      description: ['', Validators.required]
-    });
+    if (this.memorialInfoForm) {
+      this.memorialInfoForm.setValue({
+        first_name: this.memorialInfo.first_name || '',
+        middle_name: this.memorialInfo.middle_name || '',
+        last_name: this.memorialInfo.last_name || '',
+        birth_date: this.memorialInfo.birth_date,
+        death_date: this.memorialInfo.death_date,
+        description: this.memorialInfo.description || ''
+      });
+    } else {
+      this.memorialInfoForm = this.fb.group({
+        first_name: [this.memorialInfo.first_name || '', Validators.required],
+        middle_name: this.memorialInfo.middle_name || '',
+        last_name: [this.memorialInfo.last_name || '', Validators.required],
+        birth_date: [this.memorialInfo.birth_date, Validators.required],
+        death_date: [this.memorialInfo.death_date, Validators.required],
+        description: [this.memorialInfo.description || '', Validators.required]
+      });
+    }
   }
 
   onSave() {
@@ -80,12 +80,12 @@ export class MemorialInfoComponent implements OnInit {
       this.store.dispatch(new UpdateCreateMemorial(payload));
       const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
         if (res) {
-          this.router.navigate(['create', this.memorialInfo.uuid, 'timeline']);
+          this.router.navigate(['/create', this.memorialInfo.uuid, 'timeline']);
           sub.unsubscribe();
         }
       });
     } else {
-      this.router.navigate(['create', this.memorialInfo.uuid, 'timeline']);
+      this.router.navigate(['/create', this.memorialInfo.uuid, 'timeline']);
     }
   }
 

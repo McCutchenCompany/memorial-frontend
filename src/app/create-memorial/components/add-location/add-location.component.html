@@ -18,11 +18,12 @@
     <div *ngIf="saving$ | async" class="saving">
       <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
     </div>
-    <agm-map (boundsChange)="onCheckBounds($event)"  [streetViewControl]="false" (mapClick)="onMapClick($event)" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-map [streetViewControl]="false" (mapClick)="onMapClick($event)" [latitude]="(locationSearch$ | async).latitude" [longitude]="(locationSearch$ | async).longitude" [zoom]="(locationSearch$ | async).zoom">
       <agm-marker iconUrl="assets/imgs/marker-initial.svg" [latitude]="(memorialLocation$ | async)?.latitude" [longitude]="(memorialLocation$ | async)?.longitude"></agm-marker>
     </agm-map>
   </div>
   <div class="actions">
-    <button mat-button class="primary" (click)="onNav()">Memories <mat-icon>keyboard_arrow_right</mat-icon></button>
+    <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'timeline']"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+    <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'memories']">Next <mat-icon>keyboard_arrow_right</mat-icon></button>
   </div>
 </div>

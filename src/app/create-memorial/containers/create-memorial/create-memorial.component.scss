@@ -6,13 +6,13 @@ mat-drawer-container {
 
   mat-drawer {
     overflow: hidden;
+    border-right: 2px solid map-get($colors, primary-darkest);
   }
 
   mat-drawer-content {
     background: #fafdfe;
-    margin-left: 300px;
     margin-right: 0px;
-    height: 82%;
+    height: calc(100vh - 95px);
     overflow-x: hidden;
   }
 }
@@ -50,5 +50,24 @@ mat-drawer-container {
 @include respond-to('medium') {
   .container {
     width: rem(1176);
+  }
+}
+
+.mobile-floater {
+  display: none;
+  background-color: map-get($colors, primary) !important;
+  position: fixed;
+  z-index: 99999;
+  bottom: 0.5rem;
+  margin-left: 0.5rem;
+
+  mat-icon {
+    color: white;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mobile-floater {
+    display: block;
   }
 }

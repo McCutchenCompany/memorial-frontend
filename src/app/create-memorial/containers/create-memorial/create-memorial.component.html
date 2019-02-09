@@ -12,12 +12,15 @@
     <h6>An unexpected error occurred. Try again. If the error continues please contact support.</h6>
   </div>
 </div>
-<mat-drawer-container class="nav-container">
-  <mat-drawer mode="side" open="true">
-    <app-create-nav></app-create-nav>
+<mat-drawer-container *ngIf="(memorial$ | async).memorial" class="nav-container">
+  <mat-drawer mode="side" [opened]="opened">
+    <app-create-nav [memorial]="(memorial$ | async).memorial" (publish)="togglePublish($event)"></app-create-nav>
   </mat-drawer>
   <mat-drawer-content>
     <div class="view">
+      <button mat-fab class="mobile-floater" (click)="toggleSidebar()">
+        <mat-icon aria-label="Example icon-button with a heart icon">menu</mat-icon>
+      </button>
       <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>

@@ -58,6 +58,13 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         }
       };
     }
+    case CreateMemorialActionTypes.CLEAR_CREATE_MEMORIAL: {
+      return {
+        ...state,
+        memorial: INITIAL_STATE.memorial,
+        addressSearch: INITIAL_STATE.addressSearch
+      };
+    }
     case CreateMemorialActionTypes.SEARCH_ADDRESS_FAILURE:
     case CreateMemorialActionTypes.GET_CREATE_MEMORIAL_FAILURE: {
       return {

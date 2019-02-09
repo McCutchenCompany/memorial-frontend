@@ -50,7 +50,8 @@ export enum CreateMemorialActionTypes {
   SEARCH_ADDRESS_FAILURE = '[Create] Search Address failure',
   UPDATE_MEMORY_STATUS = '[Create] Update Memory status',
   UPDATE_MEMORY_STATUS_SUCCESS = '[Create] Update Memory status success',
-  UPDATE_MEMORY_STATUS_FAILURE = '[Create] Update Memory status failure'
+  UPDATE_MEMORY_STATUS_FAILURE = '[Create] Update Memory status failure',
+  CLEAR_CREATE_MEMORIAL = '[Create] Clear create memorial'
 }
 
 export class GetCreateMemorial implements Action {
@@ -254,6 +255,10 @@ export class UpdateMemoryStatusFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class ClearCreateMemorial implements Action {
+  readonly type = CreateMemorialActionTypes.CLEAR_CREATE_MEMORIAL;
+}
+
 export type All =
   | GetCreateMemorial
   | GetCreateMemorialSuccess
@@ -300,4 +305,5 @@ export type All =
   | UpdateLocationFailure
   | UpdateMemoryStatus
   | UpdateMemoryStatusSuccess
-  | UpdateMemoryStatusFailure;
+  | UpdateMemoryStatusFailure
+  | ClearCreateMemorial;

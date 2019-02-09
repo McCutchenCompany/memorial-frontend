@@ -7,6 +7,9 @@
   .form-container, .memory-container {
     padding: rem(16);
     background: rgba(255,255,255,0.9);
+    .back-btn {
+      margin-top: rem(32);
+    }
   }
   .memory-container {
     margin-top: rem(36);

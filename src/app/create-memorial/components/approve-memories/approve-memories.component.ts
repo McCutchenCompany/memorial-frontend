@@ -1,5 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Memory } from '@shared/models/memory.model';
+import { UpdateCreateMemorial } from '@store/create-memorial/create-memorial.actions';
+import { CreateMemorialState } from '@store/models/create-memorial-state.model';
+import { Observable } from 'rxjs';
+
+import { getCreateMemorial } from './../../../store/create-memorial/create-memorial.reducer';
 
 @Component({
   selector: 'app-approve-memories',
@@ -8,8 +14,10 @@ import { Memory } from '@shared/models/memory.model';
 })
 export class ApproveMemoriesComponent implements OnInit, OnChanges {
 
-  @Input() memories: Memory[];
-  @Input() public: boolean;
+  memorial$: Observable<any>;
+  memorialUUID: string;
+  memories: Memory[];
+  public: boolean;
 
   @Output() switchPublic: EventEmitter<any> = new EventEmitter<any>();
 
@@ -21,10 +29,21 @@ export class ApproveMemoriesComponent implements OnInit, OnChanges {
   showApproved = false;
   showDenied = false;
 
-  constructor() { }
+  constructor(
+    private store: Store<CreateMemorialState>
+  ) {
+    this.memorial$ = this.store.pipe(select(getCreateMemorial));
+  }
 
   ngOnInit() {
-    this.separateMemories();
+    this.memorial$.subscribe(res => {
+      if (res.memories) {
+        this.memories = res.memories;
+        this.public = res.memorial.public_post;
+        this.memorialUUID = res.memorial.uuid;
+        this.separateMemories();
+      }
+    });
     if (this.toApprove.length > 0) {
       this.showToApprove = true;
     }
@@ -62,9 +81,12 @@ export class ApproveMemoriesComponent implements OnInit, OnChanges {
 
   togglePublic() {
     const body = {
-      public_post: !this.public
+      uuid: this.memorialUUID,
+      body: {
+        public_post: !this.public
+      }
     };
-    this.switchPublic.emit(body);
+    this.store.dispatch(new UpdateCreateMemorial(body));
   }
 
 }

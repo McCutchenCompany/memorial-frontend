@@ -1,7 +1,8 @@
 <div class="container">
-  <div class="form-container mat-elevation-z3">
+  <div *ngIf="(memorial$ | async).memorial" class="form-container mat-elevation-z3">
     <h4>Memories</h4>
-    <mat-checkbox [value]="!public" (change)="togglePublic()" color="primary">Ask for my approval before publishing memories</mat-checkbox>
+    <mat-checkbox [checked]="!(memorial$ | async).memorial.public_post" (change)="togglePublic()" color="primary">Ask for my approval before publishing memories</mat-checkbox><br>
+    <button mat-button class="primary back-btn" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'location']"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
   </div>
   <div class="memory-container mat-elevation-z3" *ngIf="!public">
     <div class="for-approval">

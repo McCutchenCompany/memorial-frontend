@@ -1,8 +1,13 @@
 import { MapsAPILoader } from '@agm/core';
-import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { getCreatedSaving, getCreateMemorialLocation } from '@store/create-memorial';
+import {
+  getCreatedSaving,
+  getCreateMemorial,
+  getCreateMemorialLocation,
+  getCreateSearchAddress,
+} from '@store/create-memorial';
 import { SearchAddress, SearchAddressSuccess, UpdateLocation } from '@store/create-memorial/create-memorial.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
@@ -14,12 +19,9 @@ import { Observable } from 'rxjs';
 })
 export class AddLocationComponent implements OnInit {
 
-  @Input() latitude: number;
-  @Input() longitude: number;
-  @Input() zoom: number;
-  @Input() memorial_id: string;
-
-  @Output() toMemories: EventEmitter<any> = new EventEmitter<any>();
+  locationSearch$: Observable<any>;
+  memorial$: Observable<any>;
+  memorial_id: string;
 
   @ViewChild('search') searchElRef: ElementRef;
 
@@ -35,6 +37,13 @@ export class AddLocationComponent implements OnInit {
   ) {
     this.memorialLocation$ = this.store.pipe(select(getCreateMemorialLocation));
     this.saving$ = this.store.pipe(select(getCreatedSaving));
+    this.locationSearch$ = this.store.pipe(select(getCreateSearchAddress));
+    this.memorial$ = this.store.pipe(select(getCreateMemorial));
+    this.memorial$.subscribe(res => {
+      if (res.memorial) {
+        this.memorial_id = res.memorial.uuid;
+      }
+    });
   }
 
   ngOnInit() {
@@ -90,13 +99,6 @@ export class AddLocationComponent implements OnInit {
       };
       this.store.dispatch(new UpdateLocation(payload));
     }
-  }
-
-  onCheckBounds(event) {
-  }
-
-  onNav() {
-    this.toMemories.emit({tab: {textLabel: 'memories'}});
   }
 
 }

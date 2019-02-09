@@ -14,6 +14,9 @@ export class PaymentConfirmationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dialogRef.backdropClick().subscribe(res => {
+      this.dialogRef.close();
+    });
   }
 
 }
