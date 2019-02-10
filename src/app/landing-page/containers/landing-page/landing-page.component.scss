@@ -73,15 +73,16 @@
       background-image: url("/assets/imgs/location-temp.jpeg");
     }
     .timeline-img {
-      background-image: url("/assets/imgs/timeline-temp.jpg");
+      background-image: url("/assets/imgs/timeline-temp.jpeg");
     }
     .memories-img {
-      background-image: url("/assets/imgs/memories-temp.jpg");
+      background-image: url("/assets/imgs/memories-temp.jpeg");
     }
     .location-img, .memories-img, .timeline-img {
       height: rem(272);
       width: rem(336);
       background-size: cover;
+      margin: auto;
     }
     .location, .timeline, .memories {
       width: rem(336);
@@ -118,15 +119,17 @@
   }
   .most-viewed {
     h3 {
+      width: 85%;
       margin-bottom: rem(32);
+      margin: auto;
     }
   }
   .popular {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
     width: rem(390);
-    margin: auto;
+    margin: rem(32) auto 0;
     app-memorial-result-card {
       margin-bottom: rem(32);
     }
@@ -169,10 +172,11 @@
     .popular {
       width: rem(720);
       margin: auto;
+      justify-content: space-between;
     }
     .price {
       width: rem(776);
-      margin: 0 auto rem(128);
+      margin: rem(64) auto rem(128);
       .price-cut {
         .strike {
           font-size: rem(32);
@@ -221,6 +225,12 @@
     }
     .popular {
       width: 100%;
+    }
+    .most-viewed {
+      h3 {
+        width: initial;
+        margin: initial;
+      }
     }
     .description {
       margin: rem(104) 0 rem(128);
