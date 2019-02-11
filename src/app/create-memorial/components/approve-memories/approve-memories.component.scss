@@ -7,6 +7,15 @@
   .form-container, .memory-container {
     padding: rem(16);
     background: rgba(255,255,255,0.9);
+    mat-checkbox {
+      display: block;
+      margin-top: rem(32);
+    }
+    .action {
+      margin-top: rem(32);
+      display: flex;
+      justify-content: space-between;
+    }
   }
   .memory-container {
     margin-top: rem(36);

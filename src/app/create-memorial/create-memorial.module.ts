@@ -8,12 +8,14 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDatepickerModule,
+  MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatNativeDateModule,
   MatProgressSpinnerModule,
   MatSelectModule,
+  MatSidenavModule,
   MatSliderModule,
   MatTabsModule,
 } from '@angular/material';
@@ -31,8 +33,10 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { TimelineFormComponent } from './components/timeline-form/timeline-form.component';
 import { CreateMemorialComponent } from './containers/create-memorial/create-memorial.component';
+import { CreateNavComponent } from './containers/create-nav/create-nav.component';
 import { CreateTimelineComponent } from './containers/create-timeline/create-timeline.component';
 import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
+
 
 @NgModule({
   imports: [
@@ -50,6 +54,8 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     MatTabsModule,
     MatSelectModule,
     MatSliderModule,
+    MatSidenavModule,
+    MatDividerModule,
     ReactiveFormsModule,
     SharedModule,
     StoreModule.forFeature('createMemorial', fromStore.createMemorialReducer),
@@ -71,7 +77,8 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     AddLocationComponent,
     ApproveMemoriesComponent,
     ApprovalCardComponent,
-    ImageEditorComponent
+    ImageEditorComponent,
+    CreateNavComponent
   ],
   entryComponents: [
     ImageEditorComponent

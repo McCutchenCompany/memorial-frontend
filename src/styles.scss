@@ -233,6 +233,9 @@ button {
 .no-scroll {
   overflow: hidden;
 }
+.create-no-scroll {
+  overflow: hidden;
+}
 @include respond-to('medium') {
   .no-scroll {
     overflow: initial;

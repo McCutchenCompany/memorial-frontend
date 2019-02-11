@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Memorial } from '@shared/models/memorial.model';
-import { Timeline } from '@shared/models/timeline.model';
-import { getCreatedSaving, getEditingIds } from '@store/create-memorial';
+import { getCreatedSaving, getCreateMemorial, getEditingIds } from '@store/create-memorial';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
 
@@ -15,8 +14,8 @@ import { AddTimelineEntry } from './../../../store/create-memorial/create-memori
 })
 export class CreateTimelineComponent implements OnInit {
 
-  @Input() memorial: Memorial;
-  @Input() timeline: Timeline[];
+  memorial$: Observable<any>;
+  memorial: Memorial;
 
   @Output() toLocation: EventEmitter<any> = new EventEmitter<any>();
 
@@ -28,6 +27,12 @@ export class CreateTimelineComponent implements OnInit {
   ) {
     this.editingIds$ = this.store.pipe(select(getEditingIds));
     this.saving$ = this.store.pipe(select(getCreatedSaving));
+    this.memorial$ = this.store.pipe(select(getCreateMemorial));
+    this.memorial$.subscribe(res => {
+      if (res.memorial) {
+        this.memorial = res.memorial;
+      }
+    });
   }
 
   ngOnInit() {
@@ -39,10 +44,6 @@ export class CreateTimelineComponent implements OnInit {
       body: {}
     };
     this.store.dispatch(new AddTimelineEntry(payload));
-  }
-
-  onNavToLocation() {
-    this.toLocation.emit({tab: {textLabel: 'location'}});
   }
 
 }

@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { GetCreateMemorial, UpdateCreateMemorial } from '@store/create-memorial/create-memorial.actions';
 import {
-  getCreatedSaved,
+  ClearCreateMemorial,
+  GetCreateMemorial,
+  UpdateCreateMemorial,
+} from '@store/create-memorial/create-memorial.actions';
+import {
   getCreateError,
   getCreateLoaded,
   getCreateLoading,
@@ -18,7 +22,7 @@ import { Observable } from 'rxjs';
   templateUrl: './create-memorial.component.html',
   styleUrls: ['./create-memorial.component.scss']
 })
-export class CreateMemorialComponent implements OnInit {
+export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy {
 
   memorial$: Observable<any>;
   loading$: Observable<boolean>;
@@ -26,6 +30,9 @@ export class CreateMemorialComponent implements OnInit {
   locationSearch$: Observable<any>;
   error$: Observable<any>;
   routeFragment = 'info';
+
+  public medium = 1200;
+  public opened = true;
 
   memorialUUID;
 
@@ -50,7 +57,8 @@ export class CreateMemorialComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store<CreateMemorialState>,
-    private router: Router
+    private renderer: Renderer2,
+    private breakpoint: BreakpointObserver
   ) {
     this.memorial$ = this.store.pipe(select(getCreateMemorial));
     this.loading$ = this.store.pipe(select(getCreateLoading));
@@ -65,35 +73,35 @@ export class CreateMemorialComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.fragment.subscribe(fragment => this.routeFragment = fragment);
+    this.renderer.addClass(document.body, 'create-no-scroll');
     this.route.params.subscribe(params => {
       if (params.id) {
         this.store.dispatch(new GetCreateMemorial(params.id));
+        this.memorialUUID = params.id;
       }
     });
   }
 
-  onTabChange(event) {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      fragment: event.tab.textLabel.toLowerCase() !== 'basic info' ? event.tab.textLabel.toLowerCase() : null
+  ngAfterViewInit() {
+    this.memorial$.subscribe(res => {
+      if (res.memorial) {
+        setTimeout(() => {
+          this.breakpoint.observe([`(max-width: ${this.medium}px)`])
+          .subscribe((status: BreakpointState) => {
+            this.opened = !status.matches;
+          });
+        }, 100);
+      }
     });
   }
 
-  onUpdateMemorial(body) {
-    const payload = {
-      uuid: this.memorialUUID,
-      body
-    };
-    this.store.dispatch(new UpdateCreateMemorial(payload));
-    if (body.first_name) {
-      const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
-        if (res) {
-          this.onTabChange({tab: {textLabel: 'timeline'}});
-          sub.unsubscribe();
-        }
-      });
-    }
+  ngOnDestroy() {
+    this.renderer.removeClass(document.body, 'create-no-scroll');
+    this.store.dispatch(new ClearCreateMemorial());
+  }
+
+  toggleSidebar() {
+    this.opened = !this.opened;
   }
 
   togglePublish(published) {

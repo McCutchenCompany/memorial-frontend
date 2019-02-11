@@ -40,13 +40,15 @@
 }
 .container {
   width: 95%;
-  margin: rem(68) auto rem(125);
+  margin: 0 auto rem(125);
+  padding-top: rem(64);
   form {
     background-color: rgba(255,255,255,0.9);
     padding: rem(32);
     border-radius: 2px;
     .title {
       margin-top: 0;
+      margin-bottom: rem(16);
     }
   }
   .name {
@@ -61,7 +63,7 @@
     justify-content: space-between;
   }
   h4 {
-    margin: rem(64) 0 rem(38);
+    margin: rem(32) 0 rem(38);
   }
   .dates {
     margin-top: rem(38);

@@ -8,10 +8,11 @@
 </div>
 <div class="container">
   <form (submit)="onSave()" class="mat-elevation-z3" [formGroup]="memorialInfoForm">
-    <h4 class="title">Start by adding a photo and sharing about their life</h4>
+    <h4 class="title">Personal Information</h4>
+    <p>Start creating your memorial by adding a cover photo and some basic information.</p>
     <h4>Cover Image</h4>
-    <app-image-viewer *ngIf="memorialInfo.image" [image]="memorialInfo.image" [id]="memorialInfo.uuid" [type]="'memorial'" [format]="imageFormat" (remove)="onRemove($event)"></app-image-viewer>
-    <app-upload-image *ngIf="!memorialInfo.image" [id]="memorialInfo.uuid" [type]="'memorial'"></app-upload-image>
+    <app-image-viewer *ngIf="(memorial$ | async).memorial?.image" [image]="(memorial$ | async).memorial?.image" [id]="(memorial$ | async).memorial?.uuid" [type]="'memorial'" [format]="imageFormat" (remove)="onRemove($event)"></app-image-viewer>
+    <app-upload-image *ngIf="!(memorial$ | async).memorial?.image" [id]="(memorial$ | async).memorial?.uuid" [type]="'memorial'"></app-upload-image>
     <h4>Name</h4>
     <div class="name">
       <mat-form-field appearance="outline">
@@ -52,7 +53,7 @@
       </mat-form-field>
     </div>
     <div class="actions">
-      <button mat-button *ngIf="memorialInfoForm.pristine" class="primary">Timeline <mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button mat-button *ngIf="memorialInfoForm.pristine" class="primary">Next <mat-icon>keyboard_arrow_right</mat-icon></button>
       <button mat-button *ngIf="memorialInfoForm.dirty" [disabled]="memorialInfoForm.invalid" class="primary" type="submit">Save and Continue</button>
     </div>
   </form>

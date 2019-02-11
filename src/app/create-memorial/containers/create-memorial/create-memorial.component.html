@@ -12,53 +12,16 @@
     <h6>An unexpected error occurred. Try again. If the error continues please contact support.</h6>
   </div>
 </div>
-<div *ngIf="(loaded$ | async) && !(error$ | async)" class="container">
-  <h2>Create a Memorial</h2>
-  <div class="actions">
-    <button *ngIf="!(memorial$ | async).memorial?.published" mat-button class="primary" (click)="togglePublish(true)">Publish Memorial</button>
-    <button *ngIf="(memorial$ | async).memorial?.published" mat-button class="secondary" (click)="togglePublish(false)">Unpublish Memorial</button>
-    <button mat-button class="secondary" [routerLink]="['/memorial', (memorial$ | async).memorial?.uuid]">
-      <span *ngIf="!(memorial$ | async).memorial?.published">Preview Memorial</span>
-      <span *ngIf="(memorial$ | async).memorial?.published">View Memorial</span>
-    </button>
-  </div>
-</div>
-<mat-progress-spinner *ngIf="loading$ | async"></mat-progress-spinner>
-<mat-tab-group *ngIf="loaded$ | async" class="create-tabs" [selectedIndex]="activeTab" (selectedTabChange)="onTabChange($event)">
-  <mat-tab label="Basic Info">
-    <ng-template matTabContent>
-      <app-memorial-info
-        *ngIf="loaded$ | async"
-        [memorialInfo]="(memorial$ | async).memorial"
-        (save)="onUpdateMemorial($event)"
-        (toTimeline)="onTabChange($event)"></app-memorial-info>
-    </ng-template>
-  </mat-tab>
-  <mat-tab label="Timeline">
-    <ng-template matTabContent>
-      <app-create-timeline
-        *ngIf="loaded$ | async"
-        [memorial]="(memorial$ | async).memorial"
-        [timeline]="(memorial$ | async).timeline"
-        (toLocation)="onTabChange($event)"></app-create-timeline>
-    </ng-template>
-  </mat-tab>
-  <mat-tab label="Location">
-    <ng-template matTabContent>
-      <app-add-location
-        [latitude]="(locationSearch$ | async).latitude"
-        [longitude]="(locationSearch$ | async).longitude"
-        [zoom]="(locationSearch$ | async).zoom"
-        [memorial_id]="(memorial$ | async).memorial.uuid"
-        (toMemories)="onTabChange($event)"></app-add-location>
-    </ng-template>
-  </mat-tab>
-  <mat-tab label="Memories">
-    <ng-template matTabContent>
-      <app-approve-memories
-        [memories]="(memorial$ | async).memories"
-        [public]="(memorial$ | async).memorial?.public_post"
-        (switchPublic)="onUpdateMemorial($event)"></app-approve-memories>
-    </ng-template>
-  </mat-tab>
-</mat-tab-group>
+<mat-drawer-container *ngIf="(memorial$ | async).memorial" class="nav-container">
+  <mat-drawer mode="side" [opened]="opened">
+    <app-create-nav [memorial]="(memorial$ | async).memorial" (publish)="togglePublish($event)"></app-create-nav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="view">
+      <button mat-fab class="mobile-floater" (click)="toggleSidebar()">
+        <mat-icon aria-label="Example icon-button with a heart icon">menu</mat-icon>
+      </button>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

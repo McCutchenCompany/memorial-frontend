@@ -1,0 +1,59 @@
+@import "src/styles.scss";
+
+.container {
+  width: rem(350);
+  height: 100%;
+  background: map-get($colors, primary-lightest);
+  mat-divider {
+    border-top-color: map-get($colors, primary-darkest);
+  }
+  .memorial-info {
+    height: rem(343);
+    background: map-get($colors, primary-darkest);
+    .image-border {
+      width: rem(270);
+      height: rem(140);
+      overflow: hidden;
+      margin-left: rem(16);
+      border: 3px solid map-get($colors, white);
+      border-radius: 4px;
+    }
+    .info {
+      margin-top: rem(16);
+    }
+    h3, .info {
+      padding-left: rem(16);
+      color: map-get($colors, white);
+      h6 {
+        color: map-get($colors, white);
+      }
+    }
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      margin-top: rem(8);
+    }
+  }
+  .nav-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: rem(16) 0 rem(16) 10%;
+    background: map-get($colors, primary-lightest);
+    color: map-get($colors, white);
+    border: none;
+    font-family: $sansFont;
+    font-size: rem(20);
+    text-align: left;
+    mat-icon {
+      margin-right: rem(8);
+    }
+    &:hover {
+      background: map-get($colors, primary-light);
+    }
+    &.active {
+      background: map-get($colors, primary);
+      border-left: 5px solid map-get($colors, secondary);
+    }
+  }
+}

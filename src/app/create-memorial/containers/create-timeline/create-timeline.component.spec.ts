@@ -23,6 +23,7 @@ import { CreateTimelineComponent } from './create-timeline.component';
 describe('CreateTimelineComponent', () => {
   let component: CreateTimelineComponent;
   let fixture: ComponentFixture<CreateTimelineComponent>;
+  let store: TestStore<any>;
 
   configureTestSuite(() => {
     TestBed.configureTestingModule({
@@ -54,6 +55,12 @@ describe('CreateTimelineComponent', () => {
   });
 
   beforeEach(() => {
+    store = TestBed.get(Store);
+    store.setState({
+      memorial: {
+        timeline: []
+      }
+    });
     fixture = TestBed.createComponent(CreateTimelineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
