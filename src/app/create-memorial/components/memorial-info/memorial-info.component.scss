@@ -48,6 +48,7 @@
     border-radius: 2px;
     .title {
       margin-top: 0;
+      margin-bottom: rem(16);
     }
   }
   .name {
@@ -62,7 +63,7 @@
     justify-content: space-between;
   }
   h4 {
-    margin: rem(64) 0 rem(38);
+    margin: rem(32) 0 rem(38);
   }
   .dates {
     margin-top: rem(38);

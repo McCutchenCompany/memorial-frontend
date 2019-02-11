@@ -9,9 +9,9 @@ import {
   MatNativeDateModule,
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { UploadImageComponent } from '@shared/components/upload-image/upload-image.component';
-import { Memorial } from '@shared/models/memorial.model';
 import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
@@ -21,6 +21,7 @@ import { MemorialInfoComponent } from './memorial-info.component';
 describe('MemorialInfoComponent', () => {
   let component: MemorialInfoComponent;
   let fixture: ComponentFixture<MemorialInfoComponent>;
+  let store: TestStore<any>;
 
   configureTestSuite(() => {
     TestBed.configureTestingModule({
@@ -37,6 +38,7 @@ describe('MemorialInfoComponent', () => {
         MatNativeDateModule,
         MatCardModule,
         MatIconModule,
+        RouterTestingModule,
         NoopAnimationsModule
       ],
       providers: [
@@ -49,16 +51,19 @@ describe('MemorialInfoComponent', () => {
   });
 
   beforeEach(() => {
+    store = TestBed.get(Store);
+    store.setState({
+      memorial: {
+        first_name: 'Mitch',
+        middle_name: 'Jacob',
+        last_name: 'McCutchen',
+        birth_date: new Date(),
+        death_date: new Date(),
+        description: ''
+      }
+    });
     fixture = TestBed.createComponent(MemorialInfoComponent);
     component = fixture.componentInstance;
-    component.memorialInfo = {
-      first_name: 'Mitch',
-      middle_name: 'Jacob',
-      last_name: 'McCutchen',
-      birth_date: new Date(),
-      death_date: new Date(),
-      description: ''
-    } as Memorial;
     fixture.detectChanges();
   });
 

@@ -8,7 +8,8 @@
 </div>
 <div class="container">
   <form (submit)="onSave()" class="mat-elevation-z3" [formGroup]="memorialInfoForm">
-    <h4 class="title">Start by adding a photo and sharing about their life</h4>
+    <h4 class="title">Personal Information</h4>
+    <p>Start creating your memorial by adding a cover photo and some basic information.</p>
     <h4>Cover Image</h4>
     <app-image-viewer *ngIf="(memorial$ | async).memorial?.image" [image]="(memorial$ | async).memorial?.image" [id]="(memorial$ | async).memorial?.uuid" [type]="'memorial'" [format]="imageFormat" (remove)="onRemove($event)"></app-image-viewer>
     <app-upload-image *ngIf="!(memorial$ | async).memorial?.image" [id]="(memorial$ | async).memorial?.uuid" [type]="'memorial'"></app-upload-image>

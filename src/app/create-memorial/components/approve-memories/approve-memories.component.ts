@@ -89,4 +89,14 @@ export class ApproveMemoriesComponent implements OnInit, OnChanges {
     this.store.dispatch(new UpdateCreateMemorial(body));
   }
 
+  togglePublish(published) {
+    const payload = {
+      uuid: this.memorialUUID,
+      body: {
+        published: published
+      }
+    };
+    this.store.dispatch(new UpdateCreateMemorial(payload));
+  }
+
 }

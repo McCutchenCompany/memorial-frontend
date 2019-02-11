@@ -1,8 +1,19 @@
 <div class="container">
   <div *ngIf="(memorial$ | async).memorial" class="form-container mat-elevation-z3">
     <h4>Memories</h4>
+    <p>
+      Anyone who visits your memorial will be able to submit their memories of
+      <span *ngIf="(memorial$ | async).memorial?.first_name">{{ (memorial$ | async).memorial?.first_name }}</span>
+      <span *ngIf="!(memorial$ | async).memorial?.first_name">your loved one</span>.
+      As the owner of the memorial you decide if the memories submitted can be
+      posted automatically or if you want to approve them before they are submitted.
+      You will receive an email notification whenever a new memory is submitted.
+    </p>
     <mat-checkbox [checked]="!(memorial$ | async).memorial.public_post" (change)="togglePublic()" color="primary">Ask for my approval before publishing memories</mat-checkbox><br>
-    <button mat-button class="primary back-btn" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'location']"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+    <div class="action">
+      <button mat-button class="primary back-btn" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'location']"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+      <button mat-button *ngIf="!(memorial$ | async).memorial?.published" class="primary" (click)="togglePublished(true)">Finish & Publish Memorial</button>
+    </div>
   </div>
   <div class="memory-container mat-elevation-z3" *ngIf="!public">
     <div class="for-approval">

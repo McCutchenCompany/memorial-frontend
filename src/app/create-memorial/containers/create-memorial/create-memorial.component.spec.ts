@@ -5,12 +5,14 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDatepickerModule,
+  MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatNativeDateModule,
   MatProgressSpinnerModule,
   MatSelectModule,
+  MatSidenavModule,
   MatTabsModule,
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +30,7 @@ import { TimelineFormComponent } from 'app/create-memorial/components/timeline-f
 import { configureTestSuite } from 'ng-bullet';
 
 import { AddLocationComponent } from './../../components/add-location/add-location.component';
+import { CreateNavComponent } from './../create-nav/create-nav.component';
 import { CreateTimelineComponent } from './../create-timeline/create-timeline.component';
 import { CreateMemorialComponent } from './create-memorial.component';
 
@@ -47,7 +50,8 @@ describe('CreateMemorialComponent', () => {
         TimelineFormComponent,
         AddLocationComponent,
         ApproveMemoriesComponent,
-        ApprovalCardComponent
+        ApprovalCardComponent,
+        CreateNavComponent
       ],
       imports: [
         MatProgressSpinnerModule,
@@ -61,6 +65,8 @@ describe('CreateMemorialComponent', () => {
         MatCardModule,
         MatTabsModule,
         MatSelectModule,
+        MatSidenavModule,
+        MatDividerModule,
         RouterTestingModule,
         NoopAnimationsModule,
         AgmCoreModule.forRoot({})
