@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatCardModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Memory } from '@shared/models/memory.model';
 import { TestStore } from '@shared/testing/test-store';
@@ -17,7 +17,8 @@ describe('ApprovalCardComponent', () => {
       imports: [
         MatCardModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatProgressSpinnerModule
       ],
       providers: [
         {

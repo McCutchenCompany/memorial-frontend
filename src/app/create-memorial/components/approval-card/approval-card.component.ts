@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Memory } from '@shared/models/memory.model';
+import { getCreatedSaving } from '@store/create-memorial';
 import { UpdateMemoryStatus } from '@store/create-memorial/create-memorial.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-approval-card',
@@ -13,10 +15,13 @@ export class ApprovalCardComponent implements OnInit {
 
   @Input() memory: Memory;
   @Input() needsApproval: boolean;
+  @Input() saving$: Observable<boolean>;
 
   constructor(
     private store: Store<CreateMemorialState>
-  ) { }
+  ) {
+    this.saving$ = this.store.pipe(select(getCreatedSaving));
+  }
 
   ngOnInit() {
   }
@@ -25,7 +30,8 @@ export class ApprovalCardComponent implements OnInit {
     const payload = {
       memory_id: this.memory.uuid,
       body: {
-        published: true
+        published: true,
+        denied: false
       }
     };
     this.store.dispatch(new UpdateMemoryStatus(payload));
@@ -35,6 +41,7 @@ export class ApprovalCardComponent implements OnInit {
     const payload = {
       memory_id: this.memory.uuid,
       body: {
+        published: false,
         denied: true
       }
     };

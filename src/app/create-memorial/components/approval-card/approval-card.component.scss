@@ -16,11 +16,17 @@ mat-card.mat-card {
     justify-content: space-between;
     .status {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       width: rem(140);
       height: fit-content;
+      mat-progress-spinner {
+        margin: rem(7) auto;
+      }
       p {
         font-size: rem(12);
+      }
+      button:disabled {
+        background: map-get($colors, gray);
       }
     }
     .approve {
@@ -30,6 +36,7 @@ mat-card.mat-card {
     .deny {
       background: map-get($colors, warn);
       color: map-get($colors, white);
+      margin-left: rem(12);
     }
   }
 }
