@@ -234,7 +234,14 @@ button {
   overflow: hidden;
 }
 .create-no-scroll {
+  position: fixed;
   overflow: hidden;
+  width: 100vw;
+}
+@include respond-to('small') {
+  .create-no-scroll {
+    position: initial;
+  }
 }
 @include respond-to('medium') {
   .no-scroll {

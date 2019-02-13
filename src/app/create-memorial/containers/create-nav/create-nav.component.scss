@@ -1,8 +1,9 @@
 @import "src/styles.scss";
 
 .container {
-  width: rem(350);
+  width: rem(250);
   height: 100%;
+  min-height: rem(700);
   background: map-get($colors, primary-lightest);
   mat-divider {
     border-top-color: map-get($colors, primary-darkest);
@@ -55,5 +56,36 @@
       background: map-get($colors, primary);
       border-left: 5px solid map-get($colors, secondary);
     }
+  }
+}
+@media only screen and (max-width: 340px) {
+  .container {
+    min-height: rem(760);
+    .memorial-info {
+      height: rem(375);
+      .image-border {
+        transform: translateX(-10%) scale(0.8);
+      }
+      .info {
+        margin-top: 0;
+      }
+      h3 {
+        font-size: rem(28);
+      }
+      h6 {
+        font-size: rem(17);
+      }
+      .actions {
+        flex-wrap: wrap;
+        button {
+          margin-bottom: rem(8);
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 340px) {
+  .container {
+    width: rem(350);
   }
 }

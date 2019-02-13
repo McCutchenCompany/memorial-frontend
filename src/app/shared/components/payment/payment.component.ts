@@ -28,6 +28,8 @@ export class PaymentComponent implements OnInit {
   purchasing$: Observable<boolean>;
   error$: Observable<any>;
 
+  step = 1;
+
   monthOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   get yearOption() {
@@ -69,6 +71,10 @@ export class PaymentComponent implements OnInit {
         this.discountForm.controls['code'].setErrors(res);
       }
     });
+  }
+
+  onStep(increment: 1 | -1) {
+    this.step = this.step + increment;
   }
 
   buildForm() {

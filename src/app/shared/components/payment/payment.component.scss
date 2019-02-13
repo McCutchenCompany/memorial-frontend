@@ -1,5 +1,11 @@
 @import "src/styles.scss";
 
+.step-1 {
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
 form {
   .cardholder {
     display: flex;
@@ -39,6 +45,10 @@ form {
   }
   &.card-form {
     padding-bottom: rem(64);
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
   }
 }
 mat-expansion-panel {
