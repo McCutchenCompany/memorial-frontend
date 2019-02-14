@@ -14,7 +14,7 @@
 </div>
 <mat-drawer-container *ngIf="(memorial$ | async).memorial" class="nav-container">
   <mat-drawer mode="side" [opened]="opened">
-    <app-create-nav [memorial]="(memorial$ | async).memorial" (publish)="togglePublish($event)"></app-create-nav>
+    <app-create-nav [memorial]="(memorial$ | async).memorial" [saving]="saving$ | async" (publish)="togglePublish($event)"></app-create-nav>
   </mat-drawer>
   <mat-drawer-content>
     <div class="view">

@@ -11,6 +11,7 @@ import { Memorial } from '@shared/models/memorial.model';
 export class CreateNavComponent implements OnInit {
 
   @Input() memorial: Memorial;
+  @Input() saving: boolean;
   @Output() publish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   get imgBackground() {

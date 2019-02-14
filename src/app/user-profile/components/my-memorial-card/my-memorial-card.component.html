@@ -16,8 +16,14 @@
     <div class="actions">
       <button mat-button class="primary" [routerLink]="['/memorial', memorial.uuid]">View</button>
       <button mat-button class="subtle" [routerLink]="['/create', memorial.uuid]">Edit</button>
-      <button mat-button *ngIf="memorial.published" (click)="togglePublish()" class="subtle warn">Unpublish</button>
-      <button mat-button *ngIf="!memorial.published" (click)="togglePublish()" class="subtle">Publish</button>
+      <button mat-button *ngIf="memorial.published" [disabled]="saving$ | async" (click)="togglePublish()" class="subtle warn">
+        <span *ngIf="!(saving$ | async)">Unpublish</span>
+        <mat-progress-spinner *ngIf="saving$ | async" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      </button>
+      <button mat-button *ngIf="!memorial.published" [disabled]="saving$ | async" (click)="togglePublish()" class="subtle">
+        <span *ngIf="!(saving$ | async)">Publish</span>
+        <mat-progress-spinner *ngIf="saving$ | async" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      </button>
     </div>
   </div>
 </mat-card>

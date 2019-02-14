@@ -17,6 +17,8 @@ import {
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
 
+import { getCreatedSaving } from './../../../store/create-memorial/create-memorial.reducer';
+
 @Component({
   selector: 'app-create-memorial',
   templateUrl: './create-memorial.component.html',
@@ -27,6 +29,7 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
   memorial$: Observable<any>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
+  saving$: Observable<boolean>;
   locationSearch$: Observable<any>;
   error$: Observable<any>;
   routeFragment = 'info';
@@ -65,6 +68,7 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
     this.loaded$ = this.store.pipe(select(getCreateLoaded));
     this.locationSearch$ = this.store.pipe(select(getCreateSearchAddress));
     this.error$ = this.store.pipe(select(getCreateError));
+    this.saving$ = this.store.pipe(select(getCreatedSaving));
     this.memorial$.subscribe(res => {
       if (res && res.memorial) {
         this.memorialUUID = res.memorial.uuid;

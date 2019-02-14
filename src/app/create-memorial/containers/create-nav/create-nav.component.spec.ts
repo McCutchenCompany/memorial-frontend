@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatDividerModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatDividerModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { configureTestSuite } from 'ng-bullet';
 
@@ -17,7 +17,8 @@ describe('CreateNavComponent', () => {
         RouterTestingModule,
         MatDividerModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatProgressSpinnerModule
       ]
     });
   });

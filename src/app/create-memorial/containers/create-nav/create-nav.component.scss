@@ -33,6 +33,11 @@
       display: flex;
       justify-content: space-around;
       margin-top: rem(8);
+      button {
+        mat-progress-spinner {
+          margin: 0 rem(60);
+        }
+      }
     }
   }
   .nav-option {

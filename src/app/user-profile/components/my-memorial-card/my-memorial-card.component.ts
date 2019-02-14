@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Memorial } from '@shared/models/memorial.model';
 import { UpdateUserMemorial } from '@store/auth/auth.actions';
+import { getCreatedSaving } from '@store/create-memorial';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-my-memorial-card',
@@ -13,6 +15,8 @@ import { UpdateUserMemorial } from '@store/auth/auth.actions';
 export class MyMemorialCardComponent implements OnInit {
 
   @Input() memorial: Memorial;
+
+  saving$: Observable<boolean>;
 
   get imgBackground() {
     if (this.memorial.image) {
@@ -54,7 +58,9 @@ export class MyMemorialCardComponent implements OnInit {
   constructor(
     private store: Store<any>,
     private sanitizer: DomSanitizer
-  ) { }
+  ) {
+    this.saving$ = this.store.pipe(select(getCreatedSaving));
+  }
 
   ngOnInit() {
   }

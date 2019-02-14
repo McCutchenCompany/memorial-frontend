@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { configureTestSuite } from 'ng-bullet';
 
@@ -21,7 +21,8 @@ describe('MyMemorialsComponent', () => {
         MatIconModule,
         MatCardModule,
         RouterTestingModule,
-        MatDialogModule
+        MatDialogModule,
+        MatProgressSpinnerModule
       ]
     });
   });

@@ -15,8 +15,14 @@
       <h6 *ngIf="memorial?.birth_date && memorial?.death_date">{{ memorial.birth_date | date }} - {{ memorial.death_date | date }}</h6>
     </div>
     <div class="actions">
-      <button mat-button class="primary" (click)="onTogglePublished(true)" *ngIf="!memorial?.published">Publish Memorial</button>
-      <button mat-button class="primary" (click)="onTogglePublished(false)" *ngIf="memorial?.published">Unpublish Memorial</button>
+      <button mat-button class="primary" [disabled]="saving" (click)="onTogglePublished(true)" *ngIf="!memorial?.published">
+        <span *ngIf="!saving">Publish Memorial</span>
+        <mat-progress-spinner *ngIf="saving" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      </button>
+      <button mat-button class="primary" [disabled]="saving" (click)="onTogglePublished(false)" *ngIf="memorial?.published">
+        <span *ngIf="!saving">Unpublish Memorial</span>
+        <mat-progress-spinner *ngIf="saving" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      </button>
       <button mat-button class="primary" [routerLink]="['/memorial', memorial.uuid]">
         <span *ngIf="!memorial?.published">Preview Memorial</span>
         <span *ngIf="memorial?.published">View Memorial</span>
