@@ -29,6 +29,7 @@ import { MemorialInfoComponent } from 'app/create-memorial/components/memorial-i
 import { TimelineFormComponent } from 'app/create-memorial/components/timeline-form/timeline-form.component';
 import { configureTestSuite } from 'ng-bullet';
 
+import { FooterComponent } from './../../../shared/components/footer/footer.component';
 import { AddLocationComponent } from './../../components/add-location/add-location.component';
 import { CreateNavComponent } from './../create-nav/create-nav.component';
 import { CreateTimelineComponent } from './../create-timeline/create-timeline.component';
@@ -51,7 +52,8 @@ describe('CreateMemorialComponent', () => {
         AddLocationComponent,
         ApproveMemoriesComponent,
         ApprovalCardComponent,
-        CreateNavComponent
+        CreateNavComponent,
+        FooterComponent
       ],
       imports: [
         MatProgressSpinnerModule,

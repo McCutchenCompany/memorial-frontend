@@ -39,4 +39,9 @@ mat-card.mat-card {
       margin-left: rem(12);
     }
   }
+  mat-card-content {
+    p {
+      white-space: pre-line;
+    }
+  }
 }

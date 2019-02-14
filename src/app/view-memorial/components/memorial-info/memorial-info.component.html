@@ -25,5 +25,5 @@
 </div>
 <div class="description">
   <h3>About {{ memorial.first_name }}</h3>
-  <p>{{ memorial.description }}</p>
+  <p [class.columns]="memorial.description.length > 330">{{ memorial.description }}</p>
 </div>

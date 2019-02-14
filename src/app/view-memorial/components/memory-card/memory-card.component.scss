@@ -29,4 +29,9 @@ mat-card.mat-card {
       }
     }
   }
+  mat-card-content {
+    p {
+      white-space: pre-line;
+    }
+  }
 }

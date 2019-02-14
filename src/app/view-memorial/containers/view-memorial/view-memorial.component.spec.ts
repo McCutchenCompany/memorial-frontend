@@ -69,7 +69,7 @@ describe('ViewMemorialComponent', () => {
   beforeEach(() => {
     store = TestBed.get(Store);
     store.setState({
-      memorial: {} as Memorial,
+      memorial: {description: ''} as Memorial,
       timeline: [],
       location: {} as LocationMarker
     });

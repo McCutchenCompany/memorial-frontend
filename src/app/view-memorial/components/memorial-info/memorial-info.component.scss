@@ -23,6 +23,9 @@
   h3 {
     margin-bottom: rem(6);
   }
+  p {
+    white-space: pre-line;
+  }
 }
 #fb-share-button {
   background: #3b5998;
@@ -98,7 +101,7 @@
   }
   .description {
     width: rem(767);
-    p {
+    p.columns {
       column-count: 2;
       column-gap: rem(24);
     }

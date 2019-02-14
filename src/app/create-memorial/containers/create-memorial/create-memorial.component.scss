@@ -16,7 +16,10 @@ mat-drawer-container {
     overflow-x: hidden;
   }
 }
-
+.view {
+  position: relative;
+  padding-bottom: 300px;
+}
 .container {
   margin: rem(90) auto rem(32);
   display: flex;
