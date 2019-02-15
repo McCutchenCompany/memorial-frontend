@@ -1,10 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { Timeline } from '@shared/models/timeline.model';
+import { getCreatedSaving } from '@store/create-memorial';
 import { RemoveTimelineEntry, RemoveTimelineFile, SetEditingTimeline } from '@store/create-memorial/create-memorial.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
+import { Observable } from 'rxjs';
 
 import { UpdateTimeline } from './../../../store/create-memorial/create-memorial.actions';
 
@@ -17,6 +21,8 @@ export class TimelineFormComponent implements OnInit {
 
   @Input() timeline: Timeline;
   @Input() editingIds: string[];
+
+  saving$: Observable<boolean>;
 
   timelineForm: FormGroup;
   assetForm: FormGroup;
@@ -57,8 +63,11 @@ export class TimelineFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store<CreateMemorialState>,
-    private sanitizer: DomSanitizer
-  ) { }
+    private sanitizer: DomSanitizer,
+    private dialog: MatDialog
+  ) {
+    this.saving$ = this.store.pipe(select(getCreatedSaving));
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -80,7 +89,7 @@ export class TimelineFormComponent implements OnInit {
   }
 
   checkExpanded() {
-    if (!this.editingIds.includes(this.timeline.uuid) && this.timeline.date) {
+    if (!this.editingIds.includes(this.timeline.uuid)) {
       this.expanded = false;
     }
   }
@@ -102,7 +111,24 @@ export class TimelineFormComponent implements OnInit {
   }
 
   onRemoveTimelineEntry() {
-    this.store.dispatch(new RemoveTimelineEntry(this.timeline.uuid));
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        message: 'delete this timeline event? This is a permanent action.'
+      },
+      width: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.store.dispatch(new RemoveTimelineEntry(this.timeline.uuid));
+      }
+    });
+  }
+
+  onSelection(event) {
+    if (event.value === null) {
+      this.onSaveChanges();
+    }
   }
 
   onSaveChanges() {

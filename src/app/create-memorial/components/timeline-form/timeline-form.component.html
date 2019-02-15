@@ -1,18 +1,14 @@
-<div class="container">
-  <div class="expand-container">
-    <button mat-button (click)="toggleForm()">
-      <mat-icon *ngIf="!expanded">arrow_drop_down</mat-icon>
-      <mat-icon *ngIf="expanded">arrow_drop_up</mat-icon>
-    </button>
-    <div class="info" *ngIf="!expanded">
-      <h4>{{ (timeline.date | date:timeline.date_format) || 'Incomplete Entry' }}</h4>
-      <p *ngIf="timeline.description">{{ (timeline.description.length > 30) ? (timeline.description | slice:0:30) + '...' : timeline.description }}</p>
+<mat-expansion-panel [expanded]="expanded">
+  <mat-expansion-panel-header (click)="toggleForm()">
+    <div class="info">
+      <mat-panel-title>{{ (timeline.date | date:timeline.date_format) || 'New Event' }}</mat-panel-title>
+      <mat-panel-description *ngIf="timeline.description">{{ (timeline.description.length > 30) ? (timeline.description | slice:0:30) + '...' : timeline.description }}</mat-panel-description>
     </div>
-    <button class="delete" mat-button (click)="onRemoveTimelineEntry()">
+    <button class="delete" [disabled]="saving$ | async" mat-button (click)="onRemoveTimelineEntry()">
       <mat-icon>delete</mat-icon>
     </button>
-  </div>
-  <form *ngIf="expanded" [formGroup]="timelineForm">
+  </mat-expansion-panel-header>
+  <form [formGroup]="timelineForm">
     <div class="date">
       <mat-form-field class="datepicker" appearance="outline">
         <mat-label>Date</mat-label>
@@ -29,20 +25,6 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <!-- <div class="event">
-      <mat-form-field appearance="outline">
-        <mat-label>Event</mat-label>
-        <mat-select formControlName="event">
-          <mat-option *ngFor="let option of categoryOptions" [value]="option.value">
-            {{ option.display }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Title</mat-label>
-        <input matInput formControlName="title">
-      </mat-form-field>
-    </div> -->
     <mat-form-field class="textarea" appearance="outline">
       <mat-label>What happened on this date?</mat-label>
       <textarea
@@ -53,12 +35,16 @@
     </mat-form-field>
   </form>
   <div class="save" *ngIf="timelineForm.dirty">
-    <button mat-button class="primary" [disabled]="timelineForm.invalid" (click)="onSaveChanges()">Save Changes</button>
+    <button mat-button class="primary" [disabled]="timelineForm.invalid || (saving$ | async)" (click)="onSaveChanges()">
+      <span *ngIf="!(saving$ | async)">Save Changes</span>
+      <span *ngIf="saving$ | async">...Saving</span>
+    </button>
   </div>
-  <form class="media-form" *ngIf="expanded" [formGroup]="assetForm">
+  <form class="media-form" [formGroup]="assetForm">
     <mat-form-field appearance="outline">
       <mat-label>Media type</mat-label>
-      <mat-select formControlName="asset_type">
+      <mat-select (selectionChange)="onSelection($event)" formControlName="asset_type">
+        <mat-option [value]="null">No Media</mat-option>
         <mat-option *ngFor="let option of assetOptions" [value]="option.value">
           {{ option.display }}
         </mat-option>
@@ -69,7 +55,7 @@
       <input matInput formControlName="asset_link" (keyup)="onLink()" (change)="onLink()">
     </mat-form-field>
   </form>
-  <div class="asset-view" *ngIf="expanded">
+  <div class="asset-view">
     <div *ngIf="assetForm.value.asset_type === 'video'">
       <iframe *ngIf="timeline.asset_link?.length === 11" width="660" height="371" [src]="videoSrc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
@@ -88,4 +74,4 @@
         (click)="onSaveChanges()"></app-upload-image>
     </div>
   </div>
-</div>
+</mat-expansion-panel>

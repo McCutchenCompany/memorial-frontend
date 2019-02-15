@@ -1,6 +1,6 @@
 @import "src/styles.scss";
 
-.container {
+mat-expansion-panel {
   width: 100%;
   .textarea {
     width: 100%;
@@ -21,7 +21,7 @@
   .inactive {
     display: none;
   }
-  .expand-container {
+  mat-expansion-panel-header {
     display: flex;
     justify-content: space-between;
     margin: rem(16) 0;
@@ -49,7 +49,7 @@
   }
 }
 @include respond-to('small') {
-  .container {
+  mat-expansion-panel {
     width: rem(696);
     .media-form {
       flex-wrap: initial;

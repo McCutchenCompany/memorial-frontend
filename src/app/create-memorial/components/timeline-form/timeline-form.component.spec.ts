@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatCardModule,
   MatDatepickerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -39,7 +40,8 @@ describe('TimelineFormComponent', () => {
         MatNativeDateModule,
         NoopAnimationsModule,
         MatSelectModule,
-        MatCardModule
+        MatCardModule,
+        MatExpansionModule
       ],
       providers: [
         {

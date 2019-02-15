@@ -35,7 +35,10 @@
       color="primary"></mat-slider>
   </form>
   <div class="actions">
-    <button mat-button class="primary" (click)="onSave()">Save Changes</button>
+    <button mat-button class="primary" [disabled]="saving$ | async" (click)="onSave()">
+      <span *ngIf="!(saving$ | async)">Save Changes</span>
+      <span *ngIf="saving$ | async">...Saving</span>
+    </button>
     <button mat-button class="subtle" (click)="dialogRef.close()">Cancel</button>
   </div>
 </div>

@@ -125,12 +125,6 @@ export function createMemorialReducer(state: CreateMemorialState = INITIAL_STATE
         memorial: {
           ...state.memorial,
           timeline: action.payload.reverse()
-        },
-        editingTimeline: {
-          editingIds: [
-            ...state.editingTimeline.editingIds,
-            action.payload[action.payload.length - 1].uuid
-          ]
         }
       };
     }

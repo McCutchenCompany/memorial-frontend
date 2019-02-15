@@ -28,9 +28,8 @@
       </button>
       <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'location']">Next <mat-icon>keyboard_arrow_right</mat-icon></button>
     </div>
-    <div *ngFor="let event of (memorial$ | async).timeline">
+    <div class="timeline-card" *ngFor="let event of (memorial$ | async).timeline">
       <app-timeline-form [timeline]="event" [editingIds]="editingIds$ | async"></app-timeline-form>
-      <div class="spacer"></div>
     </div>
     <div class="action">
       <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid]"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>

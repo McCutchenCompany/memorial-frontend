@@ -6,6 +6,7 @@ import {
   MatCheckboxModule,
   MatDatepickerModule,
   MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -69,6 +70,7 @@ describe('CreateMemorialComponent', () => {
         MatSelectModule,
         MatSidenavModule,
         MatDividerModule,
+        MatExpansionModule,
         RouterTestingModule,
         NoopAnimationsModule,
         AgmCoreModule.forRoot({})

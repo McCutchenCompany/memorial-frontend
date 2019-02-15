@@ -7,8 +7,9 @@ import { select, Store } from '@ngrx/store';
 import { UpdateCreateMemorial, UpdateSingleTimeline } from '@store/create-memorial/create-memorial.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { ImageFormat } from '@store/models/image-format.model';
+import { Observable } from 'rxjs';
 
-import { getCreatedSaved } from './../../../store/create-memorial/create-memorial.reducer';
+import { getCreatedSaved, getCreatedSaving } from './../../../store/create-memorial/create-memorial.reducer';
 
 @Component({
   selector: 'app-image-editor',
@@ -16,6 +17,8 @@ import { getCreatedSaved } from './../../../store/create-memorial/create-memoria
   styleUrls: ['./image-editor.component.scss']
 })
 export class ImageEditorComponent implements OnInit {
+
+  saving$: Observable<boolean>;
 
   imageFormat: FormGroup;
 
@@ -41,7 +44,9 @@ export class ImageEditorComponent implements OnInit {
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
     private store: Store<CreateMemorialState>
-  ) { }
+  ) {
+    this.saving$ = this.store.pipe(select(getCreatedSaving));
+  }
 
   ngOnInit() {
     this.buildForm();
