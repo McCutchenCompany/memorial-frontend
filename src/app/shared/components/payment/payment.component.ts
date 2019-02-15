@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { environment } from '@environments/environment';
 import { select, Store } from '@ngrx/store';
 import { GoogleAnalyticsService } from '@shared/services/google-analytics.service';
@@ -10,6 +10,7 @@ import { getAppError, getDiscount, getPurchased } from '@store/app/app.reducer';
 import { Discount } from '@store/models/app-state.model';
 import { Observable } from 'rxjs';
 
+import { PaymentConfirmationComponent } from '../payment-confirmation/payment-confirmation.component';
 import { getPurchasing } from './../../../store/app/app.reducer';
 
 @Component({
@@ -54,7 +55,8 @@ export class PaymentComponent implements OnInit {
     public fb: FormBuilder,
     public store: Store<any>,
     public dialogRef: MatDialogRef<PaymentComponent>,
-    private analytics: GoogleAnalyticsService
+    private analytics: GoogleAnalyticsService,
+    public dialog: MatDialog
   ) {
     this.discountError$ = this.store.pipe(select(getDiscountError));
     this.discount$ = this.store.pipe(select(getDiscount));
@@ -103,6 +105,10 @@ export class PaymentComponent implements OnInit {
     (<any>window).Stripe.setPublishableKey(environment.stripe.publicKey);
   }
 
+  openConfirmation() {
+    this.dialog.open(PaymentConfirmationComponent);
+  }
+
   createToken(card) {
     this.analytics.sendEvent('Complete Purchase', 'Sales', 'Conversion', this.quantityForm.value.price);
     if (this.quantityForm.value.price > 0) {
@@ -116,6 +122,7 @@ export class PaymentComponent implements OnInit {
           this.store.dispatch(new PurchaseLicense(body));
           const sub = this.store.pipe(select(getPurchased)).subscribe(res => {
             if (res) {
+              this.openConfirmation();
               this.dialogRef.close();
               sub.unsubscribe();
             }
@@ -133,6 +140,7 @@ export class PaymentComponent implements OnInit {
       this.store.dispatch(new PurchaseLicense(body));
       const sub = this.store.pipe(select(getPurchased)).subscribe(res => {
         if (res) {
+          this.openConfirmation();
           this.dialogRef.close();
           sub.unsubscribe();
         }

@@ -1,11 +1,12 @@
 <div class="container">
   <h3>Memories</h3>
+  <p>Memories are added by anyone who remembers {{ memorial.first_name }}.</p>
   <div class="post-memory">
     <button *ngIf="!adding && user.uuid" mat-button class="primary" (click)="toggleForm()">Add Memory</button>
     <button *ngIf="!adding && !user.uuid" mat-button class="primary" (click)="onLogin()">Login to Add Memory</button>
     <div class="form" *ngIf="adding">
       <h4>Add a Memory</h4>
-      <p *ngIf="!public">
+      <p *ngIf="!memorial.public_post">
         This memorial requires that memories be approved before they are displayed.
         The memorial owner will be notified that a new memory has been submitted.
       </p>
@@ -35,18 +36,18 @@
   <div class="memory-display desktop">
     <div class="left">
       <div *ngFor="let memory of memories; let i = index" [class.hide]="i % 2 === 0">
-        <app-memory-card *ngIf="i % 2 !== 0" [memory]="memory" [public]="public" [user]="user"></app-memory-card>
+        <app-memory-card *ngIf="i % 2 !== 0" [memory]="memory" [public]="memorial.public_post" [user]="user"></app-memory-card>
       </div>
     </div>
     <div class="right">
       <div *ngFor="let memory of memories; let i = index" [class.hide]="i % 2 !== 0">
-        <app-memory-card *ngIf="i % 2 === 0" [memory]="memory" [public]="public" [user]="user"></app-memory-card>
+        <app-memory-card *ngIf="i % 2 === 0" [memory]="memory" [public]="memorial.public_post" [user]="user"></app-memory-card>
       </div>
     </div>
   </div>
   <div class="memory-display mobile">
     <div *ngFor="let memory of memories">
-      <app-memory-card [memory]="memory" [public]="public" [user]="user"></app-memory-card>
+      <app-memory-card [memory]="memory" [public]="memorial.public_post" [user]="user"></app-memory-card>
     </div>
   </div>
   <div *ngIf="memories.length === 0">

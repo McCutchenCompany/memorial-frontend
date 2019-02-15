@@ -19,7 +19,7 @@
   <app-memorial-memories
     *ngIf="(selectedMemorial$ | async).memories"
     [memories]="(selectedMemorial$ | async).memories"
-    [public]="(selectedMemorial$ | async).memorial.public_post"
+    [memorial]="(selectedMemorial$ | async).memorial"
     [user]="user$ | async"
     (addEvent)="onAddMemory($event)"
     (login)="onLogin()"></app-memorial-memories>

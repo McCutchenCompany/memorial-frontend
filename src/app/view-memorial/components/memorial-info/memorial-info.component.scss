@@ -1,7 +1,7 @@
 @import "src/styles.scss";
 
 .info {
-  width: 95%;
+  width: 87%;
   display: flex;
   flex-wrap: wrap;
   margin: rem(8) auto 0;
@@ -19,7 +19,7 @@
 }
 .description {
   width: 95%;
-  margin: rem(64) auto 0;
+  margin: rem(64) auto rem(64);
   h3 {
     margin-bottom: rem(6);
   }
@@ -129,7 +129,7 @@
   }
   .description {
     width: rem(1176);
-    margin: rem(64) auto 0;
+    margin: rem(64) auto rem(64);
     h3 {
       padding-left: rem(118);
       margin-bottom: rem(6);

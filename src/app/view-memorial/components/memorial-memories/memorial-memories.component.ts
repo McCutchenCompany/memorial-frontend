@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { select, Store } from '@ngrx/store';
+import { Memorial } from '@shared/models/memorial.model';
 import { Memory } from '@shared/models/memory.model';
 import { User } from '@shared/models/user.model';
 import { ViewMemorialState } from '@store/models/view-memorial-state.model';
@@ -16,7 +17,7 @@ import { Observable } from 'rxjs';
 export class MemorialMemoriesComponent implements OnInit {
 
   @Input() memories: Memory[];
-  @Input() public: boolean;
+  @Input() memorial: Memorial;
   @Input() user: User;
 
   @Output() addEvent: EventEmitter<any> = new EventEmitter<any>();

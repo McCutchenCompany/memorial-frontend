@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatIconModule } from '@angular/material';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Store } from '@ngrx/store';
 import { MockMatDialogRef } from '@shared/testing/mockDialogRef';
@@ -28,6 +28,9 @@ describe('PaymentConfirmationComponent', () => {
           provide: Store,
           useClass: TestStore
         }
+      ],
+      imports: [
+        MatIconModule
       ]
     })
     .overrideModule(BrowserDynamicTestingModule, {

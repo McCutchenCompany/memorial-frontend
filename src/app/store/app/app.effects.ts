@@ -7,7 +7,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { CreateMemorialService } from './../../create-memorial/services/create-memorial.service';
-import { PaymentConfirmationComponent } from './../../shared/components/payment-confirmation/payment-confirmation.component';
 import {
   AppActionTypes,
   CheckDiscount,
@@ -61,9 +60,6 @@ export class AppEffects {
     ofType(AppActionTypes.PURCHASE_LICENSE_SUCCESS),
     map((action: PurchaseLicenseSuccess) => {
       this.router.navigateByUrl(`/create/${action.payload.memorials[0].uuid}`);
-      this.dialog.open(PaymentConfirmationComponent, {
-        data: action.payload
-      });
     })
   );
 

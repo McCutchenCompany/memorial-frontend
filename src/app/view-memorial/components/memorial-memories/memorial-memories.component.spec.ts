@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule, MatFormFieldModule, MatIconModule, MatMenuModule, MatSnackBarModule } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { Memorial } from '@shared/models/memorial.model';
 import { User } from '@shared/models/user.model';
 import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
@@ -43,6 +44,10 @@ describe('MemorialMemoriesComponent', () => {
     component.user = {
       uuid: '1234'
     } as User;
+    component.memorial = {
+      first_name: 'first',
+      last_name: 'last'
+    } as Memorial;
     fixture.detectChanges();
   });
 

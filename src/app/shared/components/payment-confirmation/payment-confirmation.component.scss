@@ -1,6 +1,7 @@
 @import "src/styles.scss";
 
 .container {
+  position: relative;
   img {
     margin: rem(32) auto;
     display: block;
@@ -12,5 +13,10 @@
   h6 {
     margin-bottom: rem(64);
     text-align: center;
+  }
+  button {
+    position: absolute;
+    top: rem(-36);
+    right: rem(36);
   }
 }
