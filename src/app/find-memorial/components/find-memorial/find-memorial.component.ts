@@ -139,7 +139,7 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
   }
 
   openSnackbar() {
-    this.snackbar.open(`You haven't given the `);
+    this.snackbar.open(`You haven't given the map permission to find your location`, 'dismiss', {duration: 5000});
   }
 
   onSearch(search) {

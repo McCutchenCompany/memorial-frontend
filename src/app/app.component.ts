@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { LocalTokenCheck } from '@store/auth/auth.actions';
 import { AuthState } from '@store/models/auth-state.model';
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private store: Store<AuthState>,
-    private analytics: GoogleAnalyticsService
+    private analytics: GoogleAnalyticsService,
+    private router: Router
   ) {
     this.route$ = this.store.pipe(select(getRouterState));
   }
@@ -30,5 +32,10 @@ export class AppComponent implements OnInit {
     }
     this.analytics.sendPageViews();
     this.analytics.sendUserId();
+    this.router.events.subscribe(evt => {
+      if (evt instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 }

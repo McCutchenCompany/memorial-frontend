@@ -1,3 +1,4 @@
+import { environment } from '@environments/environment';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { AppState } from '../models/app-state.model';
@@ -16,7 +17,7 @@ export const INITIAL_STATE: AppState = {
   error: null,
   discount: {
     percent: 50,
-    code: '404b3a80-df95-4915-be00-4c8b3bfe3803',
+    code: environment.discount,
     one_time_use: false,
     error: null
   }

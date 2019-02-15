@@ -32,6 +32,10 @@ export class ResponseDialogComponent implements OnInit {
     this.buildForm();
   }
 
+  onClose() {
+    this.dialogRef.close();
+  }
+
   buildForm() {
     this.responseForm = this.fb.group({
       email: ['', Validators.required],

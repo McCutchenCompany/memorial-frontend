@@ -23,7 +23,8 @@ export const environment = {
   stripe: {
     publicKey: 'pk_test_nN2N0PLFIBrWEW9Atg1HdGen'
   },
-  url: 'http://localhost:4200/'
+  url: 'http://localhost:4200/',
+  discount: 'dd7dbe8a'
 };
 
 /*

@@ -19,5 +19,6 @@ export const environment = {
   stripe: {
     publicKey: 'pk_test_nN2N0PLFIBrWEW9Atg1HdGen'
   },
-  url: 'https://staging.mymemorial.co/'
+  url: 'https://staging.mymemorial.co/',
+  discount: 'dd7dbe8a'
 };
