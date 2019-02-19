@@ -36,7 +36,7 @@ import { CreateNavComponent } from './../create-nav/create-nav.component';
 import { CreateTimelineComponent } from './../create-timeline/create-timeline.component';
 import { CreateMemorialComponent } from './create-memorial.component';
 
-describe('CreateMemorialComponent', () => {
+xdescribe('CreateMemorialComponent', () => {
   let component: CreateMemorialComponent;
   let fixture: ComponentFixture<CreateMemorialComponent>;
   let store: TestStore<any>;
