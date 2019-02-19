@@ -69,4 +69,5 @@ deploy_production:
     - pip install awscli
   script:
     - ./node_modules/@angular/cli/bin/ng build --prod --aot
-    - aws s3 cp ./dist/memorial s3://memorial-frontend --recursive
+    - aws s3 cp ./dist/memorial s3://mymemorial.co --recursive
+    - aws cloudfront create-invalidation --distribution-id 'EWZOLKAJYY7YY' --paths '/*'
