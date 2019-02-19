@@ -1,22 +1,29 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CallbackComponent } from '@shared/components/callback/callback.component';
+import { PrivacyPolicyComponent } from '@shared/components/privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from '@shared/components/terms-of-service/terms-of-service.component';
 
-import { CreateMemorialComponent } from './create-memorial/components/create-memorial/create-memorial.component';
-import { FindMemorialComponent } from './find-memorial/components/find-memorial/find-memorial.component';
-import { ViewMemorialComponent } from './view-memorial/components/view-memorial/view-memorial.component';
+import { LandingPageComponent } from './landing-page/containers/landing-page/landing-page.component';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
 const appRoutes: Routes = [
-  { path: 'explore', component: FindMemorialComponent },
-  { path: 'create', component: CreateMemorialComponent },
-  { path: 'view/:id', component: ViewMemorialComponent },
-  { path: '', redirectTo: '/explore', pathMatch: 'full' }
+  { path: 'explore', loadChildren: './find-memorial/find-memorial.module#FindMemorialModule' },
+  { path: 'create', loadChildren: './create-memorial/create-memorial.module#CreateMemorialModule', canActivate: [AuthGuardService] },
+  { path: 'memorial', loadChildren: './view-memorial/view-memorial.module#ViewMemorialModule' },
+  { path: 'profile', loadChildren: './user-profile/user-profile.module#UserProfileModule', canActivate: [AuthGuardService] },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'terms', component: TermsOfServiceComponent },
+  { path: 'callback', component: CallbackComponent },
+  { path: '', component: LandingPageComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes, {useHash: true})
+    RouterModule.forRoot(appRoutes, {useHash: false})
   ],
   declarations: [],
   providers: [

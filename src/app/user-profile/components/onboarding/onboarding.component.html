@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Welcome to Memorial</h2>
+  <p>Thanks for joining us. We need just a little bit more information from you.</p>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="first_name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="last_name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+    <div class="actions">
+      <button mat-button class="primary" [disabled]="userForm.invalid" (click)="onSave()">Save</button>
+    </div>
+  </form>
+</div>

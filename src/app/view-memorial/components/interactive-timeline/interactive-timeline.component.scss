@@ -1,0 +1,69 @@
+@import "src/styles.scss";
+
+.container {
+  width: 100%;
+  margin: rem(136) auto 0;
+  position: relative;
+  overflow-y: scroll;
+  padding: rem(30) 0;
+  .line {
+    width: rem(1175);
+    margin: auto;
+    border: 1px solid map-get($colors, gray);
+  }
+  .points {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    width: rem(1172);
+    transform: translateY(-78%);
+    display: flex;
+    justify-content: space-between;
+  }
+  .point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+      font-weight: 700;
+    }
+    &.start {
+      align-items: flex-start;
+    }
+    &.end {
+      align-items: flex-end;
+    }
+    mat-icon {
+      background: map-get($colors, white);
+      color: map-get($colors, gray);
+      cursor: pointer;
+      font-size: rem(18);
+      width: rem(18);
+      height: rem(18);
+      &.selected {
+        color: map-get($colors, primary);
+      }
+      &:hover {
+        color: map-get($colors, primary);
+      }
+    }
+  }
+}
+@include respond-to('small') {
+
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(1176);
+    overflow-y: visible;
+    padding: 0;
+    .points {
+      top: 0;
+      width: 100%;
+      right: 0;
+    }
+    .line {
+      width: 98%;
+    }
+  }
+}

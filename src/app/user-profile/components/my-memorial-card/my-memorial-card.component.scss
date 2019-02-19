@@ -1,0 +1,50 @@
+@import "src/styles.scss";
+
+mat-card {
+  position: relative;
+  min-height: rem(283);
+  width: rem(286);
+  .image-border {
+    position: absolute;
+    height: rem(168);
+    width: rem(320);
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  .image {
+    height: rem(168);
+    width: rem(320);
+    &.portrait {
+      height: rem(320);
+    }
+  }
+  .container {
+    padding: rem(168) 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .info {
+      padding-right: rem(16);
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
+@include respond-to('small') {
+
+}
+@include respond-to('medium') {
+  mat-card {
+    height: rem(136);
+    width: rem(655);
+    min-height: 0;
+    .container {
+      padding: 0 0 0 rem(320);
+      height: 100%;
+    }
+  }
+}

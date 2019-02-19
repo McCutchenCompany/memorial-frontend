@@ -1,0 +1,29 @@
+<mat-card>
+  <div class="image-border">
+    <div class="image"
+    [style.background-image]="imgBackground.background"
+    [style.background-repeat]="imgBackground.repeat"
+    [style.background-position]="imgBackground.position"
+    [style.background-size]="imgBackground.size"
+    [style.transform]="imgBackground.scale"
+    [class.portrait]="memorial.rot === 90 || memorial.rot === 270"></div>
+  </div>
+  <div class="container">
+    <div class="info">
+      <h5>{{ name }}</h5>
+      <p *ngIf="memorial.birth_date">{{ memorial.birth_date | date:'y' }} - {{ memorial.death_date | date:'y' }}</p>
+    </div>
+    <div class="actions">
+      <button mat-button class="primary" [routerLink]="['/memorial', memorial.uuid]">View</button>
+      <button mat-button class="subtle" [routerLink]="['/create', memorial.uuid]">Edit</button>
+      <button mat-button *ngIf="memorial.published" [disabled]="saving$ | async" (click)="togglePublish()" class="subtle warn">
+        <span *ngIf="!(saving$ | async)">Unpublish</span>
+        <mat-progress-spinner *ngIf="saving$ | async" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      </button>
+      <button mat-button *ngIf="!memorial.published" [disabled]="saving$ | async" (click)="togglePublish()" class="subtle">
+        <span *ngIf="!(saving$ | async)">Publish</span>
+        <mat-progress-spinner *ngIf="saving$ | async" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      </button>
+    </div>
+  </div>
+</mat-card>

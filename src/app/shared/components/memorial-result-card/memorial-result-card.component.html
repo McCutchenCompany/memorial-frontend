@@ -1,0 +1,18 @@
+<mat-card
+  (mouseenter)="onHover()"
+  (mouseleave)="onHover()"
+  [class.mat-elevation-z8]="hover"
+  [routerLink]="['/memorial', memorial.uuid]">
+  <div class="image"
+  [style.background-image]="imgBackground.background"
+  [style.background-repeat]="imgBackground.repeat"
+  [style.background-position]="imgBackground.position"
+  [style.background-size]="imgBackground.size"></div>
+  <div class="info">
+    <h4>{{ name }}</h4>
+    <div class="date-and-loc">
+      <p>{{ memorial.birth_date | date:'y' }} - {{ memorial.death_date | date:'y' }}</p>
+      <p>{{ memorial.location }}</p>
+    </div>
+  </div>
+</mat-card>

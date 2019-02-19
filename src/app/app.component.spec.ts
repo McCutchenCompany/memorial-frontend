@@ -1,34 +1,39 @@
 import { async, TestBed } from '@angular/core/testing';
+import { MatDialogModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Store } from '@ngrx/store';
+import { NavHeaderComponent } from '@shared/components/nav-header/nav-header.component';
+import { SharedModule } from '@shared/shared.module';
+import { TestStore } from '@shared/testing/test-store';
+import { configureTestSuite } from 'ng-bullet';
 
-import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        NavHeaderComponent
       ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MatDialogModule,
+        MatMenuModule,
+        MatIconModule,
+        SharedModule
+      ],
+      providers: [
+        {
+          provide: Store,
+          useClass: TestStore
+        }
       ]
-    }).compileComponents();
-  }));
+    });
+  });
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual(environment.title);
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain(`Welcome to ${environment.title}!`);
   }));
 });

@@ -1,0 +1,142 @@
+@import "src/styles.scss";
+
+.info {
+  width: 87%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: rem(8) auto 0;
+  padding: rem(16);
+  background-color: map-get($colors, white);
+  .birth {
+    width: rem(150);
+  }
+  .death {
+    width: rem(150);
+  }
+  h3 {
+    margin-bottom: rem(6);
+  }
+}
+.description {
+  width: 95%;
+  margin: rem(64) auto rem(64);
+  h3 {
+    margin-bottom: rem(6);
+  }
+  p {
+    white-space: pre-line;
+  }
+}
+#fb-share-button {
+  background: #3b5998;
+  border-radius: 3px;
+  font-weight: 600;
+  padding: 5px 8px;
+  display: inline-block;
+  position: static;
+  height: rem(19);
+}
+
+#fb-share-button:hover {
+  cursor: pointer;
+  background: #213A6F
+}
+
+#fb-share-button svg {
+  width: 18px;
+  fill: white;
+  vertical-align: middle;
+  border-radius: 2px
+}
+
+#fb-share-button span {
+  vertical-align: middle;
+  color: white;
+  font-size: 14px;
+  padding: 0 3px
+}
+.pinterest {
+  border: none;
+  background: none;
+  padding: 0;
+  height: rem(29);
+  img {
+    height: rem(28);
+  }
+}
+.birth {
+  padding-left: 0;
+  width: rem(150);
+  margin: auto;
+}
+.death {
+  width: rem(150);
+  margin: auto;
+}
+.location {
+  display: none;
+}
+.social {
+  display: flex;
+  align-items: center;
+  margin: 0 auto rem(32);
+  order: -1;
+  width: 100%;
+  justify-content: center;
+  #fb-share-button {
+    margin-right: rem(8);
+  }
+}
+@include respond-to('small') {
+  .info {
+    width: rem(767);
+    margin-top: rem(60);
+    .social {
+      width: rem(136);
+      justify-content: space-between;
+      order: 1;
+    }
+    .location {
+      display: block;
+    }
+  }
+  .description {
+    width: rem(767);
+    p.columns {
+      column-count: 2;
+      column-gap: rem(24);
+    }
+  }
+}
+@include respond-to('medium') {
+  .info {
+    width: rem(1112);
+    padding: rem(32);
+    display: flex;
+    margin: rem(63) auto 0;
+    .birth {
+      width: rem(240);
+      padding-left: 0;
+    }
+    .social {
+      margin-left: rem(200);
+    }
+    .death {
+      width: rem(240);
+    }
+    h3 {
+      margin-bottom: rem(6);
+    }
+  }
+  .description {
+    width: rem(1176);
+    margin: rem(64) auto rem(64);
+    h3 {
+      padding-left: rem(118);
+      margin-bottom: rem(6);
+    }
+    p {
+      padding: 0 rem(120);
+    }
+  }
+}

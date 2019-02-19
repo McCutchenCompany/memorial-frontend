@@ -1,0 +1,7 @@
+<mat-card>
+  <form (submit)="onSubmit()" [formGroup]="searchForm">
+    <mat-icon>search</mat-icon>
+    <input formControlName="query" type="text" placeholder="Search">
+    <mat-icon class="clear" *ngIf="searchForm.value.query && searchForm.value.query.length > 0" (click)="clearSearch()">highlight_off</mat-icon>
+  </form>
+</mat-card>

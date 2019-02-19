@@ -1,0 +1,18 @@
+@import "src/styles.scss";
+
+form {
+  display: flex;
+  mat-icon {
+    font-size: rem(28);
+  }
+  input {
+    font-size: rem(20);
+    border: none;
+    width: 100%;
+    margin-left: rem(8);
+    outline: none;
+  }
+  .clear {
+    cursor: pointer;
+  }
+}

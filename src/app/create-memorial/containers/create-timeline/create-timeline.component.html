@@ -1,0 +1,47 @@
+<div class="overflow-box">
+  <div class="flourish">
+    <div class="flourish-container">
+      <div class="box-1-container">
+        <div class="box-1"></div>
+      </div>
+      <div class="box-2"></div>
+      <div class="box-3"></div>
+    </div>
+  </div>
+  <div class="container mat-elevation-z3">
+    <h4>Timeline</h4>
+    <p>
+      Here you can add important dates to the interactive timeline.
+      A good place to start might be the date they were married, had
+      a child, or received a special honor. Each event can include
+      a picture or YouTube video.
+    </p>
+    <div *ngIf="(memorial$ | async).timeline?.length > 7" class="action">
+      <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid]"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+      <button mat-button class="primary" [class.saving]="(saving$ | async)" [disabled]="saving$ | async" (click)="onAddEvent()">
+        <span *ngIf="!(saving$ | async)">
+          <mat-icon>add</mat-icon> Add Event
+        </span>
+        <span *ngIf="saving$ | async">
+          <mat-progress-spinner strokeWidth="1" diameter="20" mode="indeterminate" color="secondary"></mat-progress-spinner>
+        </span>
+      </button>
+      <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'location']">Next <mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+    <div class="timeline-card" *ngFor="let event of (memorial$ | async).timeline">
+      <app-timeline-form [timeline]="event" [editingIds]="editingIds$ | async"></app-timeline-form>
+    </div>
+    <div class="action">
+      <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid]"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+      <button mat-button class="primary" [class.saving]="(saving$ | async)" [disabled]="saving$ | async" (click)="onAddEvent()">
+        <span *ngIf="!(saving$ | async)">
+          <mat-icon>add</mat-icon> <span *ngIf="(memorial$ | async).timeline.length === 0">Add Event</span><span *ngIf="(memorial$ | async).timeline.length > 0">Add Another Event</span>
+        </span>
+        <span *ngIf="saving$ | async">
+          <mat-progress-spinner strokeWidth="1" diameter="20" mode="indeterminate" color="secondary"></mat-progress-spinner>
+        </span>
+      </button>
+      <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'location']">Next <mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+  </div>
+</div>

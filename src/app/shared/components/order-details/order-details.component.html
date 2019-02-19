@@ -1,0 +1,54 @@
+<form [formGroup]="quantityForm">
+  <h3>Order Details</h3>
+  <div class="cost">
+    <h4>Memorial</h4>
+    <p>{{ unitPrice | currency }} each</p>
+    <mat-form-field appearance="outline">
+      <mat-label>Quantity</mat-label>
+      <input matInput type="number" formControlName="quantity" min="1" (click)="setPrice()" (change)="setPrice()">
+    </mat-form-field>
+  </div>
+</form>
+<div class="order">
+  <div *ngIf="discount?.percent && discount?.one_time_use" class="discounted-unit">
+    <div class="original">
+      <h5>Memorial</h5>
+      <p>x1</p>
+      <p>{{ unitPrice | currency }}</p>
+    </div>
+    <div class="discount">
+      <p>Discount</p>
+      <p>{{ displayPercent }}%</p>
+      <p class="discount-price">- {{ unitPrice * (discount.percent / 100) | currency }}</p>
+    </div>
+    <div class="total">
+      <p>{{ unitPrice - (unitPrice * (discount.percent / 100)) | currency }}</p>
+    </div>
+  </div>
+  <div *ngIf="discount?.percent && !discount?.one_time_use" class="discounted-unit">
+    <div class="original">
+      <h5>Memorial</h5>
+      <p>x{{ displayQuantity }}</p>
+      <p>{{ quantityTotal | currency }}</p>
+    </div>
+    <div class="discount">
+      <p *ngIf="discount?.code === '404b3a80-df95-4915-be00-4c8b3bfe3803'">Launch Discount</p>
+      <p *ngIf="discount?.code !== '404b3a80-df95-4915-be00-4c8b3bfe3803'">Discount</p>
+      <p>{{ displayPercent }}%</p>
+      <p class="discount-price">- {{ quantityTotal * (discount.percent / 100) | currency }}</p>
+    </div>
+    <div class="total">
+      <p>{{ quantityForm.value.price | currency }}</p>
+    </div>
+  </div>
+  <div *ngIf="discount?.one_time_use">
+    <div *ngIf="!discount?.percent || quantityForm.value.quantity > 1" class="section">
+      <h5>Memorial</h5>
+      <p>x{{ displayQuantity }}</p>
+      <p>{{ quantityTotal | currency }}</p>
+    </div>
+  </div>
+  <div class="total">
+    <p>Total: {{ quantityForm.value.price | currency }}</p>
+  </div>
+</div>

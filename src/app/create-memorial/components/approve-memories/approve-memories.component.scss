@@ -1,0 +1,64 @@
+@import "src/styles.scss";
+
+.container {
+  width: 89%;
+  margin: rem(64) auto;
+  padding-bottom: rem(100);
+  .form-container, .memory-container {
+    padding: rem(16);
+    background: rgba(255,255,255,0.9);
+    mat-checkbox {
+      display: block;
+      margin-top: rem(32);
+    }
+    .action {
+      margin-top: rem(32);
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .memory-container {
+    margin-top: rem(36);
+  }
+  .memories {
+    width: 100%;
+    div {
+      width: 100%;
+    }
+  }
+  .title, .denied, .approved {
+    margin-bottom: rem(16);
+  }
+  .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .number {
+      height: rem(24);
+      width: rem(24);
+      margin-left: rem(16);
+      background: map-get($colors, primary);
+      border-radius: 100px;
+      &.empty {
+        background: map-get($colors, primary-lightest)
+      }
+      p {
+        transform: translateY(-8%);
+        text-align: center;
+        font-size: rem(12);
+        color: map-get($colors, white);
+      }
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(696);
+    .form-container, .memory-container {
+      padding: rem(32);
+    }
+    .title, .denied, .approved {
+      margin-bottom: rem(32);
+    }
+  }
+}
