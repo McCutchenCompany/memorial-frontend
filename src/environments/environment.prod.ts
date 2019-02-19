@@ -11,7 +11,7 @@ export const environment = {
     scope: 'openid email profile'
   },
   s3: {
-    url: 'https://memorial-staging-imgs.s3.amazonaws.com/'
+    url: 'https://memorial-imgs.s3.amazonaws.com/'
   },
   google: {
     apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
@@ -20,5 +20,5 @@ export const environment = {
     publicKey: 'pk_test_nN2N0PLFIBrWEW9Atg1HdGen'
   },
   url: 'https://mymemorial.co/',
-  discount: 'dd7dbe8a'
+  discount: '48805f68'
 };
