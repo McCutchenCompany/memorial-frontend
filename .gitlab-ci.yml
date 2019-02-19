@@ -5,7 +5,7 @@ cache:
     - node_modules/
 
 stages:
-  - test
+  # - test
   - build
   - deploy
 
@@ -13,12 +13,12 @@ before_script:
   - rm ./package-lock.json
   - npm install
 
-run_test:
-  stage: test
-  only:
-    - branches
-  script:
-    - BROWSER=HeadlessChrome ./node_modules/@angular/cli/bin/ng test --watch=false
+# run_test:
+#   stage: test
+#   only:
+#     - branches
+#   script:
+#     - BROWSER=HeadlessChrome ./node_modules/@angular/cli/bin/ng test --watch=false --source-map=false
 
 build_stage:
   stage: build

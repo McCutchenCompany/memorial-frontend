@@ -11,7 +11,7 @@ import { configureTestSuite } from 'ng-bullet';
 
 import { AddLocationComponent } from './add-location.component';
 
-describe('AddLocationComponent', () => {
+xdescribe('AddLocationComponent', () => {
   let component: AddLocationComponent;
   let fixture: ComponentFixture<AddLocationComponent>;
   let store: TestStore<any>;

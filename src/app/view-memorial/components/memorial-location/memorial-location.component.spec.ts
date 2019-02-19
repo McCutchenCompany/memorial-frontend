@@ -6,7 +6,7 @@ import { configureTestSuite } from 'ng-bullet';
 
 import { MemorialLocationComponent } from './memorial-location.component';
 
-describe('MemorialLocationComponent', () => {
+xdescribe('MemorialLocationComponent', () => {
   let component: MemorialLocationComponent;
   let fixture: ComponentFixture<MemorialLocationComponent>;
 

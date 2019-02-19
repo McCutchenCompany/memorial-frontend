@@ -89,7 +89,7 @@ export class PaymentComponent implements OnInit {
       name: [null, Validators.required]
     });
     this.discountForm = this.fb.group({
-      code: ['', [Validators.required, Validators.minLength(36)]]
+      code: ['', [Validators.required, Validators.minLength(8)]]
     });
     this.quantityForm = this.fb.group({
       quantity: [1, [Validators.required, Validators.min(1)]],

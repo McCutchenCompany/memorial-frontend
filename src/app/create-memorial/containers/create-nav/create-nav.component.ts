@@ -28,7 +28,7 @@ export class CreateNavComponent implements OnInit {
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpg)',
+        background: 'url(https://s3.amazonaws.com/memorial-staging-imgs/assets/default-memorial.jpeg)',
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover',
