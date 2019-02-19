@@ -1,0 +1,25 @@
+@import "src/styles.scss";
+
+.container {
+  width: 95%;
+  margin: rem(64) auto;
+  h2 {
+    font-size: rem(32);
+  }
+  p {
+    margin: rem(32) 0;
+  }
+  form {
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(760);
+    h2 {
+      font-size: rem(48);
+    }
+  }
+}

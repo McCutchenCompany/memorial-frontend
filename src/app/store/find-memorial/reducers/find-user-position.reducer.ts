@@ -5,6 +5,7 @@ export const INITIAL_STATE: FindUserPositionState = {
   loading: false,
   loaded: false,
   permission: true,
+  setLocation: false,
   position: {
     latitude: 38.876422,
     longitude: -77.073024,
@@ -17,7 +18,11 @@ export const INITIAL_STATE: FindUserPositionState = {
 export function findUserPositionReducer(state: FindUserPositionState = INITIAL_STATE, action: any): FindUserPositionState {
   switch (action.type) {
     case findMemorialActionTypes.GET_POSITION: {
-      return {...state, position: action.payload};
+      return {
+        ...state,
+        setLocation: true,
+        position: action.payload
+      };
     }
     case findMemorialActionTypes.LOCATION_DENIED: {
       return {

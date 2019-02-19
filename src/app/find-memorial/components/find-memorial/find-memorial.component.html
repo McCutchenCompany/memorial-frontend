@@ -1,6 +1,90 @@
-<agm-map [latitude]="latitude | async" [longitude]="longitude | async" [zoom]="12" (boundsChange)="onBoundChange($event)">
-  <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-    <agm-marker [latitude]="latitude | async" [longitude]="longitude | async"></agm-marker>
-    <agm-marker (markerClick)="onClick(marker)" *ngFor="let marker of (markers | async)" [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
-  </agm-marker-cluster>
-</agm-map>
+<div class="container">
+  <div class="memorials">
+    <div *ngIf="!(searchQuery$ | async)" class="hidden-desktop">
+      <button mat-button *ngIf="!displayMap" class="primary" (click)="toggleMap()">Display Map</button>
+      <button mat-button *ngIf="displayMap" class="primary fixed" (click)="toggleMap()">Hide Map</button>
+    </div>
+    <app-search-bar [searchQuery]="searchQuery$ | async" (search)="onSearch($event)"></app-search-bar>
+    <div *ngIf="!(searchQuery$ | async)" class="label">
+      <p>Memorials near you</p>
+      <div class="divider"></div>
+    </div>
+    <div *ngIf="(searchQuery$ | async)" class="label">
+      <p>Search results</p>
+      <div class="divider"></div>
+    </div>
+    <div *ngIf="!(locationSet$ | async)" class="finding-location">
+      <mat-progress-spinner mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      <p>Finding your location...</p>
+    </div>
+    <div class="loading" *ngIf="(searchLoading$ | async) || (markersLoading$ | async)">
+      <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
+    <div *ngIf="(locationSet$ | async)" class="results">
+      <div class="cards" (mouseenter)="onCardHover(memorial)" (mouseleave)="onCardHover()" *ngFor="let memorial of (memorials$ | async)">
+        <app-memorial-result-card [memorial]="memorial" [markerHover]="hoveredMarker.memorial?.uuid"></app-memorial-result-card>
+      </div>
+    </div>
+    <div *ngIf="(searchLoaded$ | async) && (searchQuery$ | async) && (memorials$ | async).length === 0">
+      <h4>There are no results for {{ searchQuery$ | async }}</h4>
+    </div>
+    <div *ngIf="(searchLoaded$ | async) && !(searchQuery$ | async) && (memorials$ | async).length === 0">
+      <h4>There are no memorials in range. Search for a memorial by name.</h4>
+    </div>
+    <div *ngIf="!(searchQuery$ | async)" class="label">
+      <p>Most viewed Memorials</p>
+      <div class="divider"></div>
+    </div>
+    <div *ngIf="!(searchQuery$ | async)" class="results">
+      <div class="cards" (mouseenter)="onCardHover(memorial)" (mouseleave)="onCardHover()" *ngFor="let memorial of (popularMemorials$ | async)">
+        <app-memorial-result-card [memorial]="memorial" [markerHover]="hoveredMarker.memorial?.uuid"></app-memorial-result-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="map" [class.hide]="!displayMap" *ngIf="!(searchQuery$ | async)">
+  <agm-map
+    [latitude]="latitude | async"
+    [longitude]="longitude | async"
+    [zoom]="12"
+    [streetViewControl]="false"
+    [mapDraggable]="false"
+    [draggableCursor]="'default'"
+    (boundsChange)="onBoundChange($event)">
+    <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+      <agm-marker iconUrl="assets/imgs/baseline-my_location-24px.svg" [latitude]="latitude | async" [longitude]="longitude | async"></agm-marker>
+      <agm-marker
+        [iconUrl]="markerIcon(marker)"
+        (markerClick)="onClick(marker)"
+        *ngFor="let marker of (markers | async)"
+        [latitude]="marker.latitude"
+        [longitude]="marker.longitude"
+        (mouseOver)="onMarkerHover(marker)"
+        (mouseOut)="onMarkerLeave()"></agm-marker>
+    </agm-marker-cluster>
+  </agm-map>
+  <div class="cover" *ngIf="!(locationSet$ | async)">
+    <h3 *ngIf="!(permission | async)">Finding your location...</h3>
+    <h3 *ngIf="(permission | async)">You have not given Memorial permission to access your location.</h3>
+  </div>
+</div>
+<div class="map mobile-hide" *ngIf="searchQuery$ | async">
+  <agm-map
+    [latitude]="hoveredCard.latitude"
+    [longitude]="hoveredCard.longitude"
+    [zoom]="15"
+    [mapDraggable]=false
+    [streetViewControl]="false"
+    [draggableCursor]="'default'">
+    <agm-marker
+    iconUrl="assets/imgs/marker-hover.svg"
+    *ngIf="hoveredCard.latitude && hoveredCard.longitude"
+    (markerClick)="onClick(hoveredCard)"
+    [latitude]="hoveredCard.latitude"
+    [longitude]="hoveredCard.longitude"></agm-marker>
+  </agm-map>
+  <div class="cover" *ngIf="!hoveredCard.latitude || !hoveredCard.longitude">
+    <h3 *ngIf="!hoveredCard.uuid">Hover over a Memorial to see it's location</h3>
+    <h3 *ngIf="hoveredCard.uuid">This memorial does not have a location set</h3>
+  </div>
+</div>

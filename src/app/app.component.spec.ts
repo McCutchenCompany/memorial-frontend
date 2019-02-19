@@ -1,7 +1,9 @@
 import { async, TestBed } from '@angular/core/testing';
+import { MatDialogModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { NavHeaderComponent } from '@shared/components/nav-header/nav-header.component';
+import { SharedModule } from '@shared/shared.module';
 import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
@@ -15,7 +17,11 @@ describe('AppComponent', () => {
         NavHeaderComponent
       ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MatDialogModule,
+        MatMenuModule,
+        MatIconModule,
+        SharedModule
       ],
       providers: [
         {

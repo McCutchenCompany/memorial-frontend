@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@environments/environment';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
+import { Memorial } from '@shared/models/memorial.model';
+import { CreateMemorialService } from 'app/create-memorial/services/create-memorial.service';
 import * as auth0 from 'auth0-js';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AuthService } from './../../shared/services/auth.service';
 import { ProfileService } from './../../user-profile/services/profile.service';
@@ -20,15 +22,21 @@ import {
   LocalTokenInvalid,
   LocalTokenValid,
   UpdateProfile,
+  UpdateUserMemorial,
+  UpdateUserMemorialFailure,
+  UpdateUserMemorialSuccess,
 } from './auth.actions';
+import { getUser } from './auth.reducer';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions: Actions,
     private api: ProfileService,
+    private memorialApi: CreateMemorialService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store<any>
   ) {}
 
   auth0 = new auth0.WebAuth(environment.auth0);
@@ -57,12 +65,10 @@ export class AuthEffects {
   auth0LoginSuccess$: Observable<Action> = this.actions.pipe(
     ofType(AuthActionTypes.AUTH0_LOGIN_SUCCESS),
     map((action: Auth0LoginSuccess) => action.payload),
-    tap(payload => {
+    map(payload => {
       // Set the token
       localStorage.setItem('access_token', payload.accessToken);
-    }),
-    map(() => {
-      return new GetProfile();
+      return new GetProfile(payload);
     })
   );
 
@@ -101,7 +107,7 @@ export class AuthEffects {
   public localTokenValid$: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOCAL_TOKEN_VALID),
     map((action: LocalTokenValid) => {
-      return new GetProfile();
+      return new GetProfile({});
     })
   );
 
@@ -124,7 +130,7 @@ export class AuthEffects {
   @Effect()
   getProfile$: Observable<Action> = this.actions.pipe(
     ofType(AuthActionTypes.GET_PROFILE),
-    switchMap(() => this.api.getProfile().pipe(
+    switchMap((action: GetProfile) => this.api.getProfile(action.payload).pipe(
       map(profile => new GetProfileSuccess(profile)),
       catchError(error => of(new GetProfileFailure(error)))
     ))
@@ -137,6 +143,26 @@ export class AuthEffects {
       map((profile) => new GetProfileSuccess(profile)),
       catchError(error => of(new GetProfileFailure(error)))
     ))
+  );
+
+
+  @Effect()
+  updateUserMemorial$: Observable<Action> = this.actions.pipe(
+    ofType(AuthActionTypes.UPDATE_USER_MEMORIAL),
+    withLatestFrom(this.store.pipe(select(getUser))),
+    switchMap(([action, user]: [UpdateUserMemorial, any]) => {
+      return this.memorialApi.updateCreateMemorial(action.payload.uuid, action.payload.body).pipe(
+        map((res: Memorial) => {
+          const userMemorials = user.memorials;
+          const index = userMemorials.findIndex(memorial => memorial.uuid === res.uuid);
+          if (index !== -1) {
+            userMemorials[index] = res;
+          }
+          return new UpdateUserMemorialSuccess(userMemorials);
+        }),
+        catchError(error => of(new UpdateUserMemorialFailure(error)))
+      );
+    })
   );
 
 }

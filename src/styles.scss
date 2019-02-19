@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700');
 
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "src/theme.scss";
 
 
 $breakpoints: (
@@ -34,6 +34,11 @@ $colors: (
   primary-darkest: #0D2059,
   primary-light: #657FC2,
   primary-lightest: #BECAE8,
+  secondary: #9b643a,
+  secondary-dark: #89522c,
+  secondary-darkets: #6d3618,
+  secondary-light: #b99375,
+  secondary-lightest: #e1d1c4,
   black: #141E28,
   white: #FFFFFF,
   gray: #ACB3BF,
@@ -54,6 +59,12 @@ $serifFont: 'Noto Serif', serif;
 
 .agm-map-container-inner {
   width: 100% !important;
+}
+
+body {
+  position: relative;
+  min-height: calc(100vh - 17rem);
+  padding-bottom: rem(272);
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -105,7 +116,7 @@ h6 {
   line-height: rem(32);
 }
 
-p {
+p, a {
   font-size: rem(16);
   line-height: rem(28);
   &.caption {
@@ -219,13 +230,35 @@ button {
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+.create-no-scroll {
+  position: fixed;
+  overflow: hidden;
+  width: 100vw;
+}
+@include respond-to('small') {
+  .create-no-scroll {
+    position: static;
+  }
+}
+@include respond-to('medium') {
+  .no-scroll {
+    overflow: scroll;
+  }
+}
+
 .mat-form-field-appearance-outline .mat-form-field-flex {
   height: rem(52);
 }
 
 mat-form-field.textarea {
   &.mat-form-field-appearance-outline .mat-form-field-flex {
-    height: rem(180);
+    height: rem(250);
+  }
+  textarea {
+    height: rem(217);
   }
 }
 
@@ -239,7 +272,7 @@ mat-form-field.textarea {
   .mat-form-field-infix {
     padding: .4em 0 0;
     .mat-form-field-label-wrapper {
-      overflow: initial;
+      overflow: visible;
     }
   }
 }
@@ -262,10 +295,28 @@ mat-form-field.mat-form-field-appearance-outline {
 
 mat-tab-group.create-tabs {
   mat-tab-header.mat-tab-header {
-    width: rem(1176);
+    width: 100%;
     margin: auto;
+    @include respond-to('medium') {
+      width: rem(1176);
+    }
   }
   .mat-tab-labels {
     justify-content: space-between;
   }
+}
+
+mat-card.mat-card {
+  .mat-card-header-text {
+    margin: 0;
+  }
+}
+
+mat-dialog-container.mat-dialog-container {
+  max-height: fit-content;
+  height: 100vh;
+}
+
+mat-checkbox label.mat-checkbox-layout {
+  white-space: normal;
 }

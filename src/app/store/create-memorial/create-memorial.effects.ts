@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
+import { Timeline } from '@shared/models/timeline.model';
 import { ImageUploadService } from '@shared/services/image-upload.service';
 import { CreateMemorialService } from 'app/create-memorial/services/create-memorial.service';
 import { Observable, of } from 'rxjs';
@@ -12,18 +12,48 @@ import {
   AddTimelineEntryFaiure,
   AddTimelineEntrySuccess,
   CreateMemorialActionTypes,
+  DeleteMemorialImage,
+  DeleteMemorialImageFailure,
+  DeleteMemorialImageSuccess,
   GetCreateMemorial,
   GetCreateMemorialFailure,
   GetCreateMemorialSuccess,
   RemoveTimelineEntry,
   RemoveTimelineEntryFaiure,
   RemoveTimelineEntrySuccess,
+  RemoveTimelineFile,
+  RemoveTimelineFileFailure,
+  RemoveTimelineFileSuccess,
+  ReplaceMemorialImage,
+  ReplaceMemorialImageFailure,
+  ReplaceMemorialImageSuccess,
+  ReplaceTimelineFile,
+  ReplaceTimelineFileFailure,
+  ReplaceTimelineFileSuccess,
+  SearchAddress,
+  SearchAddressFailure,
+  SearchAddressSuccess,
   UpdateCreateMemorial,
   UpdateCreateMemorialFailure,
   UpdateCreateMemorialSuccess,
+  UpdateLocation,
+  UpdateLocationFailure,
+  UpdateLocationSuccess,
+  UpdateMemoryStatus,
+  UpdateMemoryStatusFailure,
+  UpdateMemoryStatusSuccess,
+  UpdateSingleTimeline,
+  UPdateSingleTimelineFailure,
+  UpdateSingleTimelineSuccess,
+  UpdateTimeline,
+  UpdateTimelineFailure,
+  UpdateTimelineSuccess,
   UploadMemorialImage,
   UploadMemorialImageFailure,
   UploadMemorialImageSuccess,
+  UploadTimelineFile,
+  UploadTimelineFileFailure,
+  UploadTimelineFileSuccess,
 } from './create-memorial.actions';
 
 
@@ -32,8 +62,7 @@ export class CreateMemorialEffects {
   constructor(
     private actions: Actions,
     private api: CreateMemorialService,
-    private uploadService: ImageUploadService,
-    private router: Router
+    private uploadService: ImageUploadService
   ) {}
 
   @Effect()
@@ -73,7 +102,25 @@ export class CreateMemorialEffects {
   );
 
   @Effect()
-  UploadMemorialImage$: Observable<Action> = this.actions.pipe(
+  updateTimeline$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPDATE_TIMELINE),
+    switchMap((action: UpdateTimeline) => this.api.updateTimeline(action.payload.memorial_id, action.payload.timelines).pipe(
+      map((res: Timeline[]) => new UpdateTimelineSuccess(res)),
+      catchError(error => of(new UpdateTimelineFailure(error)))
+    ))
+  );
+
+  @Effect()
+  updateSingleTimeline$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPDATE_SINGLE_TIMELINE),
+    switchMap((action: UpdateSingleTimeline) => this.api.updateSingleTimeline(action.payload.timeline_id, action.payload.body).pipe(
+      map(res => new UpdateSingleTimelineSuccess(res)),
+      catchError(error => of(new UPdateSingleTimelineFailure(error)))
+    ))
+  );
+
+  @Effect()
+  uploadMemorialImage$: Observable<Action> = this.actions.pipe(
     ofType(CreateMemorialActionTypes.UPLOAD_MEMORIAL_IMAGE),
     switchMap((action: UploadMemorialImage) => this.uploadService.uploadImage(action.payload.id, action.payload.image).pipe(
       map(memorial => new UploadMemorialImageSuccess(memorial)),
@@ -81,4 +128,85 @@ export class CreateMemorialEffects {
     ))
   );
 
+  @Effect()
+  deleteMemorialImage$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.DELETE_MEMORIAL_IMAGE),
+    switchMap((action: DeleteMemorialImage) => this.uploadService.removeImage(action.payload.id, action.payload.route).pipe(
+      map(memorial => new DeleteMemorialImageSuccess(memorial)),
+      catchError(error => of(new DeleteMemorialImageFailure(error)))
+    ))
+  );
+
+  @Effect()
+  replaceMemorialImage$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.REPLACE_MEMORIAL_IMAGE),
+    switchMap((action: ReplaceMemorialImage) => this.uploadService.replaceImage(action.payload.id, action.payload.image).pipe(
+      map(memorial => new ReplaceMemorialImageSuccess(memorial)),
+      catchError(error => of(new ReplaceMemorialImageFailure(error)))
+    ))
+  );
+
+  @Effect()
+  uploadTimelineFile$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPLOAD_TIMELINE_FILE),
+    switchMap((action: UploadTimelineFile) => {
+      return this.uploadService.uploadTimelineFile(action.payload.id, action.payload.file, action.payload.asset_type).pipe(
+      map(memorial => new UploadTimelineFileSuccess(memorial)),
+      catchError(error => of(new UploadTimelineFileFailure(error)))
+    );
+  }));
+
+  @Effect()
+  replaceTimelineFile$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.REPLACE_TIMELINE_FILE),
+    switchMap((action: ReplaceTimelineFile) => {
+      return this.uploadService.uploadTimelineFile(action.payload.id, action.payload.file, action.payload.asset_type).pipe(
+      map(memorial => new ReplaceTimelineFileSuccess(memorial)),
+      catchError(error => of(new ReplaceTimelineFileFailure(error)))
+    );
+  }));
+
+  @Effect()
+  removeTimelineFile$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.REMOVE_TIMELINE_FILE),
+    switchMap((action: RemoveTimelineFile) => this.uploadService.removeTimelineFile(action.payload.id, action.payload.route).pipe(
+      map(memorial => new RemoveTimelineFileSuccess(memorial)),
+      catchError(error => of(new RemoveTimelineFileFailure(error)))
+    ))
+  );
+
+  @Effect()
+  updateLocation$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPDATE_LOCATION),
+    switchMap((action: UpdateLocation) => this.api.updateLocation(action.payload.id, action.payload.location).pipe(
+      map(res => new UpdateLocationSuccess(res)),
+      catchError(error => of(new UpdateLocationFailure(error)))
+    ))
+  );
+
+  @Effect()
+  udpateMemoryStatus$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.UPDATE_MEMORY_STATUS),
+    switchMap((action: UpdateMemoryStatus) => this.api.updateMemoryStatus(action.payload.memory_id, action.payload.body).pipe(
+      map(res => new UpdateMemoryStatusSuccess(res)),
+      catchError(error => of(new UpdateMemoryStatusFailure(error)))
+    ))
+  );
+
+  @Effect()
+  searchLocation$: Observable<Action> = this.actions.pipe(
+    ofType(CreateMemorialActionTypes.SEARCH_ADDRESS),
+    switchMap((action: SearchAddress) => this.api.searchLocation(action.payload).pipe(
+      map((res: any) => {
+        const payload = {
+          address: res.address,
+          latitude: res.lat,
+          longitude: res.lng,
+          zoom: 15
+        };
+        return new SearchAddressSuccess(payload);
+      }),
+      catchError(error => of(new SearchAddressFailure(error)))
+    ))
+  );
 }

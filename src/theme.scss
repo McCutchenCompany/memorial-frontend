@@ -1,0 +1,112 @@
+@import '~@angular/material/theming';
+
+$mat-memorial-primary: (
+  50 : #e7ebf3,
+  100 : #c4cce1,
+  200 : #9daacd,
+  300 : #7588b9,
+  400 : #586faa,
+  500 : #3a559b,
+  600 : #344e93,
+  700 : #2c4489,
+  800 : #253b7f,
+  900 : #182a6d,
+  A100 : #a7b8ff,
+  A200 : #748eff,
+  A400 : #4165ff,
+  A700 : #2850ff,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #ffffff,
+      A700 : #ffffff,
+  )
+);
+
+$mat-memorial-secondary: (
+    50 : #f3ece7,
+    100 : #e1d1c4,
+    200 : #cdb29d,
+    300 : #b99375,
+    400 : #aa7b58,
+    500 : #9b643a,
+    600 : #935c34,
+    700 : #89522c,
+    800 : #7f4825,
+    900 : #6d3618,
+    A100 : #ffc4a7,
+    A200 : #ffa174,
+    A400 : #ff7e41,
+    A700 : #ff6d28,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+$mat-memorial-warn: (
+    50 : #f2e3e3,
+    100 : #e0b9b9,
+    200 : #cb8a8a,
+    300 : #b65b5b,
+    400 : #a63737,
+    500 : #961414,
+    600 : #8e1212,
+    700 : #830e0e,
+    800 : #790b0b,
+    900 : #680606,
+    A100 : #ff9898,
+    A200 : #ff6565,
+    A400 : #ff3232,
+    A700 : #ff1919,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+@include mat-core();
+
+$memorial-primary: mat-palette($mat-memorial-primary);
+$memorial-accent: mat-palette($mat-memorial-secondary);
+$memorial-warn: mat-palette($mat-memorial-warn);
+
+$memorial-theme: mat-light-theme($memorial-primary, $memorial-accent, $memorial-warn);
+
+@include angular-material-theme($memorial-theme);

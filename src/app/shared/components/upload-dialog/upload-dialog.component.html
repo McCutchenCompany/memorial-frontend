@@ -1,4 +1,8 @@
 <form>
   <input type="file" name="file" class="inputfile" (change)="onSelectFile($event)"/>
-  <button mat-button class="primary" [disabled]="!selectedFiles" (click)="onUpload()">Upload</button>
+  <button mat-button class="primary" [disabled]="!selectedFiles || (saving$ | async)" (click)="onUpload()">Upload</button>
 </form>
+<div *ngIf="saving$ | async" class="saving">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<p class="error" *ngIf="error">{{ error }}</p>

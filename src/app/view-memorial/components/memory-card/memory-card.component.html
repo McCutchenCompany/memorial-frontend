@@ -1,0 +1,28 @@
+<mat-card [class.unpublished]="!public && !memory.published">
+  <mat-card-header>
+    <div class="container">
+      <div class="title">
+        <mat-card-title>{{ memory.title }}</mat-card-title>
+        <mat-card-subtitle>{{ memory.first_name }} {{ memory.last_name }}</mat-card-subtitle>
+      </div>
+      <div class="status-container">
+        <div *ngIf="!public && !memory.published && !memory.denied" class="status">
+          <p>Waiting for Approval</p>
+        </div>
+        <div *ngIf="!public && !memory.published && memory.denied" class="status">
+          <p class="denied">Denied by Owner</p>
+        </div>
+        <div *ngIf="displayAction">
+          <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onEdit()">Edit</button>
+            <button mat-menu-item (click)="onDelete()">Delete</button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ memory.description }}</p>
+  </mat-card-content>
+</mat-card>

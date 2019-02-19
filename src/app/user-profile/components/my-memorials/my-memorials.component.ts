@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { PaymentComponent } from '@shared/components/payment/payment.component';
 import { Memorial } from '@shared/models/memorial.model';
 import { User } from '@shared/models/user.model';
 
@@ -13,17 +15,17 @@ export class MyMemorialsComponent implements OnInit {
   @Input() user: User;
   @Output() addLicense: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
   }
 
   onAddMemorial() {
-    const payload = {
-      licenses: this.user.licenses + 1,
-      uuid: this.user.uuid
-    };
-    this.addLicense.emit(payload);
+    this.dialog.open(PaymentComponent, {
+      closeOnNavigation: true
+    });
   }
 
 }

@@ -13,7 +13,12 @@ export enum AuthActionTypes {
   GET_PROFILE_SUCCESS = '[Auth] Get profile success',
   GET_PROFILE_FAILURE = '[Auth] Get profile failure',
   UPDATE_PROFILE = '[Auth] Update profile',
+  UPDATE_PROFILE_SUCCESS = '[Auth] Update profile success',
+  UPDATE_PROFILE_FAILURE = '[Auth] Update profile failure',
   SIGNOUT = '[Auth] Sign Out',
+  UPDATE_USER_MEMORIAL = '[Profile] Update user memorial',
+  UPDATE_USER_MEMORIAL_SUCCESS = '[Profile] Update user memorial success',
+  UPDATE_USER_MEMORIAL_FAILURE = '[Profile] Update user memorial failure'
 }
 
 // Auth 0
@@ -58,6 +63,7 @@ export class CheckSession implements Action {
 
 export class GetProfile implements Action {
   readonly type = AuthActionTypes.GET_PROFILE;
+  constructor (public payload: any) {}
 }
 export class GetProfileSuccess implements Action {
   readonly type = AuthActionTypes.GET_PROFILE_SUCCESS;
@@ -70,7 +76,28 @@ export class GetProfileFailure implements Action {
 
 export class UpdateProfile implements Action {
   readonly type = AuthActionTypes.UPDATE_PROFILE;
-  constructor (public payload: string) {}
+  constructor (public payload: any) {}
+}
+export class UpdateProfileSuccess implements Action {
+  readonly type = AuthActionTypes.UPDATE_PROFILE_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class UpdateProfileFailure implements Action {
+  readonly type = AuthActionTypes.UPDATE_PROFILE_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class UpdateUserMemorial implements Action {
+  readonly type = AuthActionTypes.UPDATE_USER_MEMORIAL;
+  constructor (public payload: any) {}
+}
+export class UpdateUserMemorialSuccess implements Action {
+  readonly type = AuthActionTypes.UPDATE_USER_MEMORIAL_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class UpdateUserMemorialFailure implements Action {
+  readonly type = AuthActionTypes.UPDATE_USER_MEMORIAL_FAILURE;
+  constructor (public payload: any) {}
 }
 
 export type AuthActions =
@@ -86,4 +113,9 @@ export type AuthActions =
   | GetProfile
   | GetProfileSuccess
   | GetProfileFailure
-  | UpdateProfile;
+  | UpdateProfile
+  | UpdateProfileSuccess
+  | UpdateProfileFailure
+  | UpdateUserMemorial
+  | UpdateUserMemorialSuccess
+  | UpdateUserMemorialFailure;

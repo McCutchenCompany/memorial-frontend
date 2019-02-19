@@ -1,0 +1,19 @@
+<form [formGroup]="editMemoryForm">
+  <h4>Edit Memory</h4>
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title">
+  </mat-form-field>
+  <mat-form-field class="textarea" appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      maxlength="1000"></textarea>
+    <mat-hint align="end">{{ editMemoryForm.value.description.length }} / 1000</mat-hint>
+  </mat-form-field>
+  <div class="actions">
+    <button mat-button class="primary" (click)="onSave()" [disabled]="editMemoryForm.invalid || (saving$ | async)">Save</button>
+    <button mat-button class="secondary" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

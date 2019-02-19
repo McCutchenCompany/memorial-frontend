@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store } from '@ngrx/store';
 import { configureTestSuite } from 'ng-bullet';
 
 import { LocationMarker } from './../../../shared/models/location-marker.model';
 import { Memorial } from './../../../shared/models/memorial.model';
+import { TestStore } from './../../../shared/testing/test-store';
 import { MemorialInfoComponent } from './memorial-info.component';
 
 describe('MemorialInfoComponent', () => {
@@ -12,6 +14,12 @@ describe('MemorialInfoComponent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [ MemorialInfoComponent ],
+      providers: [
+        {
+          provide: Store,
+          useClass: TestStore
+        }
+      ]
     });
   });
 

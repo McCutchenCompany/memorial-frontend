@@ -6,3 +6,6 @@
   font-family: $sansFont;
   color: map-get($colors, white);
 }
+.error {
+  color: map-get($colors, warn);
+}

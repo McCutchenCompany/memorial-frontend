@@ -1,0 +1,44 @@
+<div class="container">
+  <h6>Image Editor</h6>
+  <div class="image-border">
+    <div class="image-viewer"
+    [style.background-image]="imgBackground.background"
+    [style.background-repeat]="imgBackground.repeat"
+    [style.background-position]="imgBackground.position"
+    [style.background-size]="imgBackground.size"
+    [style.transform]="imgBackground.scale"
+    [class.portrait]="imageFormat.value.rot === 90 || imageFormat.value.rot === 270"
+    (panstart)="onMobileDrag($event)"
+    (panmove)="onMobileDrag($event)"></div>
+  </div>
+  <div class="rotation">
+    <h6>Rotate</h6>
+    <div class="actions">
+      <button mat-button class="subtle" (click)="onRotate('left')"><mat-icon>rotate_left</mat-icon></button>
+      <button mat-button class="subtle" (click)="onRotate('right')"><mat-icon>rotate_right</mat-icon></button>
+    </div>
+  </div>
+  <div class="center">
+    <h6>Recenter</h6>
+    <div class="actions">
+      <button mat-button class="subtle one-side" (click)="onCenterVert()">Verical</button>
+      <button mat-button class="subtle one-side" (click)="onCenterHorz()">Horizontal</button>
+      <button mat-button class="subtle" [disabled]="imageFormat.value.posY === 0 && imageFormat.value.posX === 0" type="button" (click)="recenter()">Both</button>
+    </div>
+  </div>
+  <form [formGroup]="imageFormat">
+    <h6>Scale</h6>
+    <mat-slider
+      formControlName="scale"
+      min="100"
+      max="200"
+      color="primary"></mat-slider>
+  </form>
+  <div class="actions">
+    <button mat-button class="primary" [disabled]="saving$ | async" (click)="onSave()">
+      <span *ngIf="!(saving$ | async)">Save Changes</span>
+      <span *ngIf="saving$ | async">...Saving</span>
+    </button>
+    <button mat-button class="subtle" (click)="dialogRef.close()">Cancel</button>
+  </div>
+</div>

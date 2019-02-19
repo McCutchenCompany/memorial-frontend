@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { User } from '@shared/models/user.model';
+import { PurchaseLicense } from '@store/app';
 import { GetProfile, UpdateProfile } from '@store/auth/auth.actions';
 import { getAuthLoaded, getAuthLoading, getUser } from '@store/auth/auth.reducer';
 import { AuthState } from '@store/models/auth-state.model';
-import { PurchaseLicense } from '@store/user-profile/user-profile.actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new GetProfile());
+    this.store.dispatch(new GetProfile({}));
   }
 
   onEdit(payload) {

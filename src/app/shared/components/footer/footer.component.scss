@@ -1,0 +1,51 @@
+@import "src/styles.scss";
+
+.footer {
+  width: 100%;
+  padding: rem(64) 0;
+  background: map-get($colors, black);
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+  .container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    .links {
+      margin-top: rem(16);
+      ul {
+        padding-left: 0;
+        list-style: none;
+        a {
+          color: map-get($colors, white);
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+@include respond-to('small') {
+  .footer {
+    .container {
+      width: rem(336);
+      flex-direction: row;
+      .links {
+        margin-top: initial;
+        ul {
+          padding-left: rem(40);
+        }
+      }
+    }
+  }
+}
+@include respond-to('medium') {
+  .footer {
+    .container {
+      width: rem(776)
+    }
+  }
+}

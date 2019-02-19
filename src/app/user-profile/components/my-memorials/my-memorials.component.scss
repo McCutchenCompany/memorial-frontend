@@ -1,8 +1,44 @@
 @import "src/styles.scss";
 
+.container {
+  margin-bottom: rem(150);
+}
 .memorial-card {
   margin: rem(50) 0;
 }
 mat-icon {
   font-size: rem(21);
+}
+h2 {
+  font-size: rem(32);
+}
+button {
+  margin: rem(32) 0 0;
+}
+@include respond-to('small') {
+  .container {
+    width: 760px;
+    margin: auto;
+  }
+  h2 {
+    font-size: rem(48)
+  }
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(687);
+    width: initial;
+    margin: 0;
+  }
+  .card-container {
+    display: inline;
+  }
+  button {
+    margin: rem(64) 0 0;
+  }
 }

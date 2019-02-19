@@ -1,8 +1,18 @@
+<div class="flourish">
+  <div class="flourish-container">
+    <div class="box-1"></div>
+    <div class="box-2"></div>
+    <div class="box-3"></div>
+    <div class="box-4"></div>
+  </div>
+</div>
 <div class="container">
-  <form [formGroup]="memorialInfoForm">
+  <form (submit)="onSave()" class="mat-elevation-z3" [formGroup]="memorialInfoForm">
+    <h4 class="title">Personal Information</h4>
+    <p>Start creating your memorial by adding a cover photo and some basic information.</p>
     <h4>Cover Image</h4>
-    <app-image-viewer *ngIf="memorialInfo.image" [image]="memorialInfo.image" [memorial_id]="memorialInfo.uuid"></app-image-viewer>
-    <app-upload-image *ngIf="!memorialInfo.image" [memorialId]="memorialInfo.uuid"></app-upload-image>
+    <app-image-viewer *ngIf="(memorial$ | async).memorial?.image" [image]="(memorial$ | async).memorial?.image" [id]="(memorial$ | async).memorial?.uuid" [type]="'memorial'" [format]="imageFormat" (remove)="onRemove($event)"></app-image-viewer>
+    <app-upload-image *ngIf="!(memorial$ | async).memorial?.image" [id]="(memorial$ | async).memorial?.uuid" [type]="'memorial'"></app-upload-image>
     <h4>Name</h4>
     <div class="name">
       <mat-form-field appearance="outline">
@@ -32,21 +42,19 @@
         <mat-datepicker #deathDatepicker></mat-datepicker>
       </mat-form-field>
     </div>
-    <h4>Start by sharing about their life</h4>
     <div class="description">
       <mat-form-field class="textarea" appearance="outline">
-        <mat-label>Description</mat-label>
+        <mat-label>About {{ memorialInfoForm.value.first_name }}</mat-label>
         <textarea
           matInput
           formControlName="description"
-          matTextareaAutosize
           maxlength="1000"></textarea>
         <mat-hint align="end">{{memorialInfoForm.value.description.length}} / 1000</mat-hint>
       </mat-form-field>
     </div>
     <div class="actions">
-      <button mat-button *ngIf="memorialInfoForm.pristine" class="primary">Timeline <mat-icon>keyboard_arrow_right</mat-icon></button>
-      <button mat-button *ngIf="memorialInfoForm.dirty" [disabled]="memorialInfoForm.invalid" class="primary" (click)="onSave()">Save and Continue</button>
+      <button mat-button *ngIf="memorialInfoForm.pristine" class="primary">Next <mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button mat-button *ngIf="memorialInfoForm.dirty" [disabled]="memorialInfoForm.invalid" class="primary" type="submit">Save and Continue</button>
     </div>
   </form>
 </div>

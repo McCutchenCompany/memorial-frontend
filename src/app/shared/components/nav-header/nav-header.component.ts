@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { Auth0Login, SignOut } from '@store/auth/auth.actions';
 import { AuthState } from '@store/models/auth-state.model';
 
-import { Auth0Login } from './../../../store/auth/auth.actions';
+import { PaymentComponent } from './../payment/payment.component';
 
 @Component({
   selector: 'app-nav-header',
@@ -21,7 +23,8 @@ export class NavHeaderComponent implements OnInit {
   }
 
   constructor(
-    private store: Store<AuthState>
+    private store: Store<AuthState>,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -29,6 +32,20 @@ export class NavHeaderComponent implements OnInit {
 
   onLogin() {
     this.store.dispatch(new Auth0Login());
+  }
+
+  onLogout() {
+    this.store.dispatch(new SignOut());
+  }
+
+  onCreateMemorial() {
+    if (this.loggedIn) {
+      this.dialog.open(PaymentComponent, {
+        closeOnNavigation: true
+      });
+    } else {
+      this.store.dispatch(new Auth0Login());
+    }
   }
 
 }

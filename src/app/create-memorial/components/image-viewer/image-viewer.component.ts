@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
+import { UploadDialogComponent } from '@shared/components/upload-dialog/upload-dialog.component';
+import { ImageFormat } from '@store/models/image-format.model';
 
+import { ImageEditorComponent } from '../image-editor/image-editor.component';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { ImageUploadService } from './../../../shared/services/image-upload.service';
 
 @Component({
   selector: 'app-image-viewer',
@@ -13,15 +16,22 @@ import { ImageUploadService } from './../../../shared/services/image-upload.serv
 export class ImageViewerComponent implements OnInit {
 
   @Input() image: string;
-  @Input() memorial_id: string;
+  @Input() id: string;
+  @Input() type: 'memorial' | 'timeline';
+  @Input() format: ImageFormat;
+  @Output() remove: EventEmitter<{id: string, route: string}> = new EventEmitter<{id: string, route: string}>();
 
   get imgBackground() {
     if (this.image) {
+      const height = this.format.rot === 90 || this.format.rot === 270 ? '20' : '10.5';
       return {
-        background: `url(${environment.s3.url}${encodeURI(this.image)})`,
-        position: 'center',
+        background: `url(${environment.s3.url}${this.image})`,
         repeat: 'no-repeat',
-        size: 'cover'
+        position: `${this.format.posX.toString()}px ${this.format.posY.toString()}px`,
+        size: `cover`,
+        scale: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.format.scale / 100}) rotate(${this.format.rot}deg)`),
+        height: `${height}rem`
       };
     } else {
       return {
@@ -35,7 +45,7 @@ export class ImageViewerComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private uploadService: ImageUploadService
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -50,7 +60,36 @@ export class ImageViewerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.uploadService.removeImage(this.memorial_id, this.image);
+        this.remove.emit({id: this.id, route: this.image});
+      }
+    });
+  }
+
+  onReplace() {
+    if (this.type === 'memorial') {
+      this.dialog.open(UploadDialogComponent, {
+        data: {
+          memorial: this.id,
+          action: 'replace'
+        }
+      });
+    } else if (this.type === 'timeline') {
+      this.dialog.open(UploadDialogComponent, {
+        data: {
+          timeline: this.id,
+          action: 'replace'
+        }
+      });
+    }
+  }
+
+  onEdit() {
+    this.dialog.open(ImageEditorComponent, {
+      data: {
+        id: this.id,
+        type: this.type,
+        image: this.image,
+        format: this.format
       }
     });
   }

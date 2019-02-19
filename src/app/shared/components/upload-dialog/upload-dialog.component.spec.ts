@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatProgressBarModule } from '@angular/material';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Store } from '@ngrx/store';
 import { MockMatDialogRef } from '@shared/testing/mockDialogRef';
@@ -31,7 +31,8 @@ describe('UploadDialogComponent', () => {
         }
       ],
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatProgressBarModule
       ]
     })
     .overrideModule(BrowserDynamicTestingModule, {

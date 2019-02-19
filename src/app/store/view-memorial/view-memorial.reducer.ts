@@ -7,6 +7,8 @@ import { All, ViewMemorialActionTypes } from './view-memorial.actions';
 export const INITIAL_STATE: ViewMemorialState = {
   loading: false,
   loaded: false,
+  saving: false,
+  saved: false,
   selectedMemorial: {
     memorial: null,
     location: null,
@@ -21,7 +23,8 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
       return {
         ...state,
         loading: true,
-        loaded: false
+        loaded: false,
+        error: INITIAL_STATE.error
       };
     }
     case ViewMemorialActionTypes.GET_MEMORIAL_SUCCESS: {
@@ -37,6 +40,38 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
         ...state,
         loading: false,
         loaded: false,
+        error: action.payload
+      };
+    }
+    case ViewMemorialActionTypes.EDIT_MEMORY:
+    case ViewMemorialActionTypes.DELETE_MEMORY:
+    case ViewMemorialActionTypes.ADD_MEMORY: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
+    case ViewMemorialActionTypes.EDIT_MEMORY_SUCCESS:
+    case ViewMemorialActionTypes.DELETE_MEMORY_SUCCESS:
+    case ViewMemorialActionTypes.ADD_MEMORY_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        saved: true,
+        selectedMemorial: {
+          ...state.selectedMemorial,
+          memories: action.payload
+        }
+      };
+    }
+    case ViewMemorialActionTypes.EDIT_MEMORY_FAILURE:
+    case ViewMemorialActionTypes.DELETE_MEMORY_FAILURE:
+    case ViewMemorialActionTypes.ADD_MEMORY_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
         error: action.payload
       };
     }
@@ -66,4 +101,14 @@ export const getViewMemorialError = createSelector(
 export const getViewMemorial = createSelector(
   getViewMemorialState,
   state => state.selectedMemorial
+);
+
+export const getViewSaving = createSelector(
+  getViewMemorialState,
+  state => state.saving
+);
+
+export const getViewSaved = createSelector(
+  getViewMemorialState,
+  state => state.saved
 );

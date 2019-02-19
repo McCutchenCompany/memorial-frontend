@@ -1,0 +1,100 @@
+@import "src/styles.scss";
+
+.flourish {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  .flourish-container {
+    position: relative;
+    width: 100%;
+    .box-1, .box-2, .box-3 {
+      position: absolute;
+    }
+    .box-1 {
+      background: map-get($colors, primary);
+      width: rem(200);
+      height: rem(200);
+      left: rem(20);
+      top: rem(36);
+    }
+    .box-2 {
+      background: map-get($colors, primary-lightest);
+      height: rem(250);
+      width: rem(250);
+      right: rem(36);
+      top: rem(84);
+    }
+    .box-3 {
+      background: map-get($colors, secondary-light);
+      height: rem(300);
+      width: rem(300);
+      top: rem(300);
+      left: rem(30);
+    }
+  }
+}
+.container {
+  width: 86%;
+  margin: rem(64) auto;
+  background: rgba(255,255,255,0.9);
+  padding: rem(16) rem(16) rem(1);
+  border-radius: 2px;
+  form, mat-form-field {
+    width: 100%;
+  }
+  agm-map {
+    width: 100%;
+    height: rem(320);
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin: rem(48) auto
+  }
+  .map-container {
+    position: relative;
+    .saving {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-around;
+      padding-top: rem(116);
+      background: rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    padding: rem(32) rem(32) rem(1);
+    width: rem(696);
+  }
+}
+@include respond-to('medium') {
+  .flourish {
+    .flourish-container {
+      width: rem(1176);
+      margin: auto;
+      .box-1 {
+        width: rem(350);
+        height: rem(350);
+        left: rem(-100);
+        top: rem(50);
+      }
+      .box-2 {
+        width: rem(500);
+        height: rem(500);
+        top: rem(220);
+      }
+      .box-3 {
+        width: rem(425);
+        height: rem(425);
+        right: 0;
+        top: rem(120);
+      }
+    }
+  }
+}

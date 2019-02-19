@@ -1,7 +1,9 @@
 <div class="container">
   <h2>Memorials</h2>
-  <div class="memorial-card" *ngFor="let memorial of memorials">
-    <app-my-memorial-card [memorial]="memorial"></app-my-memorial-card>
-  </div>
   <button class="primary" mat-button (click)="onAddMemorial()"><mat-icon>add</mat-icon>New Memorial</button>
+  <div class="card-container">
+    <div class="memorial-card" *ngFor="let memorial of memorials">
+      <app-my-memorial-card [memorial]="memorial"></app-my-memorial-card>
+    </div>
+  </div>
 </div>

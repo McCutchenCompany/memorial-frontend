@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatCardModule, MatIconModule } from '@angular/material';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
+import { configureTestSuite } from 'ng-bullet';
 
 import { MyMemorialCardComponent } from '../my-memorial-card/my-memorial-card.component';
 import { MyMemorialsComponent } from './my-memorials.component';
@@ -9,7 +10,7 @@ describe('MyMemorialsComponent', () => {
   let component: MyMemorialsComponent;
   let fixture: ComponentFixture<MyMemorialsComponent>;
 
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [
         MyMemorialsComponent,
@@ -19,11 +20,12 @@ describe('MyMemorialsComponent', () => {
         MatButtonModule,
         MatIconModule,
         MatCardModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatDialogModule,
+        MatProgressSpinnerModule
       ]
-    })
-    .compileComponents();
-  }));
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MyMemorialsComponent);

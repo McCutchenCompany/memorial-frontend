@@ -1,8 +1,18 @@
 @import "src/styles.scss";
 
+.view {
+  width: 100%;
+  background-color: map-get($colors, white);
+  padding: rem(10) 0;
+  position: fixed;
+  z-index: 1000;
+}
+.margin-fix {
+  padding-top: rem(95);
+}
 .container {
   width: 100%;
-  margin: rem(20) auto;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,6 +27,21 @@
     .create-btn {
       span {
         font-size: rem(16);
+      }
+    }
+    &.desktop {
+      display: none;
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    .actions {
+      &.desktop {
+        display: block;
+      }
+      &.mobile {
+        display: none;
       }
     }
   }

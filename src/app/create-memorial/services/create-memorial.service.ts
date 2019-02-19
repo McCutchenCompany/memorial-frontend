@@ -13,12 +13,17 @@ export class CreateMemorialService {
     private http: HttpClient
   ) { }
 
-  addLicense(user_id, licenses) {
-    const path = `${this.API_URL}/users/${user_id}`;
-    const body = {
-      licenses
+  addLicense(token, quantity, price, discount?) {
+    const path = `${this.API_URL}/billing/purchase`;
+    const body: any = {
+      stripeToken: token,
+      quantity: quantity,
+      price: price
     };
-    return this.http.patch(path, body);
+    if (discount) {
+      body.discount = discount;
+    }
+    return this.http.post(path, body);
   }
 
   createMemorial(user_id) {
@@ -47,6 +52,48 @@ export class CreateMemorialService {
   removeTimelineEntry(uuid) {
     const path = `${this.API_URL}/timelines/${uuid}`;
     return this.http.delete(path);
+  }
+
+  updateTimeline(memorial_id, timelines) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/update_timeline`;
+    const body = {timelines: timelines};
+    return this.http.patch(path, body);
+  }
+
+  updateSingleTimeline(timeline_id, body) {
+    const path = `${this.API_URL}/timelines/${timeline_id}`;
+    return this.http.patch(path, body);
+  }
+
+  updateLocation(memorial_id, location: {latitude: number, longitude: number}) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/location`;
+    const body = location;
+    return this.http.post(path, body);
+  }
+
+  updateMemoryStatus(memory_id, body) {
+    const path = `${this.API_URL}/memories/${memory_id}`;
+    return this.http.patch(path, body);
+  }
+
+  checkDiscount(code) {
+    const path = `${this.API_URL}/billing/${code}/check_discount`;
+    return this.http.get(path);
+  }
+
+  sendSupportEmail(payload: {email: string, subject: string, content: string}) {
+    const path = `${this.API_URL}/response/support`;
+    return this.http.post(path, payload);
+  }
+
+  sendBugEmail(payload: {email: string, subject: string, content: string}) {
+    const path = `${this.API_URL}/response/bug`;
+    return this.http.post(path, payload);
+  }
+
+  searchLocation(query) {
+    const path = `${this.API_URL}/find_places?query=${encodeURI(query)}`;
+    return this.http.get(path);
   }
 
 }

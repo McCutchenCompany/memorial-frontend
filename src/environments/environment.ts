@@ -16,7 +16,15 @@ export const environment = {
   },
   s3: {
     url: 'https://memorial-staging-imgs.s3.amazonaws.com/'
-  }
+  },
+  google: {
+    apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
+  },
+  stripe: {
+    publicKey: 'pk_test_nN2N0PLFIBrWEW9Atg1HdGen'
+  },
+  url: 'http://localhost:4200/',
+  discount: 'dd7dbe8a'
 };
 
 /*

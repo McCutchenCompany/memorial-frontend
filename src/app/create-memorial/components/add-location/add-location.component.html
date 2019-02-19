@@ -1,0 +1,35 @@
+<div class="flourish">
+  <div class="flourish-container">
+    <div class="box-1"></div>
+    <div class="box-2"></div>
+    <div class="box-3"></div>
+  </div>
+</div>
+<div class="container mat-elevation-z3">
+  <h4>Location</h4>
+  <p>
+    This is where you want your memorial to be located.
+    Anyone near the location you select will be able to
+    see your memorial in the "Memorials near you" section
+    on the search page. Find your location by searching
+    for an address. <strong>Click the map to place the memorial.</strong>
+  </p>
+  <form [formGroup]="searchForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input (keydown)="onSearch($event)" #search matInput formControlName="searchTerm">
+    </mat-form-field>
+  </form>
+  <div class="map-container">
+    <div *ngIf="saving$ | async" class="saving">
+      <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
+    <agm-map [streetViewControl]="false" (mapClick)="onMapClick($event)" [latitude]="(locationSearch$ | async).latitude" [longitude]="(locationSearch$ | async).longitude" [zoom]="(locationSearch$ | async).zoom">
+      <agm-marker iconUrl="assets/imgs/marker-initial.svg" [latitude]="(memorialLocation$ | async)?.latitude" [longitude]="(memorialLocation$ | async)?.longitude"></agm-marker>
+    </agm-map>
+  </div>
+  <div class="actions">
+    <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'timeline']"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+    <button mat-button class="primary" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'memories']">Next <mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+</div>

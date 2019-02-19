@@ -22,7 +22,34 @@ export class ImageUploadService {
     return this.http.post(path, _formData);
   }
 
-  removeImage(memorialId, route, timeline_id?) {
+  removeImage(memorial_id, route) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/remove_image?file=${route}`;
+    return this.http.delete(path);
+  }
 
+  replaceImage(memorial_id: string, image: File) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/replace_image`;
+    const _formData = new FormData();
+    _formData.append('file', image, encodeURI(image.name));
+    return this.http.patch(path, _formData);
+  }
+
+  replaceTimelineFile(timeline_id: string, file: File, type: string) {
+    const path = `${this.API_URL}/timelines/${timeline_id}/replace_file?asset_type=${type}`;
+    const _formData = new FormData();
+    _formData.append('file', file, encodeURI(file.name));
+    return this.http.post(path, _formData);
+  }
+
+  uploadTimelineFile(timeline_id: string, file: File, type: string) {
+    const path = `${this.API_URL}/timelines/${timeline_id}/file?asset_type=${type}`;
+    const _formData = new FormData();
+    _formData.append('file', file, encodeURI(file.name));
+    return this.http.post(path, _formData);
+  }
+
+  removeTimelineFile(timeline_id: string, route: string) {
+    const path = `${this.API_URL}/timelines/${timeline_id}/remove_file?file=${route}`;
+    return this.http.delete(path);
   }
 }
