@@ -38,7 +38,7 @@ export class MemorialHeaderComponent implements OnInit {
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpg)',
+        background: 'url(assets/imgs/default-memorial.jpeg)',
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover'
@@ -58,7 +58,7 @@ export class MemorialHeaderComponent implements OnInit {
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpg)',
+        background: 'url(assets/imgs/default-memorial.jpeg)',
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover'
@@ -78,7 +78,7 @@ export class MemorialHeaderComponent implements OnInit {
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpg)',
+        background: 'url(assets/imgs/default-memorial.jpeg)',
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover'
