@@ -30,7 +30,7 @@ export class MyMemorialCardComponent implements OnInit {
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpeg)',
+        background: 'url(https://s3.amazonaws.com/memorial-staging-imgs/assets/default-memorial.jpeg)',
         position: 'center',
         repeat: 'no-repeat',
         size: 'cover'
