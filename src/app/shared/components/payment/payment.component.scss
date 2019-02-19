@@ -74,15 +74,16 @@ mat-expansion-panel {
         width: 50%;
       }
       .desktop {
-        display: initial;
+        display: block;
       }
     }
     .details {
-      flex-wrap: initial;
+      flex-wrap: nowrap;
       .exp {
         width: 50%;
       }
       .cvc {
+        width: rem(204);
         width: initial;
       }
       .mobile {
@@ -90,7 +91,7 @@ mat-expansion-panel {
       }
     }
     &.card-form {
-      padding-bottom: initial;
+      padding-bottom: 0;
     }
   }
   mat-expansion-panel {

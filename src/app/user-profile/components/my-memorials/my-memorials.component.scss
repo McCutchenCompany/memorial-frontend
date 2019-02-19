@@ -31,11 +31,12 @@ button {
 }
 @include respond-to('medium') {
   .container {
+    width: rem(687);
     width: initial;
-    margin: initial;
+    margin: 0;
   }
   .card-container {
-    display: initial;
+    display: inline;
   }
   button {
     margin: rem(64) 0 0;

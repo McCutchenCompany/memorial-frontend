@@ -55,11 +55,11 @@
 @include respond-to('medium') {
   .container {
     width: rem(1176);
-    overflow-y: initial;
-    padding: initial;
+    overflow-y: visible;
+    padding: 0;
     .points {
       top: 0;
-      width: initial;
+      width: 100%;
       right: 0;
     }
     .line {

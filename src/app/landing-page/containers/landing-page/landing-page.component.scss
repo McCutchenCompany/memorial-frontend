@@ -14,13 +14,14 @@
     }
     .container {
       mat-card {
+        width: rem(620);
         width: fit-content;
         padding-left: rem(32);
         margin: rem(-62) auto 0;
       }
       h1 {
         font-size: rem(32);
-        line-height: initial;
+        line-height: normal;
       }
       h1, h6 {
         width: rem(334);
@@ -103,6 +104,7 @@
     .price-cut {
       display: flex;
       align-items: flex-end;
+      width: rem(161);
       width: fit-content;
       margin: rem(16) auto rem(8);
       .strike {
@@ -201,7 +203,7 @@
       .container {
         margin: rem(-238) 0 rem(100) rem(100);
         mat-card {
-          margin: initial;
+          margin: 0;
         }
         h1 {
           font-size: rem(60);
@@ -213,9 +215,9 @@
       }
     }
     .subheader {
-      flex-wrap: initial;
+      flex-wrap: wrap;
       justify-content: space-between;
-      margin-top: initial;
+      margin-top: 0;
       .text {
         width: rem(443);
         h3 {
@@ -228,22 +230,22 @@
     }
     .most-viewed {
       h3 {
-        width: initial;
-        margin: initial;
+        width: 100%;
+        margin: 0;
       }
     }
     .description {
       margin: rem(104) 0 rem(128);
       h3 {
-        width: initial;
-        margin: initial;
+        width: 100%;
+        margin: 0;
       }
       .container {
         flex-wrap: nowrap;
         justify-content: space-between;
       }
       .location, .timeline, .memories {
-        margin-bottom: initial;
+        margin-bottom: 0;
       }
     }
     .cta {

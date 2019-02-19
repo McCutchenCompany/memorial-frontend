@@ -41,6 +41,7 @@
     "puppeteer": "^1.11.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.0",
+    "url-search-params-polyfill": "^5.0.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

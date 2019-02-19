@@ -12,7 +12,7 @@
   &.hide {
     visibility: hidden;
     pointer-events: none;
-    left: initial;
+    left: 100%;
   }
   &.mobile-hide {
     display: none;
@@ -102,20 +102,20 @@ agm-map {
 }
 @include respond-to('medium') {
   .map {
-    visibility: initial;
+    visibility: visible;
     left: 59%;
     top: rem(94);
     height: rem(460);
     background: map-get($colors, primary);
     padding: rem(32) 0 rem(32) rem(32);
-    z-index: initial;
+    z-index: auto;
     &.hide {
-      visibility: initial;
-      pointer-events: initial;
+      visibility: visible;
+      pointer-events: auto;
       left: 59%;
     }
     &.mobile-hide {
-      display: initial;
+      display: block;
     }
   }
   agm-map {

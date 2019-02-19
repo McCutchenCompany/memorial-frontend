@@ -43,13 +43,13 @@
 }
 @include respond-to('small') {
   .cost {
-    position: initial;
+    position: static;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: initial;
+    padding-bottom: 0;
     mat-form-field {
-      position: initial;
+      position: static;
     }
   }
 }

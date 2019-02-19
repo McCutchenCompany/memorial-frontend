@@ -41,7 +41,7 @@ mat-card {
   mat-card {
     height: rem(136);
     width: rem(655);
-    min-height: initial;
+    min-height: 0;
     .container {
       padding: 0 0 0 rem(320);
       height: 100%;

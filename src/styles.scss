@@ -240,12 +240,12 @@ button {
 }
 @include respond-to('small') {
   .create-no-scroll {
-    position: initial;
+    position: static;
   }
 }
 @include respond-to('medium') {
   .no-scroll {
-    overflow: initial;
+    overflow: scroll;
   }
 }
 
@@ -272,7 +272,7 @@ mat-form-field.textarea {
   .mat-form-field-infix {
     padding: .4em 0 0;
     .mat-form-field-label-wrapper {
-      overflow: initial;
+      overflow: visible;
     }
   }
 }

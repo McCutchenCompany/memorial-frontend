@@ -51,7 +51,9 @@ export class AuthGuardService implements CanActivate {
       } else {
         if (result) {
           this.store.dispatch(new Auth0LoginSuccess(result));
-          this.router.navigateByUrl(localStorage.getItem('reroute'));
+          const route = localStorage.getItem('reroute');
+          localStorage.removeItem('reroute');
+          this.router.navigateByUrl(route);
           return true;
         } else {
           this.store.dispatch(new Auth0Login());

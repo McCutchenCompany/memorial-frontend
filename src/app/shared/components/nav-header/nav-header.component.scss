@@ -38,7 +38,7 @@
   .container {
     .actions {
       &.desktop {
-        display: initial;
+        display: block;
       }
       &.mobile {
         display: none;

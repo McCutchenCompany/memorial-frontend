@@ -29,8 +29,9 @@ import 'core-js/es6/set';
 import 'core-js/es6/string';
 import 'core-js/es6/symbol';
 import 'core-js/es6/weak-map';
+import 'core-js/es7/array';
+import 'url-search-params-polyfill';
 import 'zone.js/dist/zone';
-
 
 /***************************************************************************************************
  * BROWSER POLYFILLS
@@ -43,7 +44,16 @@ import 'zone.js/dist/zone';
 /** Evergreen browsers require these. **/
 // Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.
 
+if (!Element.prototype.matches) {
+  Element.prototype.matches = (<any>Element.prototype).msMatchesSelector || Element.prototype.webkitMatchesSelector;
+}
 
+if (!String.prototype.includes) {
+  String.prototype.includes = function() {
+      'use strict';
+      return String.prototype.indexOf.apply(this, arguments) !== -1;
+  };
+}
 
 /**
  * Web Animations `@angular/platform-browser/animations`

@@ -34,6 +34,7 @@
   padding: 5px 8px;
   display: inline-block;
   position: static;
+  height: rem(19);
 }
 
 #fb-share-button:hover {
@@ -93,10 +94,10 @@
     .social {
       width: rem(136);
       justify-content: space-between;
-      order: initial;
+      order: 1;
     }
     .location {
-      display: initial;
+      display: block;
     }
   }
   .description {
