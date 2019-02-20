@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
 import { Memorial } from '@shared/models/memorial.model';
 
@@ -28,11 +29,15 @@ export class MemorialResultCardComponent implements OnInit {
 
   get imgBackground() {
     if (this.memorial.image) {
+      const height = this.memorial.rot === 90 || this.memorial.rot === 270 ? '20' : '10.5';
       return {
         background: `url(${environment.s3.url}${this.memorial.image})`,
-        position: 'center',
         repeat: 'no-repeat',
-        size: 'cover'
+        position: `${this.memorial.posX.toString()}px ${this.memorial.posY.toString()}px`,
+        size: `cover`,
+        scale: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`),
+        height: `${height}rem`
       };
     } else {
       return {
@@ -59,7 +64,8 @@ export class MemorialResultCardComponent implements OnInit {
   }
 
   constructor(
-    private el: ElementRef
+    private el: ElementRef,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {

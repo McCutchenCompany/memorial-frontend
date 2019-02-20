@@ -13,6 +13,8 @@ import {
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
+  MatSnackBarModule,
+  MatTooltipModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
@@ -44,6 +46,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MatMenuModule,
     MatIconModule,
     MatProgressBarModule,
+    MatSnackBarModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     FormsModule,
     CreditCardDirectivesModule,
