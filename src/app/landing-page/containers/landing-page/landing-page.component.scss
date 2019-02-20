@@ -5,7 +5,7 @@
   margin: auto;
   .hero {
     .hero-container {
-      background-image: url("https://s3.amazonaws.com/memorial-staging-imgs/assets/hero.jpeg");
+      background-image: url("assets/imgs/hero.jpeg");
       background-position: 50% 10%;
       background-size: cover;
       width: 100%;
@@ -44,7 +44,7 @@
     flex-wrap: wrap-reverse;
     margin-top: rem(64);
     .about-img {
-      background-image: url("https://s3.amazonaws.com/memorial-staging-imgs/assets/about.jpeg");
+      background-image: url("assets/imgs/about.jpeg");
       background-position: 50% 65%;
       background-size: cover;
       width: rem(708);
@@ -71,13 +71,13 @@
       flex-wrap: wrap;
     }
     .location-img {
-      background-image: url("https://s3.amazonaws.com/memorial-staging-imgs/assets/location.jpeg");
+      background-image: url("/assets/imgs/location.jpeg");
     }
     .timeline-img {
-      background-image: url("https://s3.amazonaws.com/memorial-staging-imgs/assets/timeline.jpeg");
+      background-image: url("assets/imgs/timeline.jpeg");
     }
     .memories-img {
-      background-image: url("https://s3.amazonaws.com/memorial-staging-imgs/assets/memories.jpeg");
+      background-image: url("assets/imgs/memories.jpeg");
     }
     .location-img, .memories-img, .timeline-img {
       height: rem(272);
