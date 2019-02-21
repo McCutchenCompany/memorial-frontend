@@ -7,6 +7,11 @@
     justify-content: flex-end;
   }
 }
+.checked {
+  position: absolute;
+  right: 0;
+  color: map-get($colors, success);
+}
 form {
   .cardholder {
     display: flex;
@@ -98,7 +103,7 @@ mat-expansion-panel {
     form {
       flex-wrap: nowrap;
       mat-form-field {
-        width: 70%;
+        width: 60%;
       }
     }
   }

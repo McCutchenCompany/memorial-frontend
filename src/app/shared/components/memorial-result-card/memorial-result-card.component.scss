@@ -5,13 +5,20 @@ mat-card {
   width: rem(304);
   min-height: rem(256);
   cursor: pointer;
-  .image {
-    width: rem(336);
-    height: rem(180);
+  .image-border {
     position: absolute;
+    height: rem(180);
+    width: rem(336);
     top: 0;
     left: 0;
-    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+  }
+  .image {
+    height: rem(180);
+    width: rem(336);
+    &.portrait {
+      height: rem(336);
+    }
   }
   .info {
     margin-top: rem(180);

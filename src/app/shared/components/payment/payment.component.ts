@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { environment } from '@environments/environment';
 import { select, Store } from '@ngrx/store';
 import { GoogleAnalyticsService } from '@shared/services/google-analytics.service';
@@ -10,7 +10,6 @@ import { getAppError, getDiscount, getPurchased } from '@store/app/app.reducer';
 import { Discount } from '@store/models/app-state.model';
 import { Observable } from 'rxjs';
 
-import { PaymentConfirmationComponent } from '../payment-confirmation/payment-confirmation.component';
 import { getPurchasing } from './../../../store/app/app.reducer';
 
 @Component({
@@ -56,7 +55,7 @@ export class PaymentComponent implements OnInit {
     public store: Store<any>,
     public dialogRef: MatDialogRef<PaymentComponent>,
     private analytics: GoogleAnalyticsService,
-    public dialog: MatDialog
+    public snackbar: MatSnackBar
   ) {
     this.discountError$ = this.store.pipe(select(getDiscountError));
     this.discount$ = this.store.pipe(select(getDiscount));
@@ -75,8 +74,19 @@ export class PaymentComponent implements OnInit {
     });
   }
 
+  disableForm(disable) {
+    if (disable) {
+      this.cardForm.disable();
+    } else {
+      this.cardForm.enable();
+    }
+  }
+
   onStep(increment: 1 | -1) {
     this.step = this.step + increment;
+    if (this.step === 2) {
+      this.disableForm(this.quantityForm.value.price === 0 ? true : false);
+    }
   }
 
   buildForm() {
@@ -106,7 +116,7 @@ export class PaymentComponent implements OnInit {
   }
 
   openConfirmation() {
-    this.dialog.open(PaymentConfirmationComponent);
+    this.snackbar.open('Thanks! Your Memorial is ready to be created.', null, {duration: 5000});
   }
 
   createToken(card) {
