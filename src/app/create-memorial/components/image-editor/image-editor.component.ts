@@ -25,16 +25,14 @@ export class ImageEditorComponent implements OnInit {
   rotations = [0, 90, 180, 270];
   position = {x: 0, y: 0};
 
-  get imgBackground() {
-    const height = this.imageFormat.value.rot === 90 || this.imageFormat.value.rot === 270 ? '20' : '10.5';
+  get imgFormat() {
     return {
-      background: `url(${environment.s3.url}${this.data.image})`,
-      repeat: 'no-repeat',
-      position: `${this.imageFormat.value.posX.toString()}px ${this.imageFormat.value.posY.toString()}px`,
-      size: `cover`,
-      scale: this.sanitizer.bypassSecurityTrustStyle(
-        `scale(${this.imageFormat.value.scale / 100}) rotate(${this.imageFormat.value.rot}deg)`),
-      height: `${height}rem`
+      src: `${environment.s3.url}${this.data.image}`,
+      transform: this.sanitizer.bypassSecurityTrustStyle(
+        `scale(${this.imageFormat.value.scale / 100})
+        rotate(${this.imageFormat.value.rot}deg)
+        translate(${this.imageFormat.value.posX.toString()}px, ${this.imageFormat.value.posY.toString()}px)`
+      )
     };
   }
 

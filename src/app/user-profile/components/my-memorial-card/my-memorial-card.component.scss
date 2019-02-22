@@ -11,12 +11,16 @@ mat-card {
     top: 0;
     left: 0;
     overflow: hidden;
+    background: map-get($colors, dark-gray);
   }
   .image {
     height: rem(168);
     width: rem(320);
-    &.portrait {
-      height: rem(320);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    img {
+      width: 100%;
     }
   }
   .container {

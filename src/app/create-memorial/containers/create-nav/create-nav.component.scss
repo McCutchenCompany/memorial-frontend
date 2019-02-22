@@ -18,6 +18,16 @@
       margin-left: rem(16);
       border: 3px solid map-get($colors, white);
       border-radius: 4px;
+      .image {
+        height: rem(140);
+        width: rem(270);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        img {
+          width: 100%;
+        }
+      }
     }
     .info {
       margin-top: rem(16);

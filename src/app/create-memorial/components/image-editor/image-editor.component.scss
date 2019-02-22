@@ -13,8 +13,17 @@
     overflow: hidden;
     border: 3px solid map-get($colors, dark-gray);
     background-color: map-get($colors, gray);
-    .portrait {
-      height: rem(256);
+    .image {
+      cursor: move;
+      height: rem(168);
+      width: rem(320);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      img {
+        width: 100%;
+        pointer-events: none;
+      }
     }
   }
   .actions {

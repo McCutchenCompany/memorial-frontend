@@ -10,15 +10,15 @@ import {
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { MockMatDialogRef } from '@shared/testing/mockDialogRef';
 import { TestStore } from '@shared/testing/test-store';
-import { configureTestSuite } from 'ng-bullet';
-import { of } from 'rxjs'
 import { Discount } from '@store/models/app-state.model';
+import { configureTestSuite } from 'ng-bullet';
+import { of } from 'rxjs';
 
 import { OrderDetailsComponent } from '../order-details/order-details.component';
 import { PaymentComponent } from './payment.component';

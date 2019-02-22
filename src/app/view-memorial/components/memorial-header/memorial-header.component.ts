@@ -26,62 +26,56 @@ export class MemorialHeaderComponent implements OnInit {
     return name;
   }
 
-  get imgBackground() {
+  get imgFormat() {
     if (this.memorial.image) {
       return {
-        background: `url(${environment.s3.url}${this.memorial.image})`,
-        repeat: 'no-repeat',
-        position: `${(this.memorial.posX * 1.3).toString()}px ${(this.memorial.posY * 1.3).toString()}px`,
-        size: `cover`,
-        scale: this.sanitizer.bypassSecurityTrustStyle(
-          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`)
+        src: `${environment.s3.url}${this.memorial.image}`,
+        transform: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100})
+          rotate(${this.memorial.rot}deg)
+          translate(${this.memorial.posX.toString()}px, ${this.memorial.posY.toString()}px)`
+        )
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpeg)',
-        position: 'center',
-        repeat: 'no-repeat',
-        size: 'cover'
+        src: 'assets/imgs/default-memorial.jpeg',
+        transform: ''
       };
     }
   }
 
-  get imgBackgroundTablet() {
+  get imgFormatTablet() {
     if (this.memorial.image) {
       return {
-        background: `url(${environment.s3.url}${this.memorial.image})`,
-        repeat: 'no-repeat',
-        position: `${(this.memorial.posX * 2.4).toString()}px ${(this.memorial.posY * 2.4).toString()}px`,
-        size: `cover`,
-        scale: this.sanitizer.bypassSecurityTrustStyle(
-          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`)
+        src: `${environment.s3.url}${this.memorial.image}`,
+        transform: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100})
+          rotate(${this.memorial.rot}deg)
+          translate(${(this.memorial.posX * 2.4).toString()}px, ${(this.memorial.posY * 2.4).toString()}px)`
+        )
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpeg)',
-        position: 'center',
-        repeat: 'no-repeat',
-        size: 'cover'
+        src: 'assets/imgs/default-memorial.jpeg',
+        transform: ''
       };
     }
   }
 
-  get imgBackgroundDesktop() {
+  get imgFormatDesktop() {
     if (this.memorial.image) {
       return {
-        background: `url(${environment.s3.url}${this.memorial.image})`,
-        repeat: 'no-repeat',
-        position: `${(this.memorial.posX * 4).toString()}px ${(this.memorial.posY * 4).toString()}px`,
-        size: `cover`,
-        scale: this.sanitizer.bypassSecurityTrustStyle(
-          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`)
+        src: `${environment.s3.url}${this.memorial.image}`,
+        transform: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100})
+          rotate(${this.memorial.rot}deg)
+          translate(${(this.memorial.posX * 4).toString()}px, ${(this.memorial.posY * 4).toString()}px)`
+        )
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpeg)',
-        position: 'center',
-        repeat: 'no-repeat',
-        size: 'cover'
+        src: 'assets/imgs/default-memorial.jpeg',
+        transform: ''
       };
     }
   }

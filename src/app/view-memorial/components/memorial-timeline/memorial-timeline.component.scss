@@ -11,11 +11,20 @@
   .asset {
     width: 100%;
     height: rem(224);
-    &.portrait {
-      height: rem(400)
-    }
     &.image-border {
       overflow: hidden;
+      background: map-get($colors, dark-gray);
+    }
+    .asset {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      &.desktop {
+        display: none;
+      }
+      img {
+        width: 100%;
+      }
     }
     &.video-asset {
       display: flex;
@@ -76,8 +85,11 @@
     width: rem(576);
     .asset {
       height: rem(320);
-      &.portrait {
-        height: rem(576);
+      .asset.mobile {
+        display: none;
+      }
+      .asset.desktop {
+        display: flex;
       }
       &.video-asset {
         iframe {
@@ -106,8 +118,8 @@
     .asset {
       width: rem(704);
       height: rem(448);
-      &.portrait {
-        height: rem(704);
+      .asset.desktop {
+        display: flex;
       }
       &.video-asset {
         iframe {

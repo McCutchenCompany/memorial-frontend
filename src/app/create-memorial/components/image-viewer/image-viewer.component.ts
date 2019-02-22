@@ -21,24 +21,19 @@ export class ImageViewerComponent implements OnInit {
   @Input() format: ImageFormat;
   @Output() remove: EventEmitter<{id: string, route: string}> = new EventEmitter<{id: string, route: string}>();
 
-  get imgBackground() {
+  get imgFormat() {
     if (this.image) {
-      const height = this.format.rot === 90 || this.format.rot === 270 ? '20' : '10.5';
       return {
-        background: `url(${environment.s3.url}${this.image})`,
-        repeat: 'no-repeat',
-        position: `${this.format.posX.toString()}px ${this.format.posY.toString()}px`,
-        size: `cover`,
-        scale: this.sanitizer.bypassSecurityTrustStyle(
-          `scale(${this.format.scale / 100}) rotate(${this.format.rot}deg)`),
-        height: `${height}rem`
+        src: `${environment.s3.url}${this.image}`,
+        transform: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.format.scale / 100})
+          rotate(${this.format.rot}deg)
+          translate(${this.format.posX.toString()}px, ${this.format.posY.toString()}px)`),
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpeg)',
-        position: 'center',
-        repeat: 'no-repeat',
-        size: 'cover'
+        src: 'assets/imgs/default-memorial.jpeg',
+        transform: ''
       };
     }
   }

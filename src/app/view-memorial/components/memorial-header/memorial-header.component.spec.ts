@@ -20,7 +20,11 @@ describe('MemorialHeaderComponent', () => {
     component.memorial = {
       image: 'testimg.jpg',
       first_name: 'first',
-      last_name: 'last'
+      last_name: 'last',
+      scale: 100,
+      rot: 0,
+      posX: 0,
+      posY: 0
     } as Memorial;
     fixture.detectChanges();
   });

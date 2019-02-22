@@ -14,26 +14,20 @@ export class CreateNavComponent implements OnInit {
   @Input() saving: boolean;
   @Output() publish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  get imgBackground() {
+  get imgFormat() {
     if (this.memorial && this.memorial.image) {
-      const height = this.memorial.rot === 90 || this.memorial.rot === 270 ? '17.2' : '9.4';
       return {
-        background: `url(${environment.s3.url}${this.memorial.image})`,
-        repeat: 'no-repeat',
-        position: `${this.memorial.posX.toString()}px ${this.memorial.posY.toString()}px`,
-        size: `cover`,
-        scale: this.sanitizer.bypassSecurityTrustStyle(
-          `scale(${this.memorial.scale / 100}) rotate(${this.memorial.rot}deg)`),
-        height: `${height}rem`
+        src: `${environment.s3.url}${this.memorial.image}`,
+        transform: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.memorial.scale / 100})
+          rotate(${this.memorial.rot}deg)
+          translate(${this.memorial.posX.toString()}px, ${this.memorial.posY.toString()}px)`
+        )
       };
     } else {
       return {
-        background: 'url(assets/imgs/default-memorial.jpeg)',
-        position: 'center',
-        repeat: 'no-repeat',
-        size: 'cover',
-        scale: `scale(1)`,
-        height: '9.4rem'
+        src: 'assets/imgs/default-memorial.jpeg',
+        transform: ''
       };
     }
   }
