@@ -16,6 +16,12 @@ mat-card {
   .image {
     height: rem(168);
     width: rem(320);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    img {
+      width: 100%;
+    }
   }
   .actions {
     display: flex;

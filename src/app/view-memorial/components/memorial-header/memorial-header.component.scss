@@ -38,9 +38,6 @@
     }
   }
 }
-.desktop {
-  display: none;
-}
 .image-border {
   position: relative;
   width: 100%;
@@ -59,13 +56,19 @@
 .hero {
   width: 100%;
   height: 52vw;
-  &.portrait {
-    height: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  &.desktop, &.tablet {
+    display: none;
+  }
+  img {
+    width: 100%;
   }
 }
 @include respond-to('small') {
   .tablet {
-    display: block;
+    display: flex;
   }
   .mobile {
     display: none;
@@ -107,8 +110,8 @@
   .hero {
     width: rem(767);
     height: rem(408);
-    &.portrait {
-      height: rem(767);
+    &.tablet {
+      display: flex;
     }
   }
 }
@@ -139,7 +142,7 @@
     }
   }
   .desktop {
-    display: block;
+    display: flex;
   }
   .tablet {
     display: none;

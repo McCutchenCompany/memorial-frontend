@@ -1,12 +1,8 @@
 <mat-card>
   <div class="image-border">
-    <div class="image"
-    [style.background-image]="imgBackground.background"
-    [style.background-repeat]="imgBackground.repeat"
-    [style.background-position]="imgBackground.position"
-    [style.background-size]="imgBackground.size"
-    [style.transform]="imgBackground.scale"
-    [class.portrait]="memorial.rot === 90 || memorial.rot === 270"></div>
+    <div class="image">
+      <img [src]="imgFormat.src" [style.transform]="imgFormat.transform">
+    </div>
   </div>
   <div class="container">
     <div class="info">

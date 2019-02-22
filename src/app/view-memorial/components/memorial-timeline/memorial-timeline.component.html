@@ -2,14 +2,8 @@
 <div class="container">
   <div class="asset image-border"
     *ngIf="timeline[index].asset_type === 'image'">
-    <div
-      class="asset desktop"
-      [style.background-image]="imgBackground.background"
-      [style.background-repeat]="imgBackground.repeat"
-      [style.background-position]="imgBackground.position"
-      [style.background-size]="imgBackground.size"
-      [style.transform]="imgBackground.scale"
-      [class.portrait]="timeline[index].rot === 90 || timeline[index].rot === 270">
+    <div class="asset desktop">
+      <img [src]="imgFormat.src" [style.transform]="imgFormat.transform">
     </div>
     <div
       class="asset mobile"
