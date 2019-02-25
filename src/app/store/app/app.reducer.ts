@@ -55,6 +55,7 @@ export function appReducer(state: AppState = INITIAL_STATE, action: All) {
         }
       };
     }
+    case AppActionTypes.GET_STRIPE_KEY:
     case AppActionTypes.PURCHASE_LICENSE: {
       return {
         ...state,

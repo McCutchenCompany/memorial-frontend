@@ -35,13 +35,13 @@
   </div>
   <div class="memory-display desktop">
     <div class="left">
-      <div *ngFor="let memory of memories; let i = index" [class.hide]="i % 2 === 0">
-        <app-memory-card *ngIf="i % 2 !== 0" [memory]="memory" [public]="memorial.public_post" [user]="user"></app-memory-card>
+      <div *ngFor="let memory of memories; let i = index" [class.hide]="i % 2 !== 0">
+        <app-memory-card *ngIf="i % 2 === 0" [memory]="memory" [public]="memorial.public_post" [user]="user"></app-memory-card>
       </div>
     </div>
     <div class="right">
-      <div *ngFor="let memory of memories; let i = index" [class.hide]="i % 2 !== 0">
-        <app-memory-card *ngIf="i % 2 === 0" [memory]="memory" [public]="memorial.public_post" [user]="user"></app-memory-card>
+      <div *ngFor="let memory of memories; let i = index" [class.hide]="i % 2 === 0">
+        <app-memory-card *ngIf="i % 2 !== 0" [memory]="memory" [public]="memorial.public_post" [user]="user"></app-memory-card>
       </div>
     </div>
   </div>

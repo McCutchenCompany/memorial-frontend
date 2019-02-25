@@ -5,6 +5,7 @@ export enum AppActionTypes {
   CHECK_DISCOUNT_SUCCESS = '[App] Check discount success',
   CHECK_DISCOUNT_FAILURE = '[App] Check discount failure',
   CLEAR_DISCOUNT = '[App] Clear discount',
+  GET_STRIPE_KEY = '[App] Get stripe key',
   PURCHASE_LICENSE = '[Create] Purchase license',
   PURCHASE_LICENSE_SUCCESS = '[Create] Purchase license success',
   PURCHASE_LICENSE_FAILURE = '[Create] Purchase license failure',
@@ -31,6 +32,10 @@ export class CheckDiscountFailure implements Action {
 
 export class ClearDiscount implements Action {
   readonly type = AppActionTypes.CLEAR_DISCOUNT;
+}
+
+export class GetStripeKey implements Action {
+  readonly type = AppActionTypes.GET_STRIPE_KEY;
 }
 
 export class PurchaseLicense implements Action {
@@ -77,6 +82,7 @@ export type All =
   | CheckDiscountSuccess
   | CheckDiscountFailure
   | ClearDiscount
+  | GetStripeKey
   | PurchaseLicense
   | PurchaseLicenseSuccess
   | PurchaseLicenseFailure

@@ -10,6 +10,7 @@ import { getAppError, getDiscount, getPurchased } from '@store/app/app.reducer';
 import { Discount } from '@store/models/app-state.model';
 import { Observable } from 'rxjs';
 
+import { GetStripeKey } from './../../../store/app/app.actions';
 import { getPurchasing } from './../../../store/app/app.reducer';
 
 @Component({
@@ -121,6 +122,14 @@ export class PaymentComponent implements OnInit {
 
   createToken(card) {
     this.analytics.sendEvent('Complete Purchase', 'Sales', 'Conversion', this.quantityForm.value.price);
+    this.store.dispatch(new GetStripeKey());
+    const sub = this.store.pipe(select(getPurchased)).subscribe(res => {
+      if (res) {
+        this.openConfirmation();
+        this.dialogRef.close();
+        sub.unsubscribe();
+      }
+    });
     if (this.quantityForm.value.price > 0) {
       (<any>window).Stripe.card.createToken(card, (status: number, response: any) => {
         if (status === 200) {
@@ -130,31 +139,17 @@ export class PaymentComponent implements OnInit {
             price: this.quantityForm.value.price
           };
           this.store.dispatch(new PurchaseLicense(body));
-          const sub = this.store.pipe(select(getPurchased)).subscribe(res => {
-            if (res) {
-              this.openConfirmation();
-              this.dialogRef.close();
-              sub.unsubscribe();
-            }
-          });
         } else {
           console.log('ERROR: ', response);
         }
       });
-    } else {
-      const body = {
-        token: null,
-        quantity: this.quantityForm.value.quantity,
-        price: this.quantityForm.value.price
-      };
+        } else {
+        const body = {
+          token: null,
+          quantity: this.quantityForm.value.quantity,
+          price: this.quantityForm.value.price
+        };
       this.store.dispatch(new PurchaseLicense(body));
-      const sub = this.store.pipe(select(getPurchased)).subscribe(res => {
-        if (res) {
-          this.openConfirmation();
-          this.dialogRef.close();
-          sub.unsubscribe();
-        }
-      });
     }
   }
 
