@@ -98,6 +98,7 @@
     }
     .location {
       display: block;
+      max-width: rem(360);
     }
   }
   .description {
@@ -117,9 +118,6 @@
     .birth {
       width: rem(240);
       padding-left: 0;
-    }
-    .social {
-      margin-left: rem(200);
     }
     .death {
       width: rem(240);
