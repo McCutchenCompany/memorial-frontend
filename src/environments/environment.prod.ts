@@ -17,8 +17,12 @@ export const environment = {
     apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
   },
   stripe: {
-    publicKey: 'pk_test_nN2N0PLFIBrWEW9Atg1HdGen'
+    publicKey: 'pk_live_dusuYntW07CvPrTL0i3PHnhj'
   },
   url: 'https://mymemorial.co/',
-  discount: '48805f68'
+  discount: '48805f68',
+  example: {
+    uuid: '020cac1f-f335-4c0d-831f-7567b9076b61',
+    name: 'John F. Kennedy'
+  }
 };
