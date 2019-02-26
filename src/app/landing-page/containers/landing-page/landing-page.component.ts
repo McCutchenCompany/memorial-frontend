@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { environment } from '@environments/environment';
 import { select, Store } from '@ngrx/store';
 import { PaymentComponent } from '@shared/components/payment/payment.component';
 import { Memorial } from '@shared/models/memorial.model';
@@ -17,6 +18,8 @@ import { Observable } from 'rxjs';
 export class LandingPageComponent implements OnInit {
 
   popularMemorials$: Observable<Memorial[]>;
+
+  example = environment.example;
 
   get loggedIn() {
     const token = localStorage.getItem('access_token');
