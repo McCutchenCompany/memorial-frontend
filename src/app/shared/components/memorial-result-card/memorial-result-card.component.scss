@@ -4,6 +4,7 @@ mat-card {
   position: relative;
   width: rem(304);
   min-height: rem(256);
+  outline: none;
   cursor: pointer;
   .image-border {
     position: absolute;
