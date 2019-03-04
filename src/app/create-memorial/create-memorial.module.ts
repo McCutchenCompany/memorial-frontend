@@ -40,6 +40,7 @@ import { CreateMemorialComponent } from './containers/create-memorial/create-mem
 import { CreateNavComponent } from './containers/create-nav/create-nav.component';
 import { CreateTimelineComponent } from './containers/create-timeline/create-timeline.component';
 import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
+import { AlbumViewerComponent } from './components/album-viewer/album-viewer.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     ApprovalCardComponent,
     ImageEditorComponent,
     CreateNavComponent,
-    ApprovePhotosComponent
+    ApprovePhotosComponent,
+    AlbumViewerComponent
   ],
   entryComponents: [
     ImageEditorComponent

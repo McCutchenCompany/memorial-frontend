@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { select, Store } from '@ngrx/store';
 import { getCreatedSaved, getCreatedSaving } from '@store/create-memorial';
+import { UploadCreatePhoto } from '@store/create-photos/photos.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
 
@@ -36,7 +37,7 @@ export class UploadDialogComponent implements OnInit {
 
 
   onUpload() {
-    if (this.data.memorial) {
+    if (this.data.context === 'memorial') {
       const payload = {
         id: this.data.memorial,
         image: this.selectedFiles[0]
@@ -46,7 +47,7 @@ export class UploadDialogComponent implements OnInit {
       } else if (this.data.action === 'replace') {
         this.store.dispatch(new ReplaceMemorialImage(payload));
       }
-    } else if (this.data.timeline) {
+    } else if (this.data.context === 'timeline') {
       const payload = {
         id: this.data.timeline,
         file: this.selectedFiles[0],
@@ -57,6 +58,12 @@ export class UploadDialogComponent implements OnInit {
       } else if (this.data.action === 'replace') {
         this.store.dispatch(new ReplaceTimelineFile(payload));
       }
+    } else if (this.data.context === 'create-album') {
+      const payload = {
+        id: this.data.memorial,
+        file: this.selectedFiles[0],
+      };
+      this.store.dispatch(new UploadCreatePhoto(payload));
     }
     const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
       if (res) {

@@ -4,7 +4,7 @@
   width: 89%;
   margin: rem(64) auto;
   padding-bottom: rem(100);
-  .form-container {
+  .form-container, .photo-container {
     padding: rem(16);
     background: rgba(255,255,255,0.9);
     mat-checkbox {
@@ -17,11 +17,19 @@
       justify-content: space-between;
     }
   }
+  .photo-container {
+    margin-top: rem(36);
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
 }
 @include respond-to('small') {
   .container {
     width: rem(696);
-    .form-container {
+    .form-container, .photo-container {
       padding: rem(32);
     }
   }

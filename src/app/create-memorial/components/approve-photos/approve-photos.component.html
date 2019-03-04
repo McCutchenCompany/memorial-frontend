@@ -14,4 +14,13 @@
       <button mat-button class="primary" [routerLink]="['/create', (memorial$ |  async).memorial?.uuid, 'memories']"><mat-icon>keyboard_arrow_right</mat-icon> Next</button>
     </div>
   </div>
+  <div class="photo-container mat-elevation-z3">
+    <div class="header">
+      <h4>{{ total$ | async }} Photo<span *ngIf="(total$ | async) === 0 || (total$ | async) > 1">s</span></h4>
+      <button mat-button class="primary" (click)="onOpenUpload()"><mat-icon>add</mat-icon> Add Photo</button>
+    </div>
+    <div *ngIf="(total$ | async) > 0 && (memorial$ | async).memorial.public_photo">
+      <app-album-viewer [photos]="allPhotos$ | async"></app-album-viewer>
+    </div>
+  </div>
 </div>
