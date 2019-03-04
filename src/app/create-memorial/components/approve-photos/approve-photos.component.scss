@@ -1,0 +1,28 @@
+@import "src/styles.scss";
+
+.container {
+  width: 89%;
+  margin: rem(64) auto;
+  padding-bottom: rem(100);
+  .form-container {
+    padding: rem(16);
+    background: rgba(255,255,255,0.9);
+    mat-checkbox {
+      display: block;
+      margin-top: rem(32);
+    }
+    .action {
+      margin-top: rem(32);
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(696);
+    .form-container {
+      padding: rem(32);
+    }
+  }
+}

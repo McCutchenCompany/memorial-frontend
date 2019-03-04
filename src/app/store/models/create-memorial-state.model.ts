@@ -13,7 +13,11 @@ export class CreateMemorialState {
     memorial: Memorial;
     location: LocationMarker;
     timeline: Timeline[];
-    memories: Memory[]
+    memories: Memory[];
+    album: {
+      count: number | any;
+      photos: any;
+    }
   };
   editingTimeline: {
     editingIds: string[]

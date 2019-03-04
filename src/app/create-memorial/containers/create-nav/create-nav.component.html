@@ -45,6 +45,12 @@
     class="nav-option"><mat-icon>location_on</mat-icon>Location</button>
   <mat-divider></mat-divider>
   <button
+    [routerLink]="['/create', memorial?.uuid, 'photos']"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="nav-option"><mat-icon>photo_library</mat-icon>Photo Album</button>
+  <mat-divider></mat-divider>
+  <button
     [routerLink]="['/create', memorial?.uuid, 'memories']"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"

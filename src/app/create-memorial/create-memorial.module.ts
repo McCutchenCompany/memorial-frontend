@@ -23,12 +23,15 @@ import {
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '@shared/shared.module';
+import { CreatePhotosEffects } from '@store/create-photos/photos.effects';
+import { createPhotoReducer } from '@store/create-photos/reducers';
 
 import * as fromStore from '../store/create-memorial';
 import { CreateMemorialEffects } from './../store/create-memorial/create-memorial.effects';
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { ApprovalCardComponent } from './components/approval-card/approval-card.component';
 import { ApproveMemoriesComponent } from './components/approve-memories/approve-memories.component';
+import { ApprovePhotosComponent } from './components/approve-photos/approve-photos.component';
 import { ImageEditorComponent } from './components/image-editor/image-editor.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
@@ -61,8 +64,10 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     ReactiveFormsModule,
     SharedModule,
     StoreModule.forFeature('createMemorial', fromStore.createMemorialReducer),
+    StoreModule.forFeature('createPhotos', createPhotoReducer),
     EffectsModule.forFeature([
-      CreateMemorialEffects
+      CreateMemorialEffects,
+      CreatePhotosEffects
     ]),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE',
@@ -80,7 +85,8 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     ApproveMemoriesComponent,
     ApprovalCardComponent,
     ImageEditorComponent,
-    CreateNavComponent
+    CreateNavComponent,
+    ApprovePhotosComponent
   ],
   entryComponents: [
     ImageEditorComponent

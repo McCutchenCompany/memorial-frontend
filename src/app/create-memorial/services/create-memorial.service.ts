@@ -96,4 +96,13 @@ export class CreateMemorialService {
     return this.http.get(path);
   }
 
+  getCreatePhotos(payload: {memorial_id: string, approved?: number, denied?: number, waiting?: number, index?: number}) {
+    const path = `${this.API_URL}/memorials/${payload.memorial_id}/photos?
+      ${payload.approved ? 'approved=' + payload.approved + '&' : ''}
+      ${payload.denied ? 'denied=' + payload.denied + '&' : ''}
+      ${payload.waiting ? 'waiting=' + payload.waiting + '&' : ''}
+      ${payload.index ? 'index=' + payload.index : ''}`;
+    return this.http.get(path);
+  }
+
 }
