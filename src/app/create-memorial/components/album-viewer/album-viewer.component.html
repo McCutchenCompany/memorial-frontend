@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="photo" *ngFor="let photo of photos">
+  <div class="photo" *ngFor="let photo of displayPhotos">
     <img [src]="photoSrc(photo.asset_link)">
   </div>
 </div>
+<mat-paginator [pageSize]="20" [length]="total"></mat-paginator>

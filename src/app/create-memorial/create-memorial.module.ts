@@ -14,6 +14,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatNativeDateModule,
+  MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
@@ -29,6 +30,7 @@ import { createPhotoReducer } from '@store/create-photos/reducers';
 import * as fromStore from '../store/create-memorial';
 import { CreateMemorialEffects } from './../store/create-memorial/create-memorial.effects';
 import { AddLocationComponent } from './components/add-location/add-location.component';
+import { AlbumViewerComponent } from './components/album-viewer/album-viewer.component';
 import { ApprovalCardComponent } from './components/approval-card/approval-card.component';
 import { ApproveMemoriesComponent } from './components/approve-memories/approve-memories.component';
 import { ApprovePhotosComponent } from './components/approve-photos/approve-photos.component';
@@ -40,7 +42,6 @@ import { CreateMemorialComponent } from './containers/create-memorial/create-mem
 import { CreateNavComponent } from './containers/create-nav/create-nav.component';
 import { CreateTimelineComponent } from './containers/create-timeline/create-timeline.component';
 import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
-import { AlbumViewerComponent } from './components/album-viewer/album-viewer.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { AlbumViewerComponent } from './components/album-viewer/album-viewer.com
     MatSidenavModule,
     MatDividerModule,
     MatExpansionModule,
+    MatPaginatorModule,
     ReactiveFormsModule,
     SharedModule,
     StoreModule.forFeature('createMemorial', fromStore.createMemorialReducer),

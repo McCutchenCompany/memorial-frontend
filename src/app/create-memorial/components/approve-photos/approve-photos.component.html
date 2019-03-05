@@ -20,7 +20,36 @@
       <button mat-button class="primary" (click)="onOpenUpload()"><mat-icon>add</mat-icon> Add Photo</button>
     </div>
     <div *ngIf="(total$ | async) > 0 && (memorial$ | async).memorial.public_photo">
-      <app-album-viewer [photos]="allPhotos$ | async"></app-album-viewer>
+      <app-album-viewer [photos]="allPhotos$ | async" [total]="total$ | async"></app-album-viewer>
+    </div>
+    <div *ngIf="(total$ | async) > 0 && !(memorial$ | async).memorial.public_photo">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <h4>Need Approval</h4>
+          <div class="number" [class.empty]="(count$ | async).need_approval === 0">
+            <p>{{ (count$ | async).need_approval }}</p>
+          </div>
+        </mat-expansion-panel-header>
+        <app-album-viewer [photos]="needApproval$ | async" [total]="(count$ | async).need_approval"></app-album-viewer>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <h4>Denied</h4>
+          <div class="number" [class.empty]="(count$ | async).denied === 0">
+            <p>{{ (count$ | async).denied }}</p>
+          </div>
+        </mat-expansion-panel-header>
+        <app-album-viewer [photos]="denied$ | async" [total]="(count$ | async).denied"></app-album-viewer>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <h4>Approved</h4>
+          <div class="number" [class.empty]="(count$ | async).approved === 0">
+            <p>{{ (count$ | async).approved }}</p>
+          </div>
+        </mat-expansion-panel-header>
+        <app-album-viewer [photos]="approved$ | async" [total]="(count$ | async).approved"></app-album-viewer>
+      </mat-expansion-panel>
     </div>
   </div>
 </div>

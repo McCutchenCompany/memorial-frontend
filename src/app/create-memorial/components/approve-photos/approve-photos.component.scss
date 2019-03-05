@@ -25,6 +25,31 @@
       align-items: center;
     }
   }
+  mat-expansion-panel {
+    margin-top: rem(20);
+  }
+  mat-expansion-panel-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: rem(18) rem(28);
+    .number {
+      height: rem(24);
+      width: rem(24);
+      margin-left: rem(16);
+      background: map-get($colors, primary);
+      border-radius: 100px;
+      &.empty {
+        background: map-get($colors, primary-lightest)
+      }
+      p {
+        transform: translateY(-8%);
+        text-align: center;
+        font-size: rem(12);
+        color: map-get($colors, white);
+      }
+    }
+  }
 }
 @include respond-to('small') {
   .container {

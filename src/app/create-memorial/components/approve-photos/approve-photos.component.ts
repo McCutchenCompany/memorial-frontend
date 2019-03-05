@@ -4,12 +4,18 @@ import { select, Store } from '@ngrx/store';
 import { UploadDialogComponent } from '@shared/components/upload-dialog/upload-dialog.component';
 import { Photo } from '@shared/models/photo.model';
 import { getCreateMemorial } from '@store/create-memorial';
-import { getAllCreatePhotos, getCreateAllPhotoTotal } from '@store/create-photos/reducers';
+import {
+  getAllApprovedPhotos,
+  getAllCreatePhotos,
+  getAllNeedApprovalPhotos,
+  getCreateAllPhotoTotal,
+} from '@store/create-photos/reducers';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
 
 import { UpdateCreateMemorial } from './../../../store/create-memorial/create-memorial.actions';
 import { GetCreatePhotos } from './../../../store/create-photos/photos.actions';
+import { getCreatePhotosCount } from './../../../store/create-photos/reducers';
 
 @Component({
   selector: 'app-approve-photos',
@@ -20,7 +26,12 @@ export class ApprovePhotosComponent implements OnInit {
 
   memorial$: Observable<any>;
   total$: Observable<number>;
+  count$: Observable<any>;
   allPhotos$: Observable<Photo[]>;
+
+  needApproval$: Observable<Photo[]>;
+  denied$: Observable<Photo[]>;
+  approved$: Observable<Photo[]>;
 
   memorialUUID;
   public: boolean;
@@ -32,6 +43,10 @@ export class ApprovePhotosComponent implements OnInit {
     this.memorial$ = this.store.pipe(select(getCreateMemorial));
     this.total$ = this.store.pipe(select(getCreateAllPhotoTotal));
     this.allPhotos$ = this.store.pipe(select(getAllCreatePhotos));
+    this.needApproval$ = this.store.pipe(select(getAllNeedApprovalPhotos));
+    this.denied$ = this.store.pipe(select(getAllNeedApprovalPhotos));
+    this.approved$ = this.store.pipe(select(getAllApprovedPhotos));
+    this.count$ = this.store.pipe(select(getCreatePhotosCount));
     this.memorial$.subscribe(memorial => {
       this.memorialUUID = memorial.memorial.uuid;
       this.public = memorial.memorial.public_photo;

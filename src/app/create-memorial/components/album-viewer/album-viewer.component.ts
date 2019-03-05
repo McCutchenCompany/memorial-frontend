@@ -10,6 +10,15 @@ import { Photo } from '@shared/models/photo.model';
 export class AlbumViewerComponent implements OnInit {
 
   @Input() photos: Photo[];
+  @Input() total: number;
+
+  page = 1;
+
+  get displayPhotos() {
+    const start = this.page === 1 ? 0 : ((this.page - 1) * 20) - 1;
+    const end = start + 20;
+    return this.photos.slice(start, end);
+  }
 
   constructor() { }
 
