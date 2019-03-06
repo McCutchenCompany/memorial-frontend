@@ -43,8 +43,16 @@ export function approvedPhotoReducer(state = INITIAL_STATE, action: All): Approv
         return state;
       }
     }
+    case CreatePhotosActionTypes.UPDATE_CREATE_APPROVED_PHOTO_SUCCESS: {
+      return approvedPhotoAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, state);
+    }
+    case CreatePhotosActionTypes.APPROVE_NEED_APPROVAL_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.APPROVE_DENIED_PHOTO_SUCCESS:
     case CreatePhotosActionTypes.UPLOAD_CREATE_PHOTO_SUCCESS: {
       return approvedPhotoAdapter.addOne(action.payload, {...state});
+    }
+    case CreatePhotosActionTypes.DENY_APPROVED_PHOTO_SUCCESS: {
+      return approvedPhotoAdapter.removeOne(action.payload.uuid, state);
     }
     default: return state;
   }

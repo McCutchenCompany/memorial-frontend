@@ -19,7 +19,7 @@ export interface CreateAllPhotosState extends EntityState<any> {
     approved: number;
     denied: number;
     need_approval: number;
-  }
+  };
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -80,6 +80,9 @@ export function allPhotoReducer(state = INITIAL_STATE, action: All): CreateAllPh
         error: action.payload
       };
     }
+    case CreatePhotosActionTypes.DENY_PHOTO:
+    case CreatePhotosActionTypes.APPROVE_PHOTO:
+    case CreatePhotosActionTypes.UPDATE_CREATE_PHOTO:
     case CreatePhotosActionTypes.UPLOAD_CREATE_PHOTO: {
       return {
         ...state,
@@ -98,7 +101,30 @@ export function allPhotoReducer(state = INITIAL_STATE, action: All): CreateAllPh
         }
       });
     }
-    case CreatePhotosActionTypes.UPLODA_CREATE_PHOTO_FAILURE: {
+    case CreatePhotosActionTypes.UPDATE_CREATE_ALL_PHOTO_SUCCESS: {
+      return allPhotoAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, {
+        ...state,
+        saving: false,
+        saved: true
+      });
+    }
+    case CreatePhotosActionTypes.APPROVE_DENIED_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.APPROVE_NEED_APPROVAL_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.DENY_APPROVED_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.DENY_NEED_APPROVAL_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.UPDATE_CREATE_DENIED_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.UPDATE_CREATE_NEED_APPROVAL_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.UPDATE_CREATE_APPROVED_PHOTO_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        saved: true
+      };
+    }
+    case CreatePhotosActionTypes.DENY_PHOTO_FAILURE:
+    case CreatePhotosActionTypes.APPROVE_PHOTO_FAILURE:
+    case CreatePhotosActionTypes.UPDATE_CREATE_PHOTO_FAILURE:
+    case CreatePhotosActionTypes.UPLOAD_CREATE_PHOTO_FAILURE: {
       return {
         ...state,
         saving: false,

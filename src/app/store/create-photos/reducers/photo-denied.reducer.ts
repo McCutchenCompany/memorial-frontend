@@ -43,6 +43,16 @@ export function deniedPhotoReducer(state = INITIAL_STATE, action: All): DeniedPh
         return state;
       }
     }
+    case CreatePhotosActionTypes.UPDATE_CREATE_DENIED_PHOTO_SUCCESS: {
+      return deniedPhotoAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, state);
+    }
+    case CreatePhotosActionTypes.APPROVE_DENIED_PHOTO_SUCCESS: {
+      return deniedPhotoAdapter.removeOne(action.payload.uuid, state);
+    }
+    case CreatePhotosActionTypes.DENY_APPROVED_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.DENY_NEED_APPROVAL_PHOTO_SUCCESS: {
+      return deniedPhotoAdapter.addOne(action.payload, state);
+    }
     default: return state;
   }
 }

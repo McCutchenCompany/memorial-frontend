@@ -20,7 +20,7 @@
       <button mat-button class="primary" (click)="onOpenUpload()"><mat-icon>add</mat-icon> Add Photo</button>
     </div>
     <div *ngIf="(total$ | async) > 0 && (memorial$ | async).memorial.public_photo">
-      <app-album-viewer [photos]="allPhotos$ | async" [total]="total$ | async"></app-album-viewer>
+      <app-album-viewer [memorial]="(memorial$ | async).memorial" [photos]="allPhotos$ | async" [total]="total$ | async" [context]="'create-all'"></app-album-viewer>
     </div>
     <div *ngIf="(total$ | async) > 0 && !(memorial$ | async).memorial.public_photo">
       <mat-expansion-panel>
@@ -30,7 +30,7 @@
             <p>{{ (count$ | async).need_approval }}</p>
           </div>
         </mat-expansion-panel-header>
-        <app-album-viewer [photos]="needApproval$ | async" [total]="(count$ | async).need_approval"></app-album-viewer>
+        <app-album-viewer [memorial]="(memorial$ | async).memorial" [photos]="needApproval$ | async" [total]="(count$ | async).need_approval" [context]="'need-approval'"></app-album-viewer>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -39,7 +39,7 @@
             <p>{{ (count$ | async).denied }}</p>
           </div>
         </mat-expansion-panel-header>
-        <app-album-viewer [photos]="denied$ | async" [total]="(count$ | async).denied"></app-album-viewer>
+        <app-album-viewer [memorial]="(memorial$ | async).memorial" [photos]="denied$ | async" [total]="(count$ | async).denied" [context]="'denied'"></app-album-viewer>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -48,7 +48,7 @@
             <p>{{ (count$ | async).approved }}</p>
           </div>
         </mat-expansion-panel-header>
-        <app-album-viewer [photos]="approved$ | async" [total]="(count$ | async).approved"></app-album-viewer>
+        <app-album-viewer [memorial]="(memorial$ | async).memorial" [photos]="approved$ | async" [total]="(count$ | async).approved" [context]="'approved'"></app-album-viewer>
       </mat-expansion-panel>
     </div>
   </div>

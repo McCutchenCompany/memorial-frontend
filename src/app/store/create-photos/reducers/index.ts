@@ -63,20 +63,27 @@ export const getCreatePhotosSaved = createSelector(
 export const {
   selectIds: getCreateAllPhotoIds,
   selectAll: getAllCreatePhotos,
+  selectEntities: getCreateAllPhotoEntities,
   selectTotal: getCreateAllPhotosTotal
 } = allPhotoAdapter.getSelectors(getCreateAllPhotosState);
 
 export const {
+  selectIds: getNeedApprovalPhotoIds,
+  selectEntities: getNeedApprovalPhotoEntities,
   selectAll: getAllNeedApprovalPhotos,
   selectTotal: getNeedApprovalPhotosTotal
 } = needApprovalPhotoAdapter.getSelectors(getCreateNeedApprovalPhotosState);
 
 export const {
+  selectIds: getDeniedPhotoIds,
+  selectEntities: getDeniedPhotoEntities,
   selectAll: getAllDeniedPhotos,
   selectTotal: getDeniedPhotosTotal
 } = deniedPhotoAdapter.getSelectors(getCreateDeniedPhotosState);
 
 export const {
+  selectIds: getApprovedPhotoIds,
+  selectEntities: getApprovedPhotoEntities,
   selectAll: getAllApprovedPhotos,
   selectTotal: getApprovedPhotosTotal
 } = deniedPhotoAdapter.getSelectors(getCreateApprovedPhotosState);

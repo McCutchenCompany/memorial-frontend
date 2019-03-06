@@ -1,0 +1,48 @@
+<div class="container">
+  <p>{{ currentIndex + 1 }} of {{ data.total }}</p>
+  <div class="photo">
+    <img class="mat-elevation-z3" [src]="getPhotoSrc(currentPhoto.asset_link)">
+    <div class="actions">
+      <button mat-mini-fab color="primary" [disabled]="editing" (click)="previous()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="editing" (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+  </div>
+  <div *ngIf="canApprove" class="approve-actions">
+    <button mat-button *ngIf="needsApproval || currentPhoto.denied" [disabled]="saving$ | async" class="approve" (click)="onApprove(currentPhoto.uuid)">
+      <mat-icon *ngIf="!(saving$ | async)">check</mat-icon>
+      <mat-progress-spinner *ngIf="(saving$ | async)" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+    </button>
+    <button mat-button *ngIf="needsApproval || currentPhoto.published" [disabled]="saving$ | async" class="deny" (click)="onDeny(currentPhoto.uuid)">
+      <mat-icon *ngIf="!(saving$ | async)">clear</mat-icon>
+      <mat-progress-spinner *ngIf="saving$ | async" mode="indeterminate" color="accent" strokeWidth="1" diameter="20"></mat-progress-spinner>
+    </button>
+  </div>
+  <div class="info">
+    <div *ngIf="!editing" class="title">
+      <h4 [class.empty]="!currentPhoto.title">{{ currentPhoto.title || 'No title' }}</h4>
+      <p [class.empty]="!currentPhoto.description">{{ currentPhoto.description || 'No description' }}</p>
+    </div>
+    <div *ngIf="editing" class="title">
+      <form [formGroup]="editForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput type="text" formControlName="title">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <input matInput type="text" formControlName="description">
+        </mat-form-field>
+        <div class="form-actions">
+          <button mat-button color="primary" [disabled]="saving$ | async" (click)="updatePhoto(currentPhoto.uuid)" class="primary">
+            <span *ngIf="!(saving$ | async)">Save</span>
+            <span *ngIf="saving$ | async">...Saving</span>
+          </button>
+        </div>
+      </form>
+    </div>
+    <button *ngIf="canEdit" mat-icon-button (click)="toggleEdit()" color="primary">
+      <mat-icon *ngIf="!editing">edit</mat-icon>
+      <mat-icon *ngIf="editing">close</mat-icon>
+    </button>
+  </div>
+</div>

@@ -105,4 +105,14 @@ export class CreateMemorialService {
     return this.http.get(path);
   }
 
+  updatePhoto(photo_id: string, payload: {title?: string, description?: string, published?: boolean, denied?: boolean}) {
+    const path = `${this.API_URL}/photos/${photo_id}`;
+    return this.http.patch(path, payload);
+  }
+
+  updatePhotoApproval(photo_id: string, memorial_id: string, payload: {published: boolean, denied: boolean}) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/approve_photo/${photo_id}`;
+    return this.http.patch(path, payload);
+  }
+
 }

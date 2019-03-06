@@ -43,6 +43,15 @@ export function needApprovalPhotoReducer(state = INITIAL_STATE, action: All): Ne
         return state;
       }
     }
+    case CreatePhotosActionTypes.UPDATE_CREATE_NEED_APPROVAL_PHOTO_SUCCESS: {
+      return needApprovalPhotoAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, state);
+    }
+    case CreatePhotosActionTypes.APPROVE_NEED_APPROVAL_PHOTO_SUCCESS: {
+      return needApprovalPhotoAdapter.removeOne(action.payload.uuid, state);
+    }
+    case CreatePhotosActionTypes.DENY_NEED_APPROVAL_PHOTO_SUCCESS: {
+      return needApprovalPhotoAdapter.removeOne(action.payload.uuid, state);
+    }
     default: return state;
   }
 }
