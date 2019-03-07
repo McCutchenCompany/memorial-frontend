@@ -10,6 +10,9 @@
   <div *ngIf="loading$ | async" class="photo">
     <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
   </div>
+  <div class="posted-by" *ngIf="loaded$ | async">
+    <p>Posted by: {{ currentPhoto.first_name }} {{ currentPhoto.last_name }}</p>
+  </div>
   <div *ngIf="canApprove && (loaded$ | async)" class="approve-actions">
     <button mat-button *ngIf="needsApproval || currentPhoto.denied" matTooltip="Accept Photo" [disabled]="saving$ | async" class="approve" (click)="onApprove(currentPhoto.uuid)">
       <mat-icon *ngIf="!(saving$ | async)">check</mat-icon>
@@ -20,7 +23,7 @@
       <mat-progress-spinner *ngIf="saving$ | async" mode="indeterminate" color="accent" strokeWidth="1" diameter="20"></mat-progress-spinner>
     </button>
   </div>
-  <div *ngIf="loaded$ | async" class="info">
+  <div *ngIf="loaded$ | async" class="info" [class.approving]="canApprove && !data.memorial.public_photo">
     <div *ngIf="!editing" class="title">
       <h4 [class.empty]="!currentPhoto.title">{{ currentPhoto.title || 'No title' }}</h4>
       <p [class.empty]="!currentPhoto.description">{{ currentPhoto.description || 'No description' }}</p>

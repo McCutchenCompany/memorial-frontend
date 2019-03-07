@@ -125,6 +125,7 @@ export class PhotoAlbumShowComponent implements OnInit {
     } else if (index === this.ids.length - 1 && this.ids.length < this.total) {
       let payload;
       switch (this.data.context) {
+        case 'view':
         case 'create-all': {
           payload = {memorial_id: this.data.memorial.uuid, index: this.ids.length};
           break;

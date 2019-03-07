@@ -36,4 +36,9 @@ export class ViewMemorialService {
     };
     return this.http.patch(path, body);
   }
+
+  getAlbumPhotos(memorial_id: string, index: number) {
+    const path = `${this.API_URL}/photos/${memorial_id}?index=${index}`;
+    return this.http.get(path);
+  }
 }

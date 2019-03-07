@@ -1,0 +1,20 @@
+<div class="flourish">
+  <div class="flourish-container">
+    <div class="box-1">
+    </div>
+    <div class="box-2"></div>
+    <div class="box-3"></div>
+  </div>
+</div>
+<div class="container">
+  <h3>Photo Album</h3>
+  <p>{{ album.count }} Photos</p>
+  <div class="album mat-elevation-z3">
+    <div class="wrapper">
+      <div class="photo" (click)="openPhoto(photo.uuid)" *ngFor="let photo of displayPhotos">
+        <img [src]="photoSrc(photo.asset_link)">
+      </div>
+    </div>
+    <mat-paginator (page)="onPage($event)" [pageIndex]="page - 1" [pageSize]="20" [length]="album.count"></mat-paginator>
+  </div>
+</div>

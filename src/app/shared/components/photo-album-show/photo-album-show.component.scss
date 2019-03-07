@@ -22,10 +22,13 @@
     right: rem(-20);
   }
   .info {
-    margin-top: rem(36);
+    margin-top: rem(8);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    &.approving {
+      margin-top: rem(36);
+    }
     .empty {
       color: map-get($colors, gray);
     }
