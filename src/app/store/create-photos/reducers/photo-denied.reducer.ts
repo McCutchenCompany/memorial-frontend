@@ -34,10 +34,34 @@ export const INITIAL_STATE: DeniedPhotosState = deniedPhotoAdapter.getInitialSta
 
 export function deniedPhotoReducer(state = INITIAL_STATE, action: All): DeniedPhotosState {
   switch (action.type) {
+    case CreatePhotosActionTypes.GET_MORE_PHOTOS: {
+      if (action.payload.denied) {
+        return {
+          ...state,
+          loading: true,
+          loaded: false
+        };
+      } else {
+        return state;
+      }
+    }
     case CreatePhotosActionTypes.GET_CREATE_PHOTOS_SUCCESS: {
       if (action.payload.denied) {
         return deniedPhotoAdapter.addAll(action.payload.denied, {
-          ...state
+          ...state,
+          loading: false,
+          loaded: true
+        });
+      } else {
+        return state;
+      }
+    }
+    case CreatePhotosActionTypes.GET_MORE_PHOTOS_SUCCESS: {
+      if (action.payload.denied) {
+        return deniedPhotoAdapter.addMany(action.payload.denied, {
+          ...state,
+          loading: false,
+          loaded: true
         });
       } else {
         return state;
@@ -47,11 +71,11 @@ export function deniedPhotoReducer(state = INITIAL_STATE, action: All): DeniedPh
       return deniedPhotoAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, state);
     }
     case CreatePhotosActionTypes.APPROVE_DENIED_PHOTO_SUCCESS: {
-      return deniedPhotoAdapter.removeOne(action.payload.uuid, state);
+      return deniedPhotoAdapter.removeOne(action.payload.photo.uuid, state);
     }
     case CreatePhotosActionTypes.DENY_APPROVED_PHOTO_SUCCESS:
     case CreatePhotosActionTypes.DENY_NEED_APPROVAL_PHOTO_SUCCESS: {
-      return deniedPhotoAdapter.addOne(action.payload, state);
+      return deniedPhotoAdapter.addOne(action.payload.photo, state);
     }
     default: return state;
   }

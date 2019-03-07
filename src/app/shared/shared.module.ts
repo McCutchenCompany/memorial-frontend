@@ -51,6 +51,7 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MatProgressBarModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     FormsModule,
     CreditCardDirectivesModule,

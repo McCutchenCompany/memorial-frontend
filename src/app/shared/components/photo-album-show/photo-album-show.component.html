@@ -1,23 +1,26 @@
-<div class="container">
-  <p>{{ currentIndex + 1 }} of {{ data.total }}</p>
-  <div class="photo">
+<div *ngIf="currentPhoto" class="container">
+  <p>{{ currentIndex + 1 }} of {{ total$ | async }}</p>
+  <div *ngIf="loaded$ | async" class="photo">
     <img class="mat-elevation-z3" [src]="getPhotoSrc(currentPhoto.asset_link)">
     <div class="actions">
-      <button mat-mini-fab color="primary" [disabled]="editing" (click)="previous()"><mat-icon>keyboard_arrow_left</mat-icon></button>
-      <button mat-mini-fab color="primary" [disabled]="editing" (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="editing || this.currentIndex === 0" (click)="previous()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <button mat-mini-fab color="primary" [disabled]="editing || this.currentIndex + 1 === (total$ | async)" (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
     </div>
   </div>
-  <div *ngIf="canApprove" class="approve-actions">
-    <button mat-button *ngIf="needsApproval || currentPhoto.denied" [disabled]="saving$ | async" class="approve" (click)="onApprove(currentPhoto.uuid)">
+  <div *ngIf="loading$ | async" class="photo">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+  </div>
+  <div *ngIf="canApprove && (loaded$ | async)" class="approve-actions">
+    <button mat-button *ngIf="needsApproval || currentPhoto.denied" matTooltip="Accept Photo" [disabled]="saving$ | async" class="approve" (click)="onApprove(currentPhoto.uuid)">
       <mat-icon *ngIf="!(saving$ | async)">check</mat-icon>
       <mat-progress-spinner *ngIf="(saving$ | async)" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
     </button>
-    <button mat-button *ngIf="needsApproval || currentPhoto.published" [disabled]="saving$ | async" class="deny" (click)="onDeny(currentPhoto.uuid)">
+    <button mat-button *ngIf="needsApproval || currentPhoto.published" matTooltip="Deny Photo" [disabled]="saving$ | async" class="deny" (click)="onDeny(currentPhoto.uuid)">
       <mat-icon *ngIf="!(saving$ | async)">clear</mat-icon>
       <mat-progress-spinner *ngIf="saving$ | async" mode="indeterminate" color="accent" strokeWidth="1" diameter="20"></mat-progress-spinner>
     </button>
   </div>
-  <div class="info">
+  <div *ngIf="loaded$ | async" class="info">
     <div *ngIf="!editing" class="title">
       <h4 [class.empty]="!currentPhoto.title">{{ currentPhoto.title || 'No title' }}</h4>
       <p [class.empty]="!currentPhoto.description">{{ currentPhoto.description || 'No description' }}</p>

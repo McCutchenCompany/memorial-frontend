@@ -34,10 +34,34 @@ export const INITIAL_STATE: ApprovedPhotosState = approvedPhotoAdapter.getInitia
 
 export function approvedPhotoReducer(state = INITIAL_STATE, action: All): ApprovedPhotosState {
   switch (action.type) {
+    case CreatePhotosActionTypes.GET_MORE_PHOTOS: {
+      if (action.payload.approved) {
+        return {
+          ...state,
+          loading: true,
+          loaded: false
+        };
+      } else {
+        return state;
+      }
+    }
     case CreatePhotosActionTypes.GET_CREATE_PHOTOS_SUCCESS: {
       if (action.payload.approved) {
         return approvedPhotoAdapter.addAll(action.payload.approved, {
-          ...state
+          ...state,
+          loading: false,
+          loaded: true
+        });
+      } else {
+        return state;
+      }
+    }
+    case CreatePhotosActionTypes.GET_MORE_PHOTOS_SUCCESS: {
+      if (action.payload.approved) {
+        return approvedPhotoAdapter.addMany(action.payload.approved, {
+          ...state,
+          loading: false,
+          loaded: true
         });
       } else {
         return state;
@@ -47,12 +71,14 @@ export function approvedPhotoReducer(state = INITIAL_STATE, action: All): Approv
       return approvedPhotoAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, state);
     }
     case CreatePhotosActionTypes.APPROVE_NEED_APPROVAL_PHOTO_SUCCESS:
-    case CreatePhotosActionTypes.APPROVE_DENIED_PHOTO_SUCCESS:
+    case CreatePhotosActionTypes.APPROVE_DENIED_PHOTO_SUCCESS: {
+      return approvedPhotoAdapter.addOne(action.payload.photo, {...state});
+    }
     case CreatePhotosActionTypes.UPLOAD_CREATE_PHOTO_SUCCESS: {
-      return approvedPhotoAdapter.addOne(action.payload, {...state});
+      return approvedPhotoAdapter.addOne(action.payload, state);
     }
     case CreatePhotosActionTypes.DENY_APPROVED_PHOTO_SUCCESS: {
-      return approvedPhotoAdapter.removeOne(action.payload.uuid, state);
+      return approvedPhotoAdapter.removeOne(action.payload.photo.uuid, state);
     }
     default: return state;
   }

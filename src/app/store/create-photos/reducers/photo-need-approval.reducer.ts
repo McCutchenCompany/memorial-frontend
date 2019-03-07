@@ -34,10 +34,34 @@ export const INITIAL_STATE: NeedApprovalPhotosState = needApprovalPhotoAdapter.g
 
 export function needApprovalPhotoReducer(state = INITIAL_STATE, action: All): NeedApprovalPhotosState {
   switch (action.type) {
+    case CreatePhotosActionTypes.GET_MORE_PHOTOS: {
+      if (action.payload.waiting) {
+        return {
+          ...state,
+          loading: true,
+          loaded: false
+        };
+      } else {
+        return state;
+      }
+    }
     case CreatePhotosActionTypes.GET_CREATE_PHOTOS_SUCCESS: {
       if (action.payload.need_approval) {
         return needApprovalPhotoAdapter.addAll(action.payload.need_approval, {
-          ...state
+          ...state,
+          loading: false,
+          loaded: true
+        });
+      } else {
+        return state;
+      }
+    }
+    case CreatePhotosActionTypes.GET_MORE_PHOTOS_SUCCESS: {
+      if (action.payload.need_approval) {
+        return needApprovalPhotoAdapter.addMany(action.payload.need_approval, {
+          ...state,
+          loading: false,
+          loaded: true
         });
       } else {
         return state;
@@ -47,10 +71,10 @@ export function needApprovalPhotoReducer(state = INITIAL_STATE, action: All): Ne
       return needApprovalPhotoAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, state);
     }
     case CreatePhotosActionTypes.APPROVE_NEED_APPROVAL_PHOTO_SUCCESS: {
-      return needApprovalPhotoAdapter.removeOne(action.payload.uuid, state);
+      return needApprovalPhotoAdapter.removeOne(action.payload.photo.uuid, state);
     }
     case CreatePhotosActionTypes.DENY_NEED_APPROVAL_PHOTO_SUCCESS: {
-      return needApprovalPhotoAdapter.removeOne(action.payload.uuid, state);
+      return needApprovalPhotoAdapter.removeOne(action.payload.photo.uuid, state);
     }
     default: return state;
   }

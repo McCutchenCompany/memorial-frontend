@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Constructor } from '@angular/material/core/typings/common-behaviors/constructor';
 import { environment } from '@environments/environment';
 import { MemoizedSelector, select, Store } from '@ngrx/store';
@@ -23,9 +23,13 @@ export class PhotoAlbumShowComponent implements OnInit {
   ids$: Observable<string[]>;
   saving$: Observable<boolean>;
   saved$: Observable<boolean>;
+  total$: Observable<number>;
+  loaded$: Observable<boolean>;
+  loading$: Observable<boolean>;
 
   entities: any;
   ids: string[];
+  total: number;
 
   currentId: string;
 
@@ -73,11 +77,16 @@ export class PhotoAlbumShowComponent implements OnInit {
       entitySelector: MemoizedSelector<any, Photo[]>,
       idSelector: MemoizedSelector<any, string[]>,
       savingSelector: MemoizedSelector<any, boolean>,
-      savedSelector: MemoizedSelector<any, boolean>
+      savedSelector: MemoizedSelector<any, boolean>,
+      totalSelector: MemoizedSelector<any, number>,
+      loadedSelector: MemoizedSelector<any, boolean>,
+      loadingSelector: MemoizedSelector<any, boolean>,
       updateAction: Constructor<any>,
+      getMoreAction: Constructor<any>,
       memorial: Memorial,
-      total: number
+      context: string
     },
+    public dialogRef: MatDialogRef<PhotoAlbumShowComponent>,
     private store: Store<any>,
     private fb: FormBuilder
   ) {
@@ -85,10 +94,14 @@ export class PhotoAlbumShowComponent implements OnInit {
     this.ids$ = this.store.pipe(select(this.data.idSelector));
     this.saving$ = this.store.pipe(select(this.data.savingSelector));
     this.saved$ = this.store.pipe(select(this.data.savedSelector));
+    this.total$ = this.store.pipe(select(this.data.totalSelector));
+    this.loaded$ = this.store.pipe(select(this.data.loadedSelector));
+    this.loading$ = this.store.pipe(select(this.data.loadingSelector));
     this.entities$.subscribe(entities => this.entities = entities);
     this.ids$.subscribe(ids => this.ids = ids);
     this.currentId = this.data.selectedPhoto;
     this.store.pipe(select(getUser)).subscribe(user => this.user = user);
+    this.total$.subscribe(total => this.total = total);
   }
 
   ngOnInit() {
@@ -109,6 +122,34 @@ export class PhotoAlbumShowComponent implements OnInit {
     const index = this.ids.findIndex(id => id === this.currentId);
     if (index < this.ids.length - 1) {
       this.currentId = this.ids[index + 1];
+    } else if (index === this.ids.length - 1 && this.ids.length < this.total) {
+      let payload;
+      switch (this.data.context) {
+        case 'create-all': {
+          payload = {memorial_id: this.data.memorial.uuid, index: this.ids.length};
+          break;
+        }
+        case 'approved': {
+          payload = {memorial_id: this.data.memorial.uuid, approved: this.ids.length};
+          break;
+        }
+        case 'denied': {
+          payload = {memorial_id: this.data.memorial.uuid, denied: this.ids.length};
+          break;
+        }
+        case 'need-approval': {
+          payload = {memorial_id: this.data.memorial.uuid, waiting: this.ids.length};
+          break;
+        }
+        default: break;
+      }
+      this.store.dispatch(new this.data.getMoreAction(payload));
+      const sub = this.loaded$.subscribe(loaded => {
+        if (loaded) {
+          sub.unsubscribe();
+          this.currentId = this.ids[index + 1];
+        }
+      });
     }
   }
 
@@ -127,6 +168,15 @@ export class PhotoAlbumShowComponent implements OnInit {
   }
 
   onApprove(photo_id) {
+    const index = this.ids.findIndex(id => id === this.currentId);
+    let newIndex;
+    if (this.ids.length > 1 && index < this.ids.length - 1) {
+      newIndex = index;
+    } else if (this.ids.length > 1 && index === this.ids.length - 1) {
+      newIndex = index - 1;
+    } else if (this.ids.length === 1) {
+      newIndex = -1;
+    }
     const payload = {
       photo_id,
       memorial_id: this.data.memorial.uuid,
@@ -136,9 +186,28 @@ export class PhotoAlbumShowComponent implements OnInit {
       }
     };
     this.store.dispatch(new ApprovePhoto(payload));
+    const sub = this.saved$.subscribe(saved => {
+      if (saved) {
+        sub.unsubscribe();
+        if (newIndex > -1) {
+          this.currentId = this.ids[newIndex];
+        } else {
+          this.dialogRef.close();
+        }
+      }
+    });
   }
 
   onDeny(photo_id) {
+    const index = this.ids.findIndex(id => id === this.currentId);
+    let newIndex;
+    if (this.ids.length > 1 && index < this.ids.length - 1) {
+      newIndex = index;
+    } else if (this.ids.length > 1 && index === this.ids.length - 1) {
+      newIndex = index - 1;
+    } else if (this.ids.length === 1) {
+      newIndex = -1;
+    }
     const payload = {
       photo_id,
       memorial_id: this.data.memorial.uuid,
@@ -148,6 +217,16 @@ export class PhotoAlbumShowComponent implements OnInit {
       }
     };
     this.store.dispatch(new DenyPhoto(payload));
+    const sub = this.saved$.subscribe(saved => {
+      if (saved) {
+        sub.unsubscribe();
+        if (newIndex > -1) {
+          this.currentId = this.ids[newIndex];
+        } else {
+          this.dialogRef.close();
+        }
+      }
+    });
   }
 
   updatePhoto(photo_id) {

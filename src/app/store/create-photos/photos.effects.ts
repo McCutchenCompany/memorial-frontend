@@ -21,6 +21,9 @@ import {
   GetCreatePhotos,
   GetCreatePhotosFailure,
   GetCreatePhotosSuccess,
+  GetMorePhotos,
+  GetMorePhotosFailure,
+  GetMorePhotosSuccess,
   UpdateCreateAllPhotoSuccess,
   UpdateCreateApprovedPhotoSuccess,
   UpdateCreateDeniedPhotoSuccess,
@@ -31,7 +34,7 @@ import {
   UploadCreatePhotoFailure,
   UploadCreatePhotoSuccess,
 } from './photos.actions';
-import { getNeedApprovalPhotoIds } from './reducers';
+import { getCreatePhotosCount, getNeedApprovalPhotoIds } from './reducers';
 
 @Injectable()
 export class CreatePhotosEffects {
@@ -49,6 +52,15 @@ export class CreatePhotosEffects {
       map(res => new GetCreatePhotosSuccess(res)),
       catchError(error => of(new GetCreatePhotosFailure(error)))
     )),
+  );
+
+  @Effect()
+  getMorePhotos$: Observable<Action> = this.actions.pipe(
+    ofType(CreatePhotosActionTypes.GET_MORE_PHOTOS),
+    switchMap((action: GetMorePhotos) => this.api.getCreatePhotos(action.payload).pipe(
+      map(res => new GetMorePhotosSuccess(res)),
+      catchError(error => of(new GetMorePhotosFailure(error)))
+    ))
   );
 
   @Effect()
@@ -84,14 +96,30 @@ export class CreatePhotosEffects {
   @Effect()
   approvePhoto$: Observable<Action> = this.actions.pipe(
     ofType(CreatePhotosActionTypes.APPROVE_PHOTO),
-    withLatestFrom(this.store.pipe(select(getNeedApprovalPhotoIds))),
-    switchMap(([action, ids]: [ApprovePhoto, string[]]) => {
+    withLatestFrom(this.store.pipe(select(getNeedApprovalPhotoIds)), this.store.pipe(select(getCreatePhotosCount))),
+    switchMap(([action, ids, count]: [ApprovePhoto, string[], any]) => {
       return this.api.updatePhotoApproval(action.payload.photo_id, action.payload.memorial_id, {published: true, denied: false}).pipe(
         map((res: Photo) => {
           if (ids.includes(res.uuid)) {
-            return new ApproveNeedApprovalPhotoSuccess(res);
+            const payload = {
+              count: {
+                ...count,
+                approved: count.approved + 1,
+                need_approval: count.need_approval - 1
+              },
+              photo: res
+            };
+            return new ApproveNeedApprovalPhotoSuccess(payload);
           } else {
-            return new ApproveDeniedPhotoSuccess(res);
+            const payload = {
+              count: {
+                ...count,
+                denied: count.denied - 1,
+                approved: count.approved + 1
+              },
+              photo: res
+            };
+            return new ApproveDeniedPhotoSuccess(payload);
           }
         }),
         catchError(error => of(new ApprovePhotoFailure(error)))
@@ -101,14 +129,30 @@ export class CreatePhotosEffects {
   @Effect()
   denyPhoto$: Observable<Action> = this.actions.pipe(
     ofType(CreatePhotosActionTypes.DENY_PHOTO),
-    withLatestFrom(this.store.pipe(select(getNeedApprovalPhotoIds))),
-    switchMap(([action, ids]: [DenyPhoto, string[]]) => {
+    withLatestFrom(this.store.pipe(select(getNeedApprovalPhotoIds)), this.store.pipe(select(getCreatePhotosCount))),
+    switchMap(([action, ids, count]: [DenyPhoto, string[], any]) => {
       return this.api.updatePhotoApproval(action.payload.photo_id, action.payload.memorial_id, {published: false, denied: true}).pipe(
         map((res: Photo) => {
           if (ids.includes(res.uuid)) {
-            return new DenyNeedApprovalPhotoSuccess(res);
+            const payload = {
+              count: {
+                ...count,
+                need_approval: count.need_approval - 1,
+                denied: count.denied + 1
+              },
+              photo: res
+            };
+            return new DenyNeedApprovalPhotoSuccess(payload);
           } else {
-            return new DenyApprovedPhotoSuccess(res);
+            const payload = {
+              count: {
+                ...count,
+                approved: count.approved - 1,
+                denied: count.denied + 1
+              },
+              photo: res
+            };
+            return new DenyApprovedPhotoSuccess(payload);
           }
         }),
         catchError(error => of(new DenyPhotoFailure(error)))

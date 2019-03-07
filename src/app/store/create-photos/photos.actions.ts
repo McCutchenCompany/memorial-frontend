@@ -5,6 +5,9 @@ export enum CreatePhotosActionTypes {
   GET_CREATE_PHOTOS = '[Create Photos] Get create photos',
   GET_CREATE_PHOTOS_SUCCESS = '[Create Photos] Get create photos success',
   GET_CREATE_PHOTOS_FAILURE = '[Create Photos] Get create photos failure',
+  GET_MORE_PHOTOS = '[Create Photos] Get more photos',
+  GET_MORE_PHOTOS_SUCCESS = '[Create Photos] Get more photos success',
+  GET_MORE_PHOTOS_FAILURE = '[Create Photos] Get more photos failure',
   UPLOAD_CREATE_PHOTO = '[Create Photos] Upload create photo',
   UPLOAD_CREATE_PHOTO_SUCCESS = '[Create Photos] Upload create photo success',
   UPLOAD_CREATE_PHOTO_FAILURE = '[Create Photos] Upload create photo failure',
@@ -34,6 +37,19 @@ export class GetCreatePhotosSuccess implements Action {
 }
 export class GetCreatePhotosFailure implements Action {
   readonly type = CreatePhotosActionTypes.GET_CREATE_PHOTOS_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class GetMorePhotos implements Action {
+  readonly type = CreatePhotosActionTypes.GET_MORE_PHOTOS;
+  constructor (public payload: any) {}
+}
+export class GetMorePhotosSuccess implements Action {
+  readonly type = CreatePhotosActionTypes.GET_MORE_PHOTOS_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class GetMorePhotosFailure implements Action {
+  readonly type = CreatePhotosActionTypes.GET_MORE_PHOTOS_FAILURE;
   constructor (public payload: any) {}
 }
 
@@ -81,11 +97,11 @@ export class ApprovePhoto implements Action {
 }
 export class ApproveNeedApprovalPhotoSuccess implements Action {
   readonly type = CreatePhotosActionTypes.APPROVE_NEED_APPROVAL_PHOTO_SUCCESS;
-  constructor (public payload: Photo) {}
+  constructor (public payload: {count: any, photo: Photo}) {}
 }
 export class ApproveDeniedPhotoSuccess implements Action {
   readonly type = CreatePhotosActionTypes.APPROVE_DENIED_PHOTO_SUCCESS;
-  constructor (public payload: Photo) {}
+  constructor (public payload: {count: any, photo: Photo}) {}
 }
 export class ApprovePhotoFailure implements Action {
   readonly type = CreatePhotosActionTypes.APPROVE_PHOTO_FAILURE;
@@ -102,17 +118,20 @@ export class DenyPhotoFailure implements Action {
 }
 export class DenyApprovedPhotoSuccess implements Action {
   readonly type = CreatePhotosActionTypes.DENY_APPROVED_PHOTO_SUCCESS;
-  constructor (public payload: Photo) {}
+  constructor (public payload: {count: any, photo: Photo}) {}
 }
 export class DenyNeedApprovalPhotoSuccess implements Action {
   readonly type = CreatePhotosActionTypes.DENY_NEED_APPROVAL_PHOTO_SUCCESS;
-  constructor (public payload: Photo) {}
+  constructor (public payload: {count: any, photo: Photo}) {}
 }
 
 export type All =
   | GetCreatePhotos
   | GetCreatePhotosSuccess
   | GetCreatePhotosFailure
+  | GetMorePhotos
+  | GetMorePhotosSuccess
+  | GetMorePhotosFailure
   | UploadCreatePhoto
   | UploadCreatePhotoSuccess
   | UploadCreatePhotoFailure

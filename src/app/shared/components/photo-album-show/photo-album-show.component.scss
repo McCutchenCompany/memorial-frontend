@@ -38,10 +38,11 @@
   }
   .approve-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     width: rem(140);
     height: rem(36);
     height: fit-content;
+    margin: rem(16) 0 rem(16);
     mat-progress-spinner {
       margin: rem(7) auto;
     }
@@ -55,10 +56,10 @@
   .approve {
     background: map-get($colors, success);
     color: map-get($colors, white);
+    margin-right: rem(12);
   }
   .deny {
     background: map-get($colors, warn);
     color: map-get($colors, white);
-    margin-left: rem(12);
   }
 }

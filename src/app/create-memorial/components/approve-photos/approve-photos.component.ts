@@ -7,6 +7,7 @@ import { getCreateMemorial } from '@store/create-memorial';
 import {
   getAllApprovedPhotos,
   getAllCreatePhotos,
+  getAllDeniedPhotos,
   getAllNeedApprovalPhotos,
   getCreateAllPhotoTotal,
 } from '@store/create-photos/reducers';
@@ -44,7 +45,7 @@ export class ApprovePhotosComponent implements OnInit {
     this.total$ = this.store.pipe(select(getCreateAllPhotoTotal));
     this.allPhotos$ = this.store.pipe(select(getAllCreatePhotos));
     this.needApproval$ = this.store.pipe(select(getAllNeedApprovalPhotos));
-    this.denied$ = this.store.pipe(select(getAllNeedApprovalPhotos));
+    this.denied$ = this.store.pipe(select(getAllDeniedPhotos));
     this.approved$ = this.store.pipe(select(getAllApprovedPhotos));
     this.count$ = this.store.pipe(select(getCreatePhotosCount));
     this.memorial$.subscribe(memorial => {
