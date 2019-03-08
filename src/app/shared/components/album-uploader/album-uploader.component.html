@@ -1,0 +1,21 @@
+<form>
+  <input type="file" name="file" class="inputfile" (change)="onSelectFile($event)" multiple/>
+  <div class="hider">
+    <p>{{ filesForm.value.length }} files</p>
+    <button mat-button class="primary" [disabled]="uploading || filesForm.invalid || filesForm.value.length === 0" (click)="onUpload()">Upload</button>
+  </div>
+</form>
+<p *ngIf="filesForm.value.length > 0 && filesForm.invalid" class="warn">Some of your images are either too big or the wrong format.</p>
+<div class="files">
+  <div *ngFor="let group of filesForm.controls; let i = index">
+    <div class="file-loader" [matTooltip]="getTooltip(group)" [class.error]="group.invalid">
+      <div class="icon" [class.hidden]="!group.value.uploaded"><mat-icon>check_circle</mat-icon></div>
+      <p class="name">{{ group.value.file.name }}</p>
+      <div class="action">
+        <button mat-icon-button color="warn" (click)="remove(i)"><mat-icon>delete</mat-icon></button>
+      </div>
+    </div>
+    <mat-progress-bar *ngIf="group.value.uploading" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>
+<p class="error" *ngIf="error">{{ error }}</p>

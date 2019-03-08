@@ -71,12 +71,20 @@ export function albumReducer(state = INITIAL_STATE, action: All): AlbumState {
         error: action.payload
       };
     }
+    case AlbumActionType.UPLOAD_ALBUM_PHOTO:
     case AlbumActionType.UPDATE_ALBUM_PHOTO: {
       return {
         ...state,
         saving: true,
         saved: false
       };
+    }
+    case AlbumActionType.UPLOAD_ALBUM_PHOTO_SUCCESS: {
+      return albumAdapter.addOne(action.payload, {
+        ...state,
+        saving: false,
+        saved: true
+      });
     }
     case AlbumActionType.UPDATE_ALBUM_PHOTO_SUCCESS: {
       return albumAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, {
@@ -85,6 +93,7 @@ export function albumReducer(state = INITIAL_STATE, action: All): AlbumState {
         saved: true
       });
     }
+    case AlbumActionType.UPLOAD_ALBUM_PHOTO_FAILURE:
     case AlbumActionType.UPDATE_ALBUM_PHOTO_FAILURE: {
       return {
         ...state,

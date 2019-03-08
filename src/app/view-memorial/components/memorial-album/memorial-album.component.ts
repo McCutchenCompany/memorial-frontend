@@ -19,6 +19,7 @@ import {
 import { getAlbumCount } from '@store/view-memorial';
 import { Observable } from 'rxjs';
 
+import { AlbumUploaderComponent } from './../../../shared/components/album-uploader/album-uploader.component';
 import { getUser } from './../../../store/auth/auth.reducer';
 
 @Component({
@@ -75,6 +76,19 @@ export class MemorialAlbumComponent implements OnInit {
 
   photoSrc(link) {
     return `${environment.s3.url}${link}`;
+  }
+
+  openUploader() {
+    this.dialog.open(AlbumUploaderComponent, {
+      disableClose: true,
+      data: {
+        memorial: this.memorial.uuid
+      }
+    }).afterClosed().subscribe(uploaded => {
+      if (uploaded) {
+        this.openPhoto(this.photos[0].uuid);
+      }
+    });
   }
 
   openPhoto(id) {

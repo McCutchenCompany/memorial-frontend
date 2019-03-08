@@ -10,22 +10,23 @@
   <h3>Photo Album</h3>
   <p>{{ album.count }} Photos</p>
   <div class="album mat-elevation-z3">
-    <button *ngIf="!adding && (user$ | async).uuid" mat-button class="primary">Add Photo</button>
+    <button *ngIf="!adding && (user$ | async).uuid" mat-button class="primary" (click)="openUploader()">Add Photo</button>
     <button *ngIf="!adding && !(user$ | async).uuid" mat-button class="primary" (click)="onLogin()">Login to Add Photos</button>
-    <div class="wrapper desktop" [class.toggle]="hideMobile">
+    <div class="wrapper desktop" *ngIf="displayPhotos.length > 0" [class.toggle]="hideMobile">
       <div class="photo" [class.denied]="!memorial.public_photo && photo.denied" [class.waiting]="!memorial.public_photo && !photo.published && !photo.denied" (click)="openPhoto(photo.uuid)" *ngFor="let photo of displayPhotos">
         <img [src]="photoSrc(photo.asset_link)">
       </div>
     </div>
-    <div class="wrapper mobile" [class.toggle]="hideMobile">
-      <div class="photo" [class.denied]="!memorial.public_photo && displayPhotos[0].denied" [class.waiting]="!memorial.public_photo && !displayPhotos[0].published && !displayPhotos[0].denied" (click)="openPhoto(displayPhotos[0].uuid)">
-        <img [src]="photoSrc(displayPhotos[0].asset_link)">
+    <div class="wrapper mobile" *ngIf="displayPhotos.length > 0" [class.toggle]="hideMobile">
+      <div class="photo" [class.denied]="!memorial.public_photo && displayPhotos[0]?.denied" [class.waiting]="!memorial.public_photo && !displayPhotos[0]?.published && !displayPhotos[0]?.denied" (click)="openPhoto(displayPhotos[0]?.uuid)">
+        <img [src]="photoSrc(displayPhotos[0]?.asset_link)">
       </div>
-      <div class="photo" [class.denied]="!memorial.public_photo && displayPhotos[1].denied" [class.waiting]="!memorial.public_photo && !displayPhotos[1].published && !displayPhotos[1].denied" (click)="openPhoto(displayPhotos[1].uuid)">
-        <img [src]="photoSrc(displayPhotos[1].asset_link)">
+      <div class="photo" [class.denied]="!memorial.public_photo && displayPhotos[1]?.denied" [class.waiting]="!memorial.public_photo && !displayPhotos[1]?.published && !displayPhotos[1]?.denied" (click)="openPhoto(displayPhotos[1]?.uuid)">
+        <img [src]="photoSrc(displayPhotos[1]?.asset_link)">
       </div>
       <button mat-button class="primary" (click)="toggle()">Show Album</button>
     </div>
+    <div class="wrapper" *ngIf="displayPhotos.length === 0"></div>
     <button mat-button class="primary mobile" [class.toggle]="hideMobile" (click)="toggle()">Hide Album</button>
     <mat-paginator (page)="onPage($event)" [class.toggle]="hideMobile" [pageIndex]="page - 1" [pageSize]="20" [length]="album.count"></mat-paginator>
   </div>

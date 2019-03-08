@@ -20,7 +20,6 @@ export class PaymentConfirmationComponent implements OnInit {
   }
 
   onClose() {
-    console.log('should close');
     this.dialogRef.close();
   }
 

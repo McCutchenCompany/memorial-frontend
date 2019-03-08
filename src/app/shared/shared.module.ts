@@ -20,6 +20,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
 
+import { AlbumUploaderComponent } from './components/album-uploader/album-uploader.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MemorialResultCardComponent } from './components/memorial-result-card/memorial-result-card.component';
@@ -80,7 +81,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     PaymentConfirmationComponent,
     MemoryEditDialogComponent,
     MemorialResultCardComponent,
-    PhotoAlbumShowComponent
+    PhotoAlbumShowComponent,
+    AlbumUploaderComponent
   ],
   entryComponents: [
     UploadDialogComponent,
@@ -89,7 +91,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     ResponseDialogComponent,
     PaymentConfirmationComponent,
     MemoryEditDialogComponent,
-    PhotoAlbumShowComponent
+    PhotoAlbumShowComponent,
+    AlbumUploaderComponent
   ]
 })
 export class SharedModule { }
