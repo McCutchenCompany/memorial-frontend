@@ -39,13 +39,37 @@
   p {
     margin-bottom: rem(42);
   }
+  .album {
+    background: map-get($colors, white);
+    button {
+      margin: rem(16) 0 rem(16) rem(16);
+      &.mobile {
+        display: flex;
+        &.toggle {
+          display: none;
+        }
+      }
+    }
+  }
   .wrapper {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
     padding: rem(16);
-    background: map-get($colors, white);
+    min-height: rem(345);
+    &.desktop {
+      display: flex;
+      &.toggle {
+        display: none;
+      }
+    }
+    &.mobile {
+      display: none;
+      &.toggle {
+        display: flex;
+      }
+    }
   }
   .photo {
     display: flex;
@@ -57,6 +81,12 @@
     padding: rem(8);
     border-radius: 4px;
     background-color: map-get($colors, white);
+    &.denied {
+      background-color: map-get($colors, warn-light);
+    }
+    &.waiting {
+      background-color: map-get($colors, primary-lightest);
+    }
     cursor: pointer;
     transition: box-shadow .2s;
     &:hover {
@@ -67,11 +97,37 @@
       max-height: rem(150);
     }
   }
+  mat-paginator.toggle {
+    display: none;
+  }
 }
 
 @include respond-to('small') {
   .container {
-    width: rem(767)
+    width: rem(767);
+    .wrapper {
+      &.desktop {
+        display: flex;
+        &.toggle {
+          display: flex;
+        }
+      }
+      &.mobile {
+        display: none;
+        &.toggle {
+          display: none;
+        }
+      }
+    }
+    button.mobile {
+      display: none;
+      &.toggle {
+        display: none;
+      }
+    }
+    mat-paginator.toggle {
+      display: block;
+    }
   }
 }
 

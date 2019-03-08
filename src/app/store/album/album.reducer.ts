@@ -1,8 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Photo } from '@shared/models/photo.model';
-
-import { AlbumActionType, All } from './album.acitons';
+import { AlbumActionType, All } from '@store/album/album.actions';
 
 function sortByDate(p1, p2) {
   const p1Date = new Date(p1.created_at);
@@ -69,6 +68,28 @@ export function albumReducer(state = INITIAL_STATE, action: All): AlbumState {
         ...state,
         loading: false,
         loaded: false,
+        error: action.payload
+      };
+    }
+    case AlbumActionType.UPDATE_ALBUM_PHOTO: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
+    case AlbumActionType.UPDATE_ALBUM_PHOTO_SUCCESS: {
+      return albumAdapter.updateOne({id: action.payload.uuid, changes: action.payload}, {
+        ...state,
+        saving: false,
+        saved: true
+      });
+    }
+    case AlbumActionType.UPDATE_ALBUM_PHOTO_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
         error: action.payload
       };
     }

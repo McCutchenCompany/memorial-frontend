@@ -7,7 +7,10 @@ export enum AlbumActionType {
   GET_ALBUM_PHOTOS_FAILURE = '[Album] Get album photos failure',
   GET_MORE_ALBUM_PHOTOS = '[Album] Get more album photos',
   GET_MORE_ALBUM_PHOTOS_SUCCESS = '[Album] Get more album photos success',
-  GET_MORE_ALBUM_PHOTOS_FAILURE = '[Album] Get more album photos failure'
+  GET_MORE_ALBUM_PHOTOS_FAILURE = '[Album] Get more album photos failure',
+  UPDATE_ALBUM_PHOTO = '[Album] Update album photo',
+  UPDATE_ALBUM_PHOTO_SUCCESS = '[Album] Update album photo success',
+  UPDATE_ALBUM_PHOTO_FAILURE = '[Album] Update album photo failure'
 }
 
 export class GetAlbumPhotos implements Action {
@@ -35,10 +38,26 @@ export class GetMoreAlbumPhotosFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class UpdateAlbumPhoto implements Action {
+  readonly type = AlbumActionType.UPDATE_ALBUM_PHOTO;
+  constructor (public payload: {photo_id: string, body: {title?: string, description?: string}}) {}
+}
+export class UpdateAlbumPhotoSuccess implements Action {
+  readonly type = AlbumActionType.UPDATE_ALBUM_PHOTO_SUCCESS;
+  constructor (public payload: Photo) {}
+}
+export class UpdateAlbumPhotoFailure implements Action {
+  readonly type = AlbumActionType.UPDATE_ALBUM_PHOTO_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetAlbumPhotos
   | GetAlbumPhotosSuccess
   | GetAlbumPhotosFailure
   | GetMoreAlbumPhotos
   | GetMoreAlbumPhotosSuccess
-  | GetMoreAlbumPhotosFailure;
+  | GetMoreAlbumPhotosFailure
+  | UpdateAlbumPhoto
+  | UpdateAlbumPhotoSuccess
+  | UpdateAlbumPhotoFailure;

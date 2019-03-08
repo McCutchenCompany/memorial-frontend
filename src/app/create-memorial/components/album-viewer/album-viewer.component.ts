@@ -80,6 +80,9 @@ export class AlbumViewerComponent implements OnInit, OnChanges {
     if (this.page !== 1 && pageStart > this.total) {
       this.page -= 1;
     }
+    if (this.photos.length < pageStart + 20 && (this.total > this.photos.length)) {
+      this.getMorePhotos();
+    }
   }
 
   setContext() {
@@ -134,29 +137,33 @@ export class AlbumViewerComponent implements OnInit, OnChanges {
 
   onPage(event) {
     if (this.photos.length < this.total) {
-      let payload;
-      switch (this.context) {
-        case 'create-all': {
-          payload = {memorial_id: this.memorial.uuid, index: this.photos.length};
-          break;
-        }
-        case 'approved': {
-          payload = {memorial_id: this.memorial.uuid, approved: this.photos.length};
-          break;
-        }
-        case 'denied': {
-          payload = {memorial_id: this.memorial.uuid, denied: this.photos.length};
-          break;
-        }
-        case 'need-approval': {
-          payload = {memorial_id: this.memorial.uuid, waiting: this.photos.length};
-          break;
-        }
-        default: break;
-      }
-      this.store.dispatch(new GetMorePhotos(payload));
+      this.getMorePhotos();
     }
     this.page = event.pageIndex + 1;
+  }
+
+  getMorePhotos() {
+    let payload;
+    switch (this.context) {
+      case 'create-all': {
+        payload = {memorial_id: this.memorial.uuid, index: this.photos.length};
+        break;
+      }
+      case 'approved': {
+        payload = {memorial_id: this.memorial.uuid, approved: this.photos.length};
+        break;
+      }
+      case 'denied': {
+        payload = {memorial_id: this.memorial.uuid, denied: this.photos.length};
+        break;
+      }
+      case 'need-approval': {
+        payload = {memorial_id: this.memorial.uuid, waiting: this.photos.length};
+        break;
+      }
+      default: break;
+    }
+    this.store.dispatch(new GetMorePhotos(payload));
   }
 
   openPhoto(id) {

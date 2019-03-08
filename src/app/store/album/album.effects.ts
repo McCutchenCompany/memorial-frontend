@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Photo } from '@shared/models/photo.model';
-import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-
-import { ViewMemorialService } from './../../view-memorial/services/view-memorial.service';
 import {
   AlbumActionType,
   GetAlbumPhotos,
@@ -14,7 +10,14 @@ import {
   GetMoreAlbumPhotos,
   GetMoreAlbumPhotosFailure,
   GetMoreAlbumPhotosSuccess,
-} from './album.acitons';
+  UpdateAlbumPhoto,
+  UpdateAlbumPhotoFailure,
+  UpdateAlbumPhotoSuccess,
+} from '@store/album/album.actions';
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+
+import { ViewMemorialService } from './../../view-memorial/services/view-memorial.service';
 
 @Injectable()
 export class AlbumEffects {
@@ -38,6 +41,15 @@ export class AlbumEffects {
     switchMap((action: GetMoreAlbumPhotos) => this.api.getAlbumPhotos(action.payload.memorial_id, action.payload.index).pipe(
       map((res: Photo[]) => new GetMoreAlbumPhotosSuccess(res)),
       catchError(error => of(new GetMoreAlbumPhotosFailure(error)))
+    ))
+  );
+
+  @Effect()
+  updateAlbumPhoto$: Observable<Action> = this.actions.pipe(
+    ofType(AlbumActionType.UPDATE_ALBUM_PHOTO),
+    switchMap((action: UpdateAlbumPhoto) => this.api.updatePhoto(action.payload.photo_id, action.payload.body).pipe(
+      map((photo: Photo) => new UpdateAlbumPhotoSuccess(photo)),
+      catchError(error => of(new UpdateAlbumPhotoFailure(error)))
     ))
   );
 

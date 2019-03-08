@@ -1,10 +1,12 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { environment } from '@environments/environment';
 import { select, Store } from '@ngrx/store';
 import { PhotoAlbumShowComponent } from '@shared/components/photo-album-show/photo-album-show.component';
 import { Memorial } from '@shared/models/memorial.model';
 import { Photo } from '@shared/models/photo.model';
+import { User } from '@shared/models/user.model';
+import { GetAlbumPhotos, GetMoreAlbumPhotos, UpdateAlbumPhoto } from '@store/album/album.actions';
 import {
   getAlbumEntities,
   getAlbumIds,
@@ -17,7 +19,7 @@ import {
 import { getAlbumCount } from '@store/view-memorial';
 import { Observable } from 'rxjs';
 
-import { GetAlbumPhotos, GetMoreAlbumPhotos } from './../../../store/album/album.acitons';
+import { getUser } from './../../../store/auth/auth.reducer';
 
 @Component({
   selector: 'app-memorial-album',
@@ -29,11 +31,16 @@ export class MemorialAlbumComponent implements OnInit {
   @Input() album: {count: number, photos: Photo[]};
   @Input() memorial: Memorial;
 
+  @Output() login: EventEmitter<any> = new EventEmitter<any>();
+
   photos$: Observable<Photo[]>;
+  user$: Observable<User>;
 
   photos: Photo[];
 
   page = 1;
+
+  hideMobile = true;
 
   albumContainer;
 
@@ -57,6 +64,7 @@ export class MemorialAlbumComponent implements OnInit {
     private el: ElementRef
   ) {
     this.photos$ = this.store.pipe(select(getAllAlbum));
+    this.user$ = this.store.pipe(select(getUser));
     this.photos$.subscribe(photos => this.photos = photos);
   }
 
@@ -79,7 +87,7 @@ export class MemorialAlbumComponent implements OnInit {
         savedSelector: getAlbumSaved,
         loadingSelector: getAlbumLoading,
         loadedSelector: getAlbumLoaded,
-        // updateAction: UpdateCreatePhoto,
+        updateAction: UpdateAlbumPhoto,
         getMoreAction: GetMoreAlbumPhotos,
         totalSelector: getAlbumCount,
         memorial: this.memorial,
@@ -90,6 +98,10 @@ export class MemorialAlbumComponent implements OnInit {
     });
   }
 
+  toggle() {
+    this.hideMobile = !this.hideMobile;
+  }
+
   onPage(event) {
     if (this.photos.length < this.album.count) {
       const payload = {memorial_id: this.memorial.uuid, index: this.photos.length};
@@ -97,6 +109,10 @@ export class MemorialAlbumComponent implements OnInit {
     }
     this.page = event.pageIndex + 1;
     this.albumContainer.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+
+  onLogin() {
+    this.login.emit();
   }
 
 }
