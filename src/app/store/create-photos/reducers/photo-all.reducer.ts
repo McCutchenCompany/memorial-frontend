@@ -222,7 +222,7 @@ export function allPhotoReducer(state = INITIAL_STATE, action: All): CreateAllPh
       return allPhotoAdapter.removeOne(action.payload.id, {
         ...state,
         saving: false,
-        saved: false,
+        saved: true,
         count: {
           ...state.count,
           need_approval: state.count.need_approval - 1
