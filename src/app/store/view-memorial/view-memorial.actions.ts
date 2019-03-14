@@ -12,7 +12,9 @@ export enum ViewMemorialActionTypes {
   DELETE_MEMORY_FAILURE = '[View Memorial] Delete memory failure',
   EDIT_MEMORY = '[View Memorial] Edit memory',
   EDIT_MEMORY_SUCCESS = '[View Memorial] Edit memory success',
-  EDIT_MEMORY_FAILURE = '[View Memorial] Edit memory failure'
+  EDIT_MEMORY_FAILURE = '[View Memorial] Edit memory failure',
+  REMOVE_PHOTO_FROM_COUNT = '[View Memorial] Remove photo from count',
+  ADD_PHOTO_TO_COUNT = '[View Memorial] Add photo to count'
 }
 
 export class GetMemorial implements Action {
@@ -67,6 +69,13 @@ export class EditMemoryFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class RemovePhotoFromCount implements Action {
+  readonly type = ViewMemorialActionTypes.REMOVE_PHOTO_FROM_COUNT;
+}
+export class AddPhotoToCount implements Action {
+  readonly type = ViewMemorialActionTypes.ADD_PHOTO_TO_COUNT;
+}
+
 export type All =
   | GetMemorial
   | GetMemorialSuccess
@@ -79,4 +88,6 @@ export type All =
   | DeleteMemorySuccess
   | EditMemory
   | EditMemorySuccess
-  | EditMemoryFailure;
+  | EditMemoryFailure
+  | RemovePhotoFromCount
+  | AddPhotoToCount;

@@ -1,5 +1,9 @@
 <div *ngIf="currentPhoto" class="container">
-  <p>{{ currentIndex + 1 }} of {{ total$ | async }}</p>
+  <div class="header" [class.denied]="currentPhoto.denied && !data.memorial.public_photo" [class.waiting]="!currentPhoto.denied && !currentPhoto.published && !data.memorial.public_photo">
+    <p>{{ currentIndex + 1 }} of {{ total$ | async }}</p>
+    <p *ngIf="currentPhoto.denied && !data.memorial.public_photo" class="warn">Photo denied by Memorial owner. It will only be visible to you.</p>
+    <p *ngIf="!currentPhoto.denied && !currentPhoto.published && !data.memorial.public_photo">Photo awaiting approval by Memorial owner</p>
+  </div>
   <div *ngIf="loaded$ | async" class="photo">
     <img class="mat-elevation-z3" [src]="getPhotoSrc(currentPhoto.asset_link)">
     <div class="actions">
@@ -50,5 +54,25 @@
       <mat-icon *ngIf="!editing">edit</mat-icon>
       <mat-icon *ngIf="editing">close</mat-icon>
     </button>
+    <div *ngIf="canDelete">
+      <mat-menu #editMenu="matMenu">
+        <button mat-menu-item (click)="toggleEdit()">Edit Text</button>
+        <button mat-menu-item (click)="toggleDelete()">Delete</button>
+      </mat-menu>
+      <button *ngIf="!editing" mat-icon-button [matMenuTriggerFor]="editMenu" color="primary">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <button *ngIf="editing && canDelete" mat-icon-button (click)="toggleEdit()" color="primary">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="deleting">
+    <h4 *ngIf="!(saving$ | async)">Are you sure you want to delete this photo?</h4>
+    <div *ngIf="!(saving$ | async)" class="confirmation">
+      <button mat-flat-button color="warn" (click)="onDelete(currentId)">Yes</button>
+      <button mat-button class="primary" (click)="toggleDelete()">No</button>
+    </div>
+    <mat-progress-spinner mode="indeterminate" color="primary" *ngIf="saving$ | async"></mat-progress-spinner>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { environment } from '@environments/environment';
 import { select, Store } from '@ngrx/store';
@@ -6,7 +6,7 @@ import { PhotoAlbumShowComponent } from '@shared/components/photo-album-show/pho
 import { Memorial } from '@shared/models/memorial.model';
 import { Photo } from '@shared/models/photo.model';
 import { User } from '@shared/models/user.model';
-import { GetAlbumPhotos, GetMoreAlbumPhotos, UpdateAlbumPhoto } from '@store/album/album.actions';
+import { DeletePhoto, GetAlbumPhotos, GetMoreAlbumPhotos, UpdateAlbumPhoto } from '@store/album/album.actions';
 import {
   getAlbumEntities,
   getAlbumIds,
@@ -27,7 +27,7 @@ import { getUser } from './../../../store/auth/auth.reducer';
   templateUrl: './memorial-album.component.html',
   styleUrls: ['./memorial-album.component.scss']
 })
-export class MemorialAlbumComponent implements OnInit {
+export class MemorialAlbumComponent implements OnInit, OnChanges {
 
   @Input() album: {count: number, photos: Photo[]};
   @Input() memorial: Memorial;
@@ -36,6 +36,7 @@ export class MemorialAlbumComponent implements OnInit {
 
   photos$: Observable<Photo[]>;
   user$: Observable<User>;
+  loading$: Observable<boolean>;
 
   photos: Photo[];
 
@@ -57,6 +58,9 @@ export class MemorialAlbumComponent implements OnInit {
     if (this.page !== 1 && pageStart > this.album.count) {
       this.page -= 1;
     }
+    if (this.photos.length < pageStart + 20 && (this.album.count > this.photos.length)) {
+      this.getMorePhotos();
+    }
   }
 
   constructor(
@@ -66,12 +70,17 @@ export class MemorialAlbumComponent implements OnInit {
   ) {
     this.photos$ = this.store.pipe(select(getAllAlbum));
     this.user$ = this.store.pipe(select(getUser));
+    this.loading$ = this.store.pipe(select(getAlbumLoading));
     this.photos$.subscribe(photos => this.photos = photos);
   }
 
   ngOnInit() {
     this.store.dispatch(new GetAlbumPhotos({memorial_id: this.memorial.uuid}));
     this.albumContainer = this.el.nativeElement.querySelector('.container p');
+  }
+
+  ngOnChanges() {
+    this.checkPageLength();
   }
 
   photoSrc(link) {
@@ -103,6 +112,7 @@ export class MemorialAlbumComponent implements OnInit {
         loadedSelector: getAlbumLoaded,
         updateAction: UpdateAlbumPhoto,
         getMoreAction: GetMoreAlbumPhotos,
+        deleteAction: DeletePhoto,
         totalSelector: getAlbumCount,
         memorial: this.memorial,
         context: 'view'
@@ -118,11 +128,15 @@ export class MemorialAlbumComponent implements OnInit {
 
   onPage(event) {
     if (this.photos.length < this.album.count) {
-      const payload = {memorial_id: this.memorial.uuid, index: this.photos.length};
-      this.store.dispatch(new GetMoreAlbumPhotos(payload));
+      this.getMorePhotos();
     }
     this.page = event.pageIndex + 1;
     this.albumContainer.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+
+  getMorePhotos() {
+    const payload = {memorial_id: this.memorial.uuid, index: this.photos.length};
+    this.store.dispatch(new GetMoreAlbumPhotos(payload));
   }
 
   onLogin() {

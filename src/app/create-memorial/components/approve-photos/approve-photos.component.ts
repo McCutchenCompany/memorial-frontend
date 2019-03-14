@@ -49,9 +49,11 @@ export class ApprovePhotosComponent implements OnInit {
     this.approved$ = this.store.pipe(select(getAllApprovedPhotos));
     this.count$ = this.store.pipe(select(getCreatePhotosCount));
     this.memorial$.subscribe(memorial => {
-      this.memorialUUID = memorial.memorial.uuid;
-      this.public = memorial.memorial.public_photo;
-      this.store.dispatch(new GetCreatePhotos({memorial_id: this.memorialUUID}));
+      if (memorial.memorial) {
+        this.memorialUUID = memorial.memorial.uuid;
+        this.public = memorial.memorial.public_photo;
+        this.store.dispatch(new GetCreatePhotos({memorial_id: this.memorialUUID}));
+      }
     });
   }
 

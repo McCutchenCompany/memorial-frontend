@@ -22,7 +22,9 @@ export const INITIAL_STATE: AuthState = {
   },
   error: null,
   loading: false,
-  loaded: false
+  loaded: false,
+  saving: false,
+  saved: false
 };
 
 export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): AuthState {
@@ -63,7 +65,13 @@ export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): 
     case AuthActionTypes.LOCAL_TOKEN_INVALID: {
       return INITIAL_STATE;
     }
-    case AuthActionTypes.UPDATE_USER_MEMORIAL:
+    case AuthActionTypes.UPDATE_USER_MEMORIAL: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
     case AuthActionTypes.UPDATE_PROFILE: {
       return {
         ...state,
@@ -90,7 +98,14 @@ export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): 
         loaded: true
       };
     }
-    case AuthActionTypes.UPDATE_USER_MEMORIAL_FAILURE:
+    case AuthActionTypes.UPDATE_USER_MEMORIAL_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
+        error: action.payload
+      };
+    }
     case AuthActionTypes.GET_PROFILE_FAILURE: {
       return {
         ...state,
@@ -102,8 +117,8 @@ export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): 
     case AuthActionTypes.UPDATE_USER_MEMORIAL_SUCCESS: {
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        saving: false,
+        saved: true,
         user: {
           ...state.user,
           memorials: action.payload
@@ -133,4 +148,12 @@ export const getAuthLoading = createSelector(
 export const getAuthLoaded = createSelector(
   getAuthState,
   state => state.loaded
+);
+export const getAuthSaving = createSelector(
+  getAuthState,
+  state => state.saving
+);
+export const getAuthSaved = createSelector(
+  getAuthState,
+  state => state.saved
 );

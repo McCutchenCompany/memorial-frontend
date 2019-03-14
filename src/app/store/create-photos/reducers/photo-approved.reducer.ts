@@ -17,6 +17,8 @@ export interface ApprovedPhotosState extends EntityState<Photo> {
   ids: string[];
   loading: boolean;
   loaded: boolean;
+  saving: boolean;
+  saved: boolean;
   error: any;
 }
 
@@ -29,6 +31,8 @@ export const INITIAL_STATE: ApprovedPhotosState = approvedPhotoAdapter.getInitia
   ids: [],
   loading: false,
   loaded: false,
+  saving: false,
+  saved: false,
   error: null
 });
 
@@ -79,6 +83,28 @@ export function approvedPhotoReducer(state = INITIAL_STATE, action: All): Approv
     }
     case CreatePhotosActionTypes.DENY_APPROVED_PHOTO_SUCCESS: {
       return approvedPhotoAdapter.removeOne(action.payload.photo.uuid, state);
+    }
+    case CreatePhotosActionTypes.DELETE_APPROVED_PHOTO: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
+    case CreatePhotosActionTypes.DELETE_APPROVED_PHOTO_SUCCESS: {
+      return approvedPhotoAdapter.removeOne(action.payload.id, {
+        ...state,
+        saving: false,
+        saved: true
+      });
+    }
+    case CreatePhotosActionTypes.DELETE_APPROVED_PHOTO_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
+        error: action.payload
+      };
     }
     default: return state;
   }

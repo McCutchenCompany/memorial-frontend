@@ -13,7 +13,10 @@ export enum AlbumActionType {
   UPDATE_ALBUM_PHOTO_FAILURE = '[Album] Update album photo failure',
   UPLOAD_ALBUM_PHOTO = '[Album] Upload album photo',
   UPLOAD_ALBUM_PHOTO_SUCCESS = '[Album] Upload album photo success',
-  UPLOAD_ALBUM_PHOTO_FAILURE = '[Album] Upload album photo failure'
+  UPLOAD_ALBUM_PHOTO_FAILURE = '[Album] Upload album photo failure',
+  DELETE_PHOTO = '[Album] Delete photo',
+  DELETE_PHOTO_SUCCESS = '[Album] Delete photo success',
+  DELETE_PHOTO_FAILURE = '[Album] Delete photo failure'
 }
 
 export class GetAlbumPhotos implements Action {
@@ -67,6 +70,19 @@ export class UploadAlbumPhotoFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class DeletePhoto implements Action {
+  readonly type = AlbumActionType.DELETE_PHOTO;
+  constructor (public payload: {photo_id: string, file: string}) {}
+}
+export class DeletePhotoSuccess implements Action {
+  readonly type = AlbumActionType.DELETE_PHOTO_SUCCESS;
+  constructor (public payload: {message: string, id: string}) {}
+}
+export class DeletePhotoFailure implements Action {
+  readonly type = AlbumActionType.DELETE_PHOTO_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetAlbumPhotos
   | GetAlbumPhotosSuccess
@@ -79,4 +95,7 @@ export type All =
   | UpdateAlbumPhotoFailure
   | UploadAlbumPhoto
   | UploadAlbumPhotoSuccess
-  | UploadAlbumPhotoFailure;
+  | UploadAlbumPhotoFailure
+  | DeletePhoto
+  | DeletePhotoSuccess
+  | DeletePhotoFailure;

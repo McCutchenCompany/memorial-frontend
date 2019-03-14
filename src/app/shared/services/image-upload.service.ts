@@ -59,4 +59,9 @@ export class ImageUploadService {
     _formData.append('file', file, encodeURI(file.name));
     return this.http.post(path, _formData);
   }
+
+  deleteAlbumPhoto(photo_id: string, file: string) {
+    const path = `${this.API_URL}/photos/${photo_id}?file=${file}`;
+    return this.http.delete(path);
+  }
 }

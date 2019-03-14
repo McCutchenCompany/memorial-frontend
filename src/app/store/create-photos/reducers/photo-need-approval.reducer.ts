@@ -17,6 +17,8 @@ export interface NeedApprovalPhotosState extends EntityState<Photo> {
   ids: string[];
   loading: boolean;
   loaded: boolean;
+  saving: boolean;
+  saved: boolean;
   error: any;
 }
 
@@ -29,6 +31,8 @@ export const INITIAL_STATE: NeedApprovalPhotosState = needApprovalPhotoAdapter.g
   ids: [],
   loading: false,
   loaded: false,
+  saving: false,
+  saved: false,
   error: null
 });
 
@@ -75,6 +79,28 @@ export function needApprovalPhotoReducer(state = INITIAL_STATE, action: All): Ne
     }
     case CreatePhotosActionTypes.DENY_NEED_APPROVAL_PHOTO_SUCCESS: {
       return needApprovalPhotoAdapter.removeOne(action.payload.photo.uuid, state);
+    }
+    case CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
+    case CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO_SUCCESS: {
+      return needApprovalPhotoAdapter.removeOne(action.payload.id, {
+        ...state,
+        saving: false,
+        saved: true
+      });
+    }
+    case CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
+        error: action.payload
+      };
     }
     default: return state;
   }

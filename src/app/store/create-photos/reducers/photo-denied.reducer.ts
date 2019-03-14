@@ -17,6 +17,8 @@ export interface DeniedPhotosState extends EntityState<Photo> {
   ids: string[];
   loading: boolean;
   loaded: boolean;
+  saving: boolean;
+  saved: boolean;
   error: any;
 }
 
@@ -29,6 +31,8 @@ export const INITIAL_STATE: DeniedPhotosState = deniedPhotoAdapter.getInitialSta
   ids: [],
   loading: false,
   loaded: false,
+  saving: false,
+  saved: false,
   error: null
 });
 
@@ -76,6 +80,28 @@ export function deniedPhotoReducer(state = INITIAL_STATE, action: All): DeniedPh
     case CreatePhotosActionTypes.DENY_APPROVED_PHOTO_SUCCESS:
     case CreatePhotosActionTypes.DENY_NEED_APPROVAL_PHOTO_SUCCESS: {
       return deniedPhotoAdapter.addOne(action.payload.photo, state);
+    }
+    case CreatePhotosActionTypes.DELETE_DENIED_PHOTO: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
+    case CreatePhotosActionTypes.DELETE_DENIED_PHOTO_SUCCESS: {
+      return deniedPhotoAdapter.removeOne(action.payload.id, {
+        ...state,
+        saving: false,
+        saved: true
+      });
+    }
+    case CreatePhotosActionTypes.DELETE_DENIED_PHOTO_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
+        error: action.payload
+      };
     }
     default: return state;
   }

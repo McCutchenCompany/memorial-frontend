@@ -167,6 +167,68 @@ export function allPhotoReducer(state = INITIAL_STATE, action: All): CreateAllPh
         error: action.payload
       };
     }
+    case CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO_SUCCESS: {
+      return {
+        ...state,
+        count: {
+          ...state.count,
+          need_approval: state.count.need_approval - 1
+        },
+        saving: false,
+        saved: true
+      };
+    }
+    case CreatePhotosActionTypes.DELETE_DENIED_PHOTO_SUCCESS: {
+      return {
+        ...state,
+        count: {
+          ...state.count,
+          denied: state.count.denied - 1
+        },
+        saving: false,
+        saved: true
+      };
+    }
+    case CreatePhotosActionTypes.DELETE_APPROVED_PHOTO_SUCCESS: {
+      return {
+        ...state,
+        count: {
+          ...state.count,
+          approved: state.count.approved - 1
+        },
+        saving: false,
+        saved: true
+      };
+    }
+    case CreatePhotosActionTypes.DELETE_APPROVED_PHOTO:
+    case CreatePhotosActionTypes.DELETE_DENIED_PHOTO:
+    case CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO:
+    case CreatePhotosActionTypes.DELETE_ONE_FROM_ALL_PHOTO: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
+    case CreatePhotosActionTypes.DELETE_ONE_FROM_ALL_PHOTO_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
+        error: action.payload
+      };
+    }
+    case CreatePhotosActionTypes.DELETE_ONE_FROM_ALL_PHOTO_SUCCESS: {
+      return allPhotoAdapter.removeOne(action.payload.id, {
+        ...state,
+        saving: false,
+        saved: false,
+        count: {
+          ...state.count,
+          need_approval: state.count.need_approval - 1
+        }
+      });
+    }
     default: return state;
   }
 }

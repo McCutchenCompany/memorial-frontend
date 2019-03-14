@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { PhotoAlbumShowComponent } from '@shared/components/photo-album-show/photo-album-show.component';
 import { Memorial } from '@shared/models/memorial.model';
 import { Photo } from '@shared/models/photo.model';
-import { GetMorePhotos, UpdateCreatePhoto } from '@store/create-photos/photos.actions';
+import { DeleteOneFromAllPhoto, GetMorePhotos, UpdateCreatePhoto } from '@store/create-photos/photos.actions';
 import {
   getApprovedPhotoEntities,
   getApprovedPhotoIds,
@@ -32,6 +32,12 @@ import {
 } from '@store/create-photos/reducers';
 import { Observable } from 'rxjs';
 
+import {
+  DeleteApprovedPhoto,
+  DeleteDeniedPhoto,
+  DeleteNeedApprovalPhoto,
+} from './../../../store/create-photos/photos.actions';
+
 @Component({
   selector: 'app-album-viewer',
   templateUrl: './album-viewer.component.html',
@@ -52,6 +58,7 @@ export class AlbumViewerComponent implements OnInit, OnChanges {
   loadingSelector;
   loadedSelector;
   getMoreAction;
+  deleteAction;
 
   loading$: Observable<boolean>;
 
@@ -95,6 +102,7 @@ export class AlbumViewerComponent implements OnInit, OnChanges {
         this.idSelector = getCreateAllPhotoIds;
         this.totalSelector = getCreateAllPhotoTotal;
         this.getMoreAction = GetMorePhotos;
+        this.deleteAction = DeleteOneFromAllPhoto;
         break;
       }
       case 'approved': {
@@ -105,6 +113,7 @@ export class AlbumViewerComponent implements OnInit, OnChanges {
         this.idSelector = getApprovedPhotoIds;
         this.totalSelector = getCreateApprovedCount;
         this.getMoreAction = GetMorePhotos;
+        this.deleteAction = DeleteApprovedPhoto;
         break;
       }
       case 'denied': {
@@ -115,6 +124,7 @@ export class AlbumViewerComponent implements OnInit, OnChanges {
         this.idSelector = getDeniedPhotoIds;
         this.totalSelector = getCreateDeniedCount;
         this.getMoreAction = GetMorePhotos;
+        this.deleteAction = DeleteDeniedPhoto;
         break;
       }
       case 'need-approval': {
@@ -125,6 +135,7 @@ export class AlbumViewerComponent implements OnInit, OnChanges {
         this.idSelector = getNeedApprovalPhotoIds;
         this.totalSelector = getCreateNeedApprovalCount;
         this.getMoreAction = GetMorePhotos;
+        this.deleteAction = DeleteNeedApprovalPhoto;
         break;
       }
       default: break;
@@ -178,6 +189,7 @@ export class AlbumViewerComponent implements OnInit, OnChanges {
         loadedSelector: this.loadedSelector,
         updateAction: UpdateCreatePhoto,
         getMoreAction: this.getMoreAction,
+        deleteAction: this.deleteAction,
         totalSelector: this.totalSelector,
         memorial: this.memorial,
         context: this.context

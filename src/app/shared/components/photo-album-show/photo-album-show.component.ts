@@ -34,6 +34,7 @@ export class PhotoAlbumShowComponent implements OnInit {
   currentId: string;
 
   editing = false;
+  deleting = false;
 
   editForm: FormGroup;
 
@@ -48,7 +49,15 @@ export class PhotoAlbumShowComponent implements OnInit {
   }
 
   get canEdit() {
-    if (this.user.uuid === this.currentPhoto.user_id || this.user.uuid === this.data.memorial.user_id) {
+    if (this.user.uuid === this.data.memorial.user_id && this.user.uuid !== this.currentPhoto.user_id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  get canDelete() {
+    if (this.user.uuid === this.currentPhoto.user_id) {
       return true;
     } else {
       return false;
@@ -83,6 +92,7 @@ export class PhotoAlbumShowComponent implements OnInit {
       loadingSelector: MemoizedSelector<any, boolean>,
       updateAction: Constructor<any>,
       getMoreAction: Constructor<any>,
+      deleteAction: Constructor<any>,
       memorial: Memorial,
       context: string
     },
@@ -243,6 +253,34 @@ export class PhotoAlbumShowComponent implements OnInit {
       if (saved) {
         this.editing = false;
         sub.unsubscribe();
+      }
+    });
+  }
+
+  toggleDelete() {
+    this.deleting = !this.deleting;
+  }
+
+  onDelete(photo_id: string) {
+    const index = this.ids.findIndex(id => id === this.currentId);
+    let newIndex;
+    if (this.ids.length > 1 && index < this.ids.length - 1) {
+      newIndex = index;
+    } else if (this.ids.length > 1 && index === this.ids.length - 1) {
+      newIndex = index - 1;
+    } else if (this.ids.length === 1) {
+      newIndex = -1;
+    }
+    this.store.dispatch(new this.data.deleteAction({photo_id, file: this.currentPhoto.asset_link}));
+    const sub = this.saved$.subscribe(saved => {
+      if (saved) {
+        this.deleting = false;
+        sub.unsubscribe();
+        if (newIndex > -1) {
+          this.currentId = this.ids[newIndex];
+        } else {
+          this.dialogRef.close();
+        }
       }
     });
   }

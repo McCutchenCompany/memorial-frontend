@@ -14,6 +14,18 @@ import {
   ApprovePhoto,
   ApprovePhotoFailure,
   CreatePhotosActionTypes,
+  DeleteApprovedPhoto,
+  DeleteApprovedPhotoFailure,
+  DeleteApprovedPhotoSuccess,
+  DeleteDeniedPhoto,
+  DeleteDeniedPhotoFailure,
+  DeleteDeniedPhotoSuccess,
+  DeleteNeedApprovalPhoto,
+  DeleteNeedApprovalPhotoFailure,
+  DeleteNeedApprovalPhotoSuccess,
+  DeleteOneFromAllPhoto,
+  DeleteOneFromAllPhotoFailure,
+  DeleteOneFromAllPhotoSuccess,
   DenyApprovedPhotoSuccess,
   DenyNeedApprovalPhotoSuccess,
   DenyPhoto,
@@ -158,5 +170,38 @@ export class CreatePhotosEffects {
         catchError(error => of(new DenyPhotoFailure(error)))
     );
   }));
+
+  @Effect()
+  deleteNeedApprovalPhoto$: Observable<Action> = this.actions.pipe(
+    ofType(CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO),
+    switchMap((action: DeleteNeedApprovalPhoto) => this.upload.deleteAlbumPhoto(action.payload.photo_id, action.payload.file).pipe(
+      map((res: {message: string, id: string}) => new DeleteNeedApprovalPhotoSuccess(res)),
+      catchError(error => of(new DeleteNeedApprovalPhotoFailure(error)))
+    ))
+  );
+  @Effect()
+  deleteDeniedPhoto$: Observable<Action> = this.actions.pipe(
+    ofType(CreatePhotosActionTypes.DELETE_DENIED_PHOTO),
+    switchMap((action: DeleteDeniedPhoto) => this.upload.deleteAlbumPhoto(action.payload.photo_id, action.payload.file).pipe(
+      map((res: {message: string, id: string}) => new DeleteDeniedPhotoSuccess(res)),
+      catchError(error => of(new DeleteDeniedPhotoFailure(error)))
+    ))
+  );
+  @Effect()
+  deleteApprovedPhoto$: Observable<Action> = this.actions.pipe(
+    ofType(CreatePhotosActionTypes.DELETE_APPROVED_PHOTO),
+    switchMap((action: DeleteApprovedPhoto) => this.upload.deleteAlbumPhoto(action.payload.photo_id, action.payload.file).pipe(
+      map((res: {message: string, id: string}) => new DeleteApprovedPhotoSuccess(res)),
+      catchError(error => of(new DeleteApprovedPhotoFailure(error)))
+    ))
+  );
+  @Effect()
+  deleteOneFromAllPhoto$: Observable<Action> = this.actions.pipe(
+    ofType(CreatePhotosActionTypes.DELETE_ONE_FROM_ALL_PHOTO),
+    switchMap((action: DeleteOneFromAllPhoto) => this.upload.deleteAlbumPhoto(action.payload.photo_id, action.payload.file).pipe(
+      map((res: {message: string, id: string}) => new DeleteOneFromAllPhotoSuccess(res)),
+      catchError(error => of(new DeleteOneFromAllPhotoFailure(error)))
+    ))
+  );
 
 }

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 import { Photo } from '@shared/models/photo.model';
 import { ImageUploadService } from '@shared/services/image-upload.service';
 import {
   AlbumActionType,
+  DeletePhoto,
+  DeletePhotoFailure,
+  DeletePhotoSuccess,
   GetAlbumPhotos,
   GetAlbumPhotosFailure,
   GetAlbumPhotosSuccess,
@@ -18,8 +21,10 @@ import {
   UploadAlbumPhotoFailure,
   UploadAlbumPhotoSuccess,
 } from '@store/album/album.actions';
+import { getViewMemorial } from '@store/view-memorial';
+import { AddPhotoToCount, RemovePhotoFromCount } from '@store/view-memorial/view-memorial.actions';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { ViewMemorialService } from './../../view-memorial/services/view-memorial.service';
 
@@ -28,7 +33,8 @@ export class AlbumEffects {
   constructor(
     private actions: Actions,
     private api: ViewMemorialService,
-    private upload: ImageUploadService
+    private upload: ImageUploadService,
+    private store: Store<any>
   ) {}
 
   @Effect()
@@ -65,6 +71,28 @@ export class AlbumEffects {
       map((res: Photo) => new UploadAlbumPhotoSuccess(res)),
       catchError(error => of(new UploadAlbumPhotoFailure(error)))
     ))
+  );
+
+  @Effect()
+  uploadAlbumPhotoSuccess$: Observable<Action> = this.actions.pipe(
+    ofType(AlbumActionType.UPLOAD_ALBUM_PHOTO_SUCCESS),
+    map(() => new AddPhotoToCount())
+  );
+
+  @Effect()
+  deletePhoto$: Observable<Action> = this.actions.pipe(
+    ofType(AlbumActionType.DELETE_PHOTO),
+    switchMap((action: DeletePhoto) => this.upload.deleteAlbumPhoto(action.payload.photo_id, action.payload.file).pipe(
+      map((res: {message: string, id: string}) => new DeletePhotoSuccess(res)),
+      catchError(error => of(new DeletePhotoFailure(error)))
+    ))
+  );
+
+  @Effect()
+  deletePhotosSuccess$: Observable<Action> = this.actions.pipe(
+    ofType(AlbumActionType.DELETE_PHOTO_SUCCESS),
+    withLatestFrom(this.store.pipe(select(getViewMemorial))),
+    map(() => new RemovePhotoFromCount())
   );
 
 }

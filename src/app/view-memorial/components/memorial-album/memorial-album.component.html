@@ -2,13 +2,17 @@
   <div class="flourish-container">
     <div class="box-1">
     </div>
-    <div class="box-2"></div>
+    <div *ngIf="displayPhotos.length > 10" class="box-2"></div>
     <div class="box-3"></div>
   </div>
 </div>
 <div class="container">
   <h3>Photo Album</h3>
-  <p>{{ album.count }} Photos</p>
+  <p *ngIf="album.count > 0">{{ album.count }} Photo<span *ngIf="album.count !== 1">s</span></p>
+  <p>
+    <span *ngIf="memorial.public_photo">Photos can be added to the photo album by anyone.</span>
+    <span *ngIf="!memorial.public_photo">The owner of this memorial reviews all uploaded photos before they are added to the album.</span>
+  </p>
   <div class="album mat-elevation-z3">
     <button *ngIf="!adding && (user$ | async).uuid" mat-button class="primary" (click)="openUploader()">Add Photo</button>
     <button *ngIf="!adding && !(user$ | async).uuid" mat-button class="primary" (click)="onLogin()">Login to Add Photos</button>
@@ -21,13 +25,24 @@
       <div class="photo" [class.denied]="!memorial.public_photo && displayPhotos[0]?.denied" [class.waiting]="!memorial.public_photo && !displayPhotos[0]?.published && !displayPhotos[0]?.denied" (click)="openPhoto(displayPhotos[0]?.uuid)">
         <img [src]="photoSrc(displayPhotos[0]?.asset_link)">
       </div>
-      <div class="photo" [class.denied]="!memorial.public_photo && displayPhotos[1]?.denied" [class.waiting]="!memorial.public_photo && !displayPhotos[1]?.published && !displayPhotos[1]?.denied" (click)="openPhoto(displayPhotos[1]?.uuid)">
+      <div class="photo" *ngIf="displayPhotos[1]" [class.denied]="!memorial.public_photo && displayPhotos[1]?.denied" [class.waiting]="!memorial.public_photo && !displayPhotos[1]?.published && !displayPhotos[1]?.denied" (click)="openPhoto(displayPhotos[1]?.uuid)">
         <img [src]="photoSrc(displayPhotos[1]?.asset_link)">
       </div>
-      <button mat-button class="primary" (click)="toggle()">Show Album</button>
+      <button mat-button *ngIf="album.count > 2" class="primary" (click)="toggle()">Show Album</button>
     </div>
-    <div class="wrapper" *ngIf="displayPhotos.length === 0"></div>
+    <div class="wrapper" *ngIf="loading$ | async">
+      <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
+    <div class="wrapper" *ngIf="(photos$ | async).length === 0">
+      <div class="message">
+        <h4>
+          There are no photos yet.<br>
+          <span *ngIf="(user$ | async).uuid">You can upload a photo.</span>
+          <span *ngIf="!(user$ | async).uuid">Login or Sign up to start uploading photos.</span>
+        </h4>
+      </div>
+    </div>
     <button mat-button class="primary mobile" [class.toggle]="hideMobile" (click)="toggle()">Hide Album</button>
-    <mat-paginator (page)="onPage($event)" [class.toggle]="hideMobile" [pageIndex]="page - 1" [pageSize]="20" [length]="album.count"></mat-paginator>
+    <mat-paginator *ngIf="album.count > 20" (page)="onPage($event)" [class.toggle]="hideMobile" [pageIndex]="page - 1" [pageSize]="20" [length]="album.count"></mat-paginator>
   </div>
 </div>

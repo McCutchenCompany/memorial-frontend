@@ -34,7 +34,7 @@
 }
 
 .container {
-  width: rem(400);
+  width: 95%;
   margin: rem(64) auto;
   p {
     margin-bottom: rem(42);
@@ -57,7 +57,12 @@
     align-items: center;
     flex-wrap: wrap;
     padding: rem(16);
-    min-height: rem(345);
+    min-height: rem(190);
+    .message {
+      h4 {
+        text-align: center;
+      }
+    }
     &.desktop {
       display: flex;
       &.toggle {

@@ -24,7 +24,19 @@ export enum CreatePhotosActionTypes {
   DENY_PHOTO = '[Create Photos] Deny photo',
   DENY_PHOTO_FAILURE = '[Create Photos] Deny photo failure',
   DENY_NEED_APPROVAL_PHOTO_SUCCESS = '[Create Photos] Deny need approval photo success',
-  DENY_APPROVED_PHOTO_SUCCESS = '[Create Photos] Deny approved photo success'
+  DENY_APPROVED_PHOTO_SUCCESS = '[Create Photos] Deny approved photo success',
+  DELETE_ONE_FROM_ALL_PHOTO = '[Create Photos] Delete one from all photo',
+  DELETE_ONE_FROM_ALL_PHOTO_SUCCESS = '[Create Photo] Delete one from all photo success',
+  DELETE_ONE_FROM_ALL_PHOTO_FAILURE = '[Create Photo] Delete one from all photo failure',
+  DELETE_NEED_APPROVAL_PHOTO = '[Create Photos] Delete need approval photo',
+  DELETE_NEED_APPROVAL_PHOTO_SUCCESS = '[Create Photos] Delete need approval photo success',
+  DELETE_NEED_APPROVAL_PHOTO_FAILURE = '[Create Photos] Delete need approval photo failure',
+  DELETE_DENIED_PHOTO = '[Create Photos] Delete denied photo',
+  DELETE_DENIED_PHOTO_SUCCESS = '[Create Photos] Delete denied photo success',
+  DELETE_DENIED_PHOTO_FAILURE = '[Create Photos] Delete denied photo failure',
+  DELETE_APPROVED_PHOTO = '[Create Photos] Delete approved photo',
+  DELETE_APPROVED_PHOTO_SUCCESS = '[Create Photos] Delete approved photo success',
+  DELETE_APPROVED_PHOTO_FAILURE = '[Create Photos] Delete approved photo failure'
 }
 
 export class GetCreatePhotos implements Action {
@@ -125,6 +137,57 @@ export class DenyNeedApprovalPhotoSuccess implements Action {
   constructor (public payload: {count: any, photo: Photo}) {}
 }
 
+export class DeleteNeedApprovalPhoto implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO;
+  constructor (public payload: {photo_id: string, file: string}) {}
+}
+export class DeleteDeniedPhoto implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_DENIED_PHOTO;
+  constructor (public payload: {photo_id: string, file: string}) {}
+}
+export class DeleteApprovedPhoto implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_APPROVED_PHOTO;
+  constructor (public payload: {photo_id: string, file: string}) {}
+}
+export class DeleteOneFromAllPhoto implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_ONE_FROM_ALL_PHOTO;
+  constructor (public payload: {photo_id: string, file: string}) {}
+}
+
+export class DeleteNeedApprovalPhotoSuccess implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO_SUCCESS;
+  constructor (public payload: {message: string, id:string}) {}
+}
+export class DeleteDeniedPhotoSuccess implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_DENIED_PHOTO_SUCCESS;
+  constructor (public payload: {message: string, id:string}) {}
+}
+export class DeleteApprovedPhotoSuccess implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_APPROVED_PHOTO_SUCCESS;
+  constructor (public payload: {message: string, id:string}) {}
+}
+export class DeleteOneFromAllPhotoSuccess implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_ONE_FROM_ALL_PHOTO_SUCCESS;
+  constructor (public payload: {message: string, id:string}) {}
+}
+
+export class DeleteNeedApprovalPhotoFailure implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_NEED_APPROVAL_PHOTO_FAILURE;
+  constructor (public payload: any) {}
+}
+export class DeleteDeniedPhotoFailure implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_DENIED_PHOTO_FAILURE;
+  constructor (public payload: any) {}
+}
+export class DeleteApprovedPhotoFailure implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_APPROVED_PHOTO_FAILURE;
+  constructor (public payload: any) {}
+}
+export class DeleteOneFromAllPhotoFailure implements Action {
+  readonly type = CreatePhotosActionTypes.DELETE_ONE_FROM_ALL_PHOTO_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetCreatePhotos
   | GetCreatePhotosSuccess
@@ -148,4 +211,16 @@ export type All =
   | DenyPhoto
   | DenyPhotoFailure
   | DenyApprovedPhotoSuccess
-  | DenyNeedApprovalPhotoSuccess;
+  | DenyNeedApprovalPhotoSuccess
+  | DeleteNeedApprovalPhoto
+  | DeleteNeedApprovalPhotoSuccess
+  | DeleteNeedApprovalPhotoFailure
+  | DeleteDeniedPhoto
+  | DeleteDeniedPhotoSuccess
+  | DeleteDeniedPhotoFailure
+  | DeleteApprovedPhoto
+  | DeleteApprovedPhotoSuccess
+  | DeleteApprovedPhotoFailure
+  | DeleteOneFromAllPhoto
+  | DeleteOneFromAllPhotoSuccess
+  | DeleteOneFromAllPhotoFailure;
