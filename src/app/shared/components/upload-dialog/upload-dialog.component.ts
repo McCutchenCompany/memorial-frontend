@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { select, Store } from '@ngrx/store';
 import { getCreatedSaved, getCreatedSaving } from '@store/create-memorial';
+import { UploadCreatePhoto } from '@store/create-photos/photos.actions';
+import { getCreatePhotosSaved, getCreatePhotosSaving } from '@store/create-photos/reducers';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
 
@@ -29,14 +31,18 @@ export class UploadDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private store: Store<CreateMemorialState>
   ) {
-    this.saving$ = this.store.pipe(select(getCreatedSaving));
+    if (data.context === 'create-album') {
+      this.saving$ = this.store.pipe(select(getCreatePhotosSaving));
+    } else {
+      this.saving$ = this.store.pipe(select(getCreatedSaving));
+    }
   }
 
   ngOnInit() {}
 
 
   onUpload() {
-    if (this.data.memorial) {
+    if (this.data.context === 'memorial') {
       const payload = {
         id: this.data.memorial,
         image: this.selectedFiles[0]
@@ -46,7 +52,7 @@ export class UploadDialogComponent implements OnInit {
       } else if (this.data.action === 'replace') {
         this.store.dispatch(new ReplaceMemorialImage(payload));
       }
-    } else if (this.data.timeline) {
+    } else if (this.data.context === 'timeline') {
       const payload = {
         id: this.data.timeline,
         file: this.selectedFiles[0],
@@ -57,13 +63,28 @@ export class UploadDialogComponent implements OnInit {
       } else if (this.data.action === 'replace') {
         this.store.dispatch(new ReplaceTimelineFile(payload));
       }
+    } else if (this.data.context === 'create-album') {
+      const payload = {
+        id: this.data.memorial,
+        file: this.selectedFiles[0],
+      };
+      this.store.dispatch(new UploadCreatePhoto(payload));
     }
-    const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
-      if (res) {
-        this.dialogRef.close();
-        sub.unsubscribe();
-      }
-    });
+    if (this.data.context === 'create-album') {
+      const sub = this.store.pipe(select(getCreatePhotosSaved)).subscribe(res => {
+        if (res) {
+          this.dialogRef.close();
+          sub.unsubscribe();
+        }
+      });
+    } else {
+      const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
+        if (res) {
+          this.dialogRef.close();
+          sub.unsubscribe();
+        }
+      });
+    }
   }
 
   onSelectFile(event) {
@@ -71,6 +92,8 @@ export class UploadDialogComponent implements OnInit {
       this.error = 'Your file is too big. It must be less than 2MB';
     } else if (event.target.files[0].type !== 'image/jpeg' && event.target.files[0].type !== 'image/png') {
       this.error = 'This file is the wrong type. You may only upload jpeg or png files';
+    } else if (event.target.files.length > 1) {
+      this.error = 'You may only upload one file at a time';
     } else {
       this.error = '';
       this.selectedFiles = event.target.files;

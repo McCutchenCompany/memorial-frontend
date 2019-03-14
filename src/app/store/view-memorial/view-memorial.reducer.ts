@@ -12,7 +12,11 @@ export const INITIAL_STATE: ViewMemorialState = {
   selectedMemorial: {
     memorial: null,
     location: null,
-    timeline: null
+    timeline: null,
+    album: {
+      count: 0,
+      photos: null
+    }
   },
   error: null
 };
@@ -75,6 +79,30 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
         error: action.payload
       };
     }
+    case ViewMemorialActionTypes.ADD_PHOTO_TO_COUNT: {
+      return {
+        ...state,
+        selectedMemorial: {
+          ...state.selectedMemorial,
+          album: {
+            ...state.selectedMemorial.album,
+            count: state.selectedMemorial.album.count + 1
+          }
+        }
+      }
+    }
+    case ViewMemorialActionTypes.REMOVE_PHOTO_FROM_COUNT: {
+      return {
+        ...state,
+        selectedMemorial: {
+          ...state.selectedMemorial,
+          album: {
+            ...state.selectedMemorial.album,
+            count: state.selectedMemorial.album.count - 1
+          }
+        }
+      }
+    }
     default: {
       return state;
     }
@@ -111,4 +139,9 @@ export const getViewSaving = createSelector(
 export const getViewSaved = createSelector(
   getViewMemorialState,
   state => state.saved
+);
+
+export const getAlbumCount = createSelector(
+  getViewMemorial,
+  state => state.album.count
 );

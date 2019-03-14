@@ -4,7 +4,7 @@ import { environment } from '@environments/environment';
 import { select, Store } from '@ngrx/store';
 import { Memorial } from '@shared/models/memorial.model';
 import { UpdateUserMemorial } from '@store/auth/auth.actions';
-import { getCreatedSaving } from '@store/create-memorial';
+import { getAuthSaved, getAuthSaving } from '@store/auth/auth.reducer';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,6 +17,8 @@ export class MyMemorialCardComponent implements OnInit {
   @Input() memorial: Memorial;
 
   saving$: Observable<boolean>;
+
+  saving = false;
 
   get imgFormat() {
     if (this.memorial.image) {
@@ -57,13 +59,14 @@ export class MyMemorialCardComponent implements OnInit {
     private store: Store<any>,
     private sanitizer: DomSanitizer
   ) {
-    this.saving$ = this.store.pipe(select(getCreatedSaving));
+    this.saving$ = this.store.pipe(select(getAuthSaving));
   }
 
   ngOnInit() {
   }
 
   togglePublish() {
+    this.saving = true;
     const payload = {
       uuid: this.memorial.uuid,
       body: {
@@ -71,6 +74,12 @@ export class MyMemorialCardComponent implements OnInit {
       }
     };
     this.store.dispatch(new UpdateUserMemorial(payload));
+    const sub = this.store.pipe(select(getAuthSaved)).subscribe(saved => {
+      if (saved) {
+        sub.unsubscribe();
+        this.saving = false;
+      }
+    });
   }
 
 }

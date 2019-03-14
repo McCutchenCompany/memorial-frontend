@@ -11,7 +11,7 @@
     </p>
     <mat-checkbox [checked]="!(memorial$ | async).memorial.public_post" (change)="togglePublic()" color="primary">Ask for my approval before publishing memories</mat-checkbox><br>
     <div class="action">
-      <button mat-button class="primary back-btn" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'location']"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+      <button mat-button class="primary back-btn" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'photos']"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
       <button mat-button *ngIf="!(memorial$ | async).memorial?.published" class="primary" (click)="togglePublish(true)">Finish & Publish Memorial</button>
     </div>
   </div>

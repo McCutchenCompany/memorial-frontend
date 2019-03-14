@@ -1,0 +1,9 @@
+<div *ngIf="!(loading$ | async)" class="container">
+  <div class="photo" (click)="openPhoto(photo.uuid)" *ngFor="let photo of displayPhotos">
+    <img [src]="photoSrc(photo.asset_link)">
+  </div>
+</div>
+<div *ngIf="loading$ | async" class="loading">
+  <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+</div>
+<mat-paginator (page)="onPage($event)" [pageIndex]="page - 1" [pageSize]="20" [length]="total"></mat-paginator>

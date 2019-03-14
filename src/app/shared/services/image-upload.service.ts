@@ -52,4 +52,16 @@ export class ImageUploadService {
     const path = `${this.API_URL}/timelines/${timeline_id}/remove_file?file=${route}`;
     return this.http.delete(path);
   }
+
+  uploadAlbumPhoto(memorial_id: string, file: File) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/photo`;
+    const _formData = new FormData();
+    _formData.append('file', file, encodeURI(file.name));
+    return this.http.post(path, _formData);
+  }
+
+  deleteAlbumPhoto(photo_id: string, file: string) {
+    const path = `${this.API_URL}/photos/${photo_id}?file=${file}`;
+    return this.http.delete(path);
+  }
 }
