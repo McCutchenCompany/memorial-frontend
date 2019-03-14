@@ -14,8 +14,8 @@
     <span *ngIf="!memorial.public_photo">The owner of this memorial reviews all uploaded photos before they are added to the album.</span>
   </p>
   <div class="album mat-elevation-z3">
-    <button *ngIf="!adding && (user$ | async).uuid" mat-button class="primary" (click)="openUploader()">Add Photo</button>
-    <button *ngIf="!adding && !(user$ | async).uuid" mat-button class="primary" (click)="onLogin()">Login to Add Photos</button>
+    <button *ngIf="(user$ | async).uuid" mat-button class="primary" (click)="openUploader()">Add Photo</button>
+    <button *ngIf="!(user$ | async).uuid" mat-button class="primary" (click)="onLogin()">Login to Add Photos</button>
     <div class="wrapper desktop" *ngIf="displayPhotos.length > 0" [class.toggle]="hideMobile">
       <div class="photo" [class.denied]="!memorial.public_photo && photo.denied" [class.waiting]="!memorial.public_photo && !photo.published && !photo.denied" (click)="openPhoto(photo.uuid)" *ngFor="let photo of displayPhotos">
         <img [src]="photoSrc(photo.asset_link)">
