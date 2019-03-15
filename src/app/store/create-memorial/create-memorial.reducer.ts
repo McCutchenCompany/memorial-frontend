@@ -12,7 +12,11 @@ export const INITIAL_STATE: CreateMemorialState = {
     memorial: null,
     location: null,
     timeline: [],
-    memories: []
+    memories: [],
+    album: {
+      count: null,
+      photos: null
+    }
   },
   editingTimeline: {
     editingIds: []

@@ -1,5 +1,6 @@
 export class Memorial {
   uuid: string;
+  user_id: string;
   first_name: string;
   middle_name: string;
   last_name: string;
@@ -10,6 +11,7 @@ export class Memorial {
   updated_at: Date;
   description: string;
   public_post: boolean;
+  public_photo: boolean;
   published: boolean;
   latitude?: number;
   longitude?: number;

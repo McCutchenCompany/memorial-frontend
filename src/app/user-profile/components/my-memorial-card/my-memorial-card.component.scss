@@ -35,6 +35,10 @@ mat-card {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      min-width: rem(84);
+      mat-progress-spinner {
+        margin: rem(5) auto;
+      }
     }
   }
 }

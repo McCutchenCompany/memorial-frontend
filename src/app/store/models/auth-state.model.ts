@@ -17,4 +17,6 @@ export class AuthState {
   error: any;
   loading: boolean;
   loaded: boolean;
+  saving: boolean;
+  saved: boolean;
 }

@@ -96,4 +96,23 @@ export class CreateMemorialService {
     return this.http.get(path);
   }
 
+  getCreatePhotos(payload: {memorial_id: string, approved?: number, denied?: number, waiting?: number, index?: number}) {
+    const path = `${this.API_URL}/memorials/${payload.memorial_id}/photos?` +
+      `${payload.approved ? 'approved=' + payload.approved + '' : ''}` +
+      `${payload.denied ? 'denied=' + payload.denied + '&' : ''}` +
+      `${payload.waiting ? 'waiting=' + payload.waiting + '&' : ''}` +
+      `${payload.index ? 'index=' + payload.index : ''}`;
+    return this.http.get(path);
+  }
+
+  updatePhoto(photo_id: string, payload: {title?: string, description?: string, published?: boolean, denied?: boolean}) {
+    const path = `${this.API_URL}/photos/${photo_id}`;
+    return this.http.patch(path, payload);
+  }
+
+  updatePhotoApproval(photo_id: string, memorial_id: string, payload: {published: boolean, denied: boolean}) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/approve_photo/${photo_id}`;
+    return this.http.patch(path, payload);
+  }
+
 }

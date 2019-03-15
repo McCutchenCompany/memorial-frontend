@@ -1,0 +1,61 @@
+@import "src/styles.scss";
+
+.container {
+  width: 89%;
+  margin: rem(64) auto;
+  padding-bottom: rem(100);
+  .form-container, .photo-container {
+    padding: rem(16);
+    background: rgba(255,255,255,0.9);
+    mat-checkbox {
+      display: block;
+      margin-top: rem(32);
+    }
+    .action {
+      margin-top: rem(32);
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .photo-container {
+    margin-top: rem(36);
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  mat-expansion-panel {
+    margin-top: rem(20);
+  }
+  mat-expansion-panel-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: rem(18) rem(28);
+    .number {
+      height: rem(24);
+      width: rem(24);
+      margin-left: rem(16);
+      background: map-get($colors, primary);
+      border-radius: 100px;
+      &.empty {
+        background: map-get($colors, primary-lightest)
+      }
+      p {
+        transform: translateY(-8%);
+        text-align: center;
+        font-size: rem(12);
+        color: map-get($colors, white);
+      }
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(696);
+    .form-container, .photo-container {
+      padding: rem(32);
+    }
+  }
+}

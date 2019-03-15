@@ -1,0 +1,100 @@
+@import "src/styles.scss";
+
+.container {
+  position: relative;
+  .photo {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100vw;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100vw;
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 45%;
+    left: rem(-20);
+    right: rem(-20);
+  }
+  .info {
+    margin-top: rem(8);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    &.approving {
+      margin-top: rem(36);
+    }
+    .empty {
+      color: map-get($colors, gray);
+    }
+    .title {
+      width: 90%;
+    }
+    mat-form-field {
+      width: 100%;
+    }
+  }
+  .approve-actions {
+    display: flex;
+    justify-content: flex-start;
+    width: rem(140);
+    height: rem(36);
+    height: fit-content;
+    margin: rem(16) 0 rem(16);
+    mat-progress-spinner {
+      margin: rem(7) auto;
+    }
+    p {
+      font-size: rem(12);
+    }
+    button:disabled {
+      background: map-get($colors, gray);
+    }
+  }
+  .approve {
+    background: map-get($colors, success);
+    color: map-get($colors, white);
+    margin-right: rem(12);
+  }
+  .deny {
+    background: map-get($colors, warn);
+    color: map-get($colors, white);
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    &.denied {
+      background: map-get($colors, warn-light);
+      .warn {
+        color: map-get($colors, warn);
+      }
+    }
+    &.waiting {
+      background: map-get($colors, primary-lightest);
+    }
+  }
+  .overlay {
+    position: absolute;
+    top: rem(-24);
+    bottom: rem(-24);
+    right: rem(-24);
+    left: rem(-24);
+    background: rgba(255,255,255,0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    .confirmation {
+      width: rem(200);
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

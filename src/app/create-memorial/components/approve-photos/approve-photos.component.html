@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="form-container mat-elevation-z3">
+    <h4>Photo Album</h4>
+    <p>
+      Anyone who visits your memorial will be able to submit their photos
+      <span *ngIf="(memorial$ | async).memorial.first_name">of {{ (memorial$ | async).memorial.first_name }}</span>.
+      As the owner of the memorial you decide if the photos submitted can be
+      posted automatically or if you want to approve them before they are submitted.
+      You will receive an email notification whenever a new photo is submitted.
+    </p>
+    <mat-checkbox [checked]="!(memorial$ | async).memorial.public_photo" (change)="togglePublic()" color="primary">Ask for my approval before publishing photos</mat-checkbox><br>
+    <div class="action">
+      <button mat-button class="primary back-btn" [routerLink]="['/create', (memorial$ | async).memorial?.uuid, 'location']"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+      <button mat-button class="primary" [routerLink]="['/create', (memorial$ |  async).memorial?.uuid, 'memories']"><mat-icon>keyboard_arrow_right</mat-icon> Next</button>
+    </div>
+  </div>
+  <div class="photo-container mat-elevation-z3">
+    <div class="header">
+      <h4>{{ total$ | async }} Photo<span *ngIf="(total$ | async) === 0 || (total$ | async) > 1">s</span></h4>
+      <button mat-button class="primary" (click)="onOpenUpload()"><mat-icon>add</mat-icon> Add Photo</button>
+    </div>
+    <div *ngIf="(total$ | async) > 0 && (memorial$ | async).memorial.public_photo">
+      <app-album-viewer [memorial]="(memorial$ | async).memorial" [photos]="allPhotos$ | async" [total]="total$ | async" [context]="'create-all'"></app-album-viewer>
+    </div>
+    <div *ngIf="(total$ | async) > 0 && !(memorial$ | async).memorial.public_photo">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <h4>Need Approval</h4>
+          <div class="number" [class.empty]="(count$ | async).need_approval === 0">
+            <p>{{ (count$ | async).need_approval }}</p>
+          </div>
+        </mat-expansion-panel-header>
+        <app-album-viewer [memorial]="(memorial$ | async).memorial" [photos]="needApproval$ | async" [total]="(count$ | async).need_approval" [context]="'need-approval'"></app-album-viewer>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <h4>Denied</h4>
+          <div class="number" [class.empty]="(count$ | async).denied === 0">
+            <p>{{ (count$ | async).denied }}</p>
+          </div>
+        </mat-expansion-panel-header>
+        <app-album-viewer [memorial]="(memorial$ | async).memorial" [photos]="denied$ | async" [total]="(count$ | async).denied" [context]="'denied'"></app-album-viewer>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <h4>Approved</h4>
+          <div class="number" [class.empty]="(count$ | async).approved === 0">
+            <p>{{ (count$ | async).approved }}</p>
+          </div>
+        </mat-expansion-panel-header>
+        <app-album-viewer [memorial]="(memorial$ | async).memorial" [photos]="approved$ | async" [total]="(count$ | async).approved" [context]="'approved'"></app-album-viewer>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>

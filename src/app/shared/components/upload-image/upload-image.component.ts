@@ -24,6 +24,7 @@ export class UploadImageComponent implements OnInit {
     if (this.type === 'memorial') {
       this.dialog.open(UploadDialogComponent, {
         data: {
+          context: 'memorial',
           memorial: this.id,
           action: 'upload'
         }
@@ -31,6 +32,7 @@ export class UploadImageComponent implements OnInit {
     } else if (this.type === 'timeline') {
       this.dialog.open(UploadDialogComponent, {
         data: {
+          context: 'timeline',
           timeline: this.id,
           action: 'upload'
         },
