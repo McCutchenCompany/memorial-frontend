@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
 
 import { GeolocationService } from '../../services/geolocation.service';
 import { Memorial } from './../../../shared/models/memorial.model';
+import { LocationDenied } from './../../../store/find-memorial/actions/action.types';
 import { getMarkersLoading } from './../../../store/find-memorial/selectors/memorial-markers.selector';
 import { getPermission } from './../../../store/find-memorial/selectors/position.selector';
 import {
@@ -54,6 +55,8 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
   displayMap = false;
   current = {ga: {j: 0, l: 0}, ma: {j: 0, l: 0}};
 
+  mapTimer = false;
+
   get latitude(): Observable<number> {
     return this.latitude$;
   }
@@ -90,6 +93,7 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
     this.markersLoading$ = this.store.pipe(select(getMarkersLoading));
     this.locationSet$ = this.store.pipe(select(getSetLocation));
     this.popularMemorials$ = this.store.pipe(select(getAllPopularMemorials));
+    this.permission = this.store.pipe(select(getPermission));
     this.searchQuery$.subscribe(query => {
       if (query) {
         this.memorials$ = this.store.pipe(select(getAllSearchMemorials));
@@ -107,6 +111,7 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.geo.findMe();
     this.store.dispatch(new GetPopularMemorials());
+    this.startTimer();
   }
 
   ngOnDestroy() {
@@ -115,6 +120,19 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
 
   onClick(event) {
     this.router.navigate(['/memorial', event.memorial_id]);
+  }
+
+  startTimer() {
+    setTimeout(() => {
+      this.mapTimer = true;
+      this.nextTimer();
+    }, 10000);
+  }
+
+  nextTimer() {
+    setTimeout(() => {
+      this.store.dispatch(new LocationDenied());
+    }, 10000);
   }
 
   onBoundChange(event) {
