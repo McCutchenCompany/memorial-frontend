@@ -20,7 +20,7 @@ export const environment = {
     publicKey: 'pk_test_nN2N0PLFIBrWEW9Atg1HdGen'
   },
   url: 'https://staging.mymemorial.co/',
-  discount: 'dd7dbe8a',
+  discount: '77de7e0b',
   example: {
     uuid: '41f5a855-c76d-4385-b97f-aeee827bbccc',
     name: 'Obi-wan Kenobi'
