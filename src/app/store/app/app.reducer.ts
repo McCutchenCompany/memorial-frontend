@@ -16,7 +16,7 @@ export const INITIAL_STATE: AppState = {
   },
   error: null,
   discount: {
-    percent: 100,
+    percent: 75,
     code: environment.discount,
     one_time_use: false,
     error: null
