@@ -20,7 +20,7 @@ export const environment = {
     publicKey: 'pk_live_dusuYntW07CvPrTL0i3PHnhj'
   },
   url: 'https://mymemorial.co/',
-  discount: '9ee3ba9a',
+  discount: '92fc012e',
   example: {
     uuid: '020cac1f-f335-4c0d-831f-7567b9076b61',
     name: 'John F. Kennedy'
