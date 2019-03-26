@@ -13,14 +13,12 @@
       </mat-card>
     </div>
   </div>
-  <mat-card class="price mat-elevation-z8">
-    <h3>LIMITED TIME</h3>
-    <div class="price-cut">
-      <p class="strike">$60</p>
-      <p class="final-price">$15</p>
+  <div class="most-viewed">
+    <h3>Recent Memorials</h3>
+    <div class="popular">
+      <app-memorial-result-card *ngFor="let memorial of (popularMemorials$ | async)" [memorial]="memorial"></app-memorial-result-card>
     </div>
-    <h6>75% off new Memorials</h6>
-  </mat-card>
+  </div>
   <div class="subheader">
     <div class="text">
       <h3>Create a lasting tribute to your loved ones.</h3>
@@ -59,10 +57,20 @@
         Every Memorial is a one time purchase so there are no recurring fees or future payments to unarchive your Memorial.
         When new features are added to the platform they are instantly accessible to any previously purchased Memorial.
         By taking advantage of our limited time promotion you get all of these base features, plus every new feature as
-        they are released, for 75% off.
+        they are released for free, forever. Act now, before the promotion ends!
       </p>
     </div>
   </div>
+  <mat-card class="price mat-elevation-z8">
+    <h3>LIMITED TIME</h3>
+    <div class="price-cut">
+      <p class="strike">$60</p>
+      <p class="final-price">Free!</p>
+    </div>
+    <h6>Full featured Memorials</h6>
+    <h3>Launch Event</h3>
+    <button mat-button class="primary" (click)="onCreateMemorial()">Get Started</button>
+  </mat-card>
   <div class="description">
     <h3>How it Works</h3>
     <div class="container">
@@ -128,12 +136,6 @@
         Each Memorial owner can decide if they need to review the photos
         before they are published.
       </p>
-    </div>
-  </div>
-  <div class="most-viewed">
-    <h3>Take a look at some of the most viewed Memorials</h3>
-    <div class="popular">
-      <app-memorial-result-card *ngFor="let memorial of (popularMemorials$ | async)" [memorial]="memorial"></app-memorial-result-card>
     </div>
   </div>
   <div class="cta">

@@ -159,6 +159,9 @@
   .price {
     text-align: center;
     margin-top: rem(64);
+    button {
+      margin: rem(16) 0;
+    }
     .price-cut {
       display: flex;
       align-items: flex-end;
