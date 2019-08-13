@@ -9,6 +9,9 @@
     display: flex;
     flex-direction: column;
     width: 90%;
+    .email {
+      min-width: rem(260);
+    }
   }
   .actions {
     display: flex;
@@ -23,7 +26,13 @@
       font-size: rem(48);
     }
     form {
-      width: rem(250);
+      width: rem(760);
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .actions {
+        transform: translateY(rem(-10))
+      }
     }
   }
 }

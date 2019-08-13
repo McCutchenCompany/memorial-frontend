@@ -1,0 +1,42 @@
+@import "src/styles.scss";
+
+.container {
+  margin-bottom: rem(36);
+  .heading {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: rem(36);
+    h2 {
+      font-size: rem(36);
+    }
+  }
+  .orgs {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .org {
+      margin-bottom: rem(16);
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    width: rem(760);
+    margin: auto;
+    .heading {
+      width: rem(600);
+      h2 {
+      font-size: rem(48);
+    }
+  }
+  }
+}
+@include respond-to('medium') {
+  .container {
+    width: initial;
+    margin: initial;
+  }
+}

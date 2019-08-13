@@ -16,6 +16,7 @@
   </div>
   <div class="posted-by" *ngIf="loaded$ | async">
     <p>Posted by: {{ currentPhoto.first_name }} {{ currentPhoto.last_name }}</p>
+    <!-- <button mat-icon-button matTooltip="Download Photo" (click)="downloadPhoto()"><mat-icon>file_download</mat-icon></button> -->
   </div>
   <div *ngIf="canApprove && (loaded$ | async) && data.context !== 'view'" class="approve-actions">
     <button mat-button *ngIf="needsApproval || currentPhoto.denied" matTooltip="Accept Photo" [disabled]="saving$ | async" class="approve" (click)="onApprove(currentPhoto.uuid)">

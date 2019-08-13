@@ -23,6 +23,8 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { UserProfileComponent } from './containers/user-profile/user-profile.component';
 import { WelcomeComponent } from './containers/welcome/welcome.component';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
+import { UserOrgsComponent } from './components/user-orgs/user-orgs.component';
+import { OrgCardComponent } from './components/org-card/org-card.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
     MyMemorialsComponent,
     MyMemorialCardComponent,
     WelcomeComponent,
-    OnboardingComponent
+    OnboardingComponent,
+    UserOrgsComponent,
+    OrgCardComponent
   ],
   imports: [
     CommonModule,

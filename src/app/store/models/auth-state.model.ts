@@ -1,3 +1,5 @@
+import { Organization } from '@shared/models/organization.model';
+
 export class AuthState {
   isAuthenticated: boolean;
   token: string;
@@ -12,7 +14,8 @@ export class AuthState {
     updated_at: Date;
     created_at: Date;
     a0: any;
-    memorials: any[]
+    memorials: any[],
+    organizations: Organization[]
   };
   error: any;
   loading: boolean;

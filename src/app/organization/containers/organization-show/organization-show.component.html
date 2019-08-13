@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="header">
+    <app-organization-header *ngIf="organization$ | async" [organization]="organization$ | async"></app-organization-header>
+  </div>
+  <div class="details">
+    <app-organization-details *ngIf="organization$ | async" [organization]="organization$ | async"></app-organization-details>
+  </div>
+  <mat-card *ngIf="organization$ | async">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Memorials">
+        <div class="memorials-container">
+          <div class="actions">
+            <form [formGroup]="searchForm">
+              <mat-form-field appearance="outline">
+                <mat-label>Search</mat-label>
+                <input matInput type="text" formControlName="q" (keyup)="onSearch()">
+              </mat-form-field>
+              <button *ngIf="searchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearSearch()"><mat-icon>highlight_off</mat-icon></button>
+            </form>
+            <button mat-button class="primary" [disabled]="saving$ | async" (click)="createFreeMemorial()"><mat-icon>add</mat-icon>Memorial</button>
+          </div>
+          <app-memorial-table
+            *ngIf="(memorials$ | async).length > 0"
+            [memorials]="memorials$ | async"
+            [pageInfo]="paginator$ | async"
+            [loading]="loading$ | async"
+            (sort)="onSort($event)"></app-memorial-table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Members">
+        <app-add-members *ngIf="organization$ | async" [organization]="organization$ | async"></app-add-members>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

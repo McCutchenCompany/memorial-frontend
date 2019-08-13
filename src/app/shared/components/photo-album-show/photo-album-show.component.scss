@@ -14,6 +14,11 @@
     max-width: 100%;
     max-height: 100vw;
   }
+  .posted-by {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .actions {
     display: flex;
     justify-content: space-between;

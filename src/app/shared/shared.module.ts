@@ -19,6 +19,7 @@ import {
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
+import { FileSaverModule } from 'ngx-filesaver';
 
 import { AlbumUploaderComponent } from './components/album-uploader/album-uploader.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -56,7 +57,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     ReactiveFormsModule,
     FormsModule,
     CreditCardDirectivesModule,
-    RouterModule
+    RouterModule,
+    FileSaverModule
   ],
   exports: [
     MatButtonModule,

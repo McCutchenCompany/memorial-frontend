@@ -1,0 +1,34 @@
+@import "src/styles.scss";
+
+.container {
+  width: 90%;
+  margin: auto;
+  .memorials-container {
+    padding: rem(36) 0;
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: rem(-36);
+    mat-form-field.mat-form-field {
+      width: rem(270);
+    }
+    form {
+      button {
+        transform: translateX(-120%);
+      }
+    }
+  }
+  .details {
+    margin: rem(36) 0;
+  }
+}
+@include respond-to('small') {
+
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(1176);
+  }
+}

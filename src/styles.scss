@@ -71,6 +71,9 @@ body {
 h1, h2, h3, h4, h5, h6, p {
   color: map-get($colors, black);
   margin: 0;
+  &.secondary {
+    color: map-get($colors, dark-gray)
+  }
 }
 
 h1, h2, h3, h5 {

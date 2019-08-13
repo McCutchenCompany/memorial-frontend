@@ -1,0 +1,19 @@
+<mat-card
+  (mouseenter)="onHover()"
+  (mouseleave)="onHover()"
+  [class.mat-elevation-z8]="hover"
+  matRipple
+  *ngIf="organization"
+  [routerLink]="['/organization', organization.uuid]">
+  <div class="image-border">
+    <div class="image">
+      <img [src]="imgFormat">
+    </div>
+  </div>
+  <div class="container">
+    <div class="info">
+      <h5>{{ organization.name }}</h5>
+      <p *ngIf="organization.address">{{ organization.address }}</p>
+    </div>
+  </div>
+</mat-card>

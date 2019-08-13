@@ -1,0 +1,11 @@
+<div class="organizations container">
+  <div class="heading">
+    <h2>Organizations</h2>
+    <button mat-button class="primary" [routerLink]="['/organization', 'create-org']"><mat-icon>add</mat-icon>New Organization</button>
+  </div>
+  <div class="orgs">
+    <div class="org" *ngFor="let org of organizations">
+      <app-org-card [organization]="org"></app-org-card>
+    </div>
+  </div>
+</div>

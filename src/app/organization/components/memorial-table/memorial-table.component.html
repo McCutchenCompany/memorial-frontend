@@ -1,0 +1,50 @@
+<div class="container">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)">
+
+    <!-- Unlocked Column -->
+    <ng-container matColumnDef="unlocked">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Unlocked</th>
+      <td mat-cell *matCellDef="let memorial">
+        <mat-icon [class.unlocked]="memorial.unlocked">check_circle_outline</mat-icon>
+      </td>
+    </ng-container>
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="first_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>First</th>
+      <td mat-cell *matCellDef="let memorial">{{ memorial.first_name || 'N/A' }}</td>
+    </ng-container>
+
+    <!-- Middle Name Column -->
+    <ng-container matColumnDef="middle_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Middle</th>
+      <td mat-cell *matCellDef="let memorial">{{ memorial.middle_name }}</td>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="last_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last</th>
+      <td mat-cell *matCellDef="let memorial">{{ memorial.last_name || 'N/A' }}</td>
+    </ng-container>
+
+    <!-- Birth Column -->
+    <ng-container matColumnDef="birth_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Birth</th>
+      <td mat-cell *matCellDef="let memorial">{{ memorial.birth_date | date }}</td>
+    </ng-container>
+
+    <!-- Death Column -->
+    <ng-container matColumnDef="death_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Death</th>
+      <td mat-cell *matCellDef="let memorial">{{ memorial.death_date | date }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns;" class="mat-elevation-z2 group-data-row group-data-row-data" [routerLink]="['/create', row.uuid]"></tr>
+
+  </table>
+  <div *ngIf="loading" class="loading">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+  </div>
+</div>
+  <mat-paginator [length]="pageInfo.total" [pageSize]="page.per_p" [pageIndex]="page.p"></mat-paginator>

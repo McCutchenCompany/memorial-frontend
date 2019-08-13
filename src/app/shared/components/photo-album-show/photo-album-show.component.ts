@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -8,6 +9,7 @@ import { Memorial } from '@shared/models/memorial.model';
 import { Photo } from '@shared/models/photo.model';
 import { User } from '@shared/models/user.model';
 import { getUser } from '@store/auth/auth.reducer';
+import { FileSaverService } from 'ngx-filesaver';
 import { Observable } from 'rxjs';
 
 import { ApprovePhoto, DenyPhoto } from './../../../store/create-photos/photos.actions';
@@ -98,7 +100,9 @@ export class PhotoAlbumShowComponent implements OnInit {
     },
     public dialogRef: MatDialogRef<PhotoAlbumShowComponent>,
     private store: Store<any>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private fileSaver: FileSaverService
   ) {
     this.entities$ = this.store.pipe(select(this.data.entitySelector));
     this.ids$ = this.store.pipe(select(this.data.idSelector));
@@ -283,6 +287,9 @@ export class PhotoAlbumShowComponent implements OnInit {
         }
       }
     });
+  }
+
+  downloadPhoto() {
   }
 
 }

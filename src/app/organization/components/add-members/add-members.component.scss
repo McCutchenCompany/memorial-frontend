@@ -1,0 +1,30 @@
+@import "src/styles.scss";
+
+.container {
+  padding: rem(36) 0;
+  mat-card.mat-card {
+    width: rem(690);
+    margin: auto;
+  }
+  .link {
+    display: flex;
+    align-items: center;
+    h4 {
+      margin-right: rem(36);
+    }
+    p {
+      margin-top: rem(16);
+    }
+  }
+  mat-chip-list.chips {
+    display: flex;
+    align-items: center;
+    mat-chip {
+      cursor: pointer;
+      span {
+        padding: 0 rem(12);
+        transform: translateY(rem(-1));
+      }
+    }
+  }
+}

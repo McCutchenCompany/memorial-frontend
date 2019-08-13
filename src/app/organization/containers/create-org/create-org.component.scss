@@ -8,20 +8,21 @@
 .container {
   width: 90%;
   margin: rem(60) auto;
-  app-user-info {
-    width: 90%;
+  form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    mat-form-field {
+      width: 100%;
+    }
   }
 }
 @include respond-to('small') {
-  .container {
-    width: 100%;
-  }
+
 }
 @include respond-to('medium') {
   .container {
     width: rem(1176);
-    app-user-info {
-      width: initial;
-    }
   }
 }

@@ -13,6 +13,7 @@ const appRoutes: Routes = [
   { path: 'create', loadChildren: './create-memorial/create-memorial.module#CreateMemorialModule', canActivate: [AuthGuardService] },
   { path: 'memorial', loadChildren: './view-memorial/view-memorial.module#ViewMemorialModule' },
   { path: 'profile', loadChildren: './user-profile/user-profile.module#UserProfileModule', canActivate: [AuthGuardService] },
+  { path: 'organization', loadChildren: './organization/organization.module#OrganizationModule' },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'terms', component: TermsOfServiceComponent },
   { path: 'callback', component: CallbackComponent },

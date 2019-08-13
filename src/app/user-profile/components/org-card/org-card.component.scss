@@ -1,0 +1,36 @@
+@import "src/styles.scss";
+
+mat-card {
+  position: relative;
+  width: rem(304);
+  min-height: rem(256);
+  outline: none;
+  cursor: pointer;
+  .image-border {
+    position: absolute;
+    height: rem(180);
+    width: rem(336);
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background: map-get($colors, dark-gray);
+  }
+  .image {
+    height: rem(180);
+    width: rem(336);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+  }
+  .info {
+    margin-top: rem(180);
+  }
+  .date-and-loc {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}

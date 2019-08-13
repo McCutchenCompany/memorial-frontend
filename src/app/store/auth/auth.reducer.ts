@@ -18,7 +18,8 @@ export const INITIAL_STATE: AuthState = {
     created_at: null,
     updated_at: null,
     a0: null,
-    memorials: []
+    memorials: [],
+    organizations: [],
   },
   error: null,
   loading: false,
@@ -92,7 +93,8 @@ export function reducer(state: AuthState = INITIAL_STATE, action: AuthActions): 
         user: {
           ...state.user,
           ...action.payload.user,
-          memorials: action.payload.memorials
+          memorials: action.payload.memorials,
+          organizations: action.payload.organizations
         },
         loading: false,
         loaded: true
