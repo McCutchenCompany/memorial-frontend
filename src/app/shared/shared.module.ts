@@ -33,6 +33,7 @@ import { PhotoAlbumShowComponent } from './components/photo-album-show/photo-alb
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { ResponseDialogComponent } from './components/response-dialog/response-dialog.component';
 import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
+import { UnlockOverlayComponent } from './components/unlock-overlay/unlock-overlay.component';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 
@@ -68,7 +69,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     PaymentComponent,
     FooterComponent,
     MemoryEditDialogComponent,
-    MemorialResultCardComponent
+    MemorialResultCardComponent,
+    UnlockOverlayComponent
   ],
   declarations: [
     UploadImageComponent,
@@ -84,7 +86,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MemoryEditDialogComponent,
     MemorialResultCardComponent,
     PhotoAlbumShowComponent,
-    AlbumUploaderComponent
+    AlbumUploaderComponent,
+    UnlockOverlayComponent
   ],
   entryComponents: [
     UploadDialogComponent,

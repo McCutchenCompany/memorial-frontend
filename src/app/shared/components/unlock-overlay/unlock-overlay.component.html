@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-icon>{{ isHover ? 'lock_open' : 'lock' }}</mat-icon>
+  <h3>Unlock Memorial</h3>
+  <p>
+    Tell {{ memorial.first_name ? memorial.first_name + '\'s' : 'the' }} story
+    with an interactive timeline and photo album by unlocking this Memorial.
+  </p>
+  <button mat-button class="primary" (mouseenter)="toggleHover()" (mouseleave)="toggleHover()">Unlock</button>
+</mat-card>

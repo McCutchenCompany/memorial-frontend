@@ -29,6 +29,7 @@ import { OrganizationHeaderComponent } from './components/organization-header/or
 import { CreateOrgComponent } from './containers/create-org/create-org.component';
 import { OrganizationShowComponent } from './containers/organization-show/organization-show.component';
 import { OrganizationRoutingModule } from './organization-routing.module';
+import { EditOrgComponent } from './containers/edit-org/edit-org.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { OrganizationRoutingModule } from './organization-routing.module';
     MemorialTableComponent,
     OrganizationHeaderComponent,
     OrganizationDetailsComponent,
-    AddMembersComponent
+    AddMembersComponent,
+    EditOrgComponent
   ],
   imports: [
     CommonModule,

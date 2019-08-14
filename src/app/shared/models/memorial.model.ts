@@ -20,4 +20,5 @@ export class Memorial {
   posY: number;
   scale: number;
   rot: number;
+  unlocked: boolean;
 }

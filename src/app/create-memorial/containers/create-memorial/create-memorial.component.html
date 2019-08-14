@@ -19,10 +19,13 @@
   <mat-drawer-content>
     <div class="view">
       <button mat-fab class="mobile-floater" (click)="toggleSidebar()">
-        <mat-icon aria-label="Example icon-button with a heart icon">menu</mat-icon>
+        <mat-icon aria-label="Toggle Menu">menu</mat-icon>
       </button>
       <router-outlet></router-outlet>
       <app-footer></app-footer>
+    </div>
+    <div *ngIf="!(memorial$ | async).memorial.unlocked && unlockOverlay" class="unlock-overlay">
+      <app-unlock-overlay [memorial]="(memorial$ | async).memorial"></app-unlock-overlay>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

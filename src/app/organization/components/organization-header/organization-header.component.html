@@ -17,4 +17,7 @@
     <img [src]="imgFormatDesktop.src" [style.transform]="imgFormatDesktop.transform">
   </div>
   <h2>{{ organization.name }}</h2>
+  <div *ngIf="!organization.image" (click)="navigateToEdit()" class="add-overlay">
+    <mat-icon>photo_camera</mat-icon>
+  </div>
 </div>

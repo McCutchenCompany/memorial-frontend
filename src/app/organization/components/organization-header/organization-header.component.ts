@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Organization } from '@shared/models/organization.model';
 
 import { environment } from './../../../../environments/environment';
@@ -69,10 +70,15 @@ export class OrganizationHeaderComponent implements OnInit {
   }
 
   constructor(
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) { }
 
   ngOnInit() {
+  }
+
+  navigateToEdit() {
+    this.router.navigate(['organization', this.organization.uuid, 'edit']);
   }
 
 }

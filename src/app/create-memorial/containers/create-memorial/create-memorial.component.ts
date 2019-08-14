@@ -15,6 +15,7 @@ import {
   getCreateSearchAddress,
 } from '@store/create-memorial/create-memorial.reducer';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
+import { getRouterState } from '@store/router';
 import { Observable } from 'rxjs';
 
 import { getCreatedSaving } from './../../../store/create-memorial/create-memorial.reducer';
@@ -33,6 +34,7 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
   locationSearch$: Observable<any>;
   error$: Observable<any>;
   routeFragment = 'info';
+  unlockOverlay = false;
 
   public medium = 1200;
   public opened = true;
@@ -72,6 +74,13 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
     this.memorial$.subscribe(res => {
       if (res && res.memorial) {
         this.memorialUUID = res.memorial.uuid;
+      }
+    });
+    this.store.pipe(select(getRouterState)).subscribe(res => {
+      if (res.state.url.indexOf('timeline') > 0 || res.state.url.indexOf('photo') > 0) {
+        this.unlockOverlay = true;
+      } else {
+        this.unlockOverlay = false;
       }
     });
   }

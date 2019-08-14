@@ -11,7 +11,7 @@
       padding: 0 2px;
     }
     mat-icon.mat-icon {
-      color: rgba(10, 100, 85, .2);
+      color: rgba(103, 103, 103, 0.2);
       font-size: rem(28);
       &.unlocked {
         color: map-get($colors, success);

@@ -44,6 +44,28 @@
   height: 52vw;
   overflow: hidden;
   margin: auto;
+  .add-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    &:hover {
+      opacity: 1;
+    }
+    mat-icon {
+      color: map-get($colors, white);
+      font-size: rem(64);
+      height: rem(64);
+      width: rem(64);
+    }
+  }
   h2 {
     position: absolute;
     bottom: 0;

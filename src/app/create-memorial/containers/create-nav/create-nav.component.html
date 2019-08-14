@@ -36,7 +36,7 @@
     [routerLink]="['/create', memorial?.uuid, 'timeline']"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
-    class="nav-option"><mat-icon>timeline</mat-icon>Timeline</button>
+    class="nav-option"><mat-icon>timeline</mat-icon>Timeline<mat-icon class="lock" *ngIf="!memorial?.unlocked">lock</mat-icon></button>
   <mat-divider></mat-divider>
   <button
     [routerLink]="['/create', memorial?.uuid, 'location']"
@@ -48,7 +48,7 @@
     [routerLink]="['/create', memorial?.uuid, 'photos']"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
-    class="nav-option"><mat-icon>photo_library</mat-icon>Photo Album</button>
+    class="nav-option"><mat-icon>photo_library</mat-icon>Photo Album<mat-icon class="lock" *ngIf="!memorial?.unlocked">lock</mat-icon></button>
   <mat-divider></mat-divider>
   <button
     [routerLink]="['/create', memorial?.uuid, 'memories']"
