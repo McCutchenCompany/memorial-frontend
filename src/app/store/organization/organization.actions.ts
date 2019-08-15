@@ -19,7 +19,10 @@ export enum OrganizationActionTypes {
   REPLACE_ORG_IMAGE_FAILURE = '[Organization] Replace org image failure',
   REMOVE_ORG_IMAGE = '[Organization] Remove org image',
   REMOVE_ORG_IMAGE_SUCCESS = '[Organization] Remove org image success',
-  REMOVE_ORG_IMAGE_FAILURE = '[Organization] Remove org image failure'
+  REMOVE_ORG_IMAGE_FAILURE = '[Organization] Remove org image failure',
+  JOIN_ORG = '[Organization] Join org',
+  JOIN_ORG_SUCCESS = '[Organization] Join org success',
+  JOIN_ORG_FAILURE = '[Organization] Join org failure'
 }
 
 export class CreateOrg implements Action {
@@ -100,6 +103,19 @@ export class RemoveOrgImageFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class JoinOrg implements Action {
+  readonly type = OrganizationActionTypes.JOIN_ORG;
+  constructor (public payload: any) {}
+}
+export class JoinOrgSuccess implements Action {
+  readonly type = OrganizationActionTypes.JOIN_ORG_SUCCESS;
+  constructor (public payload: Organization) {}
+}
+export class JoinOrgFailure implements Action {
+  readonly type = OrganizationActionTypes.JOIN_ORG_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | CreateOrg
   | CreateOrgSuccess
@@ -118,4 +134,7 @@ export type All =
   | RemoveOrgImageFailure
   | UpdateOrg
   | UpdateOrgSuccess
-  | UpdateOrgFailure;
+  | UpdateOrgFailure
+  | JoinOrg
+  | JoinOrgSuccess
+  | JoinOrgFailure;

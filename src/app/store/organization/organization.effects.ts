@@ -15,6 +15,9 @@ import {
   GetOrg,
   GetOrgFailure,
   GetOrgSuccess,
+  JoinOrg,
+  JoinOrgFailure,
+  JoinOrgSuccess,
   OrganizationActionTypes,
   RemoveOrgImage,
   RemoveOrgImageFailure,
@@ -100,5 +103,22 @@ export class OrganizationEffects {
       map(org => new RemoveOrgImageSuccess(org)),
       catchError(error => of(new RemoveOrgImageFailure(error)))
     ))
+  );
+
+  @Effect()
+  joinOrg$: Observable<Action> = this.actions.pipe(
+    ofType(OrganizationActionTypes.JOIN_ORG),
+    switchMap((action: JoinOrg) => this.api.joinOrganization(action.payload).pipe(
+      map((res: Organization) => new JoinOrgSuccess(res)),
+      catchError(error => of(new JoinOrgFailure(error)))
+    ))
+  );
+
+  @Effect({dispatch: false})
+  joinOrgSuccess$ = this.actions.pipe(
+    ofType(OrganizationActionTypes.JOIN_ORG_SUCCESS),
+    map((action: JoinOrgSuccess) => {
+      this.router.navigate(['/organization', action.payload.uuid]);
+    })
   );
 }

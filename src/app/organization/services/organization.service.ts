@@ -39,4 +39,10 @@ export class OrganizationService {
     const path = `${this.API_URL}/organizations/${id}/memorial`;
     return this.http.post(path, {});
   }
+
+  joinOrganization(invite_link: string) {
+    const path = `${this.API_URL}/user_organizations/join_org`;
+    const body = {invite_link};
+    return this.http.post(path, body);
+  }
 }

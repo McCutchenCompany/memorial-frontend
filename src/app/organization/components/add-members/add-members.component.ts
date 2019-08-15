@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatTooltip } from '@angular/material';
 import { Organization } from '@shared/models/organization.model';
 
 import { environment } from './../../../../environments/environment';
@@ -19,6 +20,16 @@ export class AddMembersComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+  showToolTip(tooltip: MatTooltip) {
+    tooltip.message = 'Copied';
+    tooltip.show();
+    setTimeout(() => {
+      tooltip.hide();
+      tooltip.message = 'Copy';
+    }, 1000);
   }
 
 }

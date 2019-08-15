@@ -24,6 +24,7 @@ import { OrgMemorialEffects } from '@store/organization-memorials/org-memorials.
 import { orgMemorialReducer } from '@store/organization-memorials/org-memorials.reducer';
 import { OrganizationEffects } from '@store/organization/organization.effects';
 import { organizationReducer } from '@store/organization/organization.reducer';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AddMembersComponent } from './components/add-members/add-members.component';
 import { MemorialTableComponent } from './components/memorial-table/memorial-table.component';
@@ -31,6 +32,7 @@ import { OrganizationDetailsComponent } from './components/organization-details/
 import { OrganizationHeaderComponent } from './components/organization-header/organization-header.component';
 import { CreateOrgComponent } from './containers/create-org/create-org.component';
 import { EditOrgComponent } from './containers/edit-org/edit-org.component';
+import { JoinOrgComponent } from './containers/join-org/join-org.component';
 import { OrganizationShowComponent } from './containers/organization-show/organization-show.component';
 import { OrganizationRoutingModule } from './organization-routing.module';
 
@@ -42,7 +44,8 @@ import { OrganizationRoutingModule } from './organization-routing.module';
     OrganizationHeaderComponent,
     OrganizationDetailsComponent,
     AddMembersComponent,
-    EditOrgComponent
+    EditOrgComponent,
+    JoinOrgComponent
   ],
   imports: [
     CommonModule,
@@ -63,6 +66,7 @@ import { OrganizationRoutingModule } from './organization-routing.module';
     MatTabsModule,
     SharedModule,
     RouterModule,
+    ClipboardModule,
     StoreModule.forFeature('organization', organizationReducer),
     StoreModule.forFeature('org-memorials', orgMemorialReducer),
     EffectsModule.forFeature([

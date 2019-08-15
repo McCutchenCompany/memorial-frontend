@@ -37,6 +37,7 @@ export function organizationReducer(state: OrganizationState = INITIAL_STATE, ac
         error: action.payload
       };
     }
+    case OrganizationActionTypes.JOIN_ORG:
     case OrganizationActionTypes.GET_ORG: {
       return {
         ...state,
@@ -44,6 +45,7 @@ export function organizationReducer(state: OrganizationState = INITIAL_STATE, ac
         loaded: false
       };
     }
+    case OrganizationActionTypes.JOIN_ORG_SUCCESS:
     case OrganizationActionTypes.GET_ORG_SUCCESS: {
       return {
         ...state,
@@ -52,6 +54,7 @@ export function organizationReducer(state: OrganizationState = INITIAL_STATE, ac
         organization: action.payload
       };
     }
+    case OrganizationActionTypes.JOIN_ORG_FAILURE:
     case OrganizationActionTypes.GET_ORG_FAILURE: {
       return {
         ...state,

@@ -3,10 +3,20 @@
     <div class="link">
       <h4>Join Link</h4>
       <mat-chip-list class="chips">
-        <mat-chip color="primary" selected>
+        <mat-chip
+          color="primary"
+          selected#tooltip="matTooltip"
+          [matTooltipDisabled]="false"
+          [matTooltipHideDelay]="1000"
+          matTooltip="Copy"
+          aria-tooltip="Copy"
+          matTooltipPosition="above"
+          ngxClipboard
+          [cbContent]="join_link"
+          (click)="showToolTip(tooltip)">
           <mat-icon>link</mat-icon>
           <span>{{ join_link }}</span>
-        </mat-chip>
+        </mat-chipcolor="primary">
       </mat-chip-list>
     </div>
     <p class="secondary">
