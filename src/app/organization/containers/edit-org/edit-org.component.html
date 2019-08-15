@@ -1,3 +1,35 @@
-<p>
-  edit-org works!
-</p>
+<div class="container">
+  <div class="header">
+    <h2>Edit Organization</h2>
+    <button mat-button class="secondary back-btn" [routerLink]="['/organization', (organization$ | async)?.uuid]"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+  </div>
+  <div class="forms">
+    <div class="image">
+      <h4>Cover Image</h4>
+      <app-image-viewer *ngIf="(organization$ | async)?.image" [image]="(organization$ | async)?.image" [id]="(organization$ | async)?.uuid" [type]="'org'" [format]="imageFormat" (remove)="onRemove($event)"></app-image-viewer>
+      <app-upload-image *ngIf="!(organization$ | async)?.image" [id]="(organization$ | async)?.uuid" [type]="'org'"></app-upload-image>
+    </div>
+    <form [formGroup]="orgForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address">
+      </mat-form-field>
+      <mat-form-field class="textarea" appearance="outline">
+        <mat-label>Short Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          maxlength="1500"></textarea>
+        <mat-hint align="end">{{ orgForm.value.description.length }} / 1500</mat-hint>
+      </mat-form-field>
+      <button mat-button class="primary" [disabled]="(saving$ | async) || orgForm.invalid" (click)="onSave()">
+        <span *ngIf="!(saving$ | async)">Save</span>
+        <span *ngIf="(saving$ | async)">Saving...</span>
+      </button>
+    </form>
+  </div>
+</div>

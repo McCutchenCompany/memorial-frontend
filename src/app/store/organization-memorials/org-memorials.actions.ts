@@ -10,7 +10,10 @@ export enum OrgMemActionTypes {
   GET_ORG_MEMORIALS_FAILURE = '[Org Mems] Get org memorials failure',
   CREATE_FREE_ORG_MEMORIAL = '[Org Mems] Create free org memorial',
   CREATE_ORG_MEMORIAL_SUCCESS = '[Org Mems] Create org memorial success',
-  CREATE_ORG_MEMORIAL_FAILURE = '[Org Mems] Create org memorial failure'
+  CREATE_ORG_MEMORIAL_FAILURE = '[Org Mems] Create org memorial failure',
+  TOGGLE_ORG_MEMORIAL_PUBLISHED = '[Org Mems] Toggle org memorial published',
+  TOGGLE_ORG_MEMORIAL_PUBLISHED_SUCCESS = '[Org Mems] Toggle org memorial published success',
+  TOGGLE_ORG_MEMORIAL_PUBLISHED_FAILURE = '[Org Mems] Toggle org memorial published false'
 }
 
 export class GetFirstOrgMemorials implements Action {
@@ -42,6 +45,19 @@ export class CreateOrgMemorialFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class ToggleOrgMemorialPublished implements Action {
+  readonly type = OrgMemActionTypes.TOGGLE_ORG_MEMORIAL_PUBLISHED;
+  constructor (public payload: {uuid: string, body: any}) {}
+}
+export class ToggleOrgMemorialPublishedSuccess implements Action {
+  readonly type = OrgMemActionTypes.TOGGLE_ORG_MEMORIAL_PUBLISHED_SUCCESS;
+  constructor (public payload: Memorial) {}
+}
+export class ToggleOrgMemorialPublishedFailure implements Action {
+  readonly type = OrgMemActionTypes.TOGGLE_ORG_MEMORIAL_PUBLISHED_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetFirstOrgMemorials
   | GetOrgMemorials
@@ -49,4 +65,7 @@ export type All =
   | GetOrgMemorialsFailure
   | CreateFreeOrgMemorial
   | CreateOrgMemorialSuccess
-  | CreateOrgMemorialFailure;
+  | CreateOrgMemorialFailure
+  | ToggleOrgMemorialPublished
+  | ToggleOrgMemorialPublishedSuccess
+  | ToggleOrgMemorialPublishedFailure;

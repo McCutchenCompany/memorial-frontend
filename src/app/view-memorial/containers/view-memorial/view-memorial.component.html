@@ -14,7 +14,7 @@
 <div class="container" *ngIf="loaded$ | async">
   <app-memorial-header [memorial]="(selectedMemorial$ | async).memorial"></app-memorial-header>
   <app-memorial-info [memorial]="(selectedMemorial$ | async).memorial" [location]="(selectedMemorial$ | async).location"></app-memorial-info>
-  <app-memorial-timeline *ngIf="(selectedMemorial$ | async).timeline.length > 0" [timeline]="(selectedMemorial$ | async).timeline" [memorial]="(selectedMemorial$ | async).memorial"></app-memorial-timeline>
+  <app-memorial-timeline *ngIf="(selectedMemorial$ | async).memorial.unlocked && (selectedMemorial$ | async).timeline.length > 0" [timeline]="(selectedMemorial$ | async).timeline" [memorial]="(selectedMemorial$ | async).memorial"></app-memorial-timeline>
   <app-memorial-album *ngIf="(selectedMemorial$ | async).memorial" [album]="(selectedMemorial$ | async).album" [memorial]="(selectedMemorial$ | async).memorial" (login)="onLogin()"></app-memorial-album>
   <app-memorial-memories
     *ngIf="(selectedMemorial$ | async).memories"

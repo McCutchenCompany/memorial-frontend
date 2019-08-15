@@ -2,17 +2,19 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { select, Store } from '@ngrx/store';
 import { getCreatedSaved, getCreatedSaving } from '@store/create-memorial';
-import { UploadCreatePhoto } from '@store/create-photos/photos.actions';
-import { getCreatePhotosSaved, getCreatePhotosSaving } from '@store/create-photos/reducers';
-import { CreateMemorialState } from '@store/models/create-memorial-state.model';
-import { Observable } from 'rxjs';
-
 import {
   ReplaceMemorialImage,
   ReplaceTimelineFile,
   UploadMemorialImage,
   UploadTimelineFile,
-} from './../../../store/create-memorial/create-memorial.actions';
+} from '@store/create-memorial/create-memorial.actions';
+import { UploadCreatePhoto } from '@store/create-photos/photos.actions';
+import { getCreatePhotosSaved, getCreatePhotosSaving } from '@store/create-photos/reducers';
+import { CreateMemorialState } from '@store/models/create-memorial-state.model';
+import { getOrganizationSaved, getOrganizationSaving } from '@store/organization/organization.reducer';
+import { Observable } from 'rxjs';
+
+import { ReplaceOrgImage, UploadOrgImage } from './../../../store/organization/organization.actions';
 
 @Component({
   selector: 'app-upload-dialog',
@@ -33,6 +35,8 @@ export class UploadDialogComponent implements OnInit {
   ) {
     if (data.context === 'create-album') {
       this.saving$ = this.store.pipe(select(getCreatePhotosSaving));
+    } else if (data.context === 'org') {
+      this.saving$ = this.store.pipe(select(getOrganizationSaving));
     } else {
       this.saving$ = this.store.pipe(select(getCreatedSaving));
     }
@@ -69,9 +73,26 @@ export class UploadDialogComponent implements OnInit {
         file: this.selectedFiles[0],
       };
       this.store.dispatch(new UploadCreatePhoto(payload));
+    } else if (this.data.context === 'org') {
+      const payload = {
+        id: this.data.organization,
+        image: this.selectedFiles[0],
+      };
+      if (this.data.action === 'upload') {
+        this.store.dispatch(new UploadOrgImage(payload));
+      } else if (this.data.action === 'replace') {
+        this.store.dispatch(new ReplaceOrgImage(payload));
+      }
     }
     if (this.data.context === 'create-album') {
       const sub = this.store.pipe(select(getCreatePhotosSaved)).subscribe(res => {
+        if (res) {
+          this.dialogRef.close();
+          sub.unsubscribe();
+        }
+      });
+    } else if (this.data.context === 'org') {
+      const sub = this.store.pipe(select(getOrganizationSaved)).subscribe(res => {
         if (res) {
           this.dialogRef.close();
           sub.unsubscribe();

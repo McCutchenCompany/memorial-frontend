@@ -24,6 +24,11 @@ export class OrganizationService {
     return this.http.get(path);
   }
 
+  updateOrganization(id: string, payload) {
+    const path = `${this.API_URL}/organizations/${id}`;
+    return this.http.patch(path, payload);
+  }
+
   getOrgMemorials(id: string, paginator: Paginator) {
     const path = `${this.API_URL}/organizations/${id}/memorials`
       + `?q=${paginator.q}&p=${paginator.p}&per_p=${paginator.per_p}&o_column=${paginator.o_column}&o_direction=${paginator.o_direction}`;

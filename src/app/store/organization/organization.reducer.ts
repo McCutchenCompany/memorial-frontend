@@ -60,6 +60,38 @@ export function organizationReducer(state: OrganizationState = INITIAL_STATE, ac
         error: action.payload
       };
     }
+    case OrganizationActionTypes.UPDATE_ORG:
+    case OrganizationActionTypes.REMOVE_ORG_IMAGE:
+    case OrganizationActionTypes.REPLACE_ORG_IMAGE:
+    case OrganizationActionTypes.UPLOAD_ORG_IMAGE: {
+      return {
+        ...state,
+        saving: true,
+        saved: false
+      };
+    }
+    case OrganizationActionTypes.UPDATE_ORG_SUCCESS:
+    case OrganizationActionTypes.REMOVE_ORG_IMAGE_SUCCESS:
+    case OrganizationActionTypes.REPLACE_ORG_IMAGE_SUCCESS:
+    case OrganizationActionTypes.UPLOAD_ORG_IMAGE_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        saved: true,
+        organization: action.payload
+      };
+    }
+    case OrganizationActionTypes.UPDATE_ORG_FAILURE:
+    case OrganizationActionTypes.REMOVE_ORG_IMAGE_FAILURE:
+    case OrganizationActionTypes.REPLACE_ORG_IMAGE_FAILURE:
+    case OrganizationActionTypes.UPLOAD_ORG_IMAGE_FAILURE: {
+      return {
+        ...state,
+        saving: false,
+        saved: false,
+        error: action.payload
+      };
+    }
     default: {
       return state;
     }
@@ -83,6 +115,10 @@ export const getOrganizationLoading = createSelector(
 export const getOrganizationLoaded = createSelector(
   getOrganizationState,
   state => state.loaded
+);
+export const getOrganizationError = createSelector(
+  getOrganizationState,
+  state => state.error
 );
 export const getOrganization = createSelector(
   getOrganizationState,

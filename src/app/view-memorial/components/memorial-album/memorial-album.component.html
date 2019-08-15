@@ -9,10 +9,11 @@
 <div class="container">
   <h3>Photo Album</h3>
   <p *ngIf="album.count > 0">{{ album.count }} Photo<span *ngIf="album.count !== 1">s</span></p>
-  <p>
+  <p *ngIf="memorial.unlocked">
     <span *ngIf="memorial.public_photo">Photos can be added to the photo album by anyone.</span>
     <span *ngIf="!memorial.public_photo">The owner of this memorial reviews all uploaded photos before they are added to the album.</span>
   </p>
+  <p *ngIf="!memorial.unlocked">This Memorial must be unlocked in order to add photos to the Photo Album.</p>
   <div class="album mat-elevation-z3">
     <button *ngIf="(user$ | async).uuid" mat-button class="primary" (click)="openUploader()">Add Photo</button>
     <button *ngIf="!(user$ | async).uuid" mat-button class="primary" (click)="onLogin()">Login to Add Photos</button>
@@ -44,5 +45,11 @@
     </div>
     <button mat-button class="primary mobile" [class.toggle]="hideMobile" (click)="toggle()">Hide Album</button>
     <mat-paginator *ngIf="album.count > 20" (page)="onPage($event)" [class.toggle]="hideMobile" [pageIndex]="page - 1" [pageSize]="20" [length]="album.count"></mat-paginator>
+    <div *ngIf="!memorial.unlocked" class="unlock">
+      <div class="content">
+        <mat-icon>lock</mat-icon>
+        <h5>Unlock to add Photos.</h5>
+      </div>
+    </div>
   </div>
 </div>

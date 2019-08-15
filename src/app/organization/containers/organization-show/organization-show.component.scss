@@ -1,8 +1,19 @@
 @import "src/styles.scss";
 
+.view {
+  position: relative;
+  overflow: hidden;
+}
+.loading-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 .container {
   width: 90%;
-  margin: auto;
+  margin: 0 auto rem(64);
   .memorials-container {
     padding: rem(36) 0;
   }
@@ -21,14 +32,68 @@
     }
   }
   .details {
-    margin: rem(36) 0;
+    margin: rem(16) 0 rem(36);
+  }
+  .edit-btn {
+    margin: rem(8) 0;
+  }
+}
+.error {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: rem(64) auto;
+  .image {
+    background-image: url('assets/imgs/error.jpeg');
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: rem(308);
+  }
+  .info {
+    width: 92%;
+    margin: auto;
+  }
+  h1 {
+    margin-bottom: rem(32);
+    font-size: rem(32);
+    line-height: rem(64);
+  }
+  p {
+    margin-top: rem(32);
+    margin-bottom: rem(100);
   }
 }
 @include respond-to('small') {
-
+  .error {
+    width: rem(767);
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .image {
+      width: 100%;
+      height: rem(443);
+    }
+    .info {
+      width: rem(690);
+      h1 {
+        font-size: rem(60);
+        line-height: rem(88);
+      }
+      p {
+        width: rem(400);
+      }
+    }
+  }
 }
 @include respond-to('medium') {
   .container {
     width: rem(1176);
+  }
+  .error {
+    width: rem(1176);
+    .image {
+      width: rem(440);
+    }
   }
 }

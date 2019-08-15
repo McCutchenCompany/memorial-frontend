@@ -1,3 +1,7 @@
 @import "src/styles.scss";
 
-
+mat-card {
+  h5 {
+    margin-bottom: rem(16);
+  }
+}

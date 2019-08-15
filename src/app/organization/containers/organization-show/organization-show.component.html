@@ -1,35 +1,52 @@
-<div class="container">
-  <div class="header">
-    <app-organization-header *ngIf="organization$ | async" [organization]="organization$ | async"></app-organization-header>
+<div class="view">
+  <div *ngIf="loading$ | async" class="loading-container">
+      <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
   </div>
-  <div class="details">
-    <app-organization-details *ngIf="organization$ | async" [organization]="organization$ | async"></app-organization-details>
-  </div>
-  <mat-card *ngIf="organization$ | async">
-    <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="Memorials">
-        <div class="memorials-container">
-          <div class="actions">
-            <form [formGroup]="searchForm">
-              <mat-form-field appearance="outline">
-                <mat-label>Search</mat-label>
-                <input matInput type="text" formControlName="q" (keyup)="onSearch()">
-              </mat-form-field>
-              <button *ngIf="searchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearSearch()"><mat-icon>highlight_off</mat-icon></button>
-            </form>
-            <button mat-button class="primary" [disabled]="saving$ | async" (click)="createFreeMemorial()"><mat-icon>add</mat-icon>Memorial</button>
+  <div *ngIf="!(loading$ | async) && (error$ | async)" class="error">
+      <div class="image">
+
+      </div>
+      <div class="info">
+          <h1>There was an error.</h1>
+          <h6 *ngIf="(error$ | async).status === 422">{{ (error$ | async).error?.error }}</h6>
+          <p>To join the organization you must visit the join link. Ask your organization owner to provide you with the organization join link.</p>
+      </div>
+    </div>
+  <div *ngIf="loaded$ | async" class="container">
+    <div class="header">
+      <app-organization-header *ngIf="organization$ | async" [organization]="organization$ | async"></app-organization-header>
+    </div>
+    <button class="edit-btn secondary" mat-button color="primary" matTooltip="Edit Details" [routerLink]="['/organization', (organization$ | async).uuid, 'edit']">Edit</button>
+    <div class="details">
+      <app-organization-details *ngIf="organization$ | async" [organization]="organization$ | async"></app-organization-details>
+    </div>
+    <mat-card *ngIf="organization$ | async">
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Memorials">
+          <div class="memorials-container">
+            <div class="actions">
+              <form [formGroup]="searchForm">
+                <mat-form-field appearance="outline">
+                  <mat-label>Search</mat-label>
+                  <input matInput type="text" formControlName="q" (keyup)="onSearch()">
+                </mat-form-field>
+                <button *ngIf="searchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearSearch()"><mat-icon>highlight_off</mat-icon></button>
+              </form>
+              <button mat-button class="primary" [disabled]="saving$ | async" (click)="createFreeMemorial()"><mat-icon>add</mat-icon>Memorial</button>
+            </div>
+            <app-memorial-table
+              *ngIf="(memorials$ | async).length > 0"
+              [memorials]="memorials$ | async"
+              [pageInfo]="paginator$ | async"
+              [loading]="loading$ | async"
+              [saving]="saving$ | async"
+              (sort)="onSort($event)"></app-memorial-table>
           </div>
-          <app-memorial-table
-            *ngIf="(memorials$ | async).length > 0"
-            [memorials]="memorials$ | async"
-            [pageInfo]="paginator$ | async"
-            [loading]="loading$ | async"
-            (sort)="onSort($event)"></app-memorial-table>
-        </div>
-      </mat-tab>
-      <mat-tab label="Members">
-        <app-add-members *ngIf="organization$ | async" [organization]="organization$ | async"></app-add-members>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
+        </mat-tab>
+        <mat-tab label="Members">
+          <app-add-members *ngIf="organization$ | async" [organization]="organization$ | async"></app-add-members>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
 </div>

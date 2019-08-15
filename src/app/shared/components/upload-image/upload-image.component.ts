@@ -11,7 +11,7 @@ import { UploadDialogComponent } from '../upload-dialog/upload-dialog.component'
 export class UploadImageComponent implements OnInit {
 
   @Input() id: string;
-  @Input() type: 'memorial' | 'timeline';
+  @Input() type: 'memorial' | 'timeline' | 'org';
 
   constructor(
     private dialog: MatDialog
@@ -37,6 +37,14 @@ export class UploadImageComponent implements OnInit {
           action: 'upload'
         },
         closeOnNavigation: false
+      });
+    } else if (this.type === 'org') {
+      this.dialog.open(UploadDialogComponent, {
+        data: {
+          context: 'org',
+          organization: this.id,
+          action: 'upload'
+        }
       });
     }
   }

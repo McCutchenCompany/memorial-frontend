@@ -1,6 +1,14 @@
 <div class="container">
   <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)">
 
+    <!-- Published Column -->
+    <ng-container matColumnDef="published">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Published</th>
+      <td mat-cell *matCellDef="let memorial">
+        <mat-checkbox [disabled]="saving" [checked]="memorial.published" (change)="onTogglePublished($event, memorial)" color="primary"></mat-checkbox>
+      </td>
+    </ng-container>
+
     <!-- Unlocked Column -->
     <ng-container matColumnDef="unlocked">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Unlocked</th>
@@ -40,7 +48,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayColumns;" class="mat-elevation-z2 group-data-row group-data-row-data" [routerLink]="['/create', row.uuid]"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns;" class="mat-elevation-z2 group-data-row group-data-row-data" (click)="onRowClick($event, row)"></tr>
 
   </table>
   <div *ngIf="loading" class="loading">

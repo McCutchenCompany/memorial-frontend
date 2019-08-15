@@ -64,4 +64,23 @@ export class ImageUploadService {
     const path = `${this.API_URL}/photos/${photo_id}?file=${file}`;
     return this.http.delete(path);
   }
+
+  uploadOrgImage(org_id: string, image: File) {
+    const path = `${this.API_URL}/organizations/${org_id}/image`;
+    const _formData = new FormData();
+    _formData.append('file', image, encodeURI(image.name));
+    return this.http.post(path, _formData);
+  }
+
+  replaceOrgImage(org_id: string, image: File) {
+    const path = `${this.API_URL}/organizations/${org_id}/replace_image`;
+    const _formData = new FormData();
+    _formData.append('file', image, encodeURI(image.name));
+    return this.http.patch(path, _formData);
+  }
+
+  removeOrgImage(org_id, route) {
+    const path = `${this.API_URL}/organizations/${org_id}/remove_image?file=${route}`;
+    return this.http.delete(path);
+  }
 }

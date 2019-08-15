@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatChipsModule,
   MatFormFieldModule,
   MatIconModule,
@@ -13,10 +14,12 @@ import {
   MatSortModule,
   MatTableModule,
   MatTabsModule,
+  MatTooltipModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { SharedModule } from '@shared/shared.module';
 import { OrgMemorialEffects } from '@store/organization-memorials/org-memorials.effects';
 import { orgMemorialReducer } from '@store/organization-memorials/org-memorials.reducer';
 import { OrganizationEffects } from '@store/organization/organization.effects';
@@ -27,9 +30,9 @@ import { MemorialTableComponent } from './components/memorial-table/memorial-tab
 import { OrganizationDetailsComponent } from './components/organization-details/organization-details.component';
 import { OrganizationHeaderComponent } from './components/organization-header/organization-header.component';
 import { CreateOrgComponent } from './containers/create-org/create-org.component';
+import { EditOrgComponent } from './containers/edit-org/edit-org.component';
 import { OrganizationShowComponent } from './containers/organization-show/organization-show.component';
 import { OrganizationRoutingModule } from './organization-routing.module';
-import { EditOrgComponent } from './containers/edit-org/edit-org.component';
 
 @NgModule({
   declarations: [
@@ -51,11 +54,14 @@ import { EditOrgComponent } from './containers/edit-org/edit-org.component';
     MatButtonModule,
     MatTableModule,
     MatChipsModule,
+    MatCheckboxModule,
     MatCardModule,
+    MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
     MatIconModule,
     MatTabsModule,
+    SharedModule,
     RouterModule,
     StoreModule.forFeature('organization', organizationReducer),
     StoreModule.forFeature('org-memorials', orgMemorialReducer),

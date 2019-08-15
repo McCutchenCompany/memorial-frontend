@@ -7,9 +7,11 @@ import { select, Store } from '@ngrx/store';
 import { UpdateCreateMemorial, UpdateSingleTimeline } from '@store/create-memorial/create-memorial.actions';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { ImageFormat } from '@store/models/image-format.model';
+import { UpdateOrg } from '@store/organization/organization.actions';
+import { getOrganizationSaved, getOrganizationSaving } from '@store/organization/organization.reducer';
 import { Observable } from 'rxjs';
 
-import { getCreatedSaved, getCreatedSaving } from './../../../store/create-memorial/create-memorial.reducer';
+import { getCreatedSaved, getCreatedSaving } from '../../../store/create-memorial/create-memorial.reducer';
 
 @Component({
   selector: 'app-image-editor',
@@ -43,7 +45,11 @@ export class ImageEditorComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private store: Store<CreateMemorialState>
   ) {
-    this.saving$ = this.store.pipe(select(getCreatedSaving));
+    if (this.data.type === 'org') {
+      this.saving$ = this.store.pipe(select(getOrganizationSaving));
+    } else {
+      this.saving$ = this.store.pipe(select(getCreatedSaving));
+    }
   }
 
   ngOnInit() {
@@ -185,12 +191,26 @@ export class ImageEditorComponent implements OnInit {
       };
       this.store.dispatch(new UpdateSingleTimeline(payload));
     }
-    const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
-      if (res) {
-        this.dialogRef.close();
-        sub.unsubscribe();
-      }
-    });
+    if (this.data.type === 'org') {
+      const payload = {
+        id: this.data.id,
+        body: this.imageFormat.value
+      };
+      this.store.dispatch(new UpdateOrg(payload));
+      const sub = this.store.pipe(select(getOrganizationSaved)).subscribe(res => {
+        if (res) {
+          this.dialogRef.close();
+          sub.unsubscribe();
+        }
+      });
+    } else {
+      const sub = this.store.pipe(select(getCreatedSaved)).subscribe(res => {
+        if (res) {
+          this.dialogRef.close();
+          sub.unsubscribe();
+        }
+      });
+    }
   }
 
 }

@@ -2,11 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@environments/environment';
+import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
+import { ImageEditorComponent } from '@shared/components/image-editor/image-editor.component';
 import { UploadDialogComponent } from '@shared/components/upload-dialog/upload-dialog.component';
 import { ImageFormat } from '@store/models/image-format.model';
-
-import { ImageEditorComponent } from '../image-editor/image-editor.component';
-import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-image-viewer',
@@ -17,7 +16,7 @@ export class ImageViewerComponent implements OnInit {
 
   @Input() image: string;
   @Input() id: string;
-  @Input() type: 'memorial' | 'timeline';
+  @Input() type: 'memorial' | 'timeline' | 'org';
   @Input() format: ImageFormat;
   @Output() remove: EventEmitter<{id: string, route: string}> = new EventEmitter<{id: string, route: string}>();
 
@@ -66,6 +65,14 @@ export class ImageViewerComponent implements OnInit {
         data: {
           context: 'memorial',
           memorial: this.id,
+          action: 'replace'
+        }
+      });
+    } else if (this.type === 'org') {
+      this.dialog.open(UploadDialogComponent, {
+        data: {
+          context: 'org',
+          organization: this.id,
           action: 'replace'
         }
       });

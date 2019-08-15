@@ -13,7 +13,7 @@ import { Store } from '@ngrx/store';
 import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
-import { MockMatDialogRef } from './../../../shared/testing/mockDialogRef';
+import { MockMatDialogRef } from '../../testing/mockDialogRef';
 import { ImageEditorComponent } from './image-editor.component';
 
 describe('ImageEditorComponent', () => {

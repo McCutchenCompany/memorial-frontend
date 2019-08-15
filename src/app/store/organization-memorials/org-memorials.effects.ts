@@ -4,6 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Memorial } from '@shared/models/memorial.model';
 import { Paginator } from '@shared/models/paginator.model';
+import { CreateMemorialService } from 'app/create-memorial/services/create-memorial.service';
 import { OrganizationService } from 'app/organization/services/organization.service';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -17,6 +18,9 @@ import {
   GetOrgMemorialsFailure,
   GetOrgMemorialsSuccess,
   OrgMemActionTypes,
+  ToggleOrgMemorialPublished,
+  ToggleOrgMemorialPublishedFailure,
+  ToggleOrgMemorialPublishedSuccess,
 } from './org-memorials.actions';
 
 @Injectable()
@@ -24,6 +28,7 @@ export class OrgMemorialEffects {
   constructor(
     private actions: Actions,
     private api: OrganizationService,
+    private memorialApi: CreateMemorialService,
     private router: Router
   ) {}
 
@@ -63,5 +68,14 @@ export class OrgMemorialEffects {
     map((action: CreateOrgMemorialSuccess) => {
       this.router.navigateByUrl(`/create/${action.payload.uuid}`);
     })
+  );
+
+  @Effect()
+  toggleOrgMemPublished$: Observable<Action> = this.actions.pipe(
+    ofType(OrgMemActionTypes.TOGGLE_ORG_MEMORIAL_PUBLISHED),
+    switchMap((action: ToggleOrgMemorialPublished) => this.memorialApi.updateCreateMemorial(action.payload.uuid, action.payload.body).pipe(
+      map((res: Memorial) => new ToggleOrgMemorialPublishedSuccess(res)),
+      catchError(error => of(new ToggleOrgMemorialPublishedFailure(error)))
+    ))
   );
 }

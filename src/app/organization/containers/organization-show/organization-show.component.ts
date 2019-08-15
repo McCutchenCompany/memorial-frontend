@@ -17,7 +17,7 @@ import {
   getOrgMemorialsSaving,
 } from '@store/organization-memorials/org-memorials.reducer';
 import { GetOrg } from '@store/organization/organization.actions';
-import { getOrganization } from '@store/organization/organization.reducer';
+import { getOrganization, getOrganizationError, getOrganizationLoaded } from '@store/organization/organization.reducer';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -32,6 +32,8 @@ export class OrganizationShowComponent implements OnInit {
   paginator$: Observable<Paginator>;
   saving$: Observable<boolean>;
   loading$: Observable<boolean>;
+  loaded$: Observable<boolean>;
+  error$: Observable<boolean>;
 
   orgId: string;
   paginator: Paginator;
@@ -54,6 +56,8 @@ export class OrganizationShowComponent implements OnInit {
     this.paginator$ = this.store.pipe(select(getOrgMemorialsPaginator));
     this.saving$ = this.store.pipe(select(getOrgMemorialsSaving));
     this.loading$ = this.store.pipe(select(getOrgMemorialsLoading));
+    this.loaded$ = this.store.pipe(select(getOrganizationLoaded));
+    this.error$ = this.store.pipe(select(getOrganizationError));
     this.paginator$.subscribe(res => this.paginator = res);
   }
 

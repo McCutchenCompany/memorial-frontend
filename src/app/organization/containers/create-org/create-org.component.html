@@ -21,6 +21,6 @@
     </form>
     <button mat-button class="primary" [disabled]="(saving$ | async) || orgForm.invalid" (click)="onSubmit()">
       <span *ngIf="!(saving$ | async)">Create</span>
-      <mat-progress-spinner *ngIf="(saving$ | async)" mode="indeterminate" strokeWidth="1" diameter="20"></mat-progress-spinner>
+      <span>Creating...</span>
     </button>
 </div>

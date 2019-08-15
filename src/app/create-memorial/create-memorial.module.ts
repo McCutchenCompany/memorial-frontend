@@ -34,8 +34,6 @@ import { AlbumViewerComponent } from './components/album-viewer/album-viewer.com
 import { ApprovalCardComponent } from './components/approval-card/approval-card.component';
 import { ApproveMemoriesComponent } from './components/approve-memories/approve-memories.component';
 import { ApprovePhotosComponent } from './components/approve-photos/approve-photos.component';
-import { ImageEditorComponent } from './components/image-editor/image-editor.component';
-import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { TimelineFormComponent } from './components/timeline-form/timeline-form.component';
 import { CreateMemorialComponent } from './containers/create-memorial/create-memorial.component';
@@ -81,19 +79,14 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
   declarations: [
     CreateMemorialComponent,
     MemorialInfoComponent,
-    ImageViewerComponent,
     CreateTimelineComponent,
     TimelineFormComponent,
     AddLocationComponent,
     ApproveMemoriesComponent,
     ApprovalCardComponent,
-    ImageEditorComponent,
     CreateNavComponent,
     ApprovePhotosComponent,
     AlbumViewerComponent
-  ],
-  entryComponents: [
-    ImageEditorComponent
   ]
 })
 export class CreateMemorialModule { }

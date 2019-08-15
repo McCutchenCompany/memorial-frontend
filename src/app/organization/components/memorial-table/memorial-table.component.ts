@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Paginator } from '@shared/models/paginator.model';
 
 import { Memorial } from './../../../shared/models/memorial.model';
+import { ToggleOrgMemorialPublished } from './../../../store/organization-memorials/org-memorials.actions';
 
 @Component({
   selector: 'app-memorial-table',
@@ -15,6 +17,7 @@ export class MemorialTableComponent implements OnChanges {
   @Input() memorials: Memorial[];
   @Input() pageInfo: Paginator;
   @Input() loading: boolean;
+  @Input() saving: boolean;
   @Output() sort: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild(MatPaginator)
@@ -23,6 +26,7 @@ export class MemorialTableComponent implements OnChanges {
   sorter: MatSort;
 
   displayColumns: string[] = [
+    'published',
     'unlocked',
     'first_name',
     'middle_name',
@@ -40,7 +44,8 @@ export class MemorialTableComponent implements OnChanges {
   }
 
   constructor(
-    private store: Store<any>
+    private store: Store<any>,
+    private router: Router
   ) { }
 
   ngOnChanges() {
@@ -56,6 +61,22 @@ export class MemorialTableComponent implements OnChanges {
     page.o_column = sort.direction ? sort.active : 'created_at';
     page.o_direction = sort.direction ? sort.direction : 'desc';
     this.sort.emit(page);
+  }
+
+  onTogglePublished(event, memorial) {
+    const payload = {
+      uuid: memorial.uuid,
+      body: {
+        published: event.checked
+      }
+    };
+    this.store.dispatch(new ToggleOrgMemorialPublished(payload));
+  }
+
+  onRowClick(event, row) {
+    if (event.target.className.indexOf('checkbox') < 0) {
+      this.router.navigate(['/create', row.uuid]);
+    }
   }
 
 }

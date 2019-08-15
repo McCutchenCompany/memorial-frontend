@@ -78,12 +78,23 @@ export function orgMemorialReducer(state = INITIAL_STATE, action: All): OrgMemor
         error: action.payload
       };
     }
+    case OrgMemActionTypes.TOGGLE_ORG_MEMORIAL_PUBLISHED:
     case OrgMemActionTypes.CREATE_FREE_ORG_MEMORIAL: {
       return {
         ...state,
         saving: true,
         saved: false
       };
+    }
+    case OrgMemActionTypes.TOGGLE_ORG_MEMORIAL_PUBLISHED_SUCCESS: {
+      return orgMemAdapter.updateOne({
+        id: action.payload.uuid,
+        changes: {published: action.payload.published}
+      }, {
+        ...state,
+        saving: false,
+        saved: true
+      });
     }
     case OrgMemActionTypes.CREATE_ORG_MEMORIAL_SUCCESS: {
       return {
@@ -92,6 +103,7 @@ export function orgMemorialReducer(state = INITIAL_STATE, action: All): OrgMemor
         saved: true
       };
     }
+    case OrgMemActionTypes.TOGGLE_ORG_MEMORIAL_PUBLISHED_FAILURE:
     case OrgMemActionTypes.CREATE_ORG_MEMORIAL_FAILURE: {
       return {
         ...state,

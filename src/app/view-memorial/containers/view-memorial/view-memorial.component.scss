@@ -13,10 +13,11 @@
   top: rem(112);
   left: rem(20);
   right: rem(20);
+  opacity: 0.9;
   mat-card {
     display: flex;
     justify-content: space-between;
-    background: map-get($colors, primary-lightest);
+    background: map-get($colors, secondary-lightest);
   }
 }
 .error {

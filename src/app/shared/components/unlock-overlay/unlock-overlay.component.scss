@@ -10,6 +10,10 @@ mat-card {
     font-size: rem(40);
     height: rem(40);
     width: rem(40);
+    color: map-get($colors, success);
+    &.hovered {
+      color: map-get($colors, tertiary);
+    }
   }
   p {
     width: rem(350);

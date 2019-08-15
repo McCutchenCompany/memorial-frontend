@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-icon>{{ isHover ? 'lock_open' : 'lock' }}</mat-icon>
+  <mat-icon [class.hovered]="!isHover">{{ isHover ? 'lock_open' : 'lock' }}</mat-icon>
   <h3>Unlock Memorial</h3>
   <p>
     Tell {{ memorial.first_name ? memorial.first_name + '\'s' : 'the' }} story

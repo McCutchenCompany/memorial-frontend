@@ -15,7 +15,7 @@ import { UploadImageComponent } from '@shared/components/upload-image/upload-ima
 import { TestStore } from '@shared/testing/test-store';
 import { configureTestSuite } from 'ng-bullet';
 
-import { ImageViewerComponent } from './../image-viewer/image-viewer.component';
+import { ImageViewerComponent } from '@shared/components/image-viewer/image-viewer.component';
 import { MemorialInfoComponent } from './memorial-info.component';
 
 describe('MemorialInfoComponent', () => {

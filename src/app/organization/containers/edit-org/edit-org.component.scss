@@ -1,0 +1,49 @@
+@import "src/styles.scss";
+
+.loading-container {
+  display: flex;
+  justify-content: space-around;
+  margin: rem(150) 0;
+}
+.container {
+  width: 90%;
+  margin: rem(60) auto;
+  .header {
+    display: flex;
+    align-items: center;
+    button {
+      margin-left: rem(16);
+      padding-left: rem(8);
+    }
+  }
+  .forms {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: rem(104);
+  }
+  .image {
+    width: rem(460);
+    transform: translateY(rem(-47));
+    h4 {
+      margin-bottom: rem(16);
+    }
+  }
+  form {
+    width: rem(680);
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}
+@include respond-to('small') {
+
+}
+@include respond-to('medium') {
+  .container {
+    width: rem(1176);
+  }
+}
