@@ -14,7 +14,11 @@ export class AddMembersComponent implements OnInit {
   @Input() organization: Organization;
 
   get join_link() {
-    return `${environment.url}join-org/${this.organization.invite_link}`;
+    return `${environment.url}organization/join/${this.organization.invite_link}`;
+  }
+
+  get display_link() {
+    return `${environment.url}organization/join`;
   }
 
   constructor() { }

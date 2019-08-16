@@ -20,9 +20,9 @@ export class MemorialTableComponent implements OnChanges {
   @Input() saving: boolean;
   @Output() sort: EventEmitter<any> = new EventEmitter<any>();
 
-  @ViewChild(MatPaginator)
+  @ViewChild(MatPaginator, {static: false})
   paginator: MatPaginator;
-  @ViewChild(MatSort)
+  @ViewChild(MatSort, {static: false})
   sorter: MatSort;
 
   displayColumns: string[] = [

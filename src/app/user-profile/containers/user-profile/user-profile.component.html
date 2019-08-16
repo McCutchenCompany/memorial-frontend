@@ -2,7 +2,7 @@
   <app-user-info [user]="user$ | async" (saveUser)="onEdit($event)"></app-user-info>
   <app-user-orgs *ngIf="(user$ | async).organizations.length > 0" [organizations]="(user$ | async).organizations"></app-user-orgs>
   <app-my-memorials [memorials]="(user$ | async).memorials" [user]="user$ | async" (addLicense)="onAddMemorial($event)"></app-my-memorials>
-  <p *ngIf="(user$ | async).organizations.length === 0">
+  <p *ngIf="(user$ | async).organizations.length === 0" class="org-prompt">
     Need to create an account for your Funeral Home or organization?
     <a [routerLink]="['/organization', 'create-org']">Click here</a>
   </p>

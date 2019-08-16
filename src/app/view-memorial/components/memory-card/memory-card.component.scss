@@ -1,4 +1,4 @@
-@import "src/styles.scss";
+@import "src/assets/styles/_variables.scss";
 
 mat-card.mat-card {
   background: map-get($colors, background);

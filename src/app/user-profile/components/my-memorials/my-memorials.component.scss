@@ -1,7 +1,11 @@
-@import "src/styles.scss";
+@import "src/assets/styles/_variables.scss";
 
 .container {
   margin-bottom: rem(150);
+  .content {
+    display: flex;
+    align-items: center;
+  }
 }
 .memorial-card {
   margin: rem(50) 0;
@@ -13,7 +17,7 @@ h2 {
   font-size: rem(32);
 }
 button {
-  margin: rem(32) 0 0;
+  margin: 0 0 0 rem(36);
 }
 @include respond-to('small') {
   .container {
@@ -39,6 +43,6 @@ button {
     display: inline;
   }
   button {
-    margin: rem(64) 0 0;
+    margin: 0 0 0 rem(36);
   }
 }

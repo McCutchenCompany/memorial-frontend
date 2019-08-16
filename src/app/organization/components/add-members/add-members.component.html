@@ -5,7 +5,8 @@
       <mat-chip-list class="chips">
         <mat-chip
           color="primary"
-          selected#tooltip="matTooltip"
+          selected
+          #tooltip="matTooltip"
           [matTooltipDisabled]="false"
           [matTooltipHideDelay]="1000"
           matTooltip="Copy"
@@ -15,7 +16,7 @@
           [cbContent]="join_link"
           (click)="showToolTip(tooltip)">
           <mat-icon>link</mat-icon>
-          <span>{{ join_link }}</span>
+          <span>{{ display_link }}</span>
         </mat-chip>
       </mat-chip-list>
     </div>

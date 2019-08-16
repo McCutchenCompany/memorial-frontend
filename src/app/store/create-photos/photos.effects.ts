@@ -109,7 +109,7 @@ export class CreatePhotosEffects {
   approvePhoto$: Observable<Action> = this.actions.pipe(
     ofType(CreatePhotosActionTypes.APPROVE_PHOTO),
     withLatestFrom(this.store.pipe(select(getNeedApprovalPhotoIds)), this.store.pipe(select(getCreatePhotosCount))),
-    switchMap(([action, ids, count]: [ApprovePhoto, string[], any]) => {
+    switchMap(([action, ids, count]: [ApprovePhoto, any[], any]) => {
       return this.api.updatePhotoApproval(action.payload.photo_id, action.payload.memorial_id, {published: true, denied: false}).pipe(
         map((res: Photo) => {
           if (ids.includes(res.uuid)) {
@@ -142,7 +142,7 @@ export class CreatePhotosEffects {
   denyPhoto$: Observable<Action> = this.actions.pipe(
     ofType(CreatePhotosActionTypes.DENY_PHOTO),
     withLatestFrom(this.store.pipe(select(getNeedApprovalPhotoIds)), this.store.pipe(select(getCreatePhotosCount))),
-    switchMap(([action, ids, count]: [DenyPhoto, string[], any]) => {
+    switchMap(([action, ids, count]: [DenyPhoto, any[], any]) => {
       return this.api.updatePhotoApproval(action.payload.photo_id, action.payload.memorial_id, {published: false, denied: true}).pipe(
         map((res: Photo) => {
           if (ids.includes(res.uuid)) {

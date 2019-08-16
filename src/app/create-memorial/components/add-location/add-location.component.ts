@@ -23,7 +23,7 @@ export class AddLocationComponent implements OnInit {
   memorial$: Observable<any>;
   memorial_id: string;
 
-  @ViewChild('search') searchElRef: ElementRef;
+  @ViewChild('search', {static: false}) searchElRef: ElementRef;
 
   memorialLocation$: Observable<any>;
   saving$: Observable<boolean>;

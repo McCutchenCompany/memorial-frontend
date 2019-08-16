@@ -39,11 +39,15 @@ export function organizationReducer(state: OrganizationState = INITIAL_STATE, ac
     }
     case OrganizationActionTypes.JOIN_ORG:
     case OrganizationActionTypes.GET_ORG: {
-      return {
-        ...state,
-        loading: true,
-        loaded: false
-      };
+      if (state.organization && state.organization.uuid === action.payload) {
+        return;
+      } else {
+        return {
+          ...state,
+          loading: true,
+          loaded: false
+        };
+      }
     }
     case OrganizationActionTypes.JOIN_ORG_SUCCESS:
     case OrganizationActionTypes.GET_ORG_SUCCESS: {

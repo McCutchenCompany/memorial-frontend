@@ -1,4 +1,4 @@
-@import "src/styles.scss";
+@import "src/assets/styles/_variables.scss";
 
 .loading-container {
   display: flex;
@@ -11,6 +11,9 @@
   app-user-info {
     width: 90%;
   }
+}
+.org-prompt {
+  margin-top: rem(64);
 }
 @include respond-to('small') {
   .container {

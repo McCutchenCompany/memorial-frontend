@@ -1,67 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700');
 
 @import "src/theme.scss";
+@import "src/assets/styles/_variables.scss";
 
 
-$breakpoints: (
-  'small':  767px,
-  'medium': 1176px,
-  'large':  1200px
-) !default;
-
-/// Mixin to manage responsive breakpoints
-/// @param {String} $breakpoint - Breakpoint name
-/// @require $breakpoints
-@mixin respond-to($breakpoint) {
-  // If the key exists in the map
-  @if map-has-key($breakpoints, $breakpoint) {
-    // Prints a media query based on the value
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
-      @content;
-    }
-  }
-
-  // If the key doesn't exist in the map
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{map-keys($breakpoints)}.";
-  }
-}
-
-$colors: (
-  primary: #3A559B,
-  primary-dark: #31488C,
-  primary-darkest: #0D2059,
-  primary-light: #657FC2,
-  primary-lightest: #BECAE8,
-  secondary: #846075,
-  secondary-dark: #78586B,
-  secondary-darkest: #6D4F60,
-  secondary-light: #8F6E81,
-  secondary-lightest: #9A7C8E,
-  tertiary: #AF5D63,
-  tertiary-dark: #A0555A,
-  tertiary-darkest: #904D52,
-  tertiary-light: #B66B71,
-  tertiary-lightest: #BD7A7F,
-  black: #141E28,
-  white: #FFFFFF,
-  gray: #ACB3BF,
-  dark-gray: #6E737D,
-  off-white: #F2F3F5,
-  background: #DADEE6,
-  warn: #961414,
-  warn-light: #ebcece,
-  success: #0A6455
-);
-
-@function rem($size) {
-  $remSize: $size / 16;
-  @return $remSize * 1rem;
-}
-
-$sansFont: 'Noto Sans', sans-serif;
-$serifFont: 'Noto Serif', serif;
 
 .agm-map-container-inner {
   width: 100% !important;
