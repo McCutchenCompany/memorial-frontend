@@ -55,4 +55,4 @@
     <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
   </div>
 </div>
-  <mat-paginator [length]="pageInfo.total" [pageSize]="page.per_p" [pageIndex]="page.p"></mat-paginator>
+  <mat-paginator [length]="pageInfo.total" [pageSize]="page.per_p" [pageIndex]="page.p" (page)="onPage($event)"></mat-paginator>

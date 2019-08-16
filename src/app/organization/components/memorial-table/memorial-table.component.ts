@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Paginator } from '@shared/models/paginator.model';
@@ -20,8 +20,6 @@ export class MemorialTableComponent implements OnChanges {
   @Input() saving: boolean;
   @Output() sort: EventEmitter<any> = new EventEmitter<any>();
 
-  @ViewChild(MatPaginator, {static: false})
-  paginator: MatPaginator;
   @ViewChild(MatSort, {static: false})
   sorter: MatSort;
 
@@ -51,7 +49,6 @@ export class MemorialTableComponent implements OnChanges {
   ngOnChanges() {
     this.dataSource = new MatTableDataSource<Memorial>(this.memorials);
     setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sorter;
     }, 50);
   }
@@ -77,6 +74,12 @@ export class MemorialTableComponent implements OnChanges {
     if (event.target.className.indexOf('checkbox') < 0) {
       this.router.navigate(['/create', row.uuid]);
     }
+  }
+
+  onPage(event) {
+    const page = this.pageInfo;
+    page.p = (event.pageIndex + 1).toString();
+    this.sort.emit(page);
   }
 
 }

@@ -25,26 +25,42 @@
         <mat-tab label="Memorials">
           <div class="memorials-container">
             <div class="actions">
-              <form [formGroup]="searchForm">
+              <form [formGroup]="memorialSearchForm">
                 <mat-form-field appearance="outline">
                   <mat-label>Search</mat-label>
-                  <input matInput type="text" formControlName="q" (keyup)="onSearch()">
+                  <input matInput type="text" formControlName="q" (keyup)="onMemorialsSearch()">
                 </mat-form-field>
-                <button *ngIf="searchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearSearch()"><mat-icon>highlight_off</mat-icon></button>
+                <button *ngIf="memorialSearchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearMemorialsSearch()"><mat-icon>highlight_off</mat-icon></button>
               </form>
-              <button mat-button class="primary" [disabled]="saving$ | async" (click)="createFreeMemorial()"><mat-icon>add</mat-icon>Memorial</button>
+              <button mat-button class="primary" [disabled]="memorialsSaving$ | async" (click)="createFreeMemorial()"><mat-icon>add</mat-icon>Memorial</button>
             </div>
             <app-memorial-table
               *ngIf="(memorials$ | async).length > 0"
               [memorials]="memorials$ | async"
-              [pageInfo]="paginator$ | async"
-              [loading]="loading$ | async"
-              [saving]="saving$ | async"
-              (sort)="onSort($event)"></app-memorial-table>
+              [pageInfo]="memorialsPaginator$ | async"
+              [loading]="memorialsLoading$ | async"
+              [saving]="memorialsSaving$ | async"
+              (sort)="onMemorialsSort($event)"></app-memorial-table>
           </div>
         </mat-tab>
         <mat-tab label="Members">
           <app-add-members *ngIf="organization$ | async" [organization]="organization$ | async"></app-add-members>
+          <div class="actions">
+            <form [formGroup]="memberSearchForm">
+              <mat-form-field appearance="outline">
+                <mat-label>Search</mat-label>
+                <input matInput type="text" formControlName="q" (keyup)="onMembersSearch()">
+              </mat-form-field>
+              <button *ngIf="memberSearchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearMembersSearch()"><mat-icon>highlight_off</mat-icon></button>
+            </form>
+          </div>
+          <app-member-table
+            *ngIf="(members$ | async).length > 0"
+            [users]="members$ | async"
+            [pageInfo]="membersPaginator$ | async"
+            [loading]="membersLoading$ | async"
+            [saving]="membersSaving$ | async"
+            (change)="onMembersChange($event)"></app-member-table>
         </mat-tab>
       </mat-tab-group>
     </mat-card>

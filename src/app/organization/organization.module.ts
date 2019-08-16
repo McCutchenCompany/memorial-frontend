@@ -20,6 +20,8 @@ import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '@shared/shared.module';
+import { orgMemberReducer } from '@store/organization-members/organization-members.reducer';
+import { OrgMembersEffects } from '@store/organization-members/organization-membrs.effects';
 import { OrgMemorialEffects } from '@store/organization-memorials/org-memorials.effects';
 import { orgMemorialReducer } from '@store/organization-memorials/org-memorials.reducer';
 import { OrganizationEffects } from '@store/organization/organization.effects';
@@ -35,6 +37,7 @@ import { EditOrgComponent } from './containers/edit-org/edit-org.component';
 import { JoinOrgComponent } from './containers/join-org/join-org.component';
 import { OrganizationShowComponent } from './containers/organization-show/organization-show.component';
 import { OrganizationRoutingModule } from './organization-routing.module';
+import { MemberTableComponent } from './components/member-table/member-table.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { OrganizationRoutingModule } from './organization-routing.module';
     OrganizationDetailsComponent,
     AddMembersComponent,
     EditOrgComponent,
-    JoinOrgComponent
+    JoinOrgComponent,
+    MemberTableComponent
   ],
   imports: [
     CommonModule,
@@ -69,9 +73,11 @@ import { OrganizationRoutingModule } from './organization-routing.module';
     ClipboardModule,
     StoreModule.forFeature('organization', organizationReducer),
     StoreModule.forFeature('org-memorials', orgMemorialReducer),
+    StoreModule.forFeature('org-members', orgMemberReducer),
     EffectsModule.forFeature([
       OrganizationEffects,
-      OrgMemorialEffects
+      OrgMemorialEffects,
+      OrgMembersEffects
     ])
   ]
 })

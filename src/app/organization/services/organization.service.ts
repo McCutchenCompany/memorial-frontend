@@ -35,6 +35,12 @@ export class OrganizationService {
     return this.http.get(path);
   }
 
+  getOrgMembers(id: string, paginator: Paginator) {
+    const path = `${this.API_URL}/organizations/${id}/members`
+      + `?q=${paginator.q}&p=${paginator.p}&per_p=${paginator.per_p}&o_column=${paginator.o_column}&o_direction=${paginator.o_direction}`;
+    return this.http.get(path);
+  }
+
   createOrganizationMemorial(id: string) {
     const path = `${this.API_URL}/organizations/${id}/memorial`;
     return this.http.post(path, {});

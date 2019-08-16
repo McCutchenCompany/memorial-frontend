@@ -40,7 +40,7 @@ export function organizationReducer(state: OrganizationState = INITIAL_STATE, ac
     case OrganizationActionTypes.JOIN_ORG:
     case OrganizationActionTypes.GET_ORG: {
       if (state.organization && state.organization.uuid === action.payload) {
-        return;
+        return state;
       } else {
         return {
           ...state,
