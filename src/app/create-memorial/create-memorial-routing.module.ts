@@ -6,6 +6,7 @@ import { ApproveMemoriesComponent } from 'app/create-memorial/components/approve
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { ApprovePhotosComponent } from './components/approve-photos/approve-photos.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
+import { MemorialShareComponent } from './components/memorial-share/memorial-share.component';
 import { CreateMemorialComponent } from './containers/create-memorial/create-memorial.component';
 import { CreateTimelineComponent } from './containers/create-timeline/create-timeline.component';
 
@@ -15,7 +16,8 @@ const createMemorialRoutes: Routes = [
     { path: 'timeline', component: CreateTimelineComponent },
     { path: 'location', component: AddLocationComponent },
     { path: 'photos', component: ApprovePhotosComponent },
-    { path: 'memories', component: ApproveMemoriesComponent }
+    { path: 'memories', component: ApproveMemoriesComponent },
+    { path: 'share', component: MemorialShareComponent }
   ]},
 ];
 

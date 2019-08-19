@@ -39,6 +39,7 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
   public medium = 1200;
   public opened = true;
 
+  isHover = false;
   memorialUUID;
 
   get activeTab() {
@@ -125,6 +126,10 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
       }
     };
     this.store.dispatch(new UpdateCreateMemorial(payload));
+  }
+
+  toggleHover() {
+    this.isHover = !this.isHover;
   }
 
 }

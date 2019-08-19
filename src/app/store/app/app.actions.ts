@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { Memorial } from '@shared/models/memorial.model';
 
 export enum AppActionTypes {
   CHECK_DISCOUNT = '[App] Check discount',
@@ -9,6 +10,9 @@ export enum AppActionTypes {
   PURCHASE_LICENSE = '[Create] Purchase license',
   PURCHASE_LICENSE_SUCCESS = '[Create] Purchase license success',
   PURCHASE_LICENSE_FAILURE = '[Create] Purchase license failure',
+  CREATE_FREE_MEMORIAL = '[Create] Create free memorial',
+  CREATE_FREE_MEMORIAL_SUCCESS = '[Create] Create free memorial success',
+  CREATE_FREE_MEMORIAL_FAILURE = '[Create] Create free memorial failure',
   SEND_SUPPORT_EMAIL = '[App] Send support email',
   SEND_SUPPORT_EMAIL_SUCCESS = '[App] Send support email success',
   SEND_SUPPORT_EMAIL_FAILURE = '[App] Send suport email failure',
@@ -48,6 +52,18 @@ export class PurchaseLicenseSuccess implements Action {
 }
 export class PurchaseLicenseFailure implements Action {
   readonly type = AppActionTypes.PURCHASE_LICENSE_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class CreateFreeMemorial implements Action {
+  readonly type = AppActionTypes.CREATE_FREE_MEMORIAL;
+}
+export class CreateFreeMemorialSuccess implements Action {
+  readonly type = AppActionTypes.CREATE_FREE_MEMORIAL_SUCCESS;
+  constructor (public payload: Memorial) {}
+}
+export class CreateFreeMemorialFailure implements Action {
+  readonly type = AppActionTypes.CREATE_FREE_MEMORIAL_FAILURE;
   constructor (public payload: any) {}
 }
 

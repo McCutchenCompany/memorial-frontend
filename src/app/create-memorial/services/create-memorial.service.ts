@@ -26,6 +26,12 @@ export class CreateMemorialService {
     return this.http.post(path, body);
   }
 
+  createFreeMemorial() {
+    const path = `${this.API_URL}/users/memorial`;
+    const body = {};
+    return this.http.post(path, body);
+  }
+
   createMemorial(user_id) {
     const path = `${this.API_URL}/memorials`;
     const body = {

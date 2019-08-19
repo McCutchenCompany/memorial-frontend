@@ -23,6 +23,18 @@
       </button>
       <router-outlet></router-outlet>
       <app-footer></app-footer>
+      <div *ngIf="!(memorial$ | async).memorial.unlocked && !unlockOverlay" class="lock-banner">
+        <mat-card class="content">
+          <div class="header">
+            <div class="title">
+              <mat-icon [class.hovered]="!isHover">{{ isHover ? 'lock_open' : 'lock' }}</mat-icon>
+              <h4>Limited Memorial</h4>
+            </div>
+            <p>Unlock to add full features.</p>
+          </div>
+          <button mat-button class="primary" (mouseenter)="toggleHover()" (mouseleave)="toggleHover()">Unlock</button>
+        </mat-card>
+      </div>
     </div>
     <div *ngIf="!(memorial$ | async).memorial.unlocked && unlockOverlay" class="unlock-overlay">
       <app-unlock-overlay [memorial]="(memorial$ | async).memorial"></app-unlock-overlay>

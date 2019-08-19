@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { PaymentComponent } from '@shared/components/payment/payment.component';
 import { Memorial } from '@shared/models/memorial.model';
 import { Organization } from '@shared/models/organization.model';
 import { Paginator } from '@shared/models/paginator.model';
@@ -13,11 +15,7 @@ import {
   getOrgMembersPaginator,
   getOrgMembersSaving,
 } from '@store/organization-members/organization-members.reducer';
-import {
-  CreateFreeOrgMemorial,
-  GetFirstOrgMemorials,
-  GetOrgMemorials,
-} from '@store/organization-memorials/org-memorials.actions';
+import { GetFirstOrgMemorials, GetOrgMemorials } from '@store/organization-memorials/org-memorials.actions';
 import {
   getAllOrgMemorials,
   getOrgMemorialsLoading,
@@ -28,7 +26,11 @@ import { GetOrg } from '@store/organization/organization.actions';
 import { getOrganization, getOrganizationError, getOrganizationLoaded } from '@store/organization/organization.reducer';
 import { Observable } from 'rxjs';
 
+import {
+  CreateMemorialOptionsComponent,
+} from './../../../shared/components/create-memorial-options/create-memorial-options.component';
 import { GetOrgMembers } from './../../../store/organization-members/organization-members.actions';
+import { CreateFreeOrgMemorial } from './../../../store/organization-memorials/org-memorials.actions';
 
 @Component({
   selector: 'app-organization-show',
@@ -60,7 +62,8 @@ export class OrganizationShowComponent implements OnInit {
   constructor(
     private store: Store<any>,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.route.params.subscribe(params => {
       this.store.dispatch(new GetOrg(params.id));
@@ -96,8 +99,18 @@ export class OrganizationShowComponent implements OnInit {
     });
   }
 
-  createFreeMemorial() {
-    this.store.dispatch(new CreateFreeOrgMemorial(this.orgId));
+  createMemorial() {
+    this.dialog.open(CreateMemorialOptionsComponent, {
+      maxWidth: '38.75rem',
+      width: '100vw',
+      autoFocus: false
+    }).afterClosed().subscribe(res => {
+      if (res) {
+        res.free ? this.store.dispatch(new CreateFreeOrgMemorial(this.orgId)) : this.dialog.open(PaymentComponent, {
+          closeOnNavigation: true
+        });
+      }
+    });
   }
 
   onMembersChange(event) {

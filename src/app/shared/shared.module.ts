@@ -5,6 +5,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
+  MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
@@ -24,6 +25,7 @@ import { FileSaverModule } from 'ngx-filesaver';
 
 import { AlbumUploaderComponent } from './components/album-uploader/album-uploader.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { CreateMemorialOptionsComponent } from './components/create-memorial-options/create-memorial-options.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ImageEditorComponent } from './components/image-editor/image-editor.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
@@ -53,6 +55,7 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MatCardModule,
     MatMenuModule,
     MatIconModule,
+    MatDividerModule,
     MatRippleModule,
     MatProgressBarModule,
     MatSnackBarModule,
@@ -76,7 +79,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MemorialResultCardComponent,
     UnlockOverlayComponent,
     ImageEditorComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    CreateMemorialOptionsComponent
   ],
   declarations: [
     UploadImageComponent,
@@ -95,7 +99,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     AlbumUploaderComponent,
     UnlockOverlayComponent,
     ImageEditorComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    CreateMemorialOptionsComponent
   ],
   entryComponents: [
     UploadDialogComponent,
@@ -106,7 +111,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MemoryEditDialogComponent,
     PhotoAlbumShowComponent,
     AlbumUploaderComponent,
-    ImageEditorComponent
+    ImageEditorComponent,
+    CreateMemorialOptionsComponent
   ]
 })
 export class SharedModule { }

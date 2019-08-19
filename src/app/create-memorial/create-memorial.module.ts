@@ -7,6 +7,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatChipsModule,
   MatDatepickerModule,
   MatDividerModule,
   MatExpansionModule,
@@ -20,12 +21,14 @@ import {
   MatSidenavModule,
   MatSliderModule,
   MatTabsModule,
+  MatTooltipModule,
 } from '@angular/material';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '@shared/shared.module';
 import { CreatePhotosEffects } from '@store/create-photos/photos.effects';
 import { createPhotoReducer } from '@store/create-photos/reducers';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import * as fromStore from '../store/create-memorial';
 import { CreateMemorialEffects } from './../store/create-memorial/create-memorial.effects';
@@ -35,6 +38,7 @@ import { ApprovalCardComponent } from './components/approval-card/approval-card.
 import { ApproveMemoriesComponent } from './components/approve-memories/approve-memories.component';
 import { ApprovePhotosComponent } from './components/approve-photos/approve-photos.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
+import { MemorialShareComponent } from './components/memorial-share/memorial-share.component';
 import { TimelineFormComponent } from './components/timeline-form/timeline-form.component';
 import { CreateMemorialComponent } from './containers/create-memorial/create-memorial.component';
 import { CreateNavComponent } from './containers/create-nav/create-nav.component';
@@ -45,6 +49,7 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
 @NgModule({
   imports: [
     CommonModule,
+    ClipboardModule,
     CreateMemorialRoutingModule,
     MatInputModule,
     MatFormFieldModule,
@@ -54,6 +59,8 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     MatNativeDateModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatChipsModule,
+    MatTooltipModule,
     MatIconModule,
     MatTabsModule,
     MatSelectModule,
@@ -86,7 +93,8 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     ApprovalCardComponent,
     CreateNavComponent,
     ApprovePhotosComponent,
-    AlbumViewerComponent
+    AlbumViewerComponent,
+    MemorialShareComponent
   ]
 })
 export class CreateMemorialModule { }

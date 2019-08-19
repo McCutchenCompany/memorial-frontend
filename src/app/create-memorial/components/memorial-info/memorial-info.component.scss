@@ -4,6 +4,7 @@
   position: absolute;
   width: 100%;
   z-index: -1;
+  transform: translateY(rem(-136));
   .flourish-container {
     position: relative;
     width: 100%;
@@ -41,7 +42,6 @@
 .container {
   width: 95%;
   margin: 0 auto rem(125);
-  padding-top: rem(64);
   form {
     background-color: rgba(255,255,255,0.9);
     padding: rem(32);

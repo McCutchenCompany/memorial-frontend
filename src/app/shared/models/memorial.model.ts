@@ -21,4 +21,5 @@ export class Memorial {
   scale: number;
   rot: number;
   unlocked: boolean;
+  invite_link;
 }

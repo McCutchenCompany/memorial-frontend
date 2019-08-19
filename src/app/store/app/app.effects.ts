@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, select, Store } from '@ngrx/store';
+import { Memorial } from '@shared/models/memorial.model';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
@@ -12,6 +13,9 @@ import {
   CheckDiscount,
   CheckDiscountFailure,
   CheckDiscountSuccess,
+  CreateFreeMemorial,
+  CreateFreeMemorialFailure,
+  CreateFreeMemorialSuccess,
   PurchaseLicense,
   PurchaseLicenseFailure,
   PurchaseLicenseSuccess,
@@ -60,6 +64,23 @@ export class AppEffects {
     ofType(AppActionTypes.PURCHASE_LICENSE_SUCCESS),
     map((action: PurchaseLicenseSuccess) => {
       this.router.navigateByUrl(`/create/${action.payload.memorials[0].uuid}`);
+    })
+  );
+
+  @Effect()
+  createFreeMemorial$: Observable<Action> = this.actions.pipe(
+    ofType(AppActionTypes.CREATE_FREE_MEMORIAL),
+    switchMap((action: CreateFreeMemorial) => this.api.createFreeMemorial().pipe(
+      map((res: Memorial) => new CreateFreeMemorialSuccess(res)),
+      catchError(error => of(new CreateFreeMemorialFailure(error)))
+    ))
+  );
+
+  @Effect({dispatch: false})
+  createFreeMemorialSuccess$ = this.actions.pipe(
+    ofType(AppActionTypes.CREATE_FREE_MEMORIAL_SUCCESS),
+    map((action: CreateFreeMemorialSuccess) => {
+      this.router.navigate(['/create', action.payload.uuid]);
     })
   );
 

@@ -56,4 +56,10 @@
     [routerLinkActiveOptions]="{ exact: true }"
     class="nav-option"><mat-icon>add_comment</mat-icon>Memories</button>
   <mat-divider></mat-divider>
+  <button
+    [routerLink]="['/create', memorial?.uuid, 'share']"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="nav-option"><mat-icon>link</mat-icon>Share</button>
+  <mat-divider></mat-divider>
 </div>

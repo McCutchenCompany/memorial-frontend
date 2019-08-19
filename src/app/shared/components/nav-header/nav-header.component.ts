@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { CreateFreeMemorial } from '@store/app';
 import { Auth0Login, SignOut } from '@store/auth/auth.actions';
 import { AuthState } from '@store/models/auth-state.model';
 
+import { CreateMemorialOptionsComponent } from './../create-memorial-options/create-memorial-options.component';
 import { PaymentComponent } from './../payment/payment.component';
 
 @Component({
@@ -40,8 +42,16 @@ export class NavHeaderComponent implements OnInit {
 
   onCreateMemorial() {
     if (this.loggedIn) {
-      this.dialog.open(PaymentComponent, {
-        closeOnNavigation: true
+      this.dialog.open(CreateMemorialOptionsComponent, {
+        maxWidth: '38.75rem',
+        width: '100vw',
+        autoFocus: false
+      }).afterClosed().subscribe(res => {
+        if (res) {
+          res.free ? this.store.dispatch(new CreateFreeMemorial()) : this.dialog.open(PaymentComponent, {
+            closeOnNavigation: true
+          });
+        }
       });
     } else {
       this.store.dispatch(new Auth0Login());

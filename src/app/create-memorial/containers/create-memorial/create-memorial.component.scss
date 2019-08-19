@@ -29,6 +29,7 @@ mat-drawer-container {
 .view {
   position: relative;
   padding-bottom: 300px;
+  padding-top: rem(136);
   min-height: calc(100vh - 463px);
 }
 .container {
@@ -54,6 +55,33 @@ mat-drawer-container {
     margin: rem(64) auto;
   }
 }
+.lock-banner {
+  .content {
+    position: fixed;
+    top: rem(112);
+    left: rem(20);
+    right: rem(20);
+    display: flex;
+    justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: rgba(255,255,255,.8);
+    z-index: 100;
+    .title {
+      display: flex;
+      align-items: center;
+      mat-icon {
+        margin-right: rem(8);
+        color: map-get($colors, success);
+        &.hovered {
+          color: map-get($colors, tertiary);
+        }
+      }
+    }
+  }
+}
 @include respond-to('small') {
   .container {
     h2 {
@@ -64,6 +92,13 @@ mat-drawer-container {
 @include respond-to('medium') {
   .container {
     width: rem(1176);
+  }
+}
+@include respond-to('large') {
+  .lock-banner {
+    .content {
+      left: rem(370);
+    }
   }
 }
 

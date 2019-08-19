@@ -32,7 +32,7 @@
                 </mat-form-field>
                 <button *ngIf="memorialSearchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearMemorialsSearch()"><mat-icon>highlight_off</mat-icon></button>
               </form>
-              <button mat-button class="primary" [disabled]="memorialsSaving$ | async" (click)="createFreeMemorial()"><mat-icon>add</mat-icon>Memorial</button>
+              <button mat-button class="primary" [disabled]="memorialsSaving$ | async" (click)="createMemorial()"><mat-icon>add</mat-icon>Memorial</button>
             </div>
             <app-memorial-table
               *ngIf="(memorials$ | async).length > 0"

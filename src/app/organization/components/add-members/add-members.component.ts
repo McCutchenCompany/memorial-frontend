@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTooltip } from '@angular/material';
+import { environment } from '@environments/environment';
 import { Organization } from '@shared/models/organization.model';
-
-import { environment } from './../../../../environments/environment';
 
 @Component({
   selector: 'app-add-members',

@@ -1,0 +1,27 @@
+<div class="container">
+  <mat-card class="mat-elevation-z4">
+    <div class="link">
+      <h4>Edit Link</h4>
+      <mat-chip-list class="chips">
+        <mat-chip
+          color="primary"
+          selected
+          #tooltip="matTooltip"
+          [matTooltipDisabled]="false"
+          [matTooltipHideDelay]="1000"
+          matTooltip="Copy"
+          aria-tooltip="Copy"
+          matTooltipPosition="above"
+          ngxClipboard
+          [cbContent]="join_link"
+          (click)="showToolTip(tooltip)">
+          <mat-icon>link</mat-icon>
+          <span>{{ display_link }}</span>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <p class="secondary">
+      Anyone with this link will have edit access to this memorial.
+    </p>
+  </mat-card>
+</div>

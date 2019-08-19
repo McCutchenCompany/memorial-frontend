@@ -4,19 +4,18 @@ import { select, Store } from '@ngrx/store';
 import { UploadDialogComponent } from '@shared/components/upload-dialog/upload-dialog.component';
 import { Photo } from '@shared/models/photo.model';
 import { getCreateMemorial } from '@store/create-memorial';
+import { UpdateCreateMemorial } from '@store/create-memorial/create-memorial.actions';
+import { GetCreatePhotos } from '@store/create-photos/photos.actions';
 import {
   getAllApprovedPhotos,
   getAllCreatePhotos,
   getAllDeniedPhotos,
   getAllNeedApprovalPhotos,
   getCreateAllPhotoTotal,
+  getCreatePhotosCount,
 } from '@store/create-photos/reducers';
 import { CreateMemorialState } from '@store/models/create-memorial-state.model';
 import { Observable } from 'rxjs';
-
-import { UpdateCreateMemorial } from './../../../store/create-memorial/create-memorial.actions';
-import { GetCreatePhotos } from './../../../store/create-photos/photos.actions';
-import { getCreatePhotosCount } from './../../../store/create-photos/reducers';
 
 @Component({
   selector: 'app-approve-photos',
