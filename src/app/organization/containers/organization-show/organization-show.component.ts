@@ -31,6 +31,7 @@ import {
 } from './../../../shared/components/create-memorial-options/create-memorial-options.component';
 import { GetOrgMembers } from './../../../store/organization-members/organization-members.actions';
 import { CreateFreeOrgMemorial } from './../../../store/organization-memorials/org-memorials.actions';
+import { getOrganizationLoading } from './../../../store/organization/organization.reducer';
 
 @Component({
   selector: 'app-organization-show',
@@ -48,6 +49,7 @@ export class OrganizationShowComponent implements OnInit {
   membersSaving$: Observable<boolean>;
   memorialsLoading$: Observable<boolean>;
   membersLoading$: Observable<boolean>;
+  loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   error$: Observable<boolean>;
 
@@ -82,6 +84,7 @@ export class OrganizationShowComponent implements OnInit {
     this.membersLoading$ = this.store.pipe(select(getOrgMembersLoading));
     this.loaded$ = this.store.pipe(select(getOrganizationLoaded));
     this.error$ = this.store.pipe(select(getOrganizationError));
+    this.loading$ = this.store.pipe(select(getOrganizationLoading));
     this.memorialsPaginator$.subscribe(res => this.memorialsPaginator = res);
     this.membersPaginator$.subscribe(res => this.membersPaginator = res);
   }
