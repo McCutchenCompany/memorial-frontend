@@ -1,0 +1,46 @@
+@import "src/assets/styles/_variables.scss";
+
+.container {
+  margin-bottom: rem(60);
+}
+mat-card {
+  position: relative;
+  width: rem(208);
+  min-height: rem(160);
+  margin: rem(24) auto;
+  .image-border {
+    position: absolute;
+    height: rem(120);
+    width: rem(240);
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background: map-get($colors, dark-gray);
+  }
+  .image {
+    height: rem(120);
+    width: rem(240);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+  }
+  .info {
+    margin-top: rem(114);
+    .unlock {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mat-icon, h4 {
+        color: map-get($colors, success);
+      }
+    }
+  }
+  .date-and-loc {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}

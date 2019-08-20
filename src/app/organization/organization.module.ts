@@ -37,7 +37,6 @@ import { EditOrgComponent } from './containers/edit-org/edit-org.component';
 import { JoinOrgComponent } from './containers/join-org/join-org.component';
 import { OrganizationShowComponent } from './containers/organization-show/organization-show.component';
 import { OrganizationRoutingModule } from './organization-routing.module';
-import { MemberTableComponent } from './components/member-table/member-table.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +47,7 @@ import { MemberTableComponent } from './components/member-table/member-table.com
     OrganizationDetailsComponent,
     AddMembersComponent,
     EditOrgComponent,
-    JoinOrgComponent,
-    MemberTableComponent
+    JoinOrgComponent
   ],
   imports: [
     CommonModule,

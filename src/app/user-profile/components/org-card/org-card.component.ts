@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@environments/environment.staging';
 import { Organization } from '@shared/models/organization.model';
 
@@ -24,13 +25,25 @@ export class OrgCardComponent implements OnInit {
 
   get imgFormat() {
     if (this.organization.image) {
-      return `${environment.s3.url}${this.organization.image}`;
+      return {
+        src: `${environment.s3.url}${this.organization.image}`,
+        transform: this.sanitizer.bypassSecurityTrustStyle(
+          `scale(${this.organization.scale / 100})
+          rotate(${this.organization.rot}deg)
+          translate(${this.organization.posX.toString()}px, ${this.organization.posY.toString()}px)`
+        )
+      };
     } else {
-      return 'assets/imgs/location.jpeg';
+      return {
+        src: 'assets/imgs/location.jpeg',
+        transform: ''
+      };
     }
   }
 
-  constructor() { }
+  constructor(
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit() {
   }

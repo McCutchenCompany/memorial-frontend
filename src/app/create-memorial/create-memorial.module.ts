@@ -20,6 +20,8 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatSliderModule,
+  MatSortModule,
+  MatTableModule,
   MatTabsModule,
   MatTooltipModule,
 } from '@angular/material';
@@ -28,6 +30,8 @@ import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '@shared/shared.module';
 import { CreatePhotosEffects } from '@store/create-photos/photos.effects';
 import { createPhotoReducer } from '@store/create-photos/reducers';
+import { MemorialMembersEffects } from '@store/memorial-members/memorial-members.effects';
+import { MemorialMemberReducer } from '@store/memorial-members/memorial-members.reducer';
 import { ClipboardModule } from 'ngx-clipboard';
 
 import * as fromStore from '../store/create-memorial';
@@ -60,6 +64,9 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     MatButtonModule,
     MatCheckboxModule,
     MatChipsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     MatTooltipModule,
     MatIconModule,
     MatTabsModule,
@@ -73,9 +80,11 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     SharedModule,
     StoreModule.forFeature('createMemorial', fromStore.createMemorialReducer),
     StoreModule.forFeature('createPhotos', createPhotoReducer),
+    StoreModule.forFeature('memorial-members', MemorialMemberReducer),
     EffectsModule.forFeature([
       CreateMemorialEffects,
-      CreatePhotosEffects
+      CreatePhotosEffects,
+      MemorialMembersEffects
     ]),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE',

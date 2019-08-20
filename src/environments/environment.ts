@@ -24,11 +24,12 @@ export const environment = {
     publicKey: 'pk_test_nN2N0PLFIBrWEW9Atg1HdGen'
   },
   url: 'http://localhost:4200/',
-  discount: '7ede932c',
+  discount: null,
   example: {
     uuid: '41f5a855-c76d-4385-b97f-aeee827bbccc',
     name: 'Obi-wan Kenobi'
-  }
+  },
+  price: 50
 };
 
 /*

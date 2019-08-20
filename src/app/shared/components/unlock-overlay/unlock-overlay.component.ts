@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Memorial } from './../../models/memorial.model';
 
@@ -10,6 +10,7 @@ import { Memorial } from './../../models/memorial.model';
 export class UnlockOverlayComponent implements OnInit {
 
   @Input() memorial: Memorial;
+  @Output() unlock: EventEmitter<any> = new EventEmitter<any>();
 
   isHover = false;
 
@@ -20,6 +21,10 @@ export class UnlockOverlayComponent implements OnInit {
 
   toggleHover() {
     this.isHover = !this.isHover;
+  }
+
+  onUnlock() {
+    this.unlock.emit();
   }
 
 }

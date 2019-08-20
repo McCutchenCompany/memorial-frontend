@@ -25,6 +25,9 @@ import {
   SendSupportEmail,
   SendSupportEmailFailure,
   SendSupportEmailSuccess,
+  UnlockMemorial,
+  UnlockMemorialFailure,
+  UnlockMemorialSuccess,
 } from './app.actions';
 import { getDiscountCode } from './app.reducer';
 
@@ -55,6 +58,17 @@ export class AppEffects {
       return this.api.addLicense(action.payload.token, action.payload.quantity, action.payload.price, discount || null).pipe(
         map(res => new PurchaseLicenseSuccess(res)),
         catchError(error => of(new PurchaseLicenseFailure(error)))
+      );
+    })
+  );
+
+  @Effect()
+  unlockMemorial$: Observable<Action> = this.actions.pipe(
+    ofType(AppActionTypes.UNLOCK_MEMORIAL),
+    switchMap((action: UnlockMemorial) => {
+      return this.api.unlockMemorial(action.payload.token, action.payload.memorial_id, action.payload.price).pipe(
+        map((res: Memorial) => new UnlockMemorialSuccess(res)),
+        catchError(error => of(new UnlockMemorialFailure(error)))
       );
     })
   );

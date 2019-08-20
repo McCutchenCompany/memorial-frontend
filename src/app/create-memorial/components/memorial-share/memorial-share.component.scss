@@ -5,8 +5,51 @@
   margin: auto;
   padding-bottom: rem(100);
   mat-card.mat-card {
-    width: rem(690);
     margin: auto;
+    position: relative;
+    &.edit-link {
+      max-width: rem(530);
+    }
+    .org-owners, .members-container {
+      margin: rem(36) 0;
+      h5 {
+        margin-bottom: rem(16);
+      }
+    }
+    &.org-card {
+      padding: rem(2);
+      height: rem(120);
+      display: flex;
+      align-items: center;
+      .info-offset {
+        width: rem(255);
+      }
+      .org-container {
+        padding-right: rem(16);
+        p {
+          margin: 0;
+        }
+      }
+    }
+    .image-border {
+      position: absolute;
+      height: rem(120);
+      width: rem(224);
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      background: map-get($colors, dark-gray);
+    }
+    .image {
+      height: rem(120);
+      width: rem(224);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      img {
+        width: 100%;
+      }
+    }
   }
   .link {
     display: flex;

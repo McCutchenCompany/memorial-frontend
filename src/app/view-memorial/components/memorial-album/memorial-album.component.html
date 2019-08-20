@@ -49,6 +49,7 @@
       <div class="content">
         <mat-icon>lock</mat-icon>
         <h5>Unlock to add Photos.</h5>
+        <button *ngIf="(user$ | async).uuid" mat-button class="primary" (click)="openUnlock()">Unlock</button>
       </div>
     </div>
   </div>

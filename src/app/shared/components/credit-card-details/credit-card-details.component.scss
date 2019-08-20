@@ -1,0 +1,75 @@
+@import "src/assets/styles/_variables.scss";
+
+form {
+  .cardholder {
+    display: flex;
+    justify-content: space-between;
+    .name {
+      width: 100%;
+    }
+  }
+  .card-number {
+    width: 100%;
+  }
+  .details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .exp {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      mat-form-field {
+        width: 45%;
+      }
+    }
+    .cvc, .zip {
+      width: 45%;
+    }
+  }
+  .desktop {
+    display: none;
+  }
+  .error {
+    float: right;
+    color: map-get($colors, warn);
+  }
+  .loading {
+    padding: rem(8) rem(42);
+  }
+  &.card-form {
+    padding-bottom: rem(64);
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@include respond-to('small') {
+  form {
+    .cardholder {
+      .name {
+        width: 50%;
+      }
+      .desktop {
+        display: block;
+      }
+    }
+    .details {
+      flex-wrap: nowrap;
+      .exp {
+        width: 50%;
+      }
+      .cvc {
+        width: rem(204);
+        width: initial;
+      }
+      .mobile {
+        display: none;
+      }
+    }
+    &.card-form {
+      padding-bottom: 0;
+    }
+  }
+}

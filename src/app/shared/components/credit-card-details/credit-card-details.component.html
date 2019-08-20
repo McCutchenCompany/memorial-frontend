@@ -1,0 +1,53 @@
+<form class="card-form" [formGroup]="cardForm">
+    <h3>Card Details</h3>
+    <div class="cardholder">
+      <mat-form-field matTooltip="Credit Card not required" [matTooltipDisabled]="price > 0"  class="name" appearance="outline">
+        <mat-label>Cardholder Name</mat-label>
+        <input matInput formControlName="name" autocomplete="cc-name">
+      </mat-form-field>
+      <mat-form-field matTooltip="Credit Card not required" [matTooltipDisabled]="price > 0"  class="desktop" appearance="outline">
+        <mat-label>Billing Zip</mat-label>
+        <input matInput formControlName="address_zip" autocomplete="shipping postal-code">
+      </mat-form-field>
+    </div>
+    <mat-form-field matTooltip="Credit Card not required" [matTooltipDisabled]="price > 0"  class="card-number" appearance="outline">
+      <mat-label>Card Number</mat-label>
+      <input matInput formControlName="number" autocomplete="cc-number" ccNumber>
+    </mat-form-field>
+    <div class="details">
+      <div class="exp">
+        <mat-form-field matTooltip="Credit Card not required" [matTooltipDisabled]="price > 0"  appearance="outline">
+          <mat-label>Month</mat-label>
+          <mat-select formControlName="exp_month" autocomplete="cc-exp-month">
+            <mat-option *ngFor="let month of monthOptions" [value]="month">
+              {{ month }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field matTooltip="Credit Card not required" [matTooltipDisabled]="price > 0"  appearance="outline">
+          <mat-label>Year</mat-label>
+          <mat-select formControlName="exp_year" autocomplete="cc-exp-year">
+            <mat-option *ngFor="let year of yearOption" [value]="year">
+              {{ year }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-form-field matTooltip="Credit Card not required" [matTooltipDisabled]="price > 0"  class="cvc" appearance="outline">
+        <mat-label>CVC</mat-label>
+        <input matInput formControlName="cvc" autocomplete="off" ccCVC>
+      </mat-form-field>
+      <mat-form-field matTooltip="Credit Card not required" [matTooltipDisabled]="price > 0"  class="zip mobile" appearance="outline">
+        <mat-label>Billing Zip</mat-label>
+        <input matInput formControlName="address_zip" autocomplete="shipping postal-code">
+      </mat-form-field>
+    </div>
+    <div class="actions">
+      <button mat-button class="secondary" (click)="onBack()"><mat-icon>keyboard_arrow_left</mat-icon> Back</button>
+      <button mat-button class="primary" [class.loading]="(purchasing$ | async)" (click)="onSubmit()" [disabled]="disableBtn || (purchasing$ | async)">
+        <span *ngIf="!(purchasing$ | async)">Purchase ({{ price | currency }})</span>
+        <span *ngIf="(purchasing$ | async)"><mat-progress-spinner strokeWidth="1" diameter="20" mode="indeterminate" color="secondary"></mat-progress-spinner></span>
+      </button>
+    </div>
+    <p *ngIf="error" class="error">{{ error.error.error }}</p>
+  </form>

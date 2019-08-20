@@ -1,27 +1,59 @@
 <div class="container">
-  <mat-card class="mat-elevation-z4">
-    <div class="link">
-      <h4>Edit Link</h4>
-      <mat-chip-list class="chips">
-        <mat-chip
-          color="primary"
-          selected
-          #tooltip="matTooltip"
-          [matTooltipDisabled]="false"
-          [matTooltipHideDelay]="1000"
-          matTooltip="Copy"
-          aria-tooltip="Copy"
-          matTooltipPosition="above"
-          ngxClipboard
-          [cbContent]="join_link"
-          (click)="showToolTip(tooltip)">
-          <mat-icon>link</mat-icon>
-          <span>{{ display_link }}</span>
-        </mat-chip>
-      </mat-chip-list>
+  <mat-card>
+    <mat-card class="mat-elevation-z4 edit-link">
+      <div class="link">
+        <h4>Edit Link</h4>
+        <mat-chip-list class="chips">
+          <mat-chip
+            color="primary"
+            selected
+            #tooltip="matTooltip"
+            [matTooltipDisabled]="false"
+            [matTooltipHideDelay]="1000"
+            matTooltip="Copy"
+            aria-tooltip="Copy"
+            matTooltipPosition="above"
+            ngxClipboard
+            [cbContent]="join_link"
+            (click)="showToolTip(tooltip)">
+            <mat-icon>link</mat-icon>
+            <span>{{ display_link }}</span>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <p class="secondary">
+        Copy and share this link to give edit access to this memorial.<br>
+        Anyone with the link will be able to make changes.
+      </p>
+    </mat-card>
+    <div *ngIf="(org$ | async)?.length > 0" class="org-owners">
+      <h5>Owner</h5>
+      <div *ngFor="let org of (org$ | async)">
+        <mat-card class="org-card">
+          <div class="image-border">
+            <div class="image">
+              <img [src]="orgImage(org).src" [style.transform]="orgImage(org).transform">
+            </div>
+          </div>
+          <div class="info-offset"></div>
+          <div class="org-container">
+            <div class="info">
+              <h5>{{ org.name }}</h5>
+              <p *ngIf="org.address">{{ org.address }}</p>
+            </div>
+          </div>
+        </mat-card>
+      </div>
     </div>
-    <p class="secondary">
-      Anyone with this link will have edit access to this memorial.
-    </p>
+    <div *ngIf="(members$ | async)?.length > 0" class="members-container">
+      <h5>Members</h5>
+      <app-member-table
+      *ngIf="(members$ | async).length > 0"
+      [users]="members$ | async"
+      [pageInfo]="memberPaginator$ | async"
+      [loading]="memberLoading$ | async"
+      [saving]="memberSaving$ | async"
+      (change)="onMembersChange($event)"></app-member-table>
+    </div>
   </mat-card>
 </div>

@@ -1,7 +1,10 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { UnlockPurchaseComponent } from '@shared/components/unlock-purchase/unlock-purchase.component';
+import { Memorial } from '@shared/models/memorial.model';
 import {
   ClearCreateMemorial,
   GetCreateMemorial,
@@ -41,6 +44,7 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
 
   isHover = false;
   memorialUUID;
+  memorial: Memorial;
 
   get activeTab() {
     switch (this.routeFragment) {
@@ -64,7 +68,8 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
     private route: ActivatedRoute,
     private store: Store<CreateMemorialState>,
     private renderer: Renderer2,
-    private breakpoint: BreakpointObserver
+    private breakpoint: BreakpointObserver,
+    private dialog: MatDialog
   ) {
     this.memorial$ = this.store.pipe(select(getCreateMemorial));
     this.loading$ = this.store.pipe(select(getCreateLoading));
@@ -75,6 +80,7 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
     this.memorial$.subscribe(res => {
       if (res && res.memorial) {
         this.memorialUUID = res.memorial.uuid;
+        this.memorial = res.memorial;
       }
     });
     this.store.pipe(select(getRouterState)).subscribe(res => {
@@ -130,6 +136,16 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
 
   toggleHover() {
     this.isHover = !this.isHover;
+  }
+
+  openUnlock() {
+    this.dialog.open(UnlockPurchaseComponent, {
+      data: this.memorial
+    }).afterClosed().subscribe(res => {
+      if (res && res.purchased) {
+        this.store.dispatch(new GetCreateMemorial(this.memorialUUID));
+      }
+    });
   }
 
 }

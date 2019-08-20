@@ -46,4 +46,10 @@ export class ViewMemorialService {
     const path = `${this.API_URL}/photos/${photo_id}`;
     return this.http.patch(path, payload);
   }
+
+  joinMemorial(invite_link: string) {
+    const path = `${this.API_URL}/user_memorials/join_memorial`;
+    const body = {invite_link};
+    return this.http.post(path, body);
+  };
 }

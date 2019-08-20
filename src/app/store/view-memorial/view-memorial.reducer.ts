@@ -23,6 +23,7 @@ export const INITIAL_STATE: ViewMemorialState = {
 
 export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, action: All) {
   switch (action.type) {
+    case ViewMemorialActionTypes.JOIN_MEMORIAL:
     case ViewMemorialActionTypes.GET_MEMORIAL: {
       return {
         ...state,
@@ -39,6 +40,7 @@ export function viewMemorialReducer(state: ViewMemorialState = INITIAL_STATE, ac
         selectedMemorial: action.payload
       };
     }
+    case ViewMemorialActionTypes.JOIN_MEMORIAL_FAILURE:
     case ViewMemorialActionTypes.GET_MEMORIAL_FAILURE: {
       return {
         ...state,

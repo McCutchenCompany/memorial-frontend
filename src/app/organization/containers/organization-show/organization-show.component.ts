@@ -3,19 +3,26 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import {
+  CreateMemorialOptionsComponent,
+} from '@shared/components/create-memorial-options/create-memorial-options.component';
 import { PaymentComponent } from '@shared/components/payment/payment.component';
 import { Memorial } from '@shared/models/memorial.model';
 import { Organization } from '@shared/models/organization.model';
 import { Paginator } from '@shared/models/paginator.model';
 import { User } from '@shared/models/user.model';
-import { GetFirstOrgMembers } from '@store/organization-members/organization-members.actions';
+import { GetFirstOrgMembers, GetOrgMembers } from '@store/organization-members/organization-members.actions';
 import {
   getAllOrgMembers,
   getOrgMembersLoading,
   getOrgMembersPaginator,
   getOrgMembersSaving,
 } from '@store/organization-members/organization-members.reducer';
-import { GetFirstOrgMemorials, GetOrgMemorials } from '@store/organization-memorials/org-memorials.actions';
+import {
+  CreateFreeOrgMemorial,
+  GetFirstOrgMemorials,
+  GetOrgMemorials,
+} from '@store/organization-memorials/org-memorials.actions';
 import {
   getAllOrgMemorials,
   getOrgMemorialsLoading,
@@ -23,15 +30,13 @@ import {
   getOrgMemorialsSaving,
 } from '@store/organization-memorials/org-memorials.reducer';
 import { GetOrg } from '@store/organization/organization.actions';
-import { getOrganization, getOrganizationError, getOrganizationLoaded } from '@store/organization/organization.reducer';
-import { Observable } from 'rxjs';
-
 import {
-  CreateMemorialOptionsComponent,
-} from './../../../shared/components/create-memorial-options/create-memorial-options.component';
-import { GetOrgMembers } from './../../../store/organization-members/organization-members.actions';
-import { CreateFreeOrgMemorial } from './../../../store/organization-memorials/org-memorials.actions';
-import { getOrganizationLoading } from './../../../store/organization/organization.reducer';
+  getOrganization,
+  getOrganizationError,
+  getOrganizationLoaded,
+  getOrganizationLoading,
+} from '@store/organization/organization.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-organization-show',
@@ -51,7 +56,7 @@ export class OrganizationShowComponent implements OnInit {
   membersLoading$: Observable<boolean>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
-  error$: Observable<boolean>;
+  error$: Observable<any>;
 
   orgId: string;
   memorialsPaginator: Paginator;

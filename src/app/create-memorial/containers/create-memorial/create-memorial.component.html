@@ -32,12 +32,12 @@
             </div>
             <p>Unlock to add full features.</p>
           </div>
-          <button mat-button class="primary" (mouseenter)="toggleHover()" (mouseleave)="toggleHover()">Unlock</button>
+          <button mat-button class="primary" (mouseenter)="toggleHover()" (mouseleave)="toggleHover()" (click)="openUnlock()">Unlock</button>
         </mat-card>
       </div>
     </div>
     <div *ngIf="!(memorial$ | async).memorial.unlocked && unlockOverlay" class="unlock-overlay">
-      <app-unlock-overlay [memorial]="(memorial$ | async).memorial"></app-unlock-overlay>
+      <app-unlock-overlay [memorial]="(memorial$ | async).memorial" (unlock)="openUnlock()"></app-unlock-overlay>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

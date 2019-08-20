@@ -16,7 +16,7 @@ export const INITIAL_STATE: AppState = {
   },
   error: null,
   discount: {
-    percent: 100,
+    percent: 0,
     code: environment.discount,
     one_time_use: false,
     error: null
@@ -55,6 +55,7 @@ export function appReducer(state: AppState = INITIAL_STATE, action: All) {
         }
       };
     }
+    case AppActionTypes.UNLOCK_MEMORIAL:
     case AppActionTypes.GET_STRIPE_KEY:
     case AppActionTypes.PURCHASE_LICENSE: {
       return {
@@ -64,6 +65,7 @@ export function appReducer(state: AppState = INITIAL_STATE, action: All) {
         error: INITIAL_STATE.error
       };
     }
+    case AppActionTypes.UNLOCK_MEMORIAL_SUCCESS:
     case AppActionTypes.PURCHASE_LICENSE_SUCCESS: {
       return {
         ...state,
@@ -72,6 +74,7 @@ export function appReducer(state: AppState = INITIAL_STATE, action: All) {
         discount: INITIAL_STATE.discount
       };
     }
+    case AppActionTypes.UNLOCK_MEMORIAL_FAILURE:
     case AppActionTypes.PURCHASE_LICENSE_FAILURE: {
       return {
         ...state,

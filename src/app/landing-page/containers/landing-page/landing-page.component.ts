@@ -35,6 +35,10 @@ export class LandingPageComponent implements OnInit {
     }
   }
 
+  get price() {
+    return environment.price;
+  }
+
   constructor(
     private dialog: MatDialog,
     private store: Store<AppState>

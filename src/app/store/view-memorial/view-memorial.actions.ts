@@ -14,7 +14,10 @@ export enum ViewMemorialActionTypes {
   EDIT_MEMORY_SUCCESS = '[View Memorial] Edit memory success',
   EDIT_MEMORY_FAILURE = '[View Memorial] Edit memory failure',
   REMOVE_PHOTO_FROM_COUNT = '[View Memorial] Remove photo from count',
-  ADD_PHOTO_TO_COUNT = '[View Memorial] Add photo to count'
+  ADD_PHOTO_TO_COUNT = '[View Memorial] Add photo to count',
+  JOIN_MEMORIAL = '[View Memorial] Join memorial',
+  JOIN_MEMORIAL_SUCCESS = '[View Memorial] Join memorial success',
+  JOIN_MEMORIAL_FAILURE = '[View Memorial] Join memorial failure'
 }
 
 export class GetMemorial implements Action {
@@ -76,6 +79,19 @@ export class AddPhotoToCount implements Action {
   readonly type = ViewMemorialActionTypes.ADD_PHOTO_TO_COUNT;
 }
 
+export class JoinMemorial implements Action {
+  readonly type = ViewMemorialActionTypes.JOIN_MEMORIAL;
+  constructor (public payload: string) {}
+}
+export class JoinMemorialSuccess implements Action {
+  readonly type = ViewMemorialActionTypes.JOIN_MEMORIAL_SUCCESS;
+  constructor (public payload: any) {}
+}
+export class JoinMemorialFailure implements Action {
+  readonly type = ViewMemorialActionTypes.JOIN_MEMORIAL_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetMemorial
   | GetMemorialSuccess
@@ -90,4 +106,7 @@ export type All =
   | EditMemorySuccess
   | EditMemoryFailure
   | RemovePhotoFromCount
-  | AddPhotoToCount;
+  | AddPhotoToCount
+  | JoinMemorial
+  | JoinMemorialSuccess
+  | JoinMemorialFailure;

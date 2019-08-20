@@ -20,9 +20,10 @@ export const environment = {
     publicKey: 'pk_live_dusuYntW07CvPrTL0i3PHnhj'
   },
   url: 'https://mymemorial.co/',
-  discount: '92fc012e',
+  discount: null,
   example: {
     uuid: '020cac1f-f335-4c0d-831f-7567b9076b61',
     name: 'John F. Kennedy'
-  }
+  },
+  price: 50
 };

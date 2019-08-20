@@ -31,26 +31,6 @@ export class PaymentComponent implements OnInit {
 
   step = 1;
 
-  monthOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
-  get yearOption() {
-    let year = new Date().getFullYear();
-    const years = [];
-    for (let i = 0; i < 20; i++) {
-      years.push(year);
-      year += 1;
-    }
-    return years;
-  }
-
-  get disableBtn() {
-    if (this.quantityForm.value.price === 0) {
-      return false;
-    } else if (this.cardForm.invalid) {
-      return true;
-    }
-  }
-
   constructor(
     public fb: FormBuilder,
     public store: Store<any>,
@@ -104,7 +84,7 @@ export class PaymentComponent implements OnInit {
     });
     this.quantityForm = this.fb.group({
       quantity: [1, [Validators.required, Validators.min(1)]],
-      price: [60, Validators.required]
+      price: [environment.price, Validators.required]
     });
   }
 

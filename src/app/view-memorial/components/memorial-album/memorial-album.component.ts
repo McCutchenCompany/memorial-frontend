@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { environment } from '@environments/environment';
 import { select, Store } from '@ngrx/store';
 import { PhotoAlbumShowComponent } from '@shared/components/photo-album-show/photo-album-show.component';
+import { UnlockPurchaseComponent } from '@shared/components/unlock-purchase/unlock-purchase.component';
 import { Memorial } from '@shared/models/memorial.model';
 import { Photo } from '@shared/models/photo.model';
 import { User } from '@shared/models/user.model';
@@ -21,6 +22,7 @@ import { Observable } from 'rxjs';
 
 import { AlbumUploaderComponent } from './../../../shared/components/album-uploader/album-uploader.component';
 import { getUser } from './../../../store/auth/auth.reducer';
+import { GetMemorial } from './../../../store/view-memorial/view-memorial.actions';
 
 @Component({
   selector: 'app-memorial-album',
@@ -81,6 +83,16 @@ export class MemorialAlbumComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.checkPageLength();
+  }
+
+  openUnlock() {
+    this.dialog.open(UnlockPurchaseComponent, {
+      data: this.memorial
+    }).afterClosed().subscribe(res => {
+      if (res && res.purchased) {
+        this.store.dispatch(new GetMemorial(this.memorial.uuid));
+      }
+    });
   }
 
   photoSrc(link) {

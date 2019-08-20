@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="purchase-details">
+    <h3>Unlock Memorial</h3>
+    <mat-card>
+      <div class="image-border">
+        <div class="image">
+          <img [src]="imgFormat.src" [style.transform]="imgFormat.transform">
+        </div>
+      </div>
+      <div class="info">
+        <h4>{{ name }}</h4>
+        <div class="unlock">
+          <mat-icon>lock_open</mat-icon>
+          <h4>${{ price }}</h4>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <app-credit-card-details
+  [cardForm]="cardForm"
+  [price]="price"
+  [error]="error$ | async"
+  (back)="dialogRef.close()"
+  (purchase)="createToken($event)"></app-credit-card-details>
+</div>

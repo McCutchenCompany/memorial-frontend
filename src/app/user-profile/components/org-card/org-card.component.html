@@ -7,7 +7,7 @@
   [routerLink]="['/organization', organization.uuid]">
   <div class="image-border">
     <div class="image">
-      <img [src]="imgFormat">
+      <img [src]="imgFormat.src" [style.transform]="imgFormat.transform">
     </div>
   </div>
   <div class="container">

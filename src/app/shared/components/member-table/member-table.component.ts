@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
-
-import { Paginator } from './../../../shared/models/paginator.model';
-import { User } from './../../../shared/models/user.model';
+import { Paginator } from '@shared/models/paginator.model';
+import { User } from '@shared/models/user.model';
 
 @Component({
   selector: 'app-member-table',

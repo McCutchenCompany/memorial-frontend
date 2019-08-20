@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
@@ -18,6 +19,9 @@ import {
   GetMemorial,
   GetMemorialFailure,
   GetMemorialSuccess,
+  JoinMemorial,
+  JoinMemorialFailure,
+  JoinMemorialSuccess,
   ViewMemorialActionTypes,
 } from './view-memorial.actions';
 
@@ -25,7 +29,8 @@ import {
 export class ViewMemorialEffects {
   constructor(
     private actions: Actions,
-    private api: ViewMemorialService
+    private api: ViewMemorialService,
+    private router: Router
   ) {}
 
   @Effect()
@@ -63,4 +68,20 @@ export class ViewMemorialEffects {
       catchError(error => of(new EditMemoryFailure(error)))
     ))
   );
+
+  @Effect()
+  joinMemorial$: Observable<Action> = this.actions.pipe(
+    ofType(ViewMemorialActionTypes.JOIN_MEMORIAL),
+    switchMap((action: JoinMemorial) => this.api.joinMemorial(action.payload).pipe(
+      map(res => new JoinMemorialSuccess(res)),
+      catchError(error => of(new JoinMemorialFailure(error)))
+    ))
+  );
+
+  @Effect({dispatch: false})
+  joinMemorialSuccess$ = this.actions.pipe(
+    ofType(ViewMemorialActionTypes.JOIN_MEMORIAL_SUCCESS),
+    map((action: JoinMemorialSuccess) => this.router.navigate(['/create', action.payload.uuid]))
+  );
+
 }

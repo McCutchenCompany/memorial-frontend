@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { environment } from '@environments/environment';
 import { Discount } from '@store/models/app-state.model';
 
 @Component({
@@ -12,7 +13,7 @@ export class OrderDetailsComponent implements OnChanges {
   @Input() discount: Discount;
   @Input() quantityForm: FormGroup;
 
-  unitPrice = 60;
+  unitPrice = environment.price;
 
   get total() {
     if (!this.discount || !this.discount.percent) {

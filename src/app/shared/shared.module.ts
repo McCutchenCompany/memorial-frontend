@@ -11,21 +11,26 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatPaginatorModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRippleModule,
   MatSelectModule,
   MatSliderModule,
   MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
   MatTooltipModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { MemberTableComponent } from '@shared/components/member-table/member-table.component';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { FileSaverModule } from 'ngx-filesaver';
 
 import { AlbumUploaderComponent } from './components/album-uploader/album-uploader.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { CreateMemorialOptionsComponent } from './components/create-memorial-options/create-memorial-options.component';
+import { CreditCardDetailsComponent } from './components/credit-card-details/credit-card-details.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ImageEditorComponent } from './components/image-editor/image-editor.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
@@ -39,6 +44,7 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
 import { ResponseDialogComponent } from './components/response-dialog/response-dialog.component';
 import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { UnlockOverlayComponent } from './components/unlock-overlay/unlock-overlay.component';
+import { UnlockPurchaseComponent } from './components/unlock-purchase/unlock-purchase.component';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 
@@ -62,6 +68,9 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MatTooltipModule,
     MatTooltipModule,
     MatSliderModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
     ReactiveFormsModule,
     FormsModule,
     CreditCardDirectivesModule,
@@ -80,7 +89,10 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     UnlockOverlayComponent,
     ImageEditorComponent,
     ImageViewerComponent,
-    CreateMemorialOptionsComponent
+    CreateMemorialOptionsComponent,
+    MemberTableComponent,
+    CreditCardDetailsComponent,
+    UnlockPurchaseComponent
   ],
   declarations: [
     UploadImageComponent,
@@ -100,7 +112,10 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     UnlockOverlayComponent,
     ImageEditorComponent,
     ImageViewerComponent,
-    CreateMemorialOptionsComponent
+    CreateMemorialOptionsComponent,
+    MemberTableComponent,
+    CreditCardDetailsComponent,
+    UnlockPurchaseComponent
   ],
   entryComponents: [
     UploadDialogComponent,
@@ -112,7 +127,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     PhotoAlbumShowComponent,
     AlbumUploaderComponent,
     ImageEditorComponent,
-    CreateMemorialOptionsComponent
+    CreateMemorialOptionsComponent,
+    UnlockPurchaseComponent
   ]
 })
 export class SharedModule { }

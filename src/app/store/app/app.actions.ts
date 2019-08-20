@@ -18,7 +18,10 @@ export enum AppActionTypes {
   SEND_SUPPORT_EMAIL_FAILURE = '[App] Send suport email failure',
   SEND_BUG_EMAIL = '[App] Send bug email',
   SEND_BUG_EMAIL_SUCCESS = '[App] Send bug email success',
-  SEND_BUG_EMAIL_FAILURE = '[App] Send bug email failure'
+  SEND_BUG_EMAIL_FAILURE = '[App] Send bug email failure',
+  UNLOCK_MEMORIAL = '[App] Unlock memorial',
+  UNLOCK_MEMORIAL_SUCCESS = '[App] Unlock memorial success',
+  UNLOCK_MEMORIAL_FAILURE = '[App] Unlock memorial failure'
 }
 
 export class CheckDiscount implements Action {
@@ -93,6 +96,19 @@ export class SendBugEmailFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class UnlockMemorial implements Action {
+  readonly type = AppActionTypes.UNLOCK_MEMORIAL;
+  constructor (public payload: any) {}
+}
+export class UnlockMemorialSuccess implements Action {
+  readonly type = AppActionTypes.UNLOCK_MEMORIAL_SUCCESS;
+  constructor (public payload: Memorial) {}
+}
+export class UnlockMemorialFailure implements Action {
+  readonly type = AppActionTypes.UNLOCK_MEMORIAL_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | CheckDiscount
   | CheckDiscountSuccess
@@ -107,4 +123,7 @@ export type All =
   | SendSupportEmailFailure
   | SendBugEmail
   | SendBugEmailSuccess
-  | SendBugEmailFailure;
+  | SendBugEmailFailure
+  | UnlockMemorial
+  | UnlockMemorialSuccess
+  | UnlockMemorialFailure;

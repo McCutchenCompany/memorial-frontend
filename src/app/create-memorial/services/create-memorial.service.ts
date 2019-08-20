@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
+import { Paginator } from '@shared/models/paginator.model';
 
 @Injectable({
   providedIn: 'root'
@@ -121,4 +122,24 @@ export class CreateMemorialService {
     return this.http.patch(path, payload);
   }
 
+  getMemorialMembers(memorial_id: string, paginator: Paginator) {
+    const path = `${this.API_URL}/memorials/${memorial_id}/members`
+    + `?q=${paginator.q}&p=${paginator.p}&per_p=${paginator.per_p}&o_column=${paginator.o_column}&o_direction=${paginator.o_direction}`;
+    return this.http.get(path);
+  }
+
+  unlockMemorial(token, memorial_id, price, org_id?, discount?) {
+    const path = `${this.API_URL}/billing/${memorial_id}/unlock`;
+    const body: any = {
+      stripeToken: token,
+      price: price
+    };
+    if (org_id) {
+      body.org_id = org_id;
+    }
+    if (discount) {
+      body.discount = discount;
+    }
+    return this.http.post(path, body);
+  }
 }

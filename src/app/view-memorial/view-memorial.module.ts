@@ -33,6 +33,7 @@ import { MemorialTimelineComponent } from './components/memorial-timeline/memori
 import { MemoryCardComponent } from './components/memory-card/memory-card.component';
 import { ViewMemorialComponent } from './containers/view-memorial/view-memorial.component';
 import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
+import { EditLinkComponent } from './containers/edit-link/edit-link.component';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
     InteractiveTimelineComponent,
     MemorialMemoriesComponent,
     MemoryCardComponent,
-    MemorialAlbumComponent
+    MemorialAlbumComponent,
+    EditLinkComponent
   ]
 })
 export class ViewMemorialModule { }
