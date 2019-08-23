@@ -57,6 +57,12 @@
     class="nav-option"><mat-icon>add_comment</mat-icon>Memories</button>
   <mat-divider></mat-divider>
   <button
+    [routerLink]="['/create', memorial?.uuid, 'military']"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="nav-option"><mat-icon>recent_actors</mat-icon>Military<mat-icon class="lock" *ngIf="!memorial?.unlocked">lock</mat-icon></button>
+  <mat-divider></mat-divider>
+  <button
     [routerLink]="['/create', memorial?.uuid, 'share']"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"

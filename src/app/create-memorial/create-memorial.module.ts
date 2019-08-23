@@ -30,8 +30,12 @@ import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '@shared/shared.module';
 import { CreatePhotosEffects } from '@store/create-photos/photos.effects';
 import { createPhotoReducer } from '@store/create-photos/reducers';
+import { EditMilitaryEffects } from '@store/edit-military/edit-military.effects';
+import { editMilitaryReducer } from '@store/edit-military/edit-military.reducer';
 import { MemorialMembersEffects } from '@store/memorial-members/memorial-members.effects';
 import { MemorialMemberReducer } from '@store/memorial-members/memorial-members.reducer';
+import { MilitaryHistoryEffects } from '@store/military-history/military-history.effects';
+import { militaryHistoryReducer } from '@store/military-history/military-history.reducer';
 import { ClipboardModule } from 'ngx-clipboard';
 
 import * as fromStore from '../store/create-memorial';
@@ -41,6 +45,8 @@ import { AlbumViewerComponent } from './components/album-viewer/album-viewer.com
 import { ApprovalCardComponent } from './components/approval-card/approval-card.component';
 import { ApproveMemoriesComponent } from './components/approve-memories/approve-memories.component';
 import { ApprovePhotosComponent } from './components/approve-photos/approve-photos.component';
+import { EditMilitaryComponent } from './components/edit-military/edit-military.component';
+import { MedalPickerComponent } from './components/medal-picker/medal-picker.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { MemorialShareComponent } from './components/memorial-share/memorial-share.component';
 import { TimelineFormComponent } from './components/timeline-form/timeline-form.component';
@@ -81,10 +87,14 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     StoreModule.forFeature('createMemorial', fromStore.createMemorialReducer),
     StoreModule.forFeature('createPhotos', createPhotoReducer),
     StoreModule.forFeature('memorial-members', MemorialMemberReducer),
+    StoreModule.forFeature('editMilitary', editMilitaryReducer),
+    StoreModule.forFeature('militaryHistory', militaryHistoryReducer),
     EffectsModule.forFeature([
       CreateMemorialEffects,
       CreatePhotosEffects,
-      MemorialMembersEffects
+      MemorialMembersEffects,
+      EditMilitaryEffects,
+      MilitaryHistoryEffects
     ]),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE',
@@ -103,7 +113,9 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     CreateNavComponent,
     ApprovePhotosComponent,
     AlbumViewerComponent,
-    MemorialShareComponent
+    MemorialShareComponent,
+    EditMilitaryComponent,
+    MedalPickerComponent
   ]
 })
 export class CreateMemorialModule { }

@@ -1,0 +1,14 @@
+@import "src/assets/styles/_variables.scss";
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  .medal {
+    width: 23%;
+    img {
+      width: 100%;
+    }
+  }
+}

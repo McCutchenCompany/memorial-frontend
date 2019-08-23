@@ -1,0 +1,42 @@
+@import "src/assets/styles/_variables.scss";
+
+.container {
+  margin-top: rem(16);
+  form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .field {
+      position: relative;
+    }
+    button {
+      position: absolute;
+      top: rem(8);
+      right: 0;
+    }
+  }
+  .medal-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .medal-display {
+    width: rem(150);
+    padding: rem(16) rem(16) rem(24);
+    margin-bottom: rem(16);
+    border-radius: rem(4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      width: rem(100);
+    }
+    p {
+      text-align: center;
+      line-height: 1rem;
+      min-height: rem(32);
+      margin: rem(8) 0;
+    }
+  }
+}

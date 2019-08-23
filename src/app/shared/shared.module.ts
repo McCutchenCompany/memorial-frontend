@@ -42,6 +42,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { PhotoAlbumShowComponent } from './components/photo-album-show/photo-album-show.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { ResponseDialogComponent } from './components/response-dialog/response-dialog.component';
+import { RibbonBoardComponent } from './components/ribbon-board/ribbon-board.component';
 import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { UnlockOverlayComponent } from './components/unlock-overlay/unlock-overlay.component';
 import { UnlockPurchaseComponent } from './components/unlock-purchase/unlock-purchase.component';
@@ -92,7 +93,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     CreateMemorialOptionsComponent,
     MemberTableComponent,
     CreditCardDetailsComponent,
-    UnlockPurchaseComponent
+    UnlockPurchaseComponent,
+    RibbonBoardComponent
   ],
   declarations: [
     UploadImageComponent,
@@ -115,7 +117,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     CreateMemorialOptionsComponent,
     MemberTableComponent,
     CreditCardDetailsComponent,
-    UnlockPurchaseComponent
+    UnlockPurchaseComponent,
+    RibbonBoardComponent
   ],
   entryComponents: [
     UploadDialogComponent,

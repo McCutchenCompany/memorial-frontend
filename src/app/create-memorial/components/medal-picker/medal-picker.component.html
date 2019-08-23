@@ -1,0 +1,20 @@
+<div class="container">
+  <form [formGroup]="search">
+    <h5>Commendations</h5>
+    <div class="field">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput formControlName="query">
+      </mat-form-field>
+      <button *ngIf="search.value.query.length > 0" mat-icon-button color="warn" (click)="search.setValue({query: ''})"><mat-icon>highlight_off</mat-icon></button>
+    </div>
+  </form>
+  <div class="medal-container">
+    <div class="medal-display mat-elevation-z1" *ngFor="let medal of filterMedals">
+      <img [src]="medal.image">
+      <p>{{ medal.name }}</p>
+      <button [disabled]="saving" mat-mini-fab color="primary" *ngIf="selectedMedals.indexOf(medal.uuid) === -1" (click)="addMedal(medal.uuid)"><mat-icon>add</mat-icon></button>
+      <button [disabled]="saving" matTooltip="Remove" mat-icon-button color="warn" *ngIf="selectedMedals.indexOf(medal.uuid) > -1" (click)="removeMedal(medal.uuid)"><mat-icon>remove_circle_outline</mat-icon></button>
+    </div>
+  </div>
+</div>

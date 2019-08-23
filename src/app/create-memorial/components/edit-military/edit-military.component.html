@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="form-container mat-elevation-z3">
+    <h4>Military History</h4>
+    <p>
+      Select any military branch
+      <span *ngIf="(memorial$ | async).memorial.first_name">{{ (memorial$ | async).memorial.first_name }}</span>
+      <span *ngIf="!(memorial$ | async).memorial.first_name">he/she</span> served with. For any branch you will
+      be able to select the highest rank they achieved and any commendations awarded to them during their time of service.
+    </p>
+    <mat-accordion [multi]="false">
+      <div *ngFor="let branch of (branches$ | async); let i = index">
+        <mat-expansion-panel
+          #expansions
+          [disabled]="disabledUuid.indexOf(branch.uuid) === -1"
+          (opened)="getMedals(branch.uuid)">
+          <mat-expansion-panel-header [collapsedHeight]="'7rem'" [expandedHeight]="'7rem'">
+            <mat-panel-title>
+              <div class="title">
+                <img [src]="branch.image">
+                <h6>{{ branch.name }}</h6>
+              </div>
+              <div class="ribbons">
+                <app-ribbon-board
+                  *ngIf="(historyEntities$ | async)[branch.uuid] && (historyEntities$ | async)[branch.uuid].mem_military_branches_medals.length > 0"
+                  [medals]="(historyEntities$ | async)[branch.uuid].mem_military_branches_medals"></app-ribbon-board>
+              </div>
+              <button mat-button class="primary" [disabled]="savingHistory$ | async" (click)="addBranch(branch.uuid)" *ngIf="disabledUuid.indexOf(branch.uuid) === -1">
+                <mat-icon>add</mat-icon>Add
+              </button>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button mat-button class="subtle warn" (click)="removeBranch(branch, i)">Remove</button>
+          <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Service History">
+              <h5>History</h5>
+            </mat-tab>
+            <mat-tab label="Commendations">
+              <app-medal-picker
+                *ngIf="medalsBranch === branch.uuid && !(medalsLoading$ | async)"
+                [medals]="medals$ | async"
+                [branch]="branch.uuid"
+                [history]="(historyEntities$ | async)[branch.uuid]"
+                [saving]="savingHistory$ | async"
+                (add)="onAddMedal($event)"
+                (remove)="onRemoveMedal($event)"></app-medal-picker>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
+</div>
