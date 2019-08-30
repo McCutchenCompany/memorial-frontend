@@ -51,6 +51,8 @@ export function militaryHistoryReducer(state = INITIAL_STATE, action: All): Mili
         error: action.payload
       };
     }
+    case MilitaryHistoryActionTypes.UPDATE_BRANCH_RANK:
+    case MilitaryHistoryActionTypes.UPDATE_MILITARY_DATES:
     case MilitaryHistoryActionTypes.REMOVE_MEDAL:
     case MilitaryHistoryActionTypes.ADD_MEDAL:
     case MilitaryHistoryActionTypes.ADD_MILITARY_BRANCH:
@@ -61,6 +63,8 @@ export function militaryHistoryReducer(state = INITIAL_STATE, action: All): Mili
         saved: false
       };
     }
+    case MilitaryHistoryActionTypes.UPDATE_BRANCH_RANK_SUCCESS:
+    case MilitaryHistoryActionTypes.UPDATE_MILITARY_DATES_SUCCESS:
     case MilitaryHistoryActionTypes.REMOVE_MEDAL_SUCCESS:
     case MilitaryHistoryActionTypes.ADD_MEDAL_SUCCESS:
     case MilitaryHistoryActionTypes.ADD_MILITARY_BRANCH_SUCCESS:
@@ -71,6 +75,8 @@ export function militaryHistoryReducer(state = INITIAL_STATE, action: All): Mili
         saved: true
       });
     }
+    case MilitaryHistoryActionTypes.UPDATE_BRANCH_RANK_FAILURE:
+    case MilitaryHistoryActionTypes.UPDATE_MILITARY_DATES_FAILURE:
     case MilitaryHistoryActionTypes.REMOVE_MEDAL_FAILURE:
     case MilitaryHistoryActionTypes.ADD_MEDAL_FAILURE:
     case MilitaryHistoryActionTypes.ADD_MILITARY_BRANCH_FAILURE:

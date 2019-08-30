@@ -1,5 +1,5 @@
 <div class="container">
   <div class="medal" *ngFor="let medal of medals">
-    <img [src]="medal.medal.image">
+    <img [matTooltip]="medal.medal.name" [src]="medal.medal.image">
   </div>
 </div>

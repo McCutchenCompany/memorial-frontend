@@ -1,0 +1,15 @@
+<div class="container">
+  <form [formGroup]="rankForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Rank/Rating</mat-label>
+      <mat-select formControlName="rank" (selectionChange)="onSelect($event)">
+        <mat-option *ngFor="let rank of ranks" [value]="rank.uuid">
+          {{ rank.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <div *ngIf="history.military_rank" class="image-container">
+    <img [src]="history.military_rank.image">
+  </div>
+</div>

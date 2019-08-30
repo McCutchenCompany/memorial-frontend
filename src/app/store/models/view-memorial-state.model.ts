@@ -1,3 +1,4 @@
+import { MilitaryHistory } from '@shared/models/military.model';
 import { Photo } from '@shared/models/photo.model';
 
 import { LocationMarker } from './../../shared/models/location-marker.model';
@@ -13,6 +14,7 @@ export class ViewMemorialState {
     memorial: Memorial;
     location: LocationMarker;
     timeline: Timeline[];
+    military: MilitaryHistory[];
     album: {count: number; photos: Photo[]};
   };
   error: any;

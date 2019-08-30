@@ -16,6 +16,13 @@ export const INITIAL_STATE: EditMilitaryState = {
     error: null,
     branchId: null,
     results: []
+  },
+  ranks: {
+    loading: false,
+    loaded: false,
+    error: null,
+    branchId: null,
+    results: []
   }
 };
 
@@ -48,6 +55,39 @@ export function editMilitaryReducer(state: EditMilitaryState = INITIAL_STATE, ac
         ...state,
         medals: {
           ...state.medals,
+          loading: false,
+          loaded: false,
+          error: action.payload
+        }
+      };
+    }
+    case EditMilitaryActionTypes.GET_BRANCH_RANKS: {
+      return {
+        ...state,
+        ranks: {
+          ...state.ranks,
+          loading: true,
+          loaded: false,
+          branchId: action.payload
+        }
+      };
+    }
+    case EditMilitaryActionTypes.GET_BRANCH_RANKS_SUCCESS: {
+      return {
+        ...state,
+        ranks: {
+          ...state.ranks,
+          loading: false,
+          loaded: false,
+          results: action.payload
+        }
+      };
+    }
+    case EditMilitaryActionTypes.GET_BRANCH_RANKS_FAILURE: {
+      return {
+        ...state,
+        ranks: {
+          ...state.ranks,
           loading: false,
           loaded: false,
           error: action.payload
@@ -133,4 +173,25 @@ export const getMedals = createSelector(
 export const getMedalsBranch = createSelector(
   getMedalsState,
   state => state.branchId
+);
+
+export const getRanksState = createSelector(
+  getEditMilitaryState,
+  state => state.ranks
+);
+export const getRanksLoading = createSelector(
+  getRanksState,
+  state => state.loading
+);
+export const getRanksLoaded = createSelector(
+  getRanksState,
+  state => state.loaded
+);
+export const getRanksError = createSelector(
+  getRanksState,
+  state => state.error
+);
+export const getRanks = createSelector(
+  getRanksState,
+  state => state.results
 );

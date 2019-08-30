@@ -4,6 +4,8 @@ import { LocationMarker } from '@shared/models/location-marker.model';
 import { Memorial } from '@shared/models/memorial.model';
 import { GoogleAnalyticsService } from '@shared/services/google-analytics.service';
 
+import { MilitaryHistory } from './../../../shared/models/military.model';
+
 @Component({
   selector: 'app-memorial-info',
   templateUrl: './memorial-info.component.html',
@@ -12,6 +14,7 @@ import { GoogleAnalyticsService } from '@shared/services/google-analytics.servic
 export class MemorialInfoComponent implements OnInit {
 
   @Input() memorial: Memorial;
+  @Input() military: MilitaryHistory[];
   @Input() location: LocationMarker;
 
   constructor(

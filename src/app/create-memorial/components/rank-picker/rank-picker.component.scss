@@ -1,0 +1,16 @@
+@import "src/assets/styles/_variables.scss";
+
+.container {
+  mat-form-field {
+    width: 100%;
+  }
+  .image-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    img {
+      max-width: rem(100);
+      max-height: rem(100);
+    }
+  }
+}

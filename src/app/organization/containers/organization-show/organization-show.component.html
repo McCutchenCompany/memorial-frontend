@@ -44,23 +44,25 @@
           </div>
         </mat-tab>
         <mat-tab label="Members">
-          <app-add-members *ngIf="organization$ | async" [organization]="organization$ | async"></app-add-members>
-          <div class="actions">
-            <form [formGroup]="memberSearchForm">
-              <mat-form-field appearance="outline">
-                <mat-label>Search</mat-label>
-                <input matInput type="text" formControlName="q" (keyup)="onMembersSearch()">
-              </mat-form-field>
-              <button *ngIf="memberSearchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearMembersSearch()"><mat-icon>highlight_off</mat-icon></button>
-            </form>
+          <div class="members-container">
+            <app-add-members *ngIf="organization$ | async" [organization]="organization$ | async"></app-add-members>
+            <div class="actions">
+              <form [formGroup]="memberSearchForm">
+                <mat-form-field appearance="outline">
+                  <mat-label>Search</mat-label>
+                  <input matInput type="text" formControlName="q" (keyup)="onMembersSearch()">
+                </mat-form-field>
+                <button *ngIf="memberSearchForm.value.q.length > 0" mat-icon-button color="warn" (click)="clearMembersSearch()"><mat-icon>highlight_off</mat-icon></button>
+              </form>
+            </div>
+            <app-member-table
+              *ngIf="(members$ | async).length > 0"
+              [users]="members$ | async"
+              [pageInfo]="membersPaginator$ | async"
+              [loading]="membersLoading$ | async"
+              [saving]="membersSaving$ | async"
+              (change)="onMembersChange($event)"></app-member-table>
           </div>
-          <app-member-table
-            *ngIf="(members$ | async).length > 0"
-            [users]="members$ | async"
-            [pageInfo]="membersPaginator$ | async"
-            [loading]="membersLoading$ | async"
-            [saving]="membersSaving$ | async"
-            (change)="onMembersChange($event)"></app-member-table>
         </mat-tab>
       </mat-tab-group>
     </mat-card>

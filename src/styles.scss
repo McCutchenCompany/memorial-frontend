@@ -264,9 +264,11 @@ mat-card.mat-card {
 }
 
 mat-dialog-container.mat-dialog-container {
-  height: 100vh;
+  // height: 100vh;
   max-height: fit-content;
 }
+
+
 
 mat-checkbox label.mat-checkbox-layout {
   white-space: normal;

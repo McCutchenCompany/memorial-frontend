@@ -2,13 +2,15 @@
 
 .container {
   padding: rem(36) 0;
+  width: 95%;
+  margin: auto;
   mat-card.mat-card {
-    width: rem(690);
     margin: auto;
   }
   .link {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     h4 {
       margin-right: rem(36);
     }
@@ -25,6 +27,13 @@
         padding: 0 rem(12);
         transform: translateY(rem(-1));
       }
+    }
+  }
+}
+@include respond-to('small') {
+  .container {
+    mat-card.mat-card {
+      width: rem(690);
     }
   }
 }

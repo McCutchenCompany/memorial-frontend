@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
@@ -14,6 +15,7 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
+  MatTabsModule,
   MatTooltipModule,
 } from '@angular/material';
 import { EffectsModule } from '@ngrx/effects';
@@ -21,6 +23,7 @@ import { albumReducer } from '@store/album/album.reducer';
 
 import { StoreModule } from '../../../node_modules/@ngrx/store';
 import * as fromStore from '../store/view-memorial';
+import { SharedModule } from './../shared/shared.module';
 import { AlbumEffects } from './../store/album/album.effects';
 import { ViewMemorialEffects } from './../store/view-memorial/view-memorial.effect';
 import { InteractiveTimelineComponent } from './components/interactive-timeline/interactive-timeline.component';
@@ -29,11 +32,12 @@ import { MemorialHeaderComponent } from './components/memorial-header/memorial-h
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { MemorialLocationComponent } from './components/memorial-location/memorial-location.component';
 import { MemorialMemoriesComponent } from './components/memorial-memories/memorial-memories.component';
+import { MemorialMilitaryComponent } from './components/memorial-military/memorial-military.component';
 import { MemorialTimelineComponent } from './components/memorial-timeline/memorial-timeline.component';
 import { MemoryCardComponent } from './components/memory-card/memory-card.component';
+import { EditLinkComponent } from './containers/edit-link/edit-link.component';
 import { ViewMemorialComponent } from './containers/view-memorial/view-memorial.component';
 import { ViewMemorialRoutingModule } from './view-memorial-routing.module';
-import { EditLinkComponent } from './containers/edit-link/edit-link.component';
 
 @NgModule({
   imports: [
@@ -43,12 +47,15 @@ import { EditLinkComponent } from './containers/edit-link/edit-link.component';
     MatInputModule,
     MatTooltipModule,
     MatButtonModule,
+    MatTabsModule,
     MatCardModule,
     MatMenuModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatDividerModule,
+    SharedModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDiBi3u4zjpmFUKCu7gFydLmdr_cgzo3oE'
@@ -72,7 +79,8 @@ import { EditLinkComponent } from './containers/edit-link/edit-link.component';
     MemorialMemoriesComponent,
     MemoryCardComponent,
     MemorialAlbumComponent,
-    EditLinkComponent
+    EditLinkComponent,
+    MemorialMilitaryComponent
   ]
 })
 export class ViewMemorialModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { MilitaryHistory } from '@shared/models/military.model';
 import { User } from '@shared/models/user.model';
 import { GoogleAnalyticsService } from '@shared/services/google-analytics.service';
 import { Auth0Login } from '@store/auth/auth.actions';
@@ -12,6 +13,7 @@ import {
   getViewMemorialError,
   getViewMemorialLoaded,
   getViewMemorialLoading,
+  getViewMilitary,
 } from '@store/view-memorial/view-memorial.reducer';
 import { Observable } from 'rxjs';
 
@@ -23,6 +25,7 @@ import { Observable } from 'rxjs';
 export class ViewMemorialComponent implements OnInit {
 
   selectedMemorial$: Observable<any>;
+  militaryHistory$: Observable<MilitaryHistory[]>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   user$: Observable<User>;
@@ -36,6 +39,7 @@ export class ViewMemorialComponent implements OnInit {
     private analytics: GoogleAnalyticsService
   ) {
     this.selectedMemorial$ = this.store.pipe(select(getViewMemorial));
+    this.militaryHistory$ = this.store.pipe(select(getViewMilitary));
     this.loading$ = this.store.pipe(select(getViewMemorialLoading));
     this.loaded$ = this.store.pipe(select(getViewMemorialLoaded));
     this.user$ = this.store.pipe(select(getUser));

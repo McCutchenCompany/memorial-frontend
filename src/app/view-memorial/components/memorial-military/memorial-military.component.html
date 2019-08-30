@@ -1,0 +1,40 @@
+<div class="container mat-elevation-z3">
+  <mat-tab-group *ngIf="history.length > 1">
+    <mat-tab *ngFor="let branch of history" [label]="branch.military_branch.name">
+      <div class="branch">
+        <img [src]="branch.military_branch.image">
+        <div class="name-rank">
+          <h5>{{ branch.military_branch.name }}</h5>
+          <div *ngIf="branch.military_rank" class="rank">
+            <img *ngIf="branch.military_rank.image.length > 0" [src]="branch.military_rank.image">
+            <p>{{ branch.military_rank.name }}</p>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <p class="dates">{{ branch.start_date | date:'MMM, y' }} - {{ branch.end_date | date:'MMM, y' }}</p>
+      <div *ngIf="branch.mem_military_branches_medals.length > 0" class="commendations">
+        <h6>Commendations</h6>
+        <app-ribbon-board [medals]="branch.mem_military_branches_medals"></app-ribbon-board>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div *ngIf="history.length === 1">
+    <div class="branch">
+      <img [src]="history[0].military_branch.image">
+      <div class="name-rank">
+        <h5>{{ history[0].military_branch.name }}</h5>
+        <div *ngIf="history[0].military_rank" class="rank">
+          <img *ngIf="history[0].military_rank.image.length > 0" [src]="history[0].military_rank.image">
+          <p>{{ history[0].military_rank.name }}</p>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <p class="dates">{{ history[0].start_date | date:'MMM, y' }} - {{ history[0].end_date | date:'MMM, y' }}</p>
+    <div *ngIf="history[0].mem_military_branches_medals.length > 0" class="commendations">
+      <h6>Commendations</h6>
+      <app-ribbon-board [medals]="history[0].mem_military_branches_medals"></app-ribbon-board>
+    </div>
+  </div>
+</div>

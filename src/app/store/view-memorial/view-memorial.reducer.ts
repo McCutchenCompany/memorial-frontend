@@ -13,6 +13,7 @@ export const INITIAL_STATE: ViewMemorialState = {
     memorial: null,
     location: null,
     timeline: null,
+    military: [],
     album: {
       count: 0,
       photos: null
@@ -146,4 +147,9 @@ export const getViewSaved = createSelector(
 export const getAlbumCount = createSelector(
   getViewMemorial,
   state => state.album.count
+);
+
+export const getViewMilitary = createSelector(
+  getViewMemorial,
+  state => state.military
 );

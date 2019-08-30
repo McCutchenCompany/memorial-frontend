@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="dates">
+    <h5>Dates of Service</h5>
+    <form [formGroup]="datesForm">
+      <mat-form-field class="datepicker" appearance="outline">
+        <mat-label>Enlistment</mat-label>
+        <input matInput [matDatepicker]="startDate" [max]="maxDate" formControlName="start_date">
+        <mat-datepicker-toggle [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker [startView]="'multi-year'" #startDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="datepicker" appearance="outline">
+        <mat-label>Discharge/Retirement</mat-label>
+        <input matInput [matDatepicker]="endDate" [max]="maxDate" formControlName="end_date">
+        <mat-datepicker-toggle [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker [startView]="'multi-year'" #endDate></mat-datepicker>
+      </mat-form-field>
+      <button mat-button class="primary" [disabled]="!datesForm.dirty || saving" (click)="onSave()">
+        <span *ngIf="!saving">Save</span>
+        <span *ngIf="saving">...Saving</span>
+      </button>
+    </form>
+  </div>
+  <div class="rank">
+    <h5>Highest Rank</h5>
+    <app-rank-picker [ranks]="ranks" [history]="history"></app-rank-picker>
+  </div>
+</div>

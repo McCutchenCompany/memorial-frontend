@@ -6,11 +6,19 @@
   padding-bottom: rem(100);
   .ribbons {
     width: rem(190);
+    display: none;
+  }
+  .rank {
+    margin: 0 rem(16);
+    img {
+      max-height: rem(36);
+      max-width: rem(36);
+    }
   }
   .form-container {
     padding: rem(16);
     background: rgba(255,255,255,0.9);
-    img {
+    .branch-seal {
       width: rem(80);
       margin-right: rem(16);
     }
@@ -32,6 +40,9 @@
     width: rem(696);
     .form-container {
       padding: rem(32);
+    }
+    .ribbons {
+      display: block;
     }
   }
 }

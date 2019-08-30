@@ -2,6 +2,9 @@
 
 .container {
   position: relative;
+  .hide-mobile {
+    display: none;
+  }
   table {
     width: 100%;
     &.mat-table {
@@ -69,4 +72,12 @@
 mat-paginator.mat-paginator {
   margin-top: rem(16);
   background: map-get($colors, primary-lightest);
+}
+
+@include respond-to('small') {
+  .container {
+    .hide-mobile {
+      display: table-cell;
+    }
+  }
 }

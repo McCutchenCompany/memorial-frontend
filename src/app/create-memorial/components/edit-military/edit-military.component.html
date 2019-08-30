@@ -16,13 +16,18 @@
           <mat-expansion-panel-header [collapsedHeight]="'7rem'" [expandedHeight]="'7rem'">
             <mat-panel-title>
               <div class="title">
-                <img [src]="branch.image">
+                <img class="branch-seal" [src]="branch.image">
                 <h6>{{ branch.name }}</h6>
               </div>
-              <div class="ribbons">
-                <app-ribbon-board
-                  *ngIf="(historyEntities$ | async)[branch.uuid] && (historyEntities$ | async)[branch.uuid].mem_military_branches_medals.length > 0"
-                  [medals]="(historyEntities$ | async)[branch.uuid].mem_military_branches_medals"></app-ribbon-board>
+              <div
+                class="rank"
+                *ngIf="(historyEntities$ | async)[branch.uuid] && (historyEntities$ | async)[branch.uuid].military_rank">
+                <img
+                  [matTooltip]="(historyEntities$ | async)[branch.uuid].military_rank.name"
+                  [src]="(historyEntities$ | async)[branch.uuid].military_rank.image">
+              </div>
+              <div *ngIf="(historyEntities$ | async)[branch.uuid] && (historyEntities$ | async)[branch.uuid].mem_military_branches_medals.length > 0" class="ribbons">
+                <app-ribbon-board [medals]="(historyEntities$ | async)[branch.uuid].mem_military_branches_medals"></app-ribbon-board>
               </div>
               <button mat-button class="primary" [disabled]="savingHistory$ | async" (click)="addBranch(branch.uuid)" *ngIf="disabledUuid.indexOf(branch.uuid) === -1">
                 <mat-icon>add</mat-icon>Add
@@ -32,7 +37,12 @@
           <button mat-button class="subtle warn" (click)="removeBranch(branch, i)">Remove</button>
           <mat-tab-group mat-align-tabs="center">
             <mat-tab label="Service History">
-              <h5>History</h5>
+              <app-military-details
+                *ngIf="(historyEntities$ | async)[branch.uuid]"
+                [history]="(historyEntities$ | async)[branch.uuid]"
+                [saving]="savingHistory$ | async"
+                [ranks]="ranks$ | async"
+                (save)="onSaveDates($event)"></app-military-details>
             </mat-tab>
             <mat-tab label="Commendations">
               <app-medal-picker

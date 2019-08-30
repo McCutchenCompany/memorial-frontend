@@ -1,0 +1,50 @@
+@import "src/assets/styles/_variables.scss";
+
+.container {
+  width: 90%;
+  max-width: rem(392);
+  margin: rem(24) auto 0;
+  padding: rem(16);
+  background-color: map-get($colors, white);
+  .branch {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: rem(16) 0 rem(24);
+    img {
+      max-width: rem(100);
+      max-height: rem(100);
+    }
+  }
+  .rank {
+    display: flex;
+    align-items: center;
+    img {
+      max-height: rem(24);
+      max-width: rem(24);
+      margin: 0 rem(16) 0 0;
+    }
+  }
+  .commendations {
+    margin: rem(42) rem(30) rem(32);
+    h6 {
+      margin-bottom: rem(16);
+    }
+  }
+}
+.dates {
+  text-align: center;
+}
+
+@include respond-to('small') {
+  .container {
+    margin: 0;
+  }
+}
+
+@include respond-to('medium') {
+  .container {
+    width: rem(392);
+    margin: 0 0 0 rem(32);
+  }
+}

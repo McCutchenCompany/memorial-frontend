@@ -10,6 +10,9 @@ import {
   GetBranchMedals,
   GetBranchMedalsFailure,
   GetBranchMedalsSuccess,
+  GetBranchRanks,
+  GetBranchRanksFailure,
+  GetBranchRanksSuccess,
   GetMilitaryBranches,
   GetMilitaryBranchesFailure,
   GetMilitaryBranchesSuccess,
@@ -38,6 +41,15 @@ export class EditMilitaryEffects {
     switchMap((action: GetBranchMedals) => this.api.getBranchMedals(action.payload).pipe(
       map(res => new GetBranchMedalsSuccess(res)),
       catchError(error => of(new GetBranchMedalsFailure(error)))
+    ))
+  );
+
+  @Effect()
+  getBranchRanks$: Observable<Action> = this.actions.pipe(
+    ofType(EditMilitaryActionTypes.GET_BRANCH_RANKS),
+    switchMap((action: GetBranchRanks) => this.api.getBranchRanks(action.payload).pipe(
+      map(res => new GetBranchRanksSuccess(res)),
+      catchError(error => of(new GetBranchRanksFailure(error)))
     ))
   );
 

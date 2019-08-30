@@ -84,7 +84,11 @@ export class CreateMemorialComponent implements OnInit, AfterViewInit, OnDestroy
       }
     });
     this.store.pipe(select(getRouterState)).subscribe(res => {
-      if (res.state.url.indexOf('timeline') > 0 || res.state.url.indexOf('photo') > 0) {
+      if (
+        res.state.url.indexOf('timeline') > 0
+        || res.state.url.indexOf('photo') > 0
+        || res.state.url.indexOf('military') > 0
+      ) {
         this.unlockOverlay = true;
       } else {
         this.unlockOverlay = false;

@@ -12,4 +12,11 @@ export class EditMilitaryState {
     branchId: string;
     results: any[];
   };
+  ranks: {
+    loading: boolean;
+    loaded: boolean;
+    error: any;
+    branchId: string;
+    results: any[];
+  };
 }

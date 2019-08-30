@@ -1,5 +1,8 @@
 @import "src/assets/styles/_variables.scss";
 
+.container {
+
+}
 .info {
   width: 87%;
   display: flex;
@@ -88,9 +91,22 @@
   }
 }
 @include respond-to('small') {
-  .info {
-    width: rem(767);
+  .container {
     margin-top: rem(60);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 rem(16);
+  }
+  .info {
+    width: rem(460);
+    margin: 0;
+    &:not(.no-vet) {
+      .social {
+        margin-top: rem(32);
+        margin-bottom: 0;
+      }
+    }
     .social {
       width: rem(136);
       justify-content: space-between;
@@ -110,11 +126,18 @@
   }
 }
 @include respond-to('medium') {
-  .info {
+  .container {
     width: rem(1112);
-    padding: rem(32);
-    display: flex;
     margin: rem(63) auto 0;
+    padding: 0;
+  }
+  .info {
+    padding: rem(32);
+    width: rem(590);
+    display: flex;
+    &.no-vet {
+      width: rem(1112);
+    }
     .birth {
       width: rem(240);
       padding-left: 0;

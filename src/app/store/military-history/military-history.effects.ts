@@ -24,6 +24,12 @@ import {
   RemoveMilitaryBranch,
   RemoveMilitaryBranchFailure,
   RemoveMilitaryBranchSuccess,
+  UpdateBranchRank,
+  UpdateBranchRankFailure,
+  UpdateBranchRankSuccess,
+  UpdateMilitaryDates,
+  UpdateMilitaryDatesFailure,
+  UpdateMilitaryDatesSuccess,
 } from './military-history.actions';
 
 @Injectable()
@@ -86,5 +92,25 @@ export class MilitaryHistoryEffects {
       map((res: MilitaryHistory[]) => new RemoveMedalSuccess(res)),
       catchError(error => of(new RemoveMedalFailure(error)))
     ))
+  );
+
+  @Effect()
+  updateMilitaryDates$: Observable<Action> = this.actions.pipe(
+    ofType(MilitaryHistoryActionTypes.UPDATE_MILITARY_DATES),
+    switchMap((action: UpdateMilitaryDates) => this.api.updateMilitaryDates(action.payload.id, action.payload.body).pipe(
+      map(((res: MilitaryHistory[]) => new UpdateMilitaryDatesSuccess(res))),
+      catchError(error => of(new UpdateMilitaryDatesFailure(error)))
+    ))
+  );
+
+  @Effect()
+  updateBranchRank$: Observable<Action> = this.actions.pipe(
+    ofType(MilitaryHistoryActionTypes.UPDATE_BRANCH_RANK),
+    switchMap((action: UpdateBranchRank) => {
+      return this.api.updateBranchRank(action.payload.memorial_military_branch_id, action.payload.military_rank_id).pipe(
+        map((res: MilitaryHistory[]) => new UpdateBranchRankSuccess(res)),
+        catchError(error => of(new UpdateBranchRankFailure(error)))
+      );
+    })
   );
 }

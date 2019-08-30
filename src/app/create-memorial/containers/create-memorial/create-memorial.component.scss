@@ -15,7 +15,7 @@ mat-drawer-container {
     height: calc(100vh - 95px);
     overflow-x: hidden;
     .unlock-overlay {
-      position: absolute;
+      position: fixed;
       top: 0;
       bottom: 0;
       left: 0;
@@ -90,6 +90,16 @@ mat-drawer-container {
   }
 }
 @include respond-to('medium') {
+  mat-drawer-container {
+    mat-drawer-content {
+      .unlock-overlay {
+        top: rem(95);
+        bottom: 0;
+        left: rem(352);
+        right: 0;
+      }
+    }
+  }
   .container {
     width: rem(1176);
   }

@@ -52,4 +52,20 @@ export class EditMilitaryService {
     const path = `${this.API_URL}/mem_military_branches_medals/${id}`;
     return this.http.delete<MilitaryHistory[]>(path);
   }
+
+  updateMilitaryDates(id: string, body: {start_date: string, end_date: string}): Observable<MilitaryHistory[]> {
+    const path = `${this.API_URL}/memorial_military_branches/${id}`;
+    return this.http.patch<MilitaryHistory[]>(path, body);
+  }
+
+  getBranchRanks(branch_id: string): Observable<any[]> {
+    const path = `${this.API_URL}/military_branches/${branch_id}/ranks`;
+    return this.http.get<any[]>(path);
+  }
+
+  updateBranchRank(memorial_military_branch_id: string, military_rank_id: string): Observable<MilitaryHistory[]> {
+    const path = `${this.API_URL}/memorial_military_branches/${memorial_military_branch_id}/rank`;
+    const body = {military_rank_id};
+    return this.http.patch<MilitaryHistory[]>(path, body);
+  }
 }

@@ -17,7 +17,13 @@ export enum MilitaryHistoryActionTypes {
   ADD_MEDAL_FAILURE = '[Military History] Add medal failure',
   REMOVE_MEDAL = '[Military History] Remove medal',
   REMOVE_MEDAL_SUCCESS = '[Military History] Remove medal success',
-  REMOVE_MEDAL_FAILURE = '[Military History] Remove medal failure'
+  REMOVE_MEDAL_FAILURE = '[Military History] Remove medal failure',
+  UPDATE_MILITARY_DATES = '[Military History] Update military dates',
+  UPDATE_MILITARY_DATES_SUCCESS = '[Military History] Update military dates success',
+  UPDATE_MILITARY_DATES_FAILURE = '[Military History] Update military dates failure',
+  UPDATE_BRANCH_RANK = '[Military History] Update branch rank',
+  UPDATE_BRANCH_RANK_SUCCESS = '[Military History] Update branch rank success',
+  UPDATE_BRANCH_RANK_FAILURE = '[Military History] Update branch rank failure'
 }
 
 export class GetMilitaryHistory implements Action {
@@ -84,6 +90,32 @@ export class RemoveMedalFailure implements Action {
   constructor (public payload: any) {}
 }
 
+export class UpdateMilitaryDates implements Action {
+  readonly type = MilitaryHistoryActionTypes.UPDATE_MILITARY_DATES;
+  constructor (public payload: {id: string, body: {start_date: string, end_date: string}}) {}
+}
+export class UpdateMilitaryDatesSuccess implements Action {
+  readonly type = MilitaryHistoryActionTypes.UPDATE_MILITARY_DATES_SUCCESS;
+  constructor (public payload: MilitaryHistory[]) {}
+}
+export class UpdateMilitaryDatesFailure implements Action {
+  readonly type = MilitaryHistoryActionTypes.UPDATE_MILITARY_DATES_FAILURE;
+  constructor (public payload: any) {}
+}
+
+export class UpdateBranchRank implements Action {
+  readonly type = MilitaryHistoryActionTypes.UPDATE_BRANCH_RANK;
+  constructor (public payload: {memorial_military_branch_id: string, military_rank_id: string}) {}
+}
+export class UpdateBranchRankSuccess implements Action {
+  readonly type = MilitaryHistoryActionTypes.UPDATE_BRANCH_RANK_SUCCESS;
+  constructor (public payload: MilitaryHistory[]) {}
+}
+export class UpdateBranchRankFailure implements Action {
+  readonly type = MilitaryHistoryActionTypes.UPDATE_BRANCH_RANK_FAILURE;
+  constructor (public payload: any) {}
+}
+
 export type All =
   | GetMilitaryHistory
   | GetMilitaryHistorySuccess
@@ -99,4 +131,10 @@ export type All =
   | AddMedalFailure
   | RemoveMedal
   | RemoveMedalSuccess
-  | RemoveMedalFailure;
+  | RemoveMedalFailure
+  | UpdateMilitaryDates
+  | UpdateMilitaryDatesSuccess
+  | UpdateMilitaryDatesFailure
+  | UpdateBranchRank
+  | UpdateBranchRankSuccess
+  | UpdateBranchRankFailure;

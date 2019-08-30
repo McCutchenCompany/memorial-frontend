@@ -12,6 +12,7 @@ import {
   GetMilitaryHistory,
   RemoveMedal,
   RemoveMilitaryBranch,
+  UpdateMilitaryDates,
 } from '@store/military-history/military-history.actions';
 import {
   getAllMilitaryHistory,
@@ -19,6 +20,9 @@ import {
   getMilitaryHistorySaving,
 } from '@store/military-history/military-history.reducer';
 import { Observable } from 'rxjs';
+
+import { GetBranchRanks } from './../../../store/edit-military/edit-military.actions';
+import { getRanks } from './../../../store/edit-military/edit-military.reducer';
 
 @Component({
   selector: 'app-edit-military',
@@ -34,6 +38,7 @@ export class EditMilitaryComponent implements OnInit {
   savingHistory$: Observable<boolean>;
   medals$: Observable<any[]>;
   medalsLoading$: Observable<boolean>;
+  ranks$: Observable<any[]>;
 
   medalsBranch = '';
   disabledUuid = [];
@@ -52,6 +57,7 @@ export class EditMilitaryComponent implements OnInit {
     this.medals$ = this.store.pipe(select(getMedals));
     this.medalsLoading$ = this.store.pipe(select(getMedalsLoading));
     this.historyEntities$ = this.store.pipe(select(getMilitaryHistoryEntities));
+    this.ranks$ = this.store.pipe(select(getRanks));
     this.store.pipe(select(getMedalsBranch)).subscribe(res => {
       if (res) {
         this.medalsBranch = res;
@@ -108,6 +114,7 @@ export class EditMilitaryComponent implements OnInit {
       return;
     } else {
       this.store.dispatch(new GetBranchMedals(branch_id));
+      this.store.dispatch(new GetBranchRanks(branch_id));
     }
   }
 
@@ -117,6 +124,10 @@ export class EditMilitaryComponent implements OnInit {
 
   onRemoveMedal(id: string) {
     this.store.dispatch(new RemoveMedal(id));
+  }
+
+  onSaveDates(event: {id: string, body: {start_date: string, end_date: string}}) {
+    this.store.dispatch(new UpdateMilitaryDates(event));
   }
 
 }

@@ -17,10 +17,17 @@ export class MilitaryMedal {
   };
 }
 
+export class MilitaryRank {
+  uuid: string;
+  name: string;
+  image: string;
+}
+
 export class MilitaryHistory {
   uuid: string;
   start_date: string;
   end_date: string;
   mem_military_branches_medals: MilitaryMedal[];
   military_branch: MilitaryBranch;
+  military_rank: MilitaryRank;
 }

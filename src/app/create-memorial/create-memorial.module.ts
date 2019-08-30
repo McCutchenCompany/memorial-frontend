@@ -2,7 +2,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -49,6 +49,8 @@ import { EditMilitaryComponent } from './components/edit-military/edit-military.
 import { MedalPickerComponent } from './components/medal-picker/medal-picker.component';
 import { MemorialInfoComponent } from './components/memorial-info/memorial-info.component';
 import { MemorialShareComponent } from './components/memorial-share/memorial-share.component';
+import { MilitaryDetailsComponent } from './components/military-details/military-details.component';
+import { RankPickerComponent } from './components/rank-picker/rank-picker.component';
 import { TimelineFormComponent } from './components/timeline-form/timeline-form.component';
 import { CreateMemorialComponent } from './containers/create-memorial/create-memorial.component';
 import { CreateNavComponent } from './containers/create-nav/create-nav.component';
@@ -83,6 +85,7 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     MatExpansionModule,
     MatPaginatorModule,
     ReactiveFormsModule,
+    FormsModule,
     SharedModule,
     StoreModule.forFeature('createMemorial', fromStore.createMemorialReducer),
     StoreModule.forFeature('createPhotos', createPhotoReducer),
@@ -115,7 +118,9 @@ import { CreateMemorialRoutingModule } from './create-memorial-routing.module';
     AlbumViewerComponent,
     MemorialShareComponent,
     EditMilitaryComponent,
-    MedalPickerComponent
+    MedalPickerComponent,
+    MilitaryDetailsComponent,
+    RankPickerComponent
   ]
 })
 export class CreateMemorialModule { }
