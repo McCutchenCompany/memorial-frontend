@@ -5,7 +5,16 @@ import { getFindMemorialState } from './../reducers';
 
 export const getPositionState = createSelector(
   getFindMemorialState,
-  state => state.userPosition.position
+  state => {
+    if (state && state.userPosition) {
+      return state.userPosition.position;
+    } else {
+      return {
+        latitude: 0,
+        longitude: 0
+      };
+    }
+  }
 );
 
 export const getLatitude = createSelector(

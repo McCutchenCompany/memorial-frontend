@@ -30,4 +30,5 @@ export class MilitaryHistory {
   mem_military_branches_medals: MilitaryMedal[];
   military_branch: MilitaryBranch;
   military_rank: MilitaryRank;
+  honor_military_medals?: MilitaryMedal[];
 }

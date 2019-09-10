@@ -3,21 +3,36 @@
 mat-card {
   position: relative;
   width: rem(304);
-  min-height: rem(256);
   outline: none;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  width: 100%;
+  .spacer {
+    width: 30vw;
+  }
+  h4 {
+    font-size: rem(16);
+    line-height: rem(16);
+  }
   .image-border {
     position: absolute;
-    height: rem(180);
-    width: rem(336);
-    top: 0;
+    height: 15vw;
+    width: 30vw;
+    top: rem(16);
     left: 0;
     overflow: hidden;
     background: map-get($colors, dark-gray);
   }
+  .date {
+    margin-right: rem(24);
+  }
+  p:not(.date) {
+    display: none;
+  }
   .image {
-    height: rem(180);
-    width: rem(336);
+    height: 15vw;
+    width: 30vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -25,12 +40,67 @@ mat-card {
       width: 100%;
     }
   }
-  .info {
-    margin-top: rem(180);
-  }
   .date-and-loc {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+  .military {
+    display: flex;
+    align-items: center;
+    padding: rem(8);
+    background: map-get($colors, off-white);
+    border: 1px solid map-get($colors, gray);
+    margin-top: rem(8);
+    .seal {
+      max-width: rem(24);
+      margin-right: rem(16);
+    }
+    .rank {
+      max-width: rem(16);
+      margin-right: rem(42);
+    }
+    .commendation {
+      max-height: rem(32);
+    }
+  }
+}
+@include respond-to('small') {
+  mat-card {
+    min-height: rem(148);
+    h4 {
+      font-size: rem(24);
+      line-height: rem(36);
+    }
+    .spacer {
+      width: rem(336);
+    }
+    .image-border {
+      height: rem(180);
+      width: rem(336);
+      top: 0;
+    }
+    .image {
+      height: rem(180);
+      width: rem(336);
+    }
+    p:not(.date) {
+      display: block;
+    }
+    .military {
+      padding: 0;
+      background: none;
+      border: none;
+      margin-top: 0;
+      .seal {
+        max-width: rem(75);
+      }
+      .rank {
+        max-width: rem(24);
+      }
+      .commendation {
+        max-height: rem(56);
+      }
+    }
   }
 }

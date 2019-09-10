@@ -20,7 +20,7 @@ export class MemorialResultCardComponent implements OnInit {
     if (this.isHover) {
       return true;
     } else if (this.markerHover === this.memorial.uuid) {
-      this.matCard.scrollIntoView({behavior: 'smooth', inline: 'center'});
+      // this.matCard.scrollIntoView({behavior: 'smooth', inline: 'center'});
       return true;
     } else {
       return false;
@@ -42,6 +42,66 @@ export class MemorialResultCardComponent implements OnInit {
         src: 'assets/imgs/default-memorial.jpeg',
         transform: ''
       };
+    }
+  }
+
+  get purpleHeart() {
+    if (this.memorial.military.length > 0) {
+      const index = this.memorial.military[0].honor_military_medals.findIndex(res => {
+        return res.medal.uuid === 'c8e28734-abd2-431e-9403-30b24607d89f';
+      });
+      if (index > -1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  get silverStar() {
+    if (this.memorial.military.length > 0) {
+      const index = this.memorial.military[0].honor_military_medals.findIndex(res => {
+        return res.medal.uuid === '321702fd-424f-42bd-8c18-6c008e341fb1';
+      });
+      if (index > -1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  get distinguished() {
+    if (this.memorial.military.length > 0) {
+      const index = this.memorial.military[0].honor_military_medals.findIndex(res => {
+        return res.medal.uuid === '4a65e518-8b46-482e-a670-a5107a87ec88';
+      });
+      if (index > -1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  get honor() {
+    if (this.memorial.military.length > 0) {
+      const index = this.memorial.military[0].honor_military_medals.findIndex(res => {
+        return res.medal.uuid === 'dc448992-6b2d-43dc-a5e2-46ef8d879a51';
+      });
+      if (index > -1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
     }
   }
 

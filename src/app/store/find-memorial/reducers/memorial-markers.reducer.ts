@@ -11,7 +11,7 @@ export interface MemorialMarkersState extends EntityState<LocationMarker> {
 }
 
 export const adapter: EntityAdapter<LocationMarker> = createEntityAdapter<LocationMarker>({
-  selectId: (marker: LocationMarker) => marker.uuid,
+  selectId: (marker: LocationMarker) => marker.memorial_id,
   sortComparer: false
 });
 

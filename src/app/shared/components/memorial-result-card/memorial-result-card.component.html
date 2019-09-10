@@ -9,11 +9,20 @@
       <img [src]="imgFormat.src" [style.transform]="imgFormat.transform">
     </div>
   </div>
+  <div class="spacer"></div>
   <div class="info">
     <h4>{{ name }}</h4>
     <div class="date-and-loc">
-      <p>{{ memorial.birth_date | date:'y' }} - {{ memorial.death_date | date:'y' }}</p>
+      <p class="date">{{ memorial.birth_date | date:'y' }} - {{ memorial.death_date | date:'y' }}</p>
       <p>{{ memorial.location }}</p>
+    </div>
+    <div class="military" *ngIf="memorial.military.length > 0">
+      <img class="seal" [src]="memorial.military[0].military_branch.image" [matTooltip]="memorial.military[0].military_branch.name">
+      <img class="rank" *ngIf="memorial.military[0].military_rank.image" [src]="memorial.military[0].military_rank.image" [matTooltip]="memorial.military[0].military_rank.name">
+      <img class="commendation" *ngIf="honor" src="https://memorial-imgs.s3.amazonaws.com/military/medal-of-honor.png" matTooltip="Medal of Honor">
+      <img class="commendation" *ngIf="distinguished" src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Army_distinguished_service_cross_medal.jpg" matTooltip="Distinguished Service Cross">
+      <img class="commendation" *ngIf="silverStar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Silver_Star_medal.png" matTooltip="Silver Star">
+      <img class="commendation" *ngIf="purpleHeart" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Purple_Heart_Medal.png/256px-Purple_Heart_Medal.png" matTooltip="Purple Heart">
     </div>
   </div>
 </mat-card>

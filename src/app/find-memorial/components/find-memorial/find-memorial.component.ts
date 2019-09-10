@@ -53,7 +53,7 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
 
   boundTimeout;
   displayMap = false;
-  current = {ga: {j: 0, l: 0}, ma: {j: 0, l: 0}};
+  current = {ga: {j: 0, l: 0}, na: {j: 0, l: 0}};
 
   mapTimer = false;
 
@@ -70,7 +70,7 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
   }
 
   markerIcon(marker) {
-    if (this.hoveredCard.uuid === marker.memorial_id || this.hoveredMarker.uuid === marker.uuid) {
+    if (this.hoveredCard.uuid === marker.memorial_id || this.hoveredMarker.memorial_id === marker.memorial_id) {
       return 'assets/imgs/marker-hover.svg';
     } else {
       return 'assets/imgs/marker-initial.svg';
@@ -111,7 +111,7 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.geo.findMe();
     this.store.dispatch(new GetPopularMemorials());
-    this.startTimer();
+    // this.startTimer();
   }
 
   ngOnDestroy() {
@@ -139,19 +139,19 @@ export class FindMemorialComponent implements OnInit, OnDestroy {
     clearTimeout(this.boundTimeout);
     if (this.current.ga.j - event.ga.j > 0.05
       || this.current.ga.j - event.ga.j < -0.05
-      || this.current.ma.j - event.ma.j > 0.1
-      || this.current.ma.j - event.ma.j < -0.1) {
-        if (event.ma.l - event.ma.j < .5 ) {
+      || this.current.na.j - event.na.j > 0.1
+      || this.current.na.j - event.na.j < -0.1) {
+        if (event.na.l - event.na.j < .5 ) {
           this.current = event;
           this.boundTimeout = setTimeout(() => {
             const payload = {
-              top: event.ma.l,
+              top: event.na.l,
               right: event.ga.l,
-              bottom: event.ma.j,
+              bottom: event.na.j,
               left: event.ga.j
             };
             this.store.dispatch(new GetInRange(payload));
-          }, 500);
+          }, 1000);
         }
       }
   }

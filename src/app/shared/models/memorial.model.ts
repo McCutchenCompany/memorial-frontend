@@ -1,3 +1,5 @@
+import { MilitaryHistory } from './military.model';
+
 export class Memorial {
   uuid: string;
   user_id: string;
@@ -21,5 +23,6 @@ export class Memorial {
   scale: number;
   rot: number;
   unlocked: boolean;
-  invite_link;
+  invite_link: string;
+  military?: MilitaryHistory[];
 }

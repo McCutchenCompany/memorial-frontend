@@ -30,7 +30,7 @@
                 <app-ribbon-board [medals]="(historyEntities$ | async)[branch.uuid].mem_military_branches_medals"></app-ribbon-board>
               </div>
               <button mat-button class="primary" [disabled]="savingHistory$ | async" (click)="addBranch(branch.uuid)" *ngIf="disabledUuid.indexOf(branch.uuid) === -1">
-                <mat-icon>add</mat-icon>Add
+                <mat-icon>add</mat-icon><span class="hide-mobile">Add</span>
               </button>
             </mat-panel-title>
           </mat-expansion-panel-header>

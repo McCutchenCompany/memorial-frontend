@@ -2,6 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import { getFindMemorialState } from './../reducers';
 import { adapter } from './../reducers/memorial-markers.reducer';
+import { getLatitude, getLongitude } from './position.selector';
 
 export const getMemorialMarkersState = createSelector(
   getFindMemorialState,
@@ -30,5 +31,24 @@ export const {
 
 export const getMarkerMemorials = createSelector(
   getAllMemorialMarkers,
-  state => state.map(marker => marker.memorial)
+  getLatitude,
+  getLongitude,
+  (state, lat, long) => {
+    const markers = sortMarkers(state, {lat, long});
+    return markers.map(marker => {
+      return {...marker.memorial, military: marker.military};
+    });
+  }
 );
+
+function sortMarkers(markers: any[], pos): any[] {
+  return markers.sort((a, b) => {
+    const aLen = Math.sqrt(Math.pow((a.latitude - pos.lat), 2) + Math.pow((a.longitude - pos.long), 2));
+    const bLen = Math.sqrt(Math.pow((b.latitude - pos.lat), 2) + Math.pow((b.longitude - pos.long), 2));
+    if (aLen > bLen) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}

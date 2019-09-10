@@ -3,12 +3,13 @@
 .container {
   display: flex;
   justify-content: space-between;
+  flex-direction: column-reverse;
   margin: rem(36) 0;
   h5 {
     margin-bottom: rem(16);
   }
   .dates {
-    width: 48%;
+    width: 100%;
     form {
       display: flex;
       flex-direction: column;
@@ -19,6 +20,14 @@
     }
   }
   .rank {
-    width: 48%;
+    width: 100%;
+  }
+}
+@include respond-to('small') {
+  .container {
+    flex-direction: row;
+    .dates, .rank {
+      width: 48%;
+    }
   }
 }

@@ -4,6 +4,7 @@
   width: rem(250);
   height: 100%;
   min-height: rem(700);
+  padding-bottom: rem(100);
   background: map-get($colors, primary-lightest);
   mat-divider {
     border-top-color: map-get($colors, primary-darkest);
@@ -77,6 +78,11 @@
       background: map-get($colors, primary);
       border-left: 5px solid map-get($colors, tertiary);
     }
+  }
+}
+@include respond-to('small') {
+  .container {
+    padding: 0;
   }
 }
 @media only screen and (max-width: 340px) {
