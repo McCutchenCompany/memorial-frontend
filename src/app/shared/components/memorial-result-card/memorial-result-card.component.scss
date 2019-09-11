@@ -9,6 +9,7 @@ mat-card {
   cursor: pointer;
   width: 100%;
   .spacer {
+    display: none;
     width: 30vw;
   }
   h4 {
@@ -16,7 +17,7 @@ mat-card {
     line-height: rem(16);
   }
   .image-border {
-    position: absolute;
+    margin-right: rem(16);
     height: 15vw;
     width: 30vw;
     top: rem(16);
@@ -73,9 +74,12 @@ mat-card {
       line-height: rem(36);
     }
     .spacer {
+      display: block;
       width: rem(336);
     }
     .image-border {
+      position: absolute;
+      margin-right: 0;
       height: rem(180);
       width: rem(336);
       top: 0;
