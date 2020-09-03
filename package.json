@@ -41,7 +41,7 @@
     "ngx-clipboard": "^12.2.0",
     "ngx-filesaver": "^8.0.0",
     "normalize-css": "^2.3.1",
-    "puppeteer": "^1.11.0",
+    "puppeteer": "^1.13.0",
     "rxjs": "^6.5.2",
     "tslib": "^1.9.0",
     "url-search-params-polyfill": "^5.0.0",
